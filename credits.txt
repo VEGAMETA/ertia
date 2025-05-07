@@ -1,0 +1,20 @@
+[Addons]
+PseudoCablePhysics For Godot - Elij4hMartin
+static uuid generator for Godot Engine - Xavier Sellier (Binogure Studio)
+Project Time Tracker - Victor Majida
+
+[Audio]
+looplicator - 67 BPM Industrial Ambient Loop #13560 (WAV)
+delusional_trip - soul
+
+[Models]
+Savalon - Ionic and Doric Columns [remodelled]
+Kuutti Siitonen - Monobloc Plastic Garden Chair
+
+[Textures]
+Kenney - Prototype Textures
+SBS - Tiny Texture Pack(s), Photorealistic Texture Pack(s)
+JulioVII - Texture Pack: Tech 01, Texture Pack: Scifi 01
+
+[Shaders]
+KubikPixel - SciFi Hologram

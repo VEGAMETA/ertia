@@ -1,0 +1,17 @@
+{
+	"disabled_build_options": {
+		"openxr": false
+	},
+	"disabled_classes": [
+		"OpenXRCompositionLayer",
+		"OpenXRHand",
+		"OpenXRVisibilityMask",
+		"XRBodyModifier3D",
+		"XRCamera3D",
+		"XRFaceModifier3D",
+		"XRHandModifier3D",
+		"XRNode3D",
+		"XROrigin3D"
+	],
+	"type": "build_profile"
+}

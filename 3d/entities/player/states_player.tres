@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="States" load_steps=2 format=3 uid="uid://ca4hykdsf8xf2"]
+
+[ext_resource type="Script" uid="uid://de51iva7o1net" path="res://globals/resources/states.gd" id="1_82tp2"]
+
+[resource]
+script = ExtResource("1_82tp2")
+states = {
+&"Crouch": true,
+&"Fall": false,
+&"Idle": false,
+&"Stride": true
+}
+metadata/_custom_type_script = "uid://de51iva7o1net"

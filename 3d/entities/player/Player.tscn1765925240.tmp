@@ -1,0 +1,143 @@
+[gd_scene load_steps=19 format=3 uid="uid://diyb5sbluyv0b"]
+
+[ext_resource type="PackedScene" uid="uid://btqewirjwvqrg" path="res://3d/entities/player/BasePlayer.tscn" id="1_v5t3m"]
+[ext_resource type="Script" uid="uid://cqtnetnw08iww" path="res://3d/entities/player/player.gd" id="2_qdkxc"]
+[ext_resource type="Script" uid="uid://dr8usv26e0pe7" path="res://3d/entities/player/components/croucher.gd" id="3_3gy6h"]
+[ext_resource type="Script" uid="uid://c118qf3x0xghb" path="res://3d/entities/player/components/camera.gd" id="3_7e343"]
+[ext_resource type="Script" uid="uid://b0k6krnr6wx73" path="res://3d/entities/player/components/audio_component.gd" id="3_curp3"]
+[ext_resource type="AudioStream" uid="uid://b627ncibw7yh" path="res://assets/audio/music/delusional_trip - soul.mp3" id="3_peog2"]
+[ext_resource type="Script" uid="uid://didf512gp8brv" path="res://3d/entities/player/components/grabber.gd" id="4_4xa2n"]
+[ext_resource type="AudioStream" uid="uid://c6kdmomxpjcsg" path="res://assets/audio/music/noise.wav" id="4_tcn2e"]
+[ext_resource type="Script" uid="uid://cp4cuob2wh6xs" path="res://3d/entities/player/components/flashlight.gd" id="6_6jsqp"]
+[ext_resource type="Texture2D" uid="uid://dt1j32aci2bwf" path="res://assets/bitmaps/lightmaps/flashlight.jpg" id="6_h0acb"]
+[ext_resource type="AudioStream" uid="uid://bh4mtagia6lns" path="res://assets/audio/sfx/steps_1.wav" id="6_p5dw3"]
+[ext_resource type="Script" uid="uid://d1plmb71m57kf" path="res://3d/entities/player/components/coyote_timer.gd" id="8_tcn2e"]
+[ext_resource type="Script" uid="uid://hnmribs6d1tn" path="res://3d/entities/player/components/jump.gd" id="13_p5dw3"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4xa2n"]
+height = 0.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qdkxc"]
+height = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7e343"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_tcn2e"]
+height = 1.15
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4xa2n"]
+
+[node name="Player" instance=ExtResource("1_v5t3m")]
+script = ExtResource("2_qdkxc")
+saved_flashlight = null
+gamepad_sensibility = null
+gamepad_sensibility_accel = null
+saved_crouching = null
+new_cam_rotation = null
+prev_velocity = null
+input_dir = null
+direction = null
+current_speed = null
+drop = null
+can_jump = null
+wish_jump = null
+walking = null
+running = null
+gravity = null
+gravity_mask = null
+gravity_vector = null
+inv_gravity_vector = null
+positive_gravity_vector = null
+current_ps3d_gravity_vector = null
+firstperson = null
+
+[node name="CollisionLegs" type="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.25, 0)
+shape = SubResource("CylinderShape3D_4xa2n")
+
+[node name="CollisionCrouch" type="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("CapsuleShape3D_qdkxc")
+
+[node name="ShapeStand" type="ShapeCast3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("CylinderShape3D_7e343")
+target_position = Vector3(0, 0, 0)
+collision_mask = 5
+
+[node name="UnderBottom" type="ShapeCast3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("CylinderShape3D_tcn2e")
+collision_mask = 4
+
+[node name="Flashlight" type="SpotLight3D" parent="Holder" index="0"]
+light_projector = ExtResource("6_h0acb")
+shadow_enabled = true
+script = ExtResource("6_6jsqp")
+
+[node name="Camera" type="Camera3D" parent="Head" index="1"]
+unique_name_in_owner = true
+script = ExtResource("3_7e343")
+
+[node name="Grabber" type="Node3D" parent="Head" index="2"]
+unique_name_in_owner = true
+script = ExtResource("4_4xa2n")
+
+[node name="Grab" type="RayCast3D" parent="Head/Grabber" index="0"]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -3)
+collision_mask = 37
+
+[node name="Hand" type="Marker3D" parent="Head/Grabber/Grab" index="0"]
+unique_name_in_owner = true
+
+[node name="GrabbedBody" type="StaticBody3D" parent="Head/Grabber/Grab" index="1"]
+unique_name_in_owner = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/Grabber/Grab/GrabbedBody" index="0"]
+shape = SubResource("BoxShape3D_4xa2n")
+disabled = true
+
+[node name="GrabJoint" type="Generic6DOFJoint3D" parent="Head/Grabber/Grab" index="2"]
+unique_name_in_owner = true
+node_a = NodePath("../GrabbedBody")
+linear_limit_x/enabled = false
+linear_limit_y/enabled = false
+linear_limit_z/enabled = false
+
+[node name="Ambient" type="OmniLight3D" parent="Head" index="3"]
+light_energy = 0.1
+omni_range = 2.0
+
+[node name="Components" type="Node" parent="." index="7"]
+
+[node name="AudioComponent" type="Node3D" parent="Components" index="0"]
+script = ExtResource("3_curp3")
+
+[node name="Music" type="AudioStreamPlayer" parent="Components/AudioComponent" index="0"]
+stream = ExtResource("3_peog2")
+volume_db = -20.0
+autoplay = true
+bus = &"Music"
+
+[node name="Noise" type="AudioStreamPlayer" parent="Components/AudioComponent" index="1"]
+stream = ExtResource("4_tcn2e")
+volume_db = -50.0
+autoplay = true
+bus = &"Music"
+
+[node name="Step" type="AudioStreamPlayer3D" parent="Components/AudioComponent" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+visible = false
+stream = ExtResource("6_p5dw3")
+max_db = -1.62
+bus = &"Sfx"
+
+[node name="Croucher" type="Node" parent="Components" index="1"]
+script = ExtResource("3_3gy6h")
+
+[node name="Jumper" type="Node" parent="Components" index="2"]
+script = ExtResource("13_p5dw3")
+
+[node name="CoyoteTimer" type="Timer" parent="Components/Jumper" index="0"]
+script = ExtResource("8_tcn2e")
