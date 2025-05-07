@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://b0k6krnr6wx73" path="res://3d/entities/player/components/audio_component.gd" id="3_curp3"]
 [ext_resource type="AudioStream" uid="uid://b627ncibw7yh" path="res://assets/audio/music/delusional_trip - soul.mp3" id="3_peog2"]
 [ext_resource type="Script" uid="uid://didf512gp8brv" path="res://3d/entities/player/components/grabber.gd" id="4_4xa2n"]
-[ext_resource type="AudioStream" uid="uid://c6kdmomxpjcsg" path="res://assets/audio/music/noise.wav" id="4_tcn2e"]
+[ext_resource type="AudioStream" uid="uid://dgkvsnjljb2d0" path="res://assets/audio/music/noise.mp3" id="4_tcn2e"]
 [ext_resource type="Script" uid="uid://cp4cuob2wh6xs" path="res://3d/entities/player/components/flashlight.gd" id="6_6jsqp"]
 [ext_resource type="Texture2D" uid="uid://dt1j32aci2bwf" path="res://assets/bitmaps/lightmaps/flashlight.jpg" id="6_h0acb"]
 [ext_resource type="AudioStream" uid="uid://bh4mtagia6lns" path="res://assets/audio/sfx/steps_1.wav" id="6_p5dw3"]
