@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://cps1tumsah8fv"]
+
+[ext_resource type="Shader" uid="uid://taf5g00cwiyy" path="res://static/shaders/holo.gdshader" id="1_pf8bb"]
+[ext_resource type="Shader" uid="uid://cphxosjrky3qp" path="res://static/shaders/cube.gdshader" id="1_tdl68"]
+
+[sub_resource type="World3D" id="World3D_tdl68"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pf8bb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xd4c2"]
+render_priority = 0
+shader = ExtResource("1_pf8bb")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_width = 0.001
+shader_parameter/line_blur = 0.415
+shader_parameter/line_speed = -0.02
+shader_parameter/straight_lines = true
+shader_parameter/interrupt_width = 0.5
+shader_parameter/interrupt_blur = 0.25
+shader_parameter/interrupt_speed = 0.2
+shader_parameter/glow_color = Color(0.5, 0.75, 1, 1)
+shader_parameter/glow_itensity = 4.5
+shader_parameter/glow_amount = 4.5
+shader_parameter/flickering = 0.55
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_we17o"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_xd4c2")
+shader = ExtResource("1_tdl68")
+shader_parameter/max_alpha = 0.6
+shader_parameter/alpha = 0.6
+
+[node name="Rotator" type="SubViewport"]
+own_world_3d = true
+world_3d = SubResource("World3D_tdl68")
+transparent_bg = true
+handle_input_locally = false
+
+[node name="Box" type="MeshInstance3D" parent="."]
+layers = 524288
+gi_mode = 2
+mesh = SubResource("BoxMesh_pf8bb")
+surface_material_override/0 = SubResource("ShaderMaterial_we17o")
+
+[node name="Center" type="Node3D" parent="."]
+
+[node name="Camera" type="Camera3D" parent="Center"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+current = true
+fov = 100.0

@@ -1,0 +1,1 @@
+class_name GravityArea3D extends Area3D

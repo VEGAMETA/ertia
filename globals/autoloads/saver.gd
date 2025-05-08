@@ -68,12 +68,14 @@ func get_next_index(type:SaveType) -> int:
 	return i
 
 func fetch_metadata(type:SaveType) -> SaveMetadata:
-	return SaveMetadata.new(
+	var metadata = SaveMetadata.new()
+	metadata.setup(
 		Time.get_unix_time_from_system(),
 		get_viewport().get_texture().get_image(),
 		type, 
 		get_tree_string()
 	)
+	return metadata
 
 func get_new_save_file(type:SaveType) -> String:
 	var save_file : String = save_directory
@@ -96,14 +98,20 @@ func get_metadata(save_path:String) -> Dictionary[String, SaveMetadata]:
 	file.store_buffer(metadata_scene)
 	file.close()
 	
-	var metadata : Resource = ResourceLoader.load(temp_metadata)
+	var metadata: SaveMetadata = ResourceLoader.load(temp_metadata)
+	
 	DirAccess.remove_absolute(temp_metadata)
 	if metadata == null or metadata is not SaveMetadata:
 		push_error("Failed to load metadata.")
+		return {}
 	return {save_path: metadata}
 
-func get_saves(type:SaveType=SaveType.ALL) -> Array[Dictionary]:
-	return get_savefiles_by_type(type).map(func (path): return save_directory + path).map(get_metadata)
+func get_saves(type:SaveType=SaveType.ALL) -> Array:
+	var saves : Array = get_savefiles_by_type(type).map(func (path): return save_directory + path)
+	saves = saves.map(get_metadata)
+	if not saves: return []
+	saves.sort_custom(func(a:Dictionary, b:Dictionary): return a.values()[0].time > b.values()[0].time)
+	return saves
 
 func save(metadata:SaveMetadata, scene:Node=get_tree().current_scene) -> void:
 	save_init.emit()
@@ -166,12 +174,7 @@ func load_save(save_path:String) -> void:
 	get_tree().change_scene_to_file(temp_scene)
 	DirAccess.remove_absolute(temp_scene)
 
-func load_last_save(type:SaveType) -> void: 
-	var files : Array[Dictionary] = []
-	for file_name in get_savefiles_by_type(type):
-		var file_path = save_directory + file_name
-		var mod_time = FileAccess.get_modified_time(file_path)
-		if mod_time == 0: continue
-		files.append({ "name": file_name, "time": mod_time })
-	files.sort_custom(func(a, b): return b["time"] - a["time"])
-	if files: return load_save(save_directory + files[0].get("name"))
+func load_last_save(type:SaveType) -> void:
+	var files : Array = get_saves(type)
+	if not files: return
+	return load_save(files[0].keys()[0])

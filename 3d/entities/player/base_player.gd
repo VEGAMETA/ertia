@@ -2,7 +2,6 @@ class_name BasePlayer
 extends CharacterBody3D
 
 var meta = APlayer.new()
-var imeta: Array[Interface]
 
 var mouse_sensibility : float = Globals.mouse_sens * 17 / 15000
 var velocity_length : float = 0.0
@@ -55,7 +54,6 @@ func _initialize():
 		current_ps3d_gravity_vector = Gravity.gravity_vector
 	gravity = Gravity.gravity
 	set_gravity(Gravity.gravity_vector)
-	
 	await get_tree().physics_frame
 	gravity_area_watcher.force_shapecast_update()
 
@@ -118,9 +116,9 @@ func set_gravity(new_gravity_vector:Vector3) -> void:
 	positive_gravity_vector = new_gravity_vector * new_gravity_vector
 	gravity_mask = Vector3.ONE - positive_gravity_vector
 	up_direction = -new_gravity_vector
-	set_gravity_global(new_gravity_vector)
-	
+	set_gravity_global(new_gravity_vector)	
 	if gravity_area_watcher.is_colliding(): return
+
 func set_gravity_global(new_gravity_vector:Vector3) -> void:
 	current_ps3d_gravity_vector = new_gravity_vector
 	Gravity.change_gravity_vector(new_gravity_vector)

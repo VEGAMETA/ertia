@@ -10,19 +10,24 @@ class_name Player extends BasePlayer
 @export var gamepad_sensibility_accel : float = gamepad_sensibility * 0.9
 @export var new_cam_rotation : Vector2 = Vector2.ZERO
 
+@export var inventory_item : Attackable = null
+
 @onready var collision_stand : CollisionShape3D = $CollisionStand
 @onready var collision_crouch : CollisionShape3D = $CollisionCrouch
 @onready var collision_legs : CollisionShape3D = $CollisionLegs
 
 @onready var shape_stand : ShapeCast3D = $ShapeStand
 @onready var shape_under : ShapeCast3D = $UnderBottom
+@onready var gravity_device : GravityDevice = %GravityDevice
 @onready var grabber : GrabberComponent = %Grabber
 @onready var croucher : CroucherComponent = %Croucher
 @onready var flashlight : FlashlightComponent = %Flashlight
 @onready var camera : PlayerCameraComponent = %Camera
 @onready var safe_area : Area3D = %SafeArea
+@onready var vision : Node3D = %Vision
 
 func _initialize():
+	inventory_item = gravity_device
 	super()
 	self.load()
 
@@ -46,6 +51,8 @@ func _input(event):
 	super(event)
 	if event is InputEventMouseMotion or event is InputEventScreenDrag:
 		new_cam_rotation = event.relative
+	if event.is_action_pressed("Attack") and not Globals.just_unpaused:
+		inventory_item.attack()
 
 func _hadle_rotation(delta):
 	if new_cam_rotation == Vector2.ZERO:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://diyb5sbluyv0b"]
+[gd_scene load_steps=23 format=3 uid="uid://diyb5sbluyv0b"]
 
 [ext_resource type="PackedScene" uid="uid://btqewirjwvqrg" path="res://3d/entities/player/base_player.tscn" id="1_v5t3m"]
 [ext_resource type="Script" uid="uid://cqtnetnw08iww" path="res://3d/entities/player/player.gd" id="2_qdkxc"]
@@ -16,7 +16,6 @@
 [ext_resource type="Script" uid="uid://hnmribs6d1tn" path="res://3d/entities/player/components/jumper.gd" id="13_p5dw3"]
 [ext_resource type="Script" uid="uid://cv5yw36abjb8w" path="res://3d/entities/player/components/saver.gd" id="15_odio3"]
 [ext_resource type="PackedScene" uid="uid://0ub1mqyun1fk" path="res://3d/entities/items/devices/gravity_device.tscn" id="16_0l3dj"]
-[ext_resource type="PackedScene" uid="uid://dnykiwmsfl20x" path="res://ui/hud/ingame/FPS.tscn" id="17_mgp6e"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4xa2n"]
 height = 0.5
@@ -181,10 +180,6 @@ script = ExtResource("15_odio3")
 [node name="GravityDevice" parent="Components" index="8" instance=ExtResource("16_0l3dj")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, -0.175, -0.2)
-
-[node name="UI" type="Node" parent="." index="8"]
-
-[node name="Fps" parent="UI" index="0" instance=ExtResource("17_mgp6e")]
 
 [connection signal="crouched" from="Components/Croucher" to="Components/Camera" method="_on_croucher_crouched"]
 [connection signal="uncrouched" from="Components/Croucher" to="Components/Camera" method="_on_croucher_uncrouched"]

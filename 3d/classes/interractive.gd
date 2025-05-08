@@ -1,2 +1,2 @@
-class_name IInterractive
-extends Interface
+class_name Interractive
+extends Node3D
