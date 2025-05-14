@@ -15,7 +15,7 @@ enum DIRECTIONS{
 @export var old_head_rotation_local : Vector3
 @export var new_head_rotation_global : Vector3
 @export_custom(PROPERTY_HINT_NONE, "") 
-var gravity_direction : BaseGravity.GravityDirection
+var gravity_direction : GravityDirection
 @export var new_gravity_vector : Vector3 = Vector3.MODEL_BOTTOM
 @export var new_rotation : Vector3
 @export var x : float
@@ -34,7 +34,7 @@ var gravity_direction : BaseGravity.GravityDirection
 @onready var sprite : Sprite3D = %Sprite
 @onready var rotator : SubViewport = %Rotator
 @onready var rotator_head : Node3D = rotator.find_child("Center")
-@onready var player : Player = owner
+@onready var player : BasePlayer = owner
 
 var vibration_timer : Timer = Timer.new()
 
@@ -44,7 +44,9 @@ func _ready() -> void:
 	_initialize()
 
 func _initialize() -> void:
-	if player.gravity_vector != Vector3.ZERO: new_gravity_vector = player.gravity_vector
+	if player.gravity_vector != Vector3.ZERO:
+		new_gravity_vector = player.gravity_vector
+		gravity_direction = GravityDirections.by_vector.get(new_gravity_vector, GravityDirections.ZERO)
 	if player.current_ps3d_gravity_vector == Vector3.ZERO: 
 		player.current_ps3d_gravity_vector = new_gravity_vector
 	player.gravity = Gravity.gravity
@@ -61,7 +63,7 @@ func attack() -> void:
 	change_gravity(get_direction().rotation_vector)
 
 func _process(_delta) -> void:
-	rotator_head.rotation = player.camera.rotation
+	rotator_head.rotation = player.head.global_rotation
 
 func _physics_process(_delta) -> void:
 	watch_and_change_gravity()
@@ -84,7 +86,7 @@ func watch_areas() -> void:
 	new_gravity_vector = new_gravity_vector.normalized()
 
 func change_gravity(direction:Vector3) -> void:
-	gravity_direction = BaseGravity.get_by_vector(direction)
+	gravity_direction = GravityDirections.by_vector.get(direction, GravityDirections.ZERO)
 	new_gravity_vector = gravity_direction.rotation_vector
 	new_rotation = gravity_direction.body_rotation
 	if not _validate_area_direction(): return
@@ -100,20 +102,19 @@ func _validate_area_direction() -> bool:
 	for area in range(player.gravity_area_watcher.get_collision_count()):
 		garvity_area = player.gravity_area_watcher.get_collider(area)
 		if not garvity_area is GravityArea3D: continue
-		if not garvity_area.avalible_gravities & BaseGravity.get_by_vector(new_gravity_vector).flag:
-			return false
+		if not garvity_area.avalible_gravities & gravity_direction.flag: return false
 	return true
 
-func get_direction() -> BaseGravity.GravityDirection:
-	x = player.camera.global_rotation.x
-	y = player.camera.global_rotation.y
-	if x > Math.PI_BY_4: return BaseGravity.GravityDirections.TOP
-	elif x < Math.PI_BY_MINUS_4: return BaseGravity.GravityDirections.BOTTOM
-	if -abs(y) <= Math.PI_MINUS_PI_BY_MINUS_4: return BaseGravity.GravityDirections.FRONT
-	elif abs(y) <= Math.PI_BY_4: return BaseGravity.GravityDirections.REAR
-	elif Math.PI_BY_MINUS_4 > y and y > Math.PI_MINUS_PI_BY_MINUS_4: return BaseGravity.GravityDirections.LEFT
-	elif Math.PI_MINUS_PI_BY_4 > y and y> Math.PI_BY_4: return BaseGravity.GravityDirections.RIGHT
-	return BaseGravity.GravityDirections.ZERO
+func get_direction() -> GravityDirection:
+	x = player.head.global_rotation.x
+	y = player.head.global_rotation.y
+	if x > Math.PI_BY_4: return GravityDirections.TOP
+	elif x < Math.PI_BY_MINUS_4: return GravityDirections.BOTTOM
+	if -abs(y) <= Math.PI_MINUS_PI_BY_MINUS_4: return GravityDirections.FRONT
+	elif abs(y) <= Math.PI_BY_4: return GravityDirections.REAR
+	elif Math.PI_BY_MINUS_4 > y and y > Math.PI_MINUS_PI_BY_MINUS_4: return GravityDirections.LEFT
+	elif Math.PI_MINUS_PI_BY_4 > y and y> Math.PI_BY_4: return GravityDirections.RIGHT
+	return gravity_direction
 
 func set_hud() -> void: 
 	pass
@@ -124,10 +125,10 @@ func rotation_correction() -> void:
 	old_vision_position_global = player.vision.global_position
 	player.global_rotation = new_rotation
 	position_correction()
-	rotate_borken_camera()
+	camera_correction()
 	player.head.global_rotation = old_head_rotation_global
 
-func rotate_borken_camera():
+func camera_correction():
 	#if not player.noclip: return
 	if (-new_gravity_vector).cross(old_vision_position_global-old_head_position_global).is_zero_approx(): return
 	player.head.look_at_from_position(old_head_position_global, old_vision_position_global, -new_gravity_vector)
@@ -158,11 +159,7 @@ func set_gravity() -> void:
 	set_gravity_vector_global()
 
 func set_gravity_vector_player() -> void:
-	player.gravity_vector = new_gravity_vector
-	player.inv_gravity_vector = -player.gravity_vector
-	player.positive_gravity_vector = new_gravity_vector * new_gravity_vector
-	player.gravity_mask = Vector3.ONE - player.positive_gravity_vector
-	player.up_direction = - new_gravity_vector
+	player.set_gravity(new_gravity_vector)
 	
 func set_gravity_vector_global() -> void:
 	if not player.gravity_area_watcher.is_colliding():

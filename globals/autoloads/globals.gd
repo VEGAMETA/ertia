@@ -3,6 +3,11 @@ extends Node
 @export var mouse_sens : float = 1.0
 @export var just_unpaused : bool = false
 
+static var debug : bool = OS.is_debug_build()
+
+
+
+
 
 enum Collisions {
 	ALL = ~0,
@@ -54,6 +59,7 @@ func _notification(what):
 		NOTIFICATION_APPLICATION_FOCUS_OUT:
 			get_tree().paused = true
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		NOTIFICATION_WM_SIZE_CHANGED: pass
 
 func reset_physics():
 	var refresh_rate := int(DisplayServer.screen_get_refresh_rate())

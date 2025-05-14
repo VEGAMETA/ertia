@@ -22,7 +22,7 @@ func get_state_by_name(name: StringName) -> AState:
 
 func add_state(state: AState) -> void: 
 	if not state in state_list and not state_list.is_empty(): 
-		return print(error_string(ERR_UNAVAILABLE), " State isn't allowed")
+		return push_error("State isn't allowed")
 	states.get_or_add(state, state.name)
 	state_changed.emit(state)
 

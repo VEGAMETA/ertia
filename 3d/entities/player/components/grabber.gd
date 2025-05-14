@@ -11,7 +11,7 @@ const THROW_FORCE : float = 5.0
 @onready var hand : Marker3D = %Hand
 @onready var grabbed_body : StaticBody3D = %GrabbedBody
 @onready var joint: Generic6DOFJoint3D = %GrabJoint
-@onready var player : Player = owner
+@onready var player : BasePlayer = owner
 
 func _ready():
 	if player.saved_grabbed_object:
@@ -51,8 +51,6 @@ func pull_object() -> void:
 	grabbed_object.set_linear_velocity((PULL_FORCE + PULL_FORCE*int(player.running)) * (grabbed_body.global_position - grabbed_object.global_position))
 
 func rotate_object() -> void:
-	if grabbed_object == null: 
-		return player._handle_camera_rotation()
 	grabbed_body.rotation.x += player.new_cam_rotation.y * player.mouse_sensibility * 0.5
 	grabbed_body.rotation.y += player.new_cam_rotation.x * player.mouse_sensibility * 0.5
 	grabbed_body.rotation.x = wrap(grabbed_body.rotation.x, 0, PI*2)

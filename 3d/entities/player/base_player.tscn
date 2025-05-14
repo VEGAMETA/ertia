@@ -26,3 +26,7 @@ unique_name_in_owner = true
 shape = SubResource("SphereShape3D_vw8av")
 target_position = Vector3(0, 0, 0)
 collision_mask = 16
+
+[node name="Vision" type="Node3D" parent="Head"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)

@@ -15,11 +15,8 @@ func _on_body_entered(body:Node3D) -> void:
 	if body is not RigidBody3D: return
 	body.linear_velocity *= _inv_velocity_multiplyer
 	body.angular_velocity = _new_angular_velocity
-	print(owner.collision_mask, " ", Globals.Collisions.DYNAMIC)
 	owner.collision_mask &= Globals.inv_collision(Globals.Collisions.DYNAMIC) 
-	print(owner.collision_mask, " ", Globals.Collisions.DYNAMIC)
-	
+
 func _on_body_exited(_body:Node3D) -> void:
 	if get_overlapping_bodies().any(func(x): return x is RigidBody3D): return
-	print(owner.collision_mask, " ", Globals.Collisions.DYNAMIC)
 	owner.collision_mask |= Globals.Collisions.DYNAMIC

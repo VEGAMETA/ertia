@@ -23,8 +23,8 @@ class_name Player extends BasePlayer
 @onready var croucher : CroucherComponent = %Croucher
 @onready var flashlight : FlashlightComponent = %Flashlight
 @onready var camera : PlayerCameraComponent = %Camera
+@onready var remote_camera : RemoteTransform3D = %RemoteCamera
 @onready var safe_area : Area3D = %SafeArea
-@onready var vision : Node3D = %Vision
 
 func _initialize():
 	inventory_item = gravity_device
@@ -60,7 +60,7 @@ func _hadle_rotation(delta):
 		if new_cam_rotation.length() > gamepad_sensibility_accel:
 			new_cam_rotation *= exp(new_cam_rotation.length() - gamepad_sensibility_accel) / 0.6 + 1
 		new_cam_rotation *=  delta * 230
-	if Input.is_action_pressed("Alternative"): 
+	if Input.is_action_pressed("Alternative") and grabber.grabbed_object:
 		grabber.rotate_object()
 	else: _handle_camera_rotation()
 	new_cam_rotation = Vector2.ZERO

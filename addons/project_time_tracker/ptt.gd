@@ -14,4 +14,3 @@ func _enter_tree():
 func _exit_tree():
 	remove_control_from_docks(dock)
 	dock.free()
-

@@ -3,7 +3,7 @@ class_name CroucherComponent extends Node
 @export var wish_crouch : bool = false
 @export var wish_uncrouch : bool = true
 @export var crouching : bool = false
-@onready var player : Player = owner
+@onready var player : BasePlayer = owner
 
 signal crouched(not_saved:bool)
 signal uncrouched
@@ -27,6 +27,7 @@ func _ready() -> void:
 	if player.saved_crouching:
 		wish_crouch = true
 		crouch.call_deferred(false, false)
+	await Engine.get_main_loop().physics_frame
 
 func _input(_event) -> void:
 	if crouching: wish_uncrouch = not Input.is_action_pressed("Crouch")

@@ -9,6 +9,7 @@ class_name CoyoteTimerComponent extends Timer
 
 func _ready():
 	set_wait_time(timer_time)
+	timeout.connect(_on_timeout)
 	jumper.jump.connect(jump)
 
 func jump():
@@ -21,6 +22,11 @@ func _physics_process(_delta) -> void:
 		if not falling: jumped = false
 		if not is_stopped(): stop()
 	elif not jumped:
-		if not falling: start()
+		if not falling and is_stopped(): start()
 		if not is_stopped(): jumper.can_jump = true
 	falling = player.is_on_floor()
+
+func _on_timeout():
+	jump()
+	jumper.can_jump = false
+	

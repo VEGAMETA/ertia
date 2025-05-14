@@ -7,7 +7,8 @@ var mouse_sensibility : float = Globals.mouse_sens * 17 / 15000
 var velocity_length : float = 0.0
 
 #Movement
-const MAX_VELOCITY_RUN : float = 7.0
+const MAX_VELOCITY : float = 9.0
+const MAX_VELOCITY_RUN : float = 6.75
 const MAX_VELOCITY_GROUND : float = 4.25
 const MAX_VELOCITY_WALK : float = 2.0 
 const MAX_VELOCITY_AIR : float = 1.75
@@ -21,6 +22,7 @@ const DEVIATION : float = 0.001
 @export var prev_velocity: Vector3
 @export var input_dir: Vector2
 @export var direction: Vector3
+@export var direct_velocity: float
 @export var current_speed: float
 @export var drop: float
 @export var walking : bool = false
@@ -36,8 +38,9 @@ const DEVIATION : float = 0.001
 
 @export var firstperson : bool = true
 
-@onready var head : Node3D = %Head
 @onready var holder : Node3D =  %Holder
+@onready var head : Node3D = %Head
+@onready var vision : Node3D = %Vision
 @onready var gravity_area_watcher : ShapeCast3D = %GravityAreaWatcher
 
 func _notification(what) -> void:
@@ -54,7 +57,8 @@ func _initialize():
 		current_ps3d_gravity_vector = Gravity.gravity_vector
 	gravity = Gravity.gravity
 	set_gravity(Gravity.gravity_vector)
-	await get_tree().physics_frame
+	set_gravity_global(Gravity.gravity_vector)
+	await Engine.get_main_loop().physics_frame
 	gravity_area_watcher.force_shapecast_update()
 
 func _input(event:InputEvent) -> void:
@@ -63,10 +67,13 @@ func _input(event:InputEvent) -> void:
 	if event.is_action_pressed("Walk"): walking = true
 	running = Input.is_action_pressed("Run")
 
+
 func _physics_process(delta:float) -> void:
+	get_tree()
 	_set_movement_direction()
 	if is_on_floor(): _update_velocity_ground(delta)
 	else: _update_velocity_air(delta)
+	_limit_speed()
 	prev_velocity = velocity
 	move_and_slide()
 	_lean_head(delta)
@@ -93,6 +100,12 @@ func _update_velocity_air(delta) -> void:
 func _lean_head(delta) -> void:
 	head.rotation.z = lerp(head.rotation.z, 0.0 if velocity == Vector3.ZERO else -input_dir.x * LEAN_SCALE, delta * 10.0)
 
+func _limit_speed() -> void:
+	direct_velocity = (velocity * gravity_mask).length()
+	if direct_velocity < MAX_VELOCITY: return
+	direct_velocity /= MAX_VELOCITY
+	velocity *= positive_gravity_vector + gravity_mask / direct_velocity
+
 func _wall_handling() -> void:
 	if is_on_wall(): velocity -= velocity * gravity_mask * WALL_GRIP
 
@@ -116,8 +129,6 @@ func set_gravity(new_gravity_vector:Vector3) -> void:
 	positive_gravity_vector = new_gravity_vector * new_gravity_vector
 	gravity_mask = Vector3.ONE - positive_gravity_vector
 	up_direction = -new_gravity_vector
-	set_gravity_global(new_gravity_vector)	
-	if gravity_area_watcher.is_colliding(): return
 
 func set_gravity_global(new_gravity_vector:Vector3) -> void:
 	current_ps3d_gravity_vector = new_gravity_vector

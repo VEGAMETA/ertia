@@ -7,28 +7,21 @@ const CAMERA_ZOOMED_FOV : float = 45.0
 var fov_tween : Tween
 var position_tween : Tween
 var hud_tween : Tween
-var debug_view_list : Array[int] = [1, 3, 4, 5, 26, 0]
 var trasns_time : float = 0.0
-var max_alpha : float = 0.0
 @export var zoomed : bool = false
 
-@onready var player : Player = owner
-@onready var head : Node3D = player.head
+@onready var player : BasePlayer = owner
 
 func _notification(what) -> void:
 	match what:
 		NOTIFICATION_PAUSED: zoom_out_fov()
 
-func _ready() -> void:
-	handle_first_person()
-
 func _process(_delta) -> void:
-	#player.gravitator.rotator_head.rotation = head.global_rotation
 	if not zoomed and (fov_tween == null or (fov_tween and not fov_tween.is_running())):
-		if player.velocity.length() > 7.9: run_fov()
+		if (player.velocity_length > 6 and player.running) or player.velocity_length > 9.0: run_fov()
 		else: run_to_default_fov()
 
-func _unhandled_input(event) -> void:
+func _input(event) -> void:
 	if event.is_action_pressed("Zoom") and not player.running and not zoomed: zoom_in_fov()
 	if event.is_action_released("Zoom") and zoomed: zoom_out_fov()
 
@@ -63,13 +56,10 @@ func zoom_out_fov() -> void:
 	zoomed = false
 	trasns_time = (CAMERA_DEFAULT_FOV-fov)/(CAMERA_DEFAULT_FOV-CAMERA_ZOOMED_FOV)
 	play_fov_animation(CAMERA_DEFAULT_FOV, trasns_time, Tween.TRANS_EXPO)
-	
-func handle_first_person() -> void:
-	position.z = 0.0 if player.firstperson else 4.0
 
 func _on_croucher_crouched(not_saved):
 	play_position_animation(Vector3(0.0, -1.0, 0.0), int(not_saved)*(1+player.head.position.y))
 
 func _on_croucher_uncrouched():
-	if player.camera.position != player.head.position:
+	if position != player.head.position:
 		play_position_animation(Vector3.ZERO, 1 - player.head.position.y)
