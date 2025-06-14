@@ -13,7 +13,11 @@ func _process(delta) -> void:
 func rotate_gravitate(value:float) -> void:
 	rotation_multiplyer = value
 
-func _input(event) -> void:
+func _input(event:InputEvent) -> void:
+	input.rpc(event)
+
+@rpc("authority", "call_local", "reliable")
+func input(event:InputEvent) -> void:
 	if event.is_action_pressed("Attack"):
 		Input.start_joy_vibration(0, 0.6, 0.0, 0.17)
 		rotate_gravitate(10)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://vs6ls4tsm6ch"]
 
-[ext_resource type="PackedScene" uid="uid://ddcnfra32iwwi" path="res://assets/models/GravityDevice.fbx" id="1_fbxtl"]
+[ext_resource type="PackedScene" uid="uid://ddcnfra32iwwi" path="res://assets/models/gravity_device.fbx" id="1_fbxtl"]
 [ext_resource type="Texture2D" uid="uid://yrrcxcy41som" path="res://assets/bitmaps/textures/256/Metal_01-256x256_20.png" id="2_x23ll"]
 [ext_resource type="Shader" uid="uid://taf5g00cwiyy" path="res://static/shaders/holo.gdshader" id="3_48kx0"]
 [ext_resource type="Script" uid="uid://vhtgrfwbw52f" path="res://3d/classes/rotating_mesh.gd" id="4_48kx0"]

@@ -12,10 +12,10 @@ func _input(event) -> void:
 
 func quicksave() -> void:
 	player.save()
-	Saver.save(Saver.fetch_metadata(Saver.SaveType.QUICKSAVE))
+	Saver.quicksave()
 
 func quickload() -> void:
-	Saver.load_last_save(Saver.SaveType.QUICKSAVE)
+	Saver.quickload()
 
 func _on_save_init() -> void: pass
 func _on_save_finish() -> void: pass

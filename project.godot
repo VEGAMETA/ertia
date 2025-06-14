@@ -11,10 +11,13 @@ config_version=5
 [application]
 
 config/name="ertia"
-run/main_scene="uid://bcljbuape7mjq"
+config/version="0.0.preproduction"
+run/main_scene="uid://bbckpe314bsaf"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.4", "Forward Plus")
-boot_splash/show_image=false
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 boot_splash/image="uid://bvli7oj55prcl"
 
 [autoload]
@@ -23,6 +26,7 @@ Gravity="*res://globals/autoloads/gravity.gd"
 Globals="*res://globals/autoloads/globals.gd"
 Saver="*res://globals/autoloads/saver.gd"
 UUID="*res://globals/autoloads/uuid.gd"
+Console="*res://globals/autoloads/console.gd"
 
 [display]
 
@@ -31,7 +35,7 @@ window/vsync/vsync_mode=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/project_time_tracker/plugin.cfg")
+enabled=PackedStringArray("res://addons/project_time_tracker/plugin.cfg", "res://addons/script-ide/plugin.cfg")
 
 [importer_defaults]
 
@@ -184,6 +188,16 @@ debug_view={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":66,"key_label":0,"unicode":98,"location":0,"echo":false,"script":null)
 ]
 }
+debug_console={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":96,"key_label":0,"unicode":96,"location":0,"echo":false,"script":null)
+]
+}
+
+[internationalization]
+
+rendering/text_driver="ICU / HarfBuzz / Graphite (Built-in)"
+locale/locale_filter_mode=0
 
 [layer_names]
 

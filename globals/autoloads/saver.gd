@@ -1,12 +1,15 @@
 extends Node
 
-@export var base_directory : String = "user://"
+const MAX_QUICKSAVES : int = 10
 
-@export var save_directory : String = base_directory + "saves/"
+@export_storage var base_directory : String = "user://"
+@export_storage var save_directory : String = base_directory + "saves/"
+
 var temp_directory : String = save_directory + "tmp/"
 var temp_filetype : String = ".tmp"
 var save_filetype : String = ".sav"
 var backup_save_filetype : String = ".backup"
+
 
 enum SaveType {
 	ALL,
@@ -171,10 +174,23 @@ func load_save(save_path:String) -> void:
 	
 	var scene : Resource = ResourceLoader.load(temp_scene)
 	if scene == null: return push_error("Failed to load scene.")
-	get_tree().change_scene_to_file(temp_scene)
+	get_tree().call_deferred("change_scene_to_file", temp_scene)
 	DirAccess.remove_absolute(temp_scene)
 
 func load_last_save(type:SaveType) -> void:
 	var files : Array = get_saves(type)
 	if not files: return
 	return load_save(files[0].keys()[0])
+
+func quickload() -> void:
+	load_last_save(SaveType.QUICKSAVE)
+
+func quicksave() -> void:
+	save(fetch_metadata(SaveType.QUICKSAVE))
+	erase_quicksaves()
+
+func erase_quicksaves() -> void:
+	var files : Array = get_saves(SaveType.QUICKSAVE)
+	if not files: return
+	if files.size() <= 10: return
+	DirAccess.remove_absolute(files[-1].keys()[0])

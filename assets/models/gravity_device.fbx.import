@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://ddcnfra32iwwi"
-path="res://.godot/imported/GravityDevice.fbx-fd7c69fe8edf7ce4a6228568dd57a121.scn"
+path="res://.godot/imported/gravity_device.fbx-4caf70ad9a05968088f4a563e2ec375a.scn"
 
 [deps]
 
-source_file="res://assets/models/GravityDevice.fbx"
-dest_files=["res://.godot/imported/GravityDevice.fbx-fd7c69fe8edf7ce4a6228568dd57a121.scn"]
+source_file="res://assets/models/gravity_device.fbx"
+dest_files=["res://.godot/imported/gravity_device.fbx-4caf70ad9a05968088f4a563e2ec375a.scn"]
 
 [params]
 

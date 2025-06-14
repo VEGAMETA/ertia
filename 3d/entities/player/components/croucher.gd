@@ -30,6 +30,10 @@ func _ready() -> void:
 	await Engine.get_main_loop().physics_frame
 
 func _input(_event) -> void:
+	input.rpc()
+
+@rpc("authority", "call_local", "reliable")
+func input() -> void:
 	if crouching: wish_uncrouch = not Input.is_action_pressed("Crouch")
 	else: wish_crouch = Input.is_action_pressed("Crouch")
 

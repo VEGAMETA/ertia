@@ -58,6 +58,7 @@ func _initialize() -> void:
 	add_child(vibration_timer)
 	vibration_timer.timeout.connect(prevent_vibration)
 
+
 func attack() -> void:
 	if Input.is_action_pressed("Alternative"): return
 	change_gravity(get_direction().rotation_vector)
@@ -108,13 +109,16 @@ func _validate_area_direction() -> bool:
 func get_direction() -> GravityDirection:
 	x = player.head.global_rotation.x
 	y = player.head.global_rotation.y
-	if x > Math.PI_BY_4: return GravityDirections.TOP
-	elif x < Math.PI_BY_MINUS_4: return GravityDirections.BOTTOM
-	if -abs(y) <= Math.PI_MINUS_PI_BY_MINUS_4: return GravityDirections.FRONT
-	elif abs(y) <= Math.PI_BY_4: return GravityDirections.REAR
-	elif Math.PI_BY_MINUS_4 > y and y > Math.PI_MINUS_PI_BY_MINUS_4: return GravityDirections.LEFT
-	elif Math.PI_MINUS_PI_BY_4 > y and y> Math.PI_BY_4: return GravityDirections.RIGHT
-	return gravity_direction
+	return (
+		GravityDirections.TOP if x > Math.PI_BY_4
+		else GravityDirections.BOTTOM if x < Math.PI_BY_MINUS_4
+		else GravityDirections.FRONT if -abs(y) <= Math.PI_MINUS_PI_BY_MINUS_4
+		else GravityDirections.REAR if abs(y) <= Math.PI_BY_4
+		else GravityDirections.LEFT if Math.PI_BY_MINUS_4 > y and y > Math.PI_MINUS_PI_BY_MINUS_4
+		else GravityDirections.RIGHT if Math.PI_MINUS_PI_BY_4 > y and y > Math.PI_BY_4
+		else gravity_direction
+	)
+
 
 func set_hud() -> void: 
 	pass
@@ -137,7 +141,7 @@ func camera_correction():
 	tween = create_tween()
 	tween.set_trans(Tween.TRANS_EXPO)
 	tween.tween_property(player.head, "global_rotation", new_head_rotation_global, 0.15 + (new_head_rotation_global - old_head_rotation_global).length()*0.0625)
-	
+
 func position_correction() -> void:
 	if player.croucher.crouching:
 		player.position += player.gravity_vector - new_gravity_vector
@@ -151,9 +155,7 @@ func position_correction() -> void:
 		player.croucher.wish_uncrouch = true
 
 
-###########################
-### Sets gravity vector ###
-###########################
+## Sets gravity vector
 func set_gravity() -> void:
 	set_gravity_vector_player()
 	set_gravity_vector_global()

@@ -16,7 +16,7 @@
 [ext_resource type="Script" uid="uid://hnmribs6d1tn" path="res://3d/entities/player/components/jumper.gd" id="13_p5dw3"]
 [ext_resource type="Script" uid="uid://cv5yw36abjb8w" path="res://3d/entities/player/components/saver.gd" id="15_odio3"]
 [ext_resource type="PackedScene" uid="uid://0ub1mqyun1fk" path="res://3d/entities/items/devices/gravity_device.tscn" id="16_0l3dj"]
-[ext_resource type="PackedScene" uid="uid://dnykiwmsfl20x" path="res://ui/hud/ingame/Debug.tscn" id="17_mgp6e"]
+[ext_resource type="PackedScene" uid="uid://dnykiwmsfl20x" path="res://ui/hud/ingame/debug.tscn" id="17_mgp6e"]
 [ext_resource type="Script" uid="uid://c3xh2s0yd0ebx" path="res://3d/entities/player/components/debug.gd" id="17_myyqq"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4xa2n"]

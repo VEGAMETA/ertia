@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://bu8kjkkq3vasm"]
+
+[ext_resource type="Script" uid="uid://5bl805er7sxs" path="res://ui/entities/console.gd" id="1_m8ebj"]
+[ext_resource type="FontFile" uid="uid://c2focg68oglmn" path="res://assets/fonts/0xProtoNerdFontMono-Regular.ttf" id="2_ixdjk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6kcfx"]
+content_margin_left = 15.0
+content_margin_top = 10.0
+content_margin_right = 15.0
+content_margin_bottom = 10.0
+bg_color = Color(0.14, 0.177, 0.2, 0.843137)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4kbc8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_top = 2
+border_color = Color(0.557937, 0.781583, 0.784418, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ixdjk"]
+content_margin_left = 6.0
+bg_color = Color(0.2975, 0.329, 0.35, 0.843137)
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="Console" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m8ebj")
+
+[node name="CommandOutput" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 6.0
+offset_right = -4.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(0.803922, 0.894118, 0.909804, 1)
+theme_override_fonts/normal_font = ExtResource("2_ixdjk")
+theme_override_font_sizes/normal_font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_6kcfx")
+bbcode_enabled = true
+scroll_following = true
+vertical_alignment = 2
+
+[node name="CommandLine" type="LineEdit" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -41.0
+offset_right = -4.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.804312, 0.89545, 0.910315, 1)
+theme_override_fonts/font = ExtResource("2_ixdjk")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxFlat_4kbc8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ixdjk")
+caret_blink = true
+caret_blink_interval = 0.35

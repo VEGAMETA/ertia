@@ -19,24 +19,24 @@ const WALL_GRIP : float = 0.15
 const LEAN_SCALE : float = 0.03
 const DEVIATION : float = 0.001
 
-@export var prev_velocity: Vector3
-@export var input_dir: Vector2
-@export var direction: Vector3
-@export var direct_velocity: float
-@export var current_speed: float
-@export var drop: float
-@export var walking : bool = false
-@export var running : bool = false
+@export_storage var prev_velocity: Vector3
+@export_storage var input_dir: Vector2
+@export_storage var direction: Vector3
+@export_storage var direct_velocity: float
+@export_storage var current_speed: float
+@export_storage var drop: float
+@export_storage var walking : bool = false
+@export_storage var running : bool = false
 
 #Gravity
-@export var gravity : float
-@export var gravity_mask : Vector3 = Vector3.ZERO
-@export var gravity_vector : Vector3 = Vector3.ZERO
-@export var inv_gravity_vector : Vector3 = Vector3.ZERO
-@export var positive_gravity_vector : Vector3 = Vector3.ZERO
-@export var current_ps3d_gravity_vector : Vector3 = Vector3.ZERO
+@export_storage var gravity : float
+@export_storage var gravity_mask : Vector3 = Vector3.ZERO
+@export_storage var gravity_vector : Vector3 = Vector3.ZERO
+@export_storage var inv_gravity_vector : Vector3 = Vector3.ZERO
+@export_storage var positive_gravity_vector : Vector3 = Vector3.ZERO
+@export_storage var current_ps3d_gravity_vector : Vector3 = Vector3.ZERO
 
-@export var firstperson : bool = true
+@export_storage var firstperson : bool = true
 
 @onready var holder : Node3D =  %Holder
 @onready var head : Node3D = %Head
@@ -62,11 +62,14 @@ func _initialize():
 	gravity_area_watcher.force_shapecast_update()
 
 func _input(event:InputEvent) -> void:
+	input.rpc(event)
+
+@rpc("authority", "call_local", "reliable")
+func input(event:InputEvent) -> void:
 	input_dir = Input.get_vector("StrafeLeft", "StrafeRight", "Forward", "Backward")
 	if event.is_action_released("Walk"): walking = false
 	if event.is_action_pressed("Walk"): walking = true
 	running = Input.is_action_pressed("Run")
-
 
 func _physics_process(delta:float) -> void:
 	get_tree()
