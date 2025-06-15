@@ -9,18 +9,12 @@ func _ready() -> void:
 
 
 func _input(event) -> void:
-	if event.is_action_pressed("Quicksave"): quicksave()
-	if event.is_action_pressed("Quickload"): quickload()
+	if event.is_action_pressed("Quicksave"): Saver.quicksave()
+	if event.is_action_pressed("Quickload"): Saver.quickload()
 
 
-func quicksave() -> void:
+func _on_save_init() -> void: 
 	player.save()
-	Saver.quicksave()
 
 
-func quickload() -> void:
-	Saver.quickload()
-
-
-func _on_save_init() -> void: pass
 func _on_save_finish() -> void: pass

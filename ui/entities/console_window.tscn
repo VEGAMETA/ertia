@@ -1,7 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://bu8kjkkq3vasm"]
 
 [ext_resource type="FontFile" uid="uid://darb6f1xibj0a" path="res://assets/fonts/Lato-Light.ttf" id="1_ru5jm"]
+
 [ext_resource type="Script" uid="uid://5bl805er7sxs" path="res://ui/entities/console_window.gd" id="1_xfmnv"]
+
 [ext_resource type="FontFile" uid="uid://c2focg68oglmn" path="res://assets/fonts/0xProtoNerdFontMono-Regular.ttf" id="2_ru5jm"]
 
 [sub_resource type="Theme" id="Theme_ru5jm"]

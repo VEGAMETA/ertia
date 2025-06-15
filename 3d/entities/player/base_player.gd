@@ -62,8 +62,8 @@ func _initialize():
 	if current_ps3d_gravity_vector == Vector3.ZERO: 
 		current_ps3d_gravity_vector = Gravity.gravity_vector
 	gravity = Gravity.gravity
-	set_gravity(Gravity.gravity_vector)
-	set_gravity_global(Gravity.gravity_vector)
+	set_gravity(current_ps3d_gravity_vector)
+	set_gravity_global(current_ps3d_gravity_vector)
 	await Engine.get_main_loop().physics_frame
 	gravity_area_watcher.force_shapecast_update()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

@@ -178,7 +178,8 @@ func load_save(save_path:String) -> void:
 	var scene : Resource = ResourceLoader.load(temp_scene)
 	if scene == null: return push_error("Failed to load scene.")
 	get_tree().change_scene_to_file.call_deferred(temp_scene)
-	DirAccess.remove_absolute(temp_scene)
+	DirAccess.remove_absolute.call_deferred(temp_scene)
+
 
 func load_last_save(type:SaveType=SaveType.ALL) -> void:
 	var files : Array = get_saves(type)
