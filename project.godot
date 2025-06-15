@@ -22,11 +22,12 @@ boot_splash/image="uid://bvli7oj55prcl"
 
 [autoload]
 
-Gravity="*res://globals/autoloads/gravity.gd"
-Globals="*res://globals/autoloads/globals.gd"
-Saver="*res://globals/autoloads/saver.gd"
-UUID="*res://globals/autoloads/uuid.gd"
 Console="*res://globals/autoloads/console.gd"
+Utils="*res://globals/autoloads/utils.gd"
+UUID="*res://globals/autoloads/uuid.gd"
+Gravity="*res://globals/autoloads/gravity.gd"
+Saver="*res://globals/autoloads/saver.gd"
+Globals="*res://globals/autoloads/globals.gd"
 
 [display]
 

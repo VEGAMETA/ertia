@@ -1,0 +1,115 @@
+[gd_scene load_steps=10 format=3 uid="uid://bu8kjkkq3vasm"]
+
+[ext_resource type="FontFile" uid="uid://darb6f1xibj0a" path="res://assets/fonts/Lato-Light.ttf" id="1_ru5jm"]
+[ext_resource type="Script" uid="uid://5bl805er7sxs" path="res://ui/entities/console_window.gd" id="1_xfmnv"]
+[ext_resource type="FontFile" uid="uid://c2focg68oglmn" path="res://assets/fonts/0xProtoNerdFontMono-Regular.ttf" id="2_ru5jm"]
+
+[sub_resource type="Theme" id="Theme_ru5jm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ru5jm"]
+bg_color = Color(0.1914, 0.247273, 0.29, 1)
+border_width_left = 100
+border_width_right = 100
+border_width_bottom = 25
+border_color = Color(0.235, 0.426917, 0.47, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 3.0
+expand_margin_top = 25.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+shadow_color = Color(0, 0, 0, 0.54902)
+shadow_size = 36
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51gmx"]
+bg_color = Color(0.192157, 0.247059, 0.290196, 1)
+border_width_left = 100
+border_width_right = 100
+border_width_bottom = 25
+border_color = Color(0.235294, 0.427451, 0.470588, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6kcfx"]
+content_margin_left = 15.0
+content_margin_top = 10.0
+content_margin_right = 15.0
+content_margin_bottom = 10.0
+bg_color = Color(0.14, 0.177, 0.2, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4kbc8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_top = 2
+border_color = Color(0.4505, 0.670225, 0.85, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ixdjk"]
+content_margin_left = 6.0
+bg_color = Color(0.2975, 0.329, 0.35, 0.843137)
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Console" type="Window"]
+process_mode = 3
+title = "console"
+position = Vector2i(745, 52)
+size = Vector2i(355, 500)
+theme = SubResource("Theme_ru5jm")
+theme_override_constants/title_height = 22
+theme_override_constants/close_h_offset = 20
+theme_override_constants/close_v_offset = 17
+theme_override_fonts/title_font = ExtResource("1_ru5jm")
+theme_override_styles/embedded_border = SubResource("StyleBoxFlat_ru5jm")
+script = ExtResource("1_xfmnv")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_51gmx")
+
+[node name="CommandOutput" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 7.0
+offset_right = -4.0
+offset_bottom = -41.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(0.803922, 0.894118, 0.909804, 1)
+theme_override_fonts/normal_font = ExtResource("2_ru5jm")
+theme_override_font_sizes/normal_font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_6kcfx")
+bbcode_enabled = true
+scroll_following = true
+vertical_alignment = 2
+
+[node name="CommandLine" type="LineEdit" parent="."]
+unique_name_in_owner = true
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -41.0
+offset_right = -4.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.804312, 0.89545, 0.910315, 1)
+theme_override_fonts/font = ExtResource("2_ru5jm")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxFlat_4kbc8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ixdjk")
+caret_blink = true
+caret_blink_interval = 0.35

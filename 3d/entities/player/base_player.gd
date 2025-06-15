@@ -48,6 +48,12 @@ func _notification(what) -> void:
 		NOTIFICATION_PAUSED:
 			walking = false
 			running = false
+		NOTIFICATION_UNPAUSED:
+			if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
+				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		NOTIFICATION_APPLICATION_FOCUS_IN:
+			if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
+				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _ready() -> void:
 	_initialize()
@@ -60,6 +66,8 @@ func _initialize():
 	set_gravity_global(Gravity.gravity_vector)
 	await Engine.get_main_loop().physics_frame
 	gravity_area_watcher.force_shapecast_update()
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	add_to_group("Player")
 
 func _input(event:InputEvent) -> void:
 	input.rpc(event)

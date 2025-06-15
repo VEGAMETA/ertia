@@ -1,4 +1,4 @@
-class_name Command
+class_name Command extends Node
 
 var result : Error = OK
 

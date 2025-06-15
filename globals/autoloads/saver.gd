@@ -134,8 +134,9 @@ func _save(metadata:SaveMetadata, scene:Node) -> void:
 	var metadata_data : PackedByteArray
 	
 	packed.pack(scene)
-	
 	result = ResourceSaver.save(packed, temp_scene)
+	
+	print(result)
 	if result != OK: return push_error("Failed to save temporary scene.")
 	file = FileAccess.open(temp_scene, FileAccess.READ)
 	scene_data = file.get_buffer(file.get_length())
@@ -160,7 +161,9 @@ func _save(metadata:SaveMetadata, scene:Node) -> void:
 
 func load_save(save_path:String) -> void:
 	var file : FileAccess = FileAccess.open(save_path, FileAccess.READ)
-	if file == null: return push_error("Failed to open save file.")
+	if file == null:
+		#Console.printerr("Failed to open save file.", ERR_FILE_BAD_PATH) 
+		return push_error("Failed to open save file.")
 	var temp_scene : String = temp_directory + UUID.v4() + temp_filetype + ".tscn"
 	var garbage : int = file.get_32()
 	file.get_buffer(garbage)
@@ -174,10 +177,10 @@ func load_save(save_path:String) -> void:
 	
 	var scene : Resource = ResourceLoader.load(temp_scene)
 	if scene == null: return push_error("Failed to load scene.")
-	get_tree().call_deferred("change_scene_to_file", temp_scene)
+	get_tree().change_scene_to_file.call_deferred(temp_scene)
 	DirAccess.remove_absolute(temp_scene)
 
-func load_last_save(type:SaveType) -> void:
+func load_last_save(type:SaveType=SaveType.ALL) -> void:
 	var files : Array = get_saves(type)
 	if not files: return
 	return load_save(files[0].keys()[0])

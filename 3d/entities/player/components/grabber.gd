@@ -26,8 +26,10 @@ func _process(_delta) -> void:
 		zoom_object()
 	check_if_floor_is_not_gravity_object()
 
+
 func _input(event:InputEvent) -> void:
 	input.rpc(event)
+
 
 @rpc("authority", "call_local", "reliable")
 func input(event:InputEvent) -> void:
@@ -35,6 +37,7 @@ func input(event:InputEvent) -> void:
 	if Input.is_action_pressed("Alternative") and Input.is_action_pressed("Attack"):
 		throw = true
 		ungrab_object()
+
 
 func interract() -> void:
 	if grab(): return
@@ -53,15 +56,18 @@ func grab() -> bool:
 	ungrab_object()
 	return false
 
+
 func pull_object() -> void:
 	if grabbed_object == null: return
 	grabbed_object.set_linear_velocity((PULL_FORCE + PULL_FORCE*int(player.running)) * (grabbed_body.global_position - grabbed_object.global_position))
+
 
 func rotate_object() -> void:
 	grabbed_body.rotation.x += player.new_cam_rotation.y * player.mouse_sensibility * 0.5
 	grabbed_body.rotation.y += player.new_cam_rotation.x * player.mouse_sensibility * 0.5
 	grabbed_body.rotation.x = wrap(grabbed_body.rotation.x, 0, PI*2)
 	grabbed_body.rotation.y = wrap(grabbed_body.rotation.y, 0, PI*2)
+
 
 func zoom_object() -> void:
 	if grabbed_object == null: return
@@ -70,12 +76,14 @@ func zoom_object() -> void:
 	int(Input.is_action_just_pressed("ZoomIn"))) * -0.1
 	grabbed_body.position.z = clamp(grabbed_zoom, -2.5, -1.5)
 
+
 func grab_object(object:RigidBody3D) -> void:
 	if grabbed_object != null: return ungrab_object()
 	for collision in player.shape_under.collision_result:
 		if collision.get("collider") == object: return
 	grabbed_object = object
 	joint.set_node_b(grabbed_object.get_path())
+
 
 func ungrab_object() -> void:
 	if grabbed_object == null: return
@@ -88,6 +96,7 @@ func ungrab_object() -> void:
 	joint.set_node_b(joint.get_path())
 	grabbed_body.rotation = Vector3.ZERO
 	grabbed_body.position.z = -2.0
+
 
 func check_grabbed_object() -> bool:
 	if grabbed_object == null: return false

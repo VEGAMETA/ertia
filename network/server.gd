@@ -4,6 +4,13 @@ var clients : Dictionary = {}
 
 enum Permission { NONE, DEFAULT, ADMIN, CUSTOM }
 
+var map : String = ""
+
+func _ready() -> void:
+	var maps : PackedStringArray = Utils.get_maps()
+	if not maps: return
+	map = maps[0]
+	
 
 func serve() -> Error:
 	result = peer.create_server(port, MAX_CLIENTS)

@@ -26,17 +26,15 @@ class_name Player extends BasePlayer
 @onready var remote_camera : RemoteTransform3D = %RemoteCamera
 @onready var safe_area : Area3D = %SafeArea
 
-#var server = Server.new()
-#var client = Client.new()
 
 func _initialize():
-	#add_child(server)
-	#add_child(client)
-	#server.serve()
-	#client.connect_to_server(server)
 	inventory_item = gravity_device
 	super()
 	self.load_save()
+
+
+func _process(delta:float) -> void:
+	_hadle_rotation.rpc(delta)
 
 
 func load_save():
@@ -53,9 +51,6 @@ func save():
 	saved_crouching = croucher.crouching
 	saved_rotation = head.rotation
 
-
-func _process(delta:float) -> void:
-	_hadle_rotation.rpc(delta)
 
 
 @rpc("authority", "call_local", "reliable")
