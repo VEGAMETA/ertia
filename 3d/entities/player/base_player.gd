@@ -19,24 +19,24 @@ const WALL_GRIP : float = 0.15
 const LEAN_SCALE : float = 0.03
 const DEVIATION : float = 0.001
 
-@export_storage var prev_velocity: Vector3
-@export_storage var input_dir: Vector2
-@export_storage var direction: Vector3
-@export_storage var direct_velocity: float
-@export_storage var current_speed: float
-@export_storage var drop: float
-@export_storage var walking : bool = false
-@export_storage var running : bool = false
+@export var prev_velocity: Vector3
+@export var input_dir: Vector2
+@export var direction: Vector3
+@export var direct_velocity: float
+@export var current_speed: float
+@export var drop: float
+@export var walking : bool = false
+@export var running : bool = false
 
 #Gravity
-@export_storage var gravity : float
-@export_storage var gravity_mask : Vector3 = Vector3.ZERO
-@export_storage var gravity_vector : Vector3 = Vector3.ZERO
-@export_storage var inv_gravity_vector : Vector3 = Vector3.ZERO
-@export_storage var positive_gravity_vector : Vector3 = Vector3.ZERO
-@export_storage var current_ps3d_gravity_vector : Vector3 = Vector3.ZERO
+@export var gravity : float
+@export var gravity_mask : Vector3 = Vector3.ZERO
+@export var gravity_vector : Vector3 = Vector3.ZERO
+@export var inv_gravity_vector : Vector3 = Vector3.ZERO
+@export var positive_gravity_vector : Vector3 = Vector3.ZERO
+@export var current_ps3d_gravity_vector : Vector3 = Vector3.ZERO
 
-@export_storage var firstperson : bool = true
+@export var firstperson : bool = true
 
 @onready var holder : Node3D =  %Holder
 @onready var head : Node3D = %Head
@@ -62,8 +62,8 @@ func _initialize():
 	if current_ps3d_gravity_vector == Vector3.ZERO: 
 		current_ps3d_gravity_vector = Gravity.gravity_vector
 	gravity = Gravity.gravity
-	set_gravity(current_ps3d_gravity_vector)
-	set_gravity_global(current_ps3d_gravity_vector)
+	set_gravity(Gravity.gravity_vector)
+	set_gravity_global(Gravity.gravity_vector)
 	await Engine.get_main_loop().physics_frame
 	gravity_area_watcher.force_shapecast_update()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

@@ -13,7 +13,7 @@ func _input(event) -> void:
 	if event.is_action_pressed("Quickload"): Saver.quickload()
 
 
-func _on_save_init() -> void: 
+func _on_save_init() -> void:
 	player.save()
 
 

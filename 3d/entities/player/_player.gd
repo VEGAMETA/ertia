@@ -10,7 +10,7 @@ class_name Player extends BasePlayer
 @export var gamepad_sensibility_accel : float = gamepad_sensibility * 0.9
 @export var new_cam_rotation : Vector2 = Vector2.ZERO
 
-@export var inventory_item : Attackable = null # @export_storage causes constant freezes
+@export var inventory_item : Attackable = null
 
 @onready var collision_stand : CollisionShape3D = $CollisionStand
 @onready var collision_crouch : CollisionShape3D = $CollisionCrouch
@@ -26,24 +26,20 @@ class_name Player extends BasePlayer
 @onready var remote_camera : RemoteTransform3D = %RemoteCamera
 @onready var safe_area : Area3D = %SafeArea
 
-
 func _initialize():
 	inventory_item = gravity_device
 	super()
-	self.load_save()
-
+	self._load()
 
 func _process(delta:float) -> void:
 	_hadle_rotation.rpc(delta)
 
-
-func load_save():
+func _load():
 	grabber.grabbed_object = saved_grabbed_object
 	flashlight.visible = saved_flashlight
 	head.rotation = saved_rotation
 	holder.rotation = saved_rotation
 	if saved_crouching: croucher.crouch(false, false)
-
 
 func save():
 	saved_grabbed_object = grabber.grabbed_object
@@ -52,9 +48,8 @@ func save():
 	saved_rotation = head.rotation
 
 
-
 @rpc("authority", "call_local", "reliable")
-func input(event:InputEvent) -> void:
+func input(event):
 	super(event)
 	if event is InputEventMouseMotion or event is InputEventScreenDrag:
 		new_cam_rotation = event.relative
@@ -63,7 +58,7 @@ func input(event:InputEvent) -> void:
 
 
 @rpc("authority", "call_local", "reliable")
-func _hadle_rotation(delta:float) -> void:
+func _hadle_rotation(delta):
 	if new_cam_rotation == Vector2.ZERO:
 		new_cam_rotation = Input.get_vector("j_left", "j_right", "j_up", "j_down") * gamepad_sensibility
 		if new_cam_rotation.length() > gamepad_sensibility_accel:
@@ -73,7 +68,6 @@ func _hadle_rotation(delta:float) -> void:
 		grabber.rotate_object()
 	else: _handle_camera_rotation()
 	new_cam_rotation = Vector2.ZERO
-
 
 func _handle_camera_rotation() -> void:
 	head.rotation.x = clamp(
