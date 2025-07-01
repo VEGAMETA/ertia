@@ -34,11 +34,7 @@ func _ready() -> void:
 
 
 func _input(_event) -> void:
-	input.rpc()
-
-
-@rpc("authority", "call_local", "reliable")
-func input() -> void:
+	if not owner.is_multiplayer_authority(): return
 	if crouching: wish_uncrouch = not Input.is_action_pressed("Crouch")
 	else: wish_crouch = Input.is_action_pressed("Crouch")
 

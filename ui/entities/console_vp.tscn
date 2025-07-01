@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://d14npjejm8tqv"]
+
+[ext_resource type="PackedScene" uid="uid://bu8kjkkq3vasm" path="res://ui/entities/console_window.tscn" id="1_67sou"]
+
+[node name="ConsoleVp" type="SubViewportContainer"]
+
+[node name="Console" parent="." instance=ExtResource("1_67sou")]

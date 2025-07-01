@@ -18,7 +18,6 @@ var server : Server
 var client : Client
 var command_handler : CommandHandler
 
-var previous_mouse_mode : Input.MouseMode
 
 @export var mouse_sens : float = 1.0
 @export var just_unpaused : bool = false
@@ -34,53 +33,73 @@ func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	reset_physics()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	previous_mouse_mode = Input.get_mouse_mode()
 
 # TO SERVER
 func _input(event):
 	if event.is_action_pressed("Fullscreen"):
-		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-		else: 
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		toggle_fullscreen()
 	if event.is_action_pressed("Pause"):
-		get_tree().set_pause(!get_tree().is_paused())
-		notify_deferred_thread_group(
-			NOTIFICATION_PAUSED if get_tree().is_paused() else \
-			NOTIFICATION_UNPAUSED
-		)
-	if event is InputEventMouseButton:
-		if get_tree().paused: get_tree().set_pause(false)
-		notify_deferred_thread_group(
-			NOTIFICATION_PAUSED if get_tree().is_paused() else \
-			NOTIFICATION_UNPAUSED
-		)
+		toggle_pause()
+	#if event is InputEventMouseButton:
+		#if get_tree().paused: get_tree().set_pause(false)
+		#notify_deferred_thread_group(
+			#NOTIFICATION_PAUSED if get_tree().is_paused() else \
+			#NOTIFICATION_UNPAUSED
+		#)
 
+
+func toggle_pause():
+	if !get_tree().current_scene.is_multiplayer_authority(): return Console.printerr("Cannot pause")
+	_toggle_pause.rpc()
+	_toggle_mouse.rpc()
+
+@rpc("any_peer", "call_local", "reliable")
+func _toggle_pause():
+	get_tree().set_pause(!get_tree().is_paused())
+	notify_deferred_thread_group(
+		NOTIFICATION_PAUSED if get_tree().is_paused() else \
+		NOTIFICATION_UNPAUSED
+	)
+
+func toggle_mouse(hide:bool=true):
+	Input.set_mouse_mode(
+		Input.MOUSE_MODE_CAPTURED if hide else \
+		Input.MOUSE_MODE_VISIBLE
+	)
+
+@rpc("any_peer", "call_remote", "unreliable")
+func _toggle_mouse():
+	Input.set_mouse_mode(
+		Input.MOUSE_MODE_CAPTURED if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE else \
+		Input.MOUSE_MODE_VISIBLE
+	)
+
+	
+
+
+func toggle_fullscreen() -> void:
+	DisplayServer.window_set_mode(
+		DisplayServer.WINDOW_MODE_WINDOWED if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN else \
+		DisplayServer.WINDOW_MODE_FULLSCREEN
+	)
 
 
 func _notification(what):
 	match what:
-		NOTIFICATION_PAUSED:
-			if Input.get_mouse_mode() != Input.MOUSE_MODE_VISIBLE:
-				previous_mouse_mode = Input.get_mouse_mode()
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		NOTIFICATION_PAUSED: pass
+			#toggle_mouse(false)
 		NOTIFICATION_UNPAUSED:
+			#toggle_mouse(true)
 			just_unpaused = true
-			if previous_mouse_mode != Input.MOUSE_MODE_VISIBLE:
-				Input.set_mouse_mode(previous_mouse_mode)
 			await get_tree().physics_frame
 			just_unpaused = false
 		NOTIFICATION_APPLICATION_FOCUS_IN:
-			get_tree().set_pause(false)
-			Input.set_mouse_mode(previous_mouse_mode)
+			#toggle_mouse(true)
 			reset_physics()
-		NOTIFICATION_APPLICATION_FOCUS_OUT:
-			if Input.get_mouse_mode() != Input.MOUSE_MODE_VISIBLE:
-				previous_mouse_mode = Input.get_mouse_mode()
-			get_tree().set_pause(true)
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		NOTIFICATION_SCENE_INSTANTIATED:
-			get_tree().set_pause(false)
+		NOTIFICATION_APPLICATION_FOCUS_OUT: pass
+			#toggle_mouse(false)
+		#NOTIFICATION_SCENE_INSTANTIATED:
+			#get_tree().set_pause(false)
 		NOTIFICATION_WM_SIZE_CHANGED: pass
 
 

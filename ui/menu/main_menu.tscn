@@ -1,0 +1,110 @@
+[gd_scene load_steps=7 format=3 uid="uid://camwqks3jp737"]
+
+[ext_resource type="Script" uid="uid://dtyioqs0liox3" path="res://ui/menu/main_menu.gd" id="1_or6mk"]
+[ext_resource type="Shader" uid="uid://b7os2pcqfuyuy" path="res://static/shaders/blur_singlepass.gdshader" id="2_or6mk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_or6mk"]
+shader = ExtResource("2_or6mk")
+shader_parameter/blur_amount = 2.5
+shader_parameter/mix_amount = 0.66
+shader_parameter/color_over = Color(0.196078, 0.196078, 0.196078, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_or6mk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gvx18"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4gkdq"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_or6mk")
+
+[node name="Blur" type="ColorRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_or6mk")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.077
+anchor_top = 0.316
+anchor_right = 0.247
+anchor_bottom = 0.855
+offset_left = 0.295982
+offset_top = 0.231995
+offset_right = -0.544006
+offset_bottom = -0.0400391
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "play"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_or6mk")
+
+[node name="Serve" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "serve
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Ip" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "ip"
+alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_gvx18")
+
+[node name="Port" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "port"
+alignment = 1
+
+[node name="Connect" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "connect"
+
+[node name="Disconnect" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "disconnect"
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_4gkdq")
+
+[node name="Options" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "options
+"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "quit"

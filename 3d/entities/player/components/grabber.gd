@@ -28,11 +28,7 @@ func _process(_delta) -> void:
 
 
 func _input(event:InputEvent) -> void:
-	input.rpc(event)
-
-
-@rpc("authority", "call_local", "reliable")
-func input(event:InputEvent) -> void:
+	if not owner.is_multiplayer_authority(): return
 	if event.is_action_pressed("Interract"): interract()
 	if Input.is_action_pressed("Alternative") and Input.is_action_pressed("Attack"):
 		throw = true

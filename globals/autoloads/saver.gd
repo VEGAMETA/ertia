@@ -136,7 +136,6 @@ func _save(metadata:SaveMetadata, scene:Node) -> void:
 	packed.pack(scene)
 	result = ResourceSaver.save(packed, temp_scene)
 	
-	print(result)
 	if result != OK: return push_error("Failed to save temporary scene.")
 	file = FileAccess.open(temp_scene, FileAccess.READ)
 	scene_data = file.get_buffer(file.get_length())

@@ -19,6 +19,8 @@ const WALL_GRIP : float = 0.15
 const LEAN_SCALE : float = 0.03
 const DEVIATION : float = 0.001
 
+@export var initial_position : Vector3
+@export var uuid : String = UUID.v4()
 @export var prev_velocity: Vector3
 @export var input_dir: Vector2
 @export var direction: Vector3
@@ -42,6 +44,8 @@ const DEVIATION : float = 0.001
 @onready var head : Node3D = %Head
 @onready var vision : Node3D = %Vision
 @onready var gravity_area_watcher : ShapeCast3D = %GravityAreaWatcher
+@onready var multiplayer_syncronizer : MultiplayerSynchronizer = %MultiplayerSynchronizer
+
 
 func _notification(what) -> void:
 	match what:
@@ -49,35 +53,43 @@ func _notification(what) -> void:
 			walking = false
 			running = false
 		NOTIFICATION_UNPAUSED:
-			if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
-				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		NOTIFICATION_APPLICATION_FOCUS_IN:
-			if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
-				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+
+func _enter_tree() -> void:
+	if Globals.client.connected():
+		set_multiplayer_authority(str(name).to_int())
+
+
+func _init():
+	add_to_group("Player")
+
 
 func _ready() -> void:
-	_initialize()
-
-func _initialize():
+	if not is_multiplayer_authority(): return
+	Menu.menu_toggle.connect(clear_inputs)
+	Console.console_toggle.connect(clear_inputs)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	initial_position = global_position
+	initial_position.y += 1.5
 	if current_ps3d_gravity_vector == Vector3.ZERO: 
 		current_ps3d_gravity_vector = Gravity.gravity_vector
 	gravity = Gravity.gravity
-	set_gravity(Gravity.gravity_vector)
-	set_gravity_global(Gravity.gravity_vector)
+	set_gravity(current_ps3d_gravity_vector)
+	set_gravity_global(current_ps3d_gravity_vector)
 	await Engine.get_main_loop().physics_frame
 	gravity_area_watcher.force_shapecast_update()
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	add_to_group("Player")
+
 
 func _input(event:InputEvent) -> void:
-	input.rpc(event)
-
-@rpc("authority", "call_local", "reliable")
-func input(event:InputEvent) -> void:
+	if not is_multiplayer_authority(): return
 	input_dir = Input.get_vector("StrafeLeft", "StrafeRight", "Forward", "Backward")
 	if event.is_action_released("Walk"): walking = false
 	if event.is_action_pressed("Walk"): walking = true
 	running = Input.is_action_pressed("Run")
+
 
 func _physics_process(delta:float) -> void:
 	get_tree()
@@ -91,6 +103,21 @@ func _physics_process(delta:float) -> void:
 	_wall_handling()
 	_move_holder(delta)
 	velocity_length = velocity.length()
+
+
+func clear_inputs(disabled:bool=true) -> void:
+	set_input_recursively(self, not disabled)
+	Input.set_mouse_mode(
+		Input.MOUSE_MODE_CAPTURED if not disabled else\
+		Input.MOUSE_MODE_VISIBLE
+	)
+	input_dir *= int(not disabled)
+
+func set_input_recursively(node: Node, enabled: bool) -> void:
+	node.set_process_input(enabled)
+	node.set_process_unhandled_input(enabled)
+	for child in node.get_children():
+		if child is Node: set_input_recursively(child, enabled)
 
 func accelerate(max_speed: float) -> void:
 	velocity += direction * clamp(max_speed - velocity.dot(direction) , 0, 1) * input_dir.length()
@@ -144,3 +171,7 @@ func set_gravity(new_gravity_vector:Vector3) -> void:
 func set_gravity_global(new_gravity_vector:Vector3) -> void:
 	current_ps3d_gravity_vector = new_gravity_vector
 	Gravity.change_gravity_vector(new_gravity_vector)
+
+func teleport_to_initial_position() -> void:
+	global_position = initial_position
+	set_velocity.call_deferred(Vector3.ZERO)

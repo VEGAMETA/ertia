@@ -21,8 +21,8 @@ func execute(_command:PackedStringArray) -> void:
 	Console.print("\n> " + joined_command + "\n")
 	if not joined_command: return
 	find_command(_command)
-	if not executor.execute():
-		Console.command_history.push_front(joined_command)
+	executor.execute()
+	Console.command_history.push_front(joined_command)
 
 
 func find_command(_command) -> void:

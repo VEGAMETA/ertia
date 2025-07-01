@@ -25,19 +25,24 @@ class_name Player extends BasePlayer
 @onready var camera : PlayerCameraComponent = %Camera
 @onready var remote_camera : RemoteTransform3D = %RemoteCamera
 @onready var safe_area : Area3D = %SafeArea
+@onready var aim : Node3D = %Aim
 
 
-func _initialize():
-	inventory_item = gravity_device
+func _ready() -> void:
 	super()
+	if not is_multiplayer_authority(): return
+	inventory_item = gravity_device
+	camera.current = true
 	self.load_save()
 
 
 func _process(delta:float) -> void:
-	_hadle_rotation.rpc(delta)
+	aim.rotation.x = lerp_angle(aim.rotation.x, head.rotation.x, delta * 16)
+	aim.rotation.y = lerp_angle(aim.rotation.y, head.rotation.y, delta * 16)
+	_hadle_rotation(delta)
 
 
-func load_save():
+func load_save() -> void:
 	grabber.grabbed_object = saved_grabbed_object
 	flashlight.visible = saved_flashlight
 	head.rotation = saved_rotation
@@ -45,16 +50,15 @@ func load_save():
 	if saved_crouching: croucher.crouch(false, false)
 
 
-func save():
+func save() -> void:
 	saved_grabbed_object = grabber.grabbed_object
 	saved_flashlight = flashlight.visible
 	saved_crouching = croucher.crouching
 	saved_rotation = head.rotation
 
 
-
-@rpc("authority", "call_local", "reliable")
-func input(event:InputEvent) -> void:
+func _input(event:InputEvent) -> void:
+	if not is_multiplayer_authority(): return
 	super(event)
 	if event is InputEventMouseMotion or event is InputEventScreenDrag:
 		new_cam_rotation = event.relative
@@ -62,8 +66,8 @@ func input(event:InputEvent) -> void:
 		inventory_item.attack()
 
 
-@rpc("authority", "call_local", "reliable")
 func _hadle_rotation(delta:float) -> void:
+	if not is_multiplayer_authority(): return
 	if new_cam_rotation == Vector2.ZERO:
 		new_cam_rotation = Input.get_vector("j_left", "j_right", "j_up", "j_down") * gamepad_sensibility
 		if new_cam_rotation.length() > gamepad_sensibility_accel:

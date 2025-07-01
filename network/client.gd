@@ -1,47 +1,91 @@
 class_name Client extends NetworkHost
 
-var connected_server : Server
+@export var MAX_RECONNECTIONS : int = 3
+var counter : int = MAX_RECONNECTIONS
+
+var default_ip : String = "localhost"
+var default_port : int = 2423
+
+var connecting_server : Dictionary = {"ip" = null, "port" = null}
 
 
-func _init() -> void:
-	port += 1
+func _ready() -> void:
+	multiplayer.allow_object_decoding = true
+	multiplayer.connected_to_server.connect(_on_connect)
+	multiplayer.server_disconnected.connect(_on_disconnect)
+	multiplayer.connection_failed.connect(_on_connection_failed)
+
+
+func _on_connection_failed() -> void:
+	Console.printerr("Couldn't connect to %s:%s" % connecting_server.values(), ERR_CANT_CONNECT)
+	connecting_server.set("ip", null)
+	connecting_server.set("port", null)
+
+
+func _reconnect() -> Error:
+	if counter < 1: 
+		counter = MAX_RECONNECTIONS
+		connecting_server.set("ip", null)
+		connecting_server.set("port", null)
+		return ERR_CANT_CONNECT
+	counter -= 1
+	return connect_to_server(
+		connecting_server.get("ip"),
+		connecting_server.get("port"),
+	)
+
+
+func _on_connect() -> void:
+	Console.print("\nConnected to server %s" % connecting_server.get("ip"))
+
+
+func _on_disconnect() -> void:
+	Console.print("\nDisconnected from server %s" % connecting_server.get("ip"))
+	connecting_server.set("ip", null)
+	connecting_server.set("port", null)
+	Menu.menu()
 
 
 func status() -> String:
 	match peer.get_connection_status():
-		MultiplayerPeer.ConnectionStatus.CONNECTION_CONNECTED: return "connected to "
+		MultiplayerPeer.ConnectionStatus.CONNECTION_CONNECTED: return "connected to " % % connecting_server.get("ip")
+		MultiplayerPeer.ConnectionStatus.CONNECTION_CONNECTING: return "connecting to..." % connecting_server.get("ip")
 		MultiplayerPeer.ConnectionStatus.CONNECTION_DISCONNECTED: return "disconnected"
-		MultiplayerPeer.ConnectionStatus.CONNECTION_CONNECTING: return "connecting..."
-	printerr("Unreachable")
+		_: Console.printerr("Unreachable - Client")
 	return "Unreachable"
 
 
-func connect_to_server(server:Server) -> Error:
-	result = peer.create_client(server.ip, server.port)
-	if result: return result
-	#multiplayer.multiplayer_peer = peer
-	#multiplayer.connected_to_server.connect(_on_connect)
-	#multiplayer.server_disconnected.connect(_on_disconnect)
-	#multiplayer.connection_failed.connect(_reconnect)
+func connect_to_server(ip:String, port:int) -> Error:
+	disconnect_from_server()
+	Console.print("Connecting to %s:%d" % [ip, port])
+	peer.close()
+	multiplayer.multiplayer_peer = null
+	connecting_server.set("ip", ip)
+	connecting_server.set("port", port)
+	result = peer.create_client(ip, port)
+	if result:
+		Console.printerr("Couldn't connect to %s" %ip, result)
+		return result
+	multiplayer.multiplayer_peer = peer
 	return OK
 
 
-func _reconnect() -> Error:
-	var counter : int = MAX_RECONNECTIONS
-	var timer : Timer = Timer.new()
-	while counter:
-		counter -= 1
-		timer.start()
-		await timer.timeout
-		result = connect_to_server(connected_server)
-		if result: continue
-		else: break
-	return result
+func disconnect_from_server() -> void:
+	if peer.get_connection_status() != MultiplayerPeer.ConnectionStatus.CONNECTION_CONNECTED: return
+	var server_peer : ENetPacketPeer = peer.get_peer(get_multiplayer_authority())
+	if not server_peer: return Console.printerr("Cannot get server instance", ERR_CONNECTION_ERROR) 
+	server_peer.peer_disconnect()
+
+@rpc("authority", "call_remote", "unreliable")
+func request_spawn() -> void:
+	Globals.server.spawn_player.rpc_id(get_multiplayer_authority(), multiplayer.get_unique_id())
 
 
-func _on_connect() -> void:
-	print_debug("cli conn")
+@rpc("any_peer", "call_local", "unreliable_ordered")
+func client_change_scene(scene: PackedScene) -> void:
+	print(get_tree().change_scene_to_packed(scene))
 
 
-func _on_disconnect() -> void:
-	print_debug("cli disc")
+@rpc("any_peer", "call_local", "unreliable_ordered")
+func client_change_map(path: String) -> void:
+	get_tree().change_scene_to_file(path)

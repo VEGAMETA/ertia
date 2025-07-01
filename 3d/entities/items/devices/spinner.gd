@@ -4,6 +4,16 @@ const initial_rotation_multiplyer : float = 0.1
 var rotation_multiplyer : float = initial_rotation_multiplyer
 var new_rot : float = 0.0
 
+func _ready():
+	if not owner: return
+	if not owner.owner: return
+	if owner.owner is not BasePlayer: return
+	set_syncronized.call_deferred()
+
+func set_syncronized() -> void:
+	if owner.owner.multiplayer_syncronizer.replication_config.has_property(^"Components/GravityDevice/Model:rotation"): return
+	owner.owner.multiplayer_syncronizer.replication_config.add_property(^"Components/GravityDevice/Model:rotation")#NodePath("%s:rotation"%get_path()))
+
 func _process(delta) -> void:
 	rotation_multiplyer = lerpf(rotation_multiplyer, initial_rotation_multiplyer, delta * rotation_multiplyer)
 	new_rot = lerpf(rotation.y, rotation.y + PI, delta * rotation_multiplyer)
@@ -14,10 +24,7 @@ func rotate_gravitate(value:float) -> void:
 	rotation_multiplyer = value
 
 func _input(event:InputEvent) -> void:
-	input.rpc(event)
-
-@rpc("authority", "call_local", "reliable")
-func input(event:InputEvent) -> void:
+	if not owner.is_multiplayer_authority(): return
 	if event.is_action_pressed("Attack"):
 		Input.start_joy_vibration(0, 0.6, 0.0, 0.17)
 		rotate_gravitate(10)

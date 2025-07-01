@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bcljbuape7mjq"]
+[gd_scene load_steps=9 format=3 uid="uid://bcljbuape7mjq"]
 
 [ext_resource type="Material" uid="uid://bjyyfh03v4u1u" path="res://static/materials/prototype_black.tres" id="1_6sujd"]
-[ext_resource type="PackedScene" uid="uid://diyb5sbluyv0b" path="res://3d/entities/player/player.tscn" id="2_6sujd"]
+[ext_resource type="PackedScene" uid="uid://diyb5sbluyv0b" path="res://3d/entities/player/Player.tscn" id="2_6sujd"]
 [ext_resource type="Script" uid="uid://sl63lhw2w8gu" path="res://3d/classes/gravity_object.gd" id="3_rryn2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6sujd"]
@@ -16,8 +16,6 @@ background_mode = 2
 sky = SubResource("Sky_rryn2")
 tonemap_mode = 2
 glow_enabled = true
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_6sujd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rryn2"]
 
@@ -45,13 +43,6 @@ material = ExtResource("1_6sujd")
 
 [node name="Player" parent="." instance=ExtResource("2_6sujd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.56557, 0)
-saved_grabbed_object = null
-inventory_item = null
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("CapsuleMesh_6sujd")
-skeleton = NodePath("")
 
 [node name="GravityObject" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.886552, -4.25406)

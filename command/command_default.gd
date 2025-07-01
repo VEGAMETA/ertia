@@ -7,10 +7,12 @@ clear/cls/clr - clear console
 connect ip port - connect to server with given ip (IPv4) and port (1025-65535) 
 server - handle server
 exit/quit - quit game
+close - toggle console
 map - load map
 maps - show maps
 pause - pauses the game
 unpause - pauses the game
+toggle_fullscreen - toggles fullscreen window mode
 """
 
 
@@ -18,10 +20,13 @@ static func get_registered() -> Array[String]:
 	return [
 		"help", 
 		"clear", "clr", "cls", 
-		"exit", "quit", 
-		"connect",
+		"exit", "quit",
+		"close",
+		"connect", "disconnect",
 		"map", "maps",
-		"pause", "unpause"
+		"toggle_pause",
+		"toggle_fullscreen",
+		"spawn"
 	]
 
 
@@ -33,15 +38,18 @@ func execute() -> Error:
 		"cls": Console.clear()
 		"exit": Globals.quit()
 		"quit": Globals.quit()
-		"maps": Console.print("%s" % Utils.get_maps())
+		"close": Console.toggle_console()
+		"maps": Console.print("%s" % "\n".join(Utils.get_maps()))
 		"map": if command.size() > 1: Utils.load_map(command[1])
-		"pause": Globals.get_tree().paused = true
-		"unpause": Globals.get_tree().paused = false
+		"toggle_pause": Globals.toggle_pause()
+		"toggle_fullscreen": Globals.toggle_fullscreen()
+		"spawn": Globals.client.request_spawn()
+		"disconnect": Globals.client.disconnect_from_server()
 		"connect": if command.size() > 2:
-			var ip : String = Utils.validate_ip(command[2])
+			var ip : String = Utils.validate_ip(command[1])
 			if not ip: return Console.printerr("incorrect ip", ERR_CANT_RESOLVE)
-			var port : int = int(command[3])
+			var port : int = int(command[2])
 			port = port if port > 1024 and port < 65536 else 0
 			if not port: return Console.printerr("incorrect port", ERR_CANT_RESOLVE)
-			Console.print("connecting to {}".format([ip], "{}"))
+			Globals.client.connect_to_server(ip, port)
 	return OK

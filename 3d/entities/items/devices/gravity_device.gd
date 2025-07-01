@@ -61,7 +61,7 @@ func _initialize() -> void:
 
 func attack() -> void:
 	if Input.is_action_pressed("Alternative"): return
-	change_gravity(get_direction().rotation_vector)
+	change_gravity.rpc(get_direction().rotation_vector)
 
 func _process(_delta) -> void:
 	rotator_head.rotation = player.head.global_rotation
@@ -86,6 +86,8 @@ func watch_areas() -> void:
 	if new_gravity_vector == Vector3.ZERO: return
 	new_gravity_vector = new_gravity_vector.normalized()
 
+
+@rpc("authority", "call_local", "reliable")
 func change_gravity(direction:Vector3) -> void:
 	gravity_direction = GravityDirections.by_vector.get(direction, GravityDirections.ZERO)
 	new_gravity_vector = gravity_direction.rotation_vector

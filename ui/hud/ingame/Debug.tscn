@@ -14,10 +14,7 @@ script = ExtResource("1_wgr67")
 [node name="Value" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.129
-anchor_bottom = 0.13
-offset_right = 0.391998
-offset_bottom = -0.240005
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 1152.0
+offset_bottom = 648.0
+text = "fps
+velocity"

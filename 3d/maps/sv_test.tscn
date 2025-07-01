@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://6dm80s7iw5pt"]
+
+[ext_resource type="Material" uid="uid://cu7ch8eak34l3" path="res://static/materials/prototype_white.tres" id="1_sosiq"]
+[ext_resource type="PackedScene" uid="uid://cn0cddljejupg" path="res://3d/entities/player/player_spawn_point.tscn" id="2_8ofa2"]
+[ext_resource type="Script" uid="uid://bocclwggvkja1" path="res://3d/classes/inbound_area.gd" id="3_10b2t"]
+[ext_resource type="Script" uid="uid://d2r6e1pocyspv" path="res://3d/classes/spawn_area.gd" id="4_kdyj7"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8ofa2"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_10b2t"]
+sky_material = SubResource("ProceduralSkyMaterial_8ofa2")
+
+[sub_resource type="Environment" id="Environment_kdyj7"]
+background_mode = 2
+sky = SubResource("Sky_10b2t")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ofa2"]
+size = Vector3(25, 8, 25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7xn26"]
+size = Vector3(5.4834, 4.72827, 10.8594)
+
+[node name="SVTest" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_kdyj7")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+use_collision = true
+size = Vector3(20, 0.1, 20)
+material = ExtResource("1_sosiq")
+
+[node name="PlayerSpawnPoint" parent="." instance=ExtResource("2_8ofa2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.30486, 0.0499997, 0.634584)
+
+[node name="Inbounds" type="Area3D" parent="."]
+script = ExtResource("3_10b2t")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Inbounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2918, 0)
+shape = SubResource("BoxShape3D_8ofa2")
+
+[node name="SpawnArea3D" type="Area3D" parent="."]
+script = ExtResource("4_kdyj7")
+metadata/_custom_type_script = "uid://d2r6e1pocyspv"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.22641, 2.5, 0)
+shape = SubResource("BoxShape3D_7xn26")

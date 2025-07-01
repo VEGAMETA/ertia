@@ -13,30 +13,37 @@ var history_count : int = -1
 
 
 func _ready() -> void:
+	always_on_top = true
 	close_requested.connect(close)
-	Console.stream_updated.connect(set_text)
+	Console.stream_update.connect(set_text)
 	set_text()
+	command_line.grab_focus()
 	command_line.text_submitted.connect(submit_command)
 	command_line.edit.call_deferred()
 	command_line.text_changed.connect(_inspect_text)
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
 func _notification(what) -> void:
 	match what:
 		NOTIFICATION_VISIBILITY_CHANGED:
+			if visible: Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			if not command_line: return
 			if visible: command_line.edit.call_deferred()
 			else: command_line.unedit.call_deferred()
 		NOTIFICATION_WM_MOUSE_ENTER:
 			if visible: command_line.edit.call_deferred()
 			else: command_line.unedit.call_deferred()
+		NOTIFICATION_WM_CLOSE_REQUEST:
+			Console.toggle_console()
+
 
 func _input(event) -> void:
 	if not visible: return
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if event.is_action_pressed("debug_console"):
-		visible = false
+		Console.toggle_console()
 	if event.is_action_pressed("ui_focus_next"):
 		get_suggestions()
 	if event.is_action_pressed("ui_up"):

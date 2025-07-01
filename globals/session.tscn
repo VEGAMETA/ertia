@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://bbckpe314bsaf"]
+[gd_scene load_steps=5 format=3 uid="uid://bbckpe314bsaf"]
 
 [ext_resource type="Script" uid="uid://c20a2entmctj1" path="res://globals/session.gd" id="1_bptd2"]
+[ext_resource type="FontFile" uid="uid://c2focg68oglmn" path="res://assets/fonts/0xProtoNerdFontMono-Regular.ttf" id="2_8gb6e"]
+[ext_resource type="Texture2D" uid="uid://bvli7oj55prcl" path="res://assets/bitmaps/icons/grV.png" id="2_88s8e"]
+
+[sub_resource type="Theme" id="Theme_a5f34"]
+default_font = ExtResource("2_8gb6e")
+default_font_size = 30
 
 [node name="Session" type="Control"]
 layout_mode = 3
@@ -11,12 +17,47 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bptd2")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.1
+autostart = true
+
+[node name="splash_1" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -576.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Tool" type="RichTextLabel" parent="splash_1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_a5f34")
+bbcode_enabled = true
+text = "[wave amp=20 freq=10]
+Made with [outline_size=5][outline_color=lightblue][color=5aaccf]Godot [table=3,center]
+[cell][font_size=60][/font_size][/cell][/table][/color][/outline_color][/outline_size][/wave]		
+[wave amp=20 freq=10]
+
+"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="splash_2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.369792
+anchor_top = 0.268519
+anchor_right = 0.630208
+anchor_bottom = 0.731481
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_88s8e")
