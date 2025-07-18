@@ -8,7 +8,7 @@ func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 
-func _process(_delta):
+func _process(_delta:float) -> void:
 	global_rotation = Vector3.ZERO
 
 func _on_body_entered(body:Node3D) -> void:
@@ -18,5 +18,5 @@ func _on_body_entered(body:Node3D) -> void:
 	owner.collision_mask &= Globals.inv_collision(Globals.Collisions.DYNAMIC) 
 
 func _on_body_exited(_body:Node3D) -> void:
-	if get_overlapping_bodies().any(func(x): return x is RigidBody3D): return
+	if get_overlapping_bodies().any(func (x:Node3D) -> bool: return x is RigidBody3D): return
 	owner.collision_mask |= Globals.Collisions.DYNAMIC

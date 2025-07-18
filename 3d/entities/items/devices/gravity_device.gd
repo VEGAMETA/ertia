@@ -63,10 +63,10 @@ func attack() -> void:
 	if Input.is_action_pressed("Alternative"): return
 	change_gravity.rpc(get_direction().rotation_vector)
 
-func _process(_delta) -> void:
+func _process(_delta:float) -> void:
 	rotator_head.rotation = player.head.global_rotation
 
-func _physics_process(_delta) -> void:
+func _physics_process(_delta:float) -> void:
 	watch_and_change_gravity()
 
 func watch_and_change_gravity() -> void:
@@ -134,7 +134,7 @@ func rotation_correction() -> void:
 	camera_correction()
 	player.head.global_rotation = old_head_rotation_global
 
-func camera_correction():
+func camera_correction() -> void:
 	#if not player.noclip: return
 	if (-new_gravity_vector).cross(old_vision_position_global-old_head_position_global).is_zero_approx(): return
 	player.head.look_at_from_position(old_head_position_global, old_vision_position_global, -new_gravity_vector)
@@ -178,8 +178,8 @@ func set_gravity_vector_global() -> void:
 		garvity_area.set_color()
 		Gravity.change_gravity.emit(new_gravity_vector)
 
-func set_gravity_ps3d():
+func set_gravity_ps3d() -> void:
 	Gravity.change_gravity_vector(player.current_ps3d_gravity_vector)
 
-func prevent_vibration():
+func prevent_vibration() -> void:
 	Input.stop_joy_vibration(1)

@@ -15,7 +15,6 @@ func _ready() -> void:
 	multiplayer.peer_disconnected.connect(_on_disconnect)
 	var maps : PackedStringArray = Utils.get_maps()
 	if not maps: return
-	map = maps[0]
 
 
 func _on_connect(peer_id:int) -> void:
@@ -72,9 +71,10 @@ func get_map() -> String:
 
 @rpc("any_peer", "call_local", "reliable")
 func spawn_player(peer_id:int) -> void:
+	if not multiplayer.is_server(): return
 	if get_tree().current_scene == null: return Console.printerr("Cannot spawn - no map")
 	var spawn_point := get_tree().get_first_node_in_group("SpawnPoint") as SpawnPoint3D
 	if spawn_point == null: return Console.printerr("Cannot spawn - nowhere to spawn")
 	var spawned : Node = spawn_point.spawner.spawn(peer_id)
-	spawned.reparent(get_tree().current_scene)
 	if spawned == null: return Console.printerr("Cannot spawn - wrong authority")
+	spawned.reparent(get_tree().current_scene)

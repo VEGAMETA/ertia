@@ -27,5 +27,4 @@ mesh = SubResource("QuadMesh_julex")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 unique_name_in_owner = true
-_spawnable_scenes = PackedStringArray("uid://diyb5sbluyv0b")
 spawn_path = NodePath("..")

@@ -6,10 +6,10 @@ signal uncrouched
 @export var wish_crouch : bool = false
 @export var wish_uncrouch : bool = true
 @export var crouching : bool = false
-@onready var player : BasePlayer = owner
+@onready var player : Player = owner
 
 
-func _notification(what) -> void:
+func _notification(what:int) -> void:
 	match what:
 		NOTIFICATION_PAUSED:
 			if crouching: wish_uncrouch = true
@@ -33,13 +33,13 @@ func _ready() -> void:
 	await Engine.get_main_loop().physics_frame
 
 
-func _input(_event) -> void:
+func _input(_event:InputEvent) -> void:
 	if not owner.is_multiplayer_authority(): return
 	if crouching: wish_uncrouch = not Input.is_action_pressed("Crouch")
 	else: wish_crouch = Input.is_action_pressed("Crouch")
 
 
-func _physics_process(_delta) -> void:
+func _physics_process(_delta:float) -> void:
 	if player.is_on_floor(): restore_crouch()
 	else: crouch_in_air()
 	crouch()
@@ -47,7 +47,7 @@ func _physics_process(_delta) -> void:
 	_set_walk()
 
 
-func crouch(gravitating = false, not_saved = true) -> void:
+func crouch(gravitating := false, not_saved := true) -> void:
 	if not wish_crouch: return
 	if gravitating: player.head.position = player.collision_crouch.position
 	crouched.emit(not_saved)
@@ -64,7 +64,7 @@ func crouch_in_air() -> void:
 	player.shape_stand.position.y = 0.5
 	player.shape_stand.force_update_transform()
 	player.shape_stand.force_shapecast_update()
-	var was_colliding = player.shape_stand.is_colliding()
+	var was_colliding := player.shape_stand.is_colliding()
 	player.shape_stand.position.y = -0.5
 	player.shape_stand.force_update_transform()
 	player.shape_stand.force_shapecast_update()
@@ -89,13 +89,13 @@ func restore_crouch() -> void:
 	player.head.position.y = -1.0
 
 
-func _on_crouch(_not_saved:bool):
+func _on_crouch(_not_saved:bool) -> void:
 	player.collision_stand.disabled = true
 	crouching = true
 	wish_crouch = false
 
 
-func _on_uncrouch():
+func _on_uncrouch() -> void:
 	player.collision_stand.disabled = false
 	crouching = false
 	wish_uncrouch = false

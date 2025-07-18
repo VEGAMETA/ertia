@@ -55,14 +55,17 @@ func get_savefiles() -> Array[String]:
 func get_savefiles_by_type(type:SaveType) -> Array[String]:
 	var prefix : String = get_prefix_by_type(type)
 	if not type: return get_savefiles()
-	return get_savefiles().filter(func (file_name:String): return file_name.begins_with(prefix) and file_name.ends_with(save_filetype))
+	return get_savefiles().filter(
+		func (file_name:String) -> bool: 
+			return file_name.begins_with(prefix) and file_name.ends_with(save_filetype)
+	)
 
 func get_next_index(type:SaveType) -> int:
 	var prefix : String = get_prefix_by_type(type)
 	var i : int = 0
 	var used_indices : Dictionary[int, bool] = {}
 	for file_name in get_savefiles_by_type(type):
-		var number_str = file_name.trim_prefix(prefix).trim_suffix(save_filetype)
+		var number_str := file_name.trim_prefix(prefix).trim_suffix(save_filetype)
 		if not number_str.is_valid_int(): continue
 		used_indices[int(number_str)] = true
 	while true:
@@ -71,7 +74,7 @@ func get_next_index(type:SaveType) -> int:
 	return i
 
 func fetch_metadata(type:SaveType) -> SaveMetadata:
-	var metadata = SaveMetadata.new()
+	var metadata := SaveMetadata.new()
 	metadata.setup(
 		Time.get_unix_time_from_system(),
 		get_viewport().get_texture().get_image(),
@@ -110,10 +113,16 @@ func get_metadata(save_path:String) -> Dictionary[String, SaveMetadata]:
 	return {save_path: metadata}
 
 func get_saves(type:SaveType=SaveType.ALL) -> Array:
-	var saves : Array = get_savefiles_by_type(type).map(func (path): return save_directory + path)
+	var saves : Array = get_savefiles_by_type(type).map(
+		func (path:String) -> String: 
+			return save_directory + path
+	)
 	saves = saves.map(get_metadata)
 	if not saves: return []
-	saves.sort_custom(func(a:Dictionary, b:Dictionary): return a.values()[0].time > b.values()[0].time)
+	saves.sort_custom(
+		func(a:Dictionary, b:Dictionary) -> bool: 
+			return a.values()[0].time > b.values()[0].time
+	)
 	return saves
 
 func save(metadata:SaveMetadata, scene:Node=get_tree().current_scene) -> void:

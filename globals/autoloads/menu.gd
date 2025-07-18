@@ -13,7 +13,7 @@ func _init() -> void:
 	menu_toggle.connect(_on_toggle)
 
 
-func _input(event) -> void:
+func _input(event:InputEvent) -> void:
 	if event.is_action_pressed("Menu"): toggle_menu()
 
 

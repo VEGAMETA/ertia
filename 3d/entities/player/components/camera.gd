@@ -12,26 +12,26 @@ var trasns_time : float = 0.0
 
 @onready var player : BasePlayer = owner
 
-func _notification(what) -> void:
+func _notification(what:int) -> void:
 	match what:
 		NOTIFICATION_PAUSED: zoom_out_fov()
 
-func _process(_delta) -> void:
+func _process(_delta:float) -> void:
 	if not zoomed and (fov_tween == null or (fov_tween and not fov_tween.is_running())):
 		if (player.velocity_length > 6 and player.running) or player.velocity_length > 9.0: run_fov()
 		else: run_to_default_fov()
 
-func _input(event) -> void:
+func _input(event:InputEvent) -> void:
 	if event.is_action_pressed("Zoom") and not player.running and not zoomed: zoom_in_fov()
 	if event.is_action_released("Zoom") and zoomed: zoom_out_fov()
 
-func play_fov_animation(new_fov, time=1.0, trans=Tween.TRANS_LINEAR) -> void:
+func play_fov_animation(new_fov:float, time:=1.0, trans:=Tween.TRANS_LINEAR) -> void:
 	if fov_tween: fov_tween.kill()
 	fov_tween = create_tween()
 	fov_tween.set_trans(trans)
 	fov_tween.tween_property(self, "fov", new_fov, 0.4 * time)
 
-func play_position_animation(new_pos, time:float=1.0):
+func play_position_animation(new_pos:Vector3, time:float=1.0) -> void:
 	if position_tween: position_tween.kill()
 	position_tween = create_tween()
 	position_tween.set_trans(Tween.TRANS_SINE)
@@ -57,9 +57,9 @@ func zoom_out_fov() -> void:
 	trasns_time = (CAMERA_DEFAULT_FOV-fov)/(CAMERA_DEFAULT_FOV-CAMERA_ZOOMED_FOV)
 	play_fov_animation(CAMERA_DEFAULT_FOV, trasns_time, Tween.TRANS_EXPO)
 
-func _on_croucher_crouched(not_saved):
+func _on_croucher_crouched(not_saved:bool) -> void:
 	play_position_animation(Vector3(0.0, -1.0, 0.0), int(not_saved)*(1+player.head.position.y))
 
-func _on_croucher_uncrouched():
+func _on_croucher_uncrouched() -> void:
 	if position != player.head.position:
 		play_position_animation(Vector3.ZERO, 1 - player.head.position.y)

@@ -14,7 +14,7 @@ func set_bubble_offset() -> void:
 	offset_v2 = Vector2(offset_x * (1 + Math.TWO_BY_MINUS_PI * abs(player.head.rotation.x)), offset_y) * MULTIPLYER
 
 
-func _process(delta):
+func _process(delta:float) -> void:
 	if not player: return
 	set_bubble_offset()
 	bubble.position = bubble.position.lerp(offset_v2, delta * 16)

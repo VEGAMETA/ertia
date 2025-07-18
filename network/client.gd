@@ -5,7 +5,6 @@ var counter : int = MAX_RECONNECTIONS
 
 var default_ip : String = "localhost"
 var default_port : int = 2423
-
 var connecting_server : Dictionary = {"ip" = null, "port" = null}
 
 
@@ -14,7 +13,6 @@ func _ready() -> void:
 	multiplayer.connected_to_server.connect(_on_connect)
 	multiplayer.server_disconnected.connect(_on_disconnect)
 	multiplayer.connection_failed.connect(_on_connection_failed)
-
 
 func _on_connection_failed() -> void:
 	Console.printerr("Couldn't connect to %s:%s" % connecting_server.values(), ERR_CANT_CONNECT)
@@ -29,7 +27,7 @@ func _reconnect() -> Error:
 		connecting_server.set("port", null)
 		return ERR_CANT_CONNECT
 	counter -= 1
-	return connect_to_server(
+	return await connect_to_server(
 		connecting_server.get("ip"),
 		connecting_server.get("port"),
 	)
@@ -57,9 +55,10 @@ func status() -> String:
 
 func connect_to_server(ip:String, port:int) -> Error:
 	disconnect_from_server()
-	Console.print("Connecting to %s:%d" % [ip, port])
 	peer.close()
-	multiplayer.multiplayer_peer = null
+	multiplayer.set_multiplayer_peer(null)
+	await get_tree().process_frame
+	Console.print("Connecting to %s:%d" % [ip, port])
 	connecting_server.set("ip", ip)
 	connecting_server.set("port", port)
 	result = peer.create_client(ip, port)
@@ -74,18 +73,25 @@ func disconnect_from_server() -> void:
 	if peer.get_connection_status() != MultiplayerPeer.ConnectionStatus.CONNECTION_CONNECTED: return
 	var server_peer : ENetPacketPeer = peer.get_peer(get_multiplayer_authority())
 	if not server_peer: return Console.printerr("Cannot get server instance", ERR_CONNECTION_ERROR) 
-	server_peer.peer_disconnect()
+	server_peer.peer_disconnect_now.call_deferred()
 
-@rpc("authority", "call_remote", "unreliable")
+@rpc("authority", "call_remote")
 func request_spawn() -> void:
 	Globals.server.spawn_player.rpc_id(get_multiplayer_authority(), multiplayer.get_unique_id())
 
 
-@rpc("any_peer", "call_local", "unreliable_ordered")
+@rpc("any_peer", "call_remote", "unreliable_ordered")
 func client_change_scene(scene: PackedScene) -> void:
 	print(get_tree().change_scene_to_packed(scene))
 
 
-@rpc("any_peer", "call_local", "unreliable_ordered")
+@rpc("any_peer", "call_local", "reliable")
 func client_change_map(path: String) -> void:
-	get_tree().change_scene_to_file(path)
+	if multiplayer.is_server():
+		return
+	var new_scene := (load(path) as PackedScene).instantiate()
+	var current_scene := get_tree().current_scene
+	get_tree().root.remove_child(current_scene)
+	current_scene.queue_free()
+	get_tree().root.add_child(new_scene)
+	get_tree().current_scene = new_scene

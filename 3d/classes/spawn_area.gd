@@ -11,10 +11,11 @@ func spawn() -> void:
 
 func _try_spawn() -> Error:
 	if not FileAccess.file_exists(scene): return ERR_FILE_BAD_PATH
-	var loaded_scene = load(scene)
+	var loaded_scene : Resource = load(scene)
 	if loaded_scene is not PackedScene: return ERR_CANT_ACQUIRE_RESOURCE
-	if not loaded_scene.can_instantiate(): return ERR_CANT_CREATE
-	var instance = loaded_scene.instantiate()
+	if not (loaded_scene as PackedScene).can_instantiate(): 
+		return ERR_CANT_CREATE
+	var instance : Node = (loaded_scene as PackedScene).instantiate()
 	if instance is not Node3D: return ERR_INVALID_DECLARATION
 	owner.add_child(instance)
 	instance.owner = owner

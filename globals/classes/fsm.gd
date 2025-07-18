@@ -8,7 +8,7 @@ signal state_changed
 @export_custom(PROPERTY_HINT_ARRAY_TYPE, "Allowed States") 
 var state_list : Array[AState]
 
-func _init(_state_list:Array[AState]=[]):
+func _init(_state_list:Array[AState]=[]) -> void:
 	state_list = _state_list
 
 func check_state(state: AState) -> bool: 

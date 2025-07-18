@@ -12,7 +12,7 @@ const THROW_FORCE : float = 5.0
 @onready var hand : Marker3D = %Hand
 @onready var grabbed_body : StaticBody3D = %GrabbedBody
 @onready var joint: Generic6DOFJoint3D = %GrabJoint
-@onready var player : BasePlayer = owner
+@onready var player : Player = owner
 
 
 func _ready() -> void:
@@ -20,7 +20,7 @@ func _ready() -> void:
 		grabbed_object = player.saved_grabbed_object
 		joint.set_node_b.call_deferred(grabbed_object.get_path()) # CALL DEFERED TO SAVE ROTATION !!!
 
-func _process(_delta) -> void:
+func _process(_delta:float) -> void:
 	if check_grabbed_object():
 		pull_object()
 		zoom_object()
@@ -75,7 +75,7 @@ func zoom_object() -> void:
 
 func grab_object(object:RigidBody3D) -> void:
 	if grabbed_object != null: return ungrab_object()
-	for collision in player.shape_under.collision_result:
+	for collision : Dictionary in player.shape_under.collision_result:
 		if collision.get("collider") == object: return
 	grabbed_object = object
 	joint.set_node_b(grabbed_object.get_path())
@@ -111,7 +111,7 @@ func check_if_floor_is_not_gravity_object() -> bool:
 	if not check_grabbed_object(): return true
 	if grabbed_object.sleeping: return true
 	if player.shape_under.collision_result.any(
-		func (collision): 
+		func (collision:Dictionary) -> bool: 
 			return collision.get("collider") == grabbed_object
 	):
 		ungrab_object()

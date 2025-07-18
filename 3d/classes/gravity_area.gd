@@ -37,11 +37,11 @@ var generated_collision : CollisionShape3D = null
 var generated_mesh : MeshInstance3D = null
 
 
-func _ready():
+func _ready() -> void:
 	if is_on: initialize()
 
 
-func initialize():
+func initialize() -> void:
 	gravity_space_override = Area3D.SPACE_OVERRIDE_REPLACE
 	
 	collision_layer = Globals.Collisions.GRAVITY_AREAS
@@ -55,7 +55,7 @@ func initialize():
 	material.shader = shader
 	set_holo()
 	material.render_priority = 1
-	var highlighter_material = ShaderMaterial.new()
+	var highlighter_material := ShaderMaterial.new()
 	highlighter_material.shader = highlighter_shader
 	material.next_pass.next_pass = highlighter_material
 	

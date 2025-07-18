@@ -27,7 +27,7 @@ func _on_change_gravity(new_gravity_vector: Vector3) -> void:
 	apply_central_impulse(-new_gravity_vector)
 	gravity_vector = new_gravity_vector
 
-func _integrate_forces(state) -> void:
+func _integrate_forces(state:PhysicsDirectBodyState3D) -> void:
 	if player == null or state.get_contact_count() <= 0: return
 	if player.get_slide_collision_count() == 0: return
 	if player.grabber.grabbed_object != self: return
@@ -37,7 +37,7 @@ func _integrate_forces(state) -> void:
 		apply_central_impulse(-(player.head.global_position - global_position) * mass * 2)
 		return
 
-func _on_body_entered(body) -> void:
+func _on_body_entered(body:Node) -> void:
 	if body == null: return
 	new_velocity = (linear_velocity.length() + 1) * (angular_velocity.length() + 1)
 	if body is BasePlayer:
@@ -49,4 +49,4 @@ func _on_body_entered(body) -> void:
 			playing = true
 		old_velocity = new_velocity
 
-func _on_audio_finished(): playing = false
+func _on_audio_finished() -> void: playing = false

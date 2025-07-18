@@ -9,8 +9,8 @@ const JUMP_VELOCITY : float = 5.25
 
 signal jump
 
-func _input(event):
-	#if not owner.is_multiplayer_authority(): return
+func _input(event:InputEvent) -> void:
+	if not owner.is_multiplayer_authority(): return
 	if event.is_action_pressed("Jump"): wish_jump = true
 	if event.is_action_released("Jump"): wish_jump = false
 

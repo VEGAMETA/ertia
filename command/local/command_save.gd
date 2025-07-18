@@ -32,9 +32,10 @@ func execute() -> Error:
 				Saver.quicksave()
 			"load": Saver.load_last_save()
 			"quickload": Saver.quickload()
-			"savefiles": Console.print("%s" % "\n".join(
-				Saver.get_saves().map(func (x): return x.keys())
-			))
+			"savefiles": Console.print("%s" % "\n".join(Saver.get_saves().map(
+				func (dict:Dictionary) -> String:
+					return (dict.keys().pop_front() as String).trim_prefix("user://saves/")
+			)))
 		2: match command[0]:
 			"save":
 				if not Globals.get_tree().has_group("Player"): 

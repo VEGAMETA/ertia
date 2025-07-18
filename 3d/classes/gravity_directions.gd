@@ -54,16 +54,16 @@ static var ZERO := GravityDirection.new(
 static var directions : Array[GravityDirection] = [TOP, BOTTOM, LEFT, RIGHT, FRONT, REAR, ZERO]
 
 static var by_flag : Dictionary = directions.reduce(
-	func(accum:Dictionary, direction:GravityDirection):
-		accum.merge({ direction.flag:direction })
-		return accum,
-	{}
+	func(accum:Dictionary, direction:GravityDirection) -> Dictionary:
+		accum.set(direction.flag, direction)
+		return accum
+, {}
 )
 static var by_vector: Dictionary = directions.reduce(
-	func(accum:Dictionary, direction:GravityDirection):
-		accum.merge( {direction.rotation_vector:direction })
-		return accum, 
-	{}
+	func(accum:Dictionary, direction:GravityDirection) -> Dictionary:
+		accum.set(direction.rotation_vector, direction)
+		return accum
+, {}
 )
 
 #func _init():

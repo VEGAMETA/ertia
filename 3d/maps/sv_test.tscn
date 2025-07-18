@@ -38,8 +38,11 @@ use_collision = true
 size = Vector3(20, 0.1, 20)
 material = ExtResource("1_sosiq")
 
+[node name="Players" type="Node" parent="."]
+
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("2_8ofa2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.30486, 0.0499997, 0.634584)
+spawn_path_node = NodePath("..")
 
 [node name="Inbounds" type="Area3D" parent="."]
 script = ExtResource("3_10b2t")

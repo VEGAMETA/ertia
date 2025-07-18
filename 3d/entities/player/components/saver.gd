@@ -8,7 +8,7 @@ func _ready() -> void:
 	Saver.save_finish.connect(_on_save_finish)
 
 
-func _input(event) -> void:
+func _input(event:InputEvent) -> void:
 	if event.is_action_pressed("Quicksave"): Saver.quicksave()
 	if event.is_action_pressed("Quickload"): Saver.quickload()
 

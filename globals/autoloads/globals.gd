@@ -23,7 +23,7 @@ var command_handler : CommandHandler
 @export var just_unpaused : bool = false
 
 
-func _ready():
+func _ready() -> void:
 	command_handler = CommandHandler.new()
 	server = Server.new()
 	client = Client.new()
@@ -35,7 +35,7 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 # TO SERVER
-func _input(event):
+func _input(event:InputEvent) -> void:
 	if event.is_action_pressed("Fullscreen"):
 		toggle_fullscreen()
 	if event.is_action_pressed("Pause"):
@@ -48,27 +48,27 @@ func _input(event):
 		#)
 
 
-func toggle_pause():
+func toggle_pause() -> void:
 	if !get_tree().current_scene.is_multiplayer_authority(): return Console.printerr("Cannot pause")
 	_toggle_pause.rpc()
 	_toggle_mouse.rpc()
 
 @rpc("any_peer", "call_local", "reliable")
-func _toggle_pause():
+func _toggle_pause() -> void:
 	get_tree().set_pause(!get_tree().is_paused())
 	notify_deferred_thread_group(
 		NOTIFICATION_PAUSED if get_tree().is_paused() else \
 		NOTIFICATION_UNPAUSED
 	)
 
-func toggle_mouse(hide:bool=true):
+func toggle_mouse(hide:bool=true) -> void:
 	Input.set_mouse_mode(
 		Input.MOUSE_MODE_CAPTURED if hide else \
 		Input.MOUSE_MODE_VISIBLE
 	)
 
 @rpc("any_peer", "call_remote", "unreliable")
-func _toggle_mouse():
+func _toggle_mouse() -> void:
 	Input.set_mouse_mode(
 		Input.MOUSE_MODE_CAPTURED if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE else \
 		Input.MOUSE_MODE_VISIBLE
@@ -84,7 +84,7 @@ func toggle_fullscreen() -> void:
 	)
 
 
-func _notification(what):
+func _notification(what:int) -> void:
 	match what:
 		NOTIFICATION_PAUSED: pass
 			#toggle_mouse(false)
@@ -103,7 +103,7 @@ func _notification(what):
 		NOTIFICATION_WM_SIZE_CHANGED: pass
 
 
-func _on_despawn_area_body_exited(body):
+func _on_despawn_area_body_exited(body:Node) -> void:
 	body.queue_free()
 
 
@@ -111,7 +111,7 @@ func inv_collision(collision:Collisions) -> int:
 	return Collisions.ALL ^ collision
 
 
-func reset_physics():
+func reset_physics() -> void:
 	# NOTE: We do have physics interpolation but it is still too clunky 
 	# (not as smooth as I wish)
 	var refresh_rate := int(DisplayServer.screen_get_refresh_rate()) 
@@ -119,5 +119,5 @@ func reset_physics():
 	# Engine.max_fps = refresh_rate
 
 
-func quit():
+func quit() -> void:
 	get_tree().quit()

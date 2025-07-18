@@ -26,7 +26,7 @@ static func get_registered() -> Array[String]:
 		"map", "maps",
 		"toggle_pause",
 		"toggle_fullscreen",
-		"spawn"
+		"spawn", "kill",
 	]
 
 
@@ -40,10 +40,13 @@ func execute() -> Error:
 		"quit": Globals.quit()
 		"close": Console.toggle_console()
 		"maps": Console.print("%s" % "\n".join(Utils.get_maps()))
-		"map": if command.size() > 1: Utils.load_map(command[1])
+		"map": 
+			if command.size() > 1: Utils.load_map(command[1])
+			elif Globals.get_tree(): Console.print(Globals.get_tree().current_scene.name)
 		"toggle_pause": Globals.toggle_pause()
 		"toggle_fullscreen": Globals.toggle_fullscreen()
 		"spawn": Globals.client.request_spawn()
+		"kill": Utils.kill()
 		"disconnect": Globals.client.disconnect_from_server()
 		"connect": if command.size() > 2:
 			var ip : String = Utils.validate_ip(command[1])
@@ -51,5 +54,6 @@ func execute() -> Error:
 			var port : int = int(command[2])
 			port = port if port > 1024 and port < 65536 else 0
 			if not port: return Console.printerr("incorrect port", ERR_CANT_RESOLVE)
-			Globals.client.connect_to_server(ip, port)
+			await Globals.client.connect_to_server(ip, port)
+
 	return OK

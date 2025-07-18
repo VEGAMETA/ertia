@@ -6,6 +6,7 @@ extends Resource
 var state_list : Array[AState]
 
 func _init() -> void:
-	for key in states:
-		var value = states.get(key)
-		state_list.append(AState.new(key, value))
+	states.keys().map(
+		func (key:String) -> void: 
+			state_list.append(AState.new(key, states.get(key)))
+	)

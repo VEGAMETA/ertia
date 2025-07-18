@@ -1,8 +1,6 @@
 class_name BasePlayer
 extends CharacterBody3D
 
-var meta = APlayer.new()
-
 var mouse_sensibility : float = Globals.mouse_sens * 17 / 15000
 var velocity_length : float = 0.0
 
@@ -47,7 +45,7 @@ const DEVIATION : float = 0.001
 @onready var multiplayer_syncronizer : MultiplayerSynchronizer = %MultiplayerSynchronizer
 
 
-func _notification(what) -> void:
+func _notification(what:int) -> void:
 	match what:
 		NOTIFICATION_PAUSED:
 			walking = false
@@ -63,7 +61,7 @@ func _enter_tree() -> void:
 		set_multiplayer_authority(str(name).to_int())
 
 
-func _init():
+func _init() -> void:
 	add_to_group("Player")
 
 
@@ -122,7 +120,7 @@ func set_input_recursively(node: Node, enabled: bool) -> void:
 func accelerate(max_speed: float) -> void:
 	velocity += direction * clamp(max_speed - velocity.dot(direction) , 0, 1) * input_dir.length()
 
-func _update_velocity_ground(delta) -> void:
+func _update_velocity_ground(delta:float) -> void:
 	current_speed = (velocity * gravity_mask).length()
 	if current_speed != 0:
 		drop = max(STOP_SPEED, current_speed) * FRICTION * delta
@@ -131,11 +129,11 @@ func _update_velocity_ground(delta) -> void:
 	if running: return accelerate(MAX_VELOCITY_RUN)
 	return accelerate(MAX_VELOCITY_GROUND)
 
-func _update_velocity_air(delta) -> void:
+func _update_velocity_air(delta:float) -> void:
 	velocity += gravity_vector * gravity * delta * FALL_CONSTANT
 	accelerate(MAX_VELOCITY_AIR)
 
-func _lean_head(delta) -> void:
+func _lean_head(delta:float) -> void:
 	head.rotation.z = lerp(head.rotation.z, 0.0 if velocity == Vector3.ZERO else -input_dir.x * LEAN_SCALE, delta * 10.0)
 
 func _limit_speed() -> void:
@@ -147,7 +145,7 @@ func _limit_speed() -> void:
 func _wall_handling() -> void:
 	if is_on_wall(): velocity -= velocity * gravity_mask * WALL_GRIP
 
-func _move_holder(delta) -> void:
+func _move_holder(delta:float) -> void:
 	holder.global_position = lerp(holder.global_position, head.global_position, delta * 16)
 	holder.rotation.x = lerp_angle(holder.rotation.x, head.rotation.x , delta * 16)
 	holder.rotation.y = lerp_angle(holder.rotation.y, head.rotation.y , delta * 16)

@@ -4,7 +4,7 @@ const initial_rotation_multiplyer : float = 0.1
 var rotation_multiplyer : float = initial_rotation_multiplyer
 var new_rot : float = 0.0
 
-func _ready():
+func _ready() -> void:
 	if not owner: return
 	if not owner.owner: return
 	if owner.owner is not BasePlayer: return
@@ -14,7 +14,7 @@ func set_syncronized() -> void:
 	if owner.owner.multiplayer_syncronizer.replication_config.has_property(^"Components/GravityDevice/Model:rotation"): return
 	owner.owner.multiplayer_syncronizer.replication_config.add_property(^"Components/GravityDevice/Model:rotation")#NodePath("%s:rotation"%get_path()))
 
-func _process(delta) -> void:
+func _process(delta:float) -> void:
 	rotation_multiplyer = lerpf(rotation_multiplyer, initial_rotation_multiplyer, delta * rotation_multiplyer)
 	new_rot = lerpf(rotation.y, rotation.y + PI, delta * rotation_multiplyer)
 	if is_nan(new_rot) or is_inf(new_rot): return

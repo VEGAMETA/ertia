@@ -24,7 +24,7 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
-func _notification(what) -> void:
+func _notification(what:int) -> void:
 	match what:
 		NOTIFICATION_VISIBILITY_CHANGED:
 			if visible: Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -38,7 +38,7 @@ func _notification(what) -> void:
 			Console.toggle_console()
 
 
-func _input(event) -> void:
+func _input(event:InputEvent) -> void:
 	if not visible: return
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -56,7 +56,7 @@ func close() -> void:
 	visible = false
 
 
-func submit_command(text) -> void:
+func submit_command(text:String) -> void:
 	Globals.command_handler.handle_command(text)
 	command_line.clear.call_deferred()
 	command_line.edit.call_deferred()
@@ -71,7 +71,7 @@ func set_text() -> void:
 func get_suggestions() -> void:
 	suggesting = true
 	if not suggestions:
-		var text = command_line.text.strip_edges()
+		var text := command_line.text.strip_edges()
 		if buff_text:
 			text = buff_text
 			buff_text = ""
@@ -80,7 +80,7 @@ func get_suggestions() -> void:
 		.command_handler \
 		.avalible_commands \
 		.filter(
-			func (x:String): 
+			func (x:String) -> bool: 
 				return x.begins_with(text)
 		)
 		buff_text = text

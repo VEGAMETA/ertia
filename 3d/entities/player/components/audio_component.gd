@@ -9,7 +9,7 @@ const DEVIATION : float = 0.05
 const FALL_PITCH : float = 0.5
 const PITCH_MULTIPLYER : float = 0.2
 
-func _physics_process(_delta) -> void:
+func _physics_process(_delta:float) -> void:
 	play_footsteps()
 
 func play_footsteps() -> void:

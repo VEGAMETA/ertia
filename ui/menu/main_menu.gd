@@ -22,7 +22,7 @@ func _ready() -> void:
 
 
 func _on_connect_pressed() -> void:
-	Globals.client.connect_to_server(
+	await Globals.client.connect_to_server(
 		ip_field.text if ip_field.text != "" else \
 		Globals.client.default_ip,
 		int(port_field.text) if port_field.text != "" else \

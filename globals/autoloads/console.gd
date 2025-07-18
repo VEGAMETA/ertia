@@ -20,7 +20,7 @@ func _ready() -> void:
 	#if Globals.debug: toggle_console()
 
 
-func _input(event) -> void:
+func _input(event:InputEvent) -> void:
 	if event.is_action_pressed("debug_console"): toggle_console()
 
 
