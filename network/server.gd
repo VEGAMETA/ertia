@@ -8,6 +8,8 @@ enum Permission { NONE, DEFAULT, ADMIN, CUSTOM }
 var clients : Dictionary = {}
 var map : String = ""
 
+signal player_loaded_map(peer_id:int)
+
 
 func _ready() -> void:
 	multiplayer.allow_object_decoding = true
@@ -20,8 +22,9 @@ func _ready() -> void:
 func _on_connect(peer_id:int) -> void:
 	clients[peer_id] = Permission.DEFAULT
 	Console.print("Client %d connected" % peer_id)
-	change_client_map(peer_id)
-
+	if multiplayer.is_server():
+		#Utils.load_map.rpc_id.call_deferred(peer_id, map)
+		Globals.client.client_change_map.rpc_id(peer_id, Utils.get_full_map_name(map))
 
 func _on_disconnect(peer_id:int) -> void:
 	clients.erase(peer_id)
@@ -49,32 +52,30 @@ func set_permission(peer_id:int, permission:Permission) -> void:
 	clients[peer_id] = permission
 
 
+@rpc("authority", "call_local")
 func set_scene() -> void:
 	Globals.client.client_change_map.rpc(Utils.load_map(map))
-	await get_tree().process_frame
-	Globals.client.request_spawn.rpc.call_deferred()
-	#spawn_player.call_deferred(multiplayer.get_unique_id())
 
 
-@rpc("any_peer", "call_local", "unreliable_ordered")
+@rpc("authority", "call_remote")
 func change_client_map(peer_id:int) -> void:
 	if not map or map == "": return
-	Globals.client.client_change_map.rpc_id(peer_id, Utils.get_full_map_name(map))
-	#var packed := PackedScene.new()
-	#packed.pack(get_tree().current_scene)
-	#Globals.client.client_change_scene.rpc_id(peer_id, packed)
+	#Globals.client.client_change_map.rpc_id(peer_id, Utils.get_full_map_name(map))
 
 
 func get_map() -> String:
 	return map
 
 
-@rpc("any_peer", "call_local", "reliable")
+@rpc("any_peer", "call_local")
 func spawn_player(peer_id:int) -> void:
 	if not multiplayer.is_server(): return
 	if get_tree().current_scene == null: return Console.printerr("Cannot spawn - no map")
-	var spawn_point := get_tree().get_first_node_in_group("SpawnPoint") as SpawnPoint3D
-	if spawn_point == null: return Console.printerr("Cannot spawn - nowhere to spawn")
-	var spawned : Node = spawn_point.spawner.spawn(peer_id)
+	var spawner := get_tree().get_first_node_in_group("Spawner") as Spawner
+	if spawner == null: return Console.printerr("Cannot spawn - nowhere to spawn")
+	var spawned : Node = spawner.spawn(peer_id)
 	if spawned == null: return Console.printerr("Cannot spawn - wrong authority")
-	spawned.reparent(get_tree().current_scene)
+
+@rpc("any_peer", "call_remote")
+func loaded_map():
+	player_loaded_map.emit()

@@ -46,7 +46,9 @@ func execute() -> Error:
 		"toggle_pause": Globals.toggle_pause()
 		"toggle_fullscreen": Globals.toggle_fullscreen()
 		"spawn": Globals.client.request_spawn()
-		"kill": Utils.kill()
+		"kill": 
+			Utils.kill()
+			Utils.kill.rpc(Globals.multiplayer.get_unique_id())
 		"disconnect": Globals.client.disconnect_from_server()
 		"connect": if command.size() > 2:
 			var ip : String = Utils.validate_ip(command[1])

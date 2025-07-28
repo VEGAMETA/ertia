@@ -146,7 +146,8 @@ func camera_correction() -> void:
 
 func position_correction() -> void:
 	if player.croucher.crouching:
-		player.position += player.gravity_vector - new_gravity_vector
+		if player.head.position != Vector3.ZERO:
+			player.global_position += player.gravity_vector - new_gravity_vector
 		return
 	await get_tree().physics_frame
 	player.shape_stand.force_shapecast_update()

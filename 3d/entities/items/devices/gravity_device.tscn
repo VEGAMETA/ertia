@@ -8,7 +8,7 @@
 [ext_resource type="Shader" uid="uid://taf5g00cwiyy" path="res://static/shaders/holo.gdshader" id="3_wo257"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_gh6co"]
-viewport_path = NodePath("/root/@EditorNode@21272/@Panel@14/@VBoxContainer@15/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@26/DockVSplitCenter/@VSplitContainer@54/@VBoxContainer@55/@EditorMainScreen@102/MainScreen/@CanvasItemEditor@11482/@VSplitContainer@11134/@HSplitContainer@11136/@HSplitContainer@11138/@Control@11139/@SubViewportContainer@11140/@SubViewport@11141/GravityDevice/Sprite/Rotator")
+viewport_path = NodePath(".")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_p7bx5"]
 top_radius = 0.1
@@ -54,11 +54,14 @@ omni_attenuation = 0.765
 [node name="Sprite" type="Sprite3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(0.025, 0, 0, 0, 0.025, 0, 0, 0, 0.025, 0.015, 0.045, 0)
+double_sided = false
 texture = SubResource("ViewportTexture_gh6co")
 script = ExtResource("2_ovkh0")
 
 [node name="Rotator" parent="Sprite" instance=ExtResource("2_p7bx5")]
 unique_name_in_owner = true
+scaling_3d_mode = 2
+scaling_3d_scale = 1.01
 size = Vector2i(1152, 648)
 
 [node name="Cone" type="MeshInstance3D" parent="."]

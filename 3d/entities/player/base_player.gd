@@ -74,6 +74,7 @@ func _ready() -> void:
 	initial_position.y += 1.5
 	if current_ps3d_gravity_vector == Vector3.ZERO: 
 		current_ps3d_gravity_vector = Gravity.gravity_vector
+	Console.print("v %d" % current_ps3d_gravity_vector.y)
 	gravity = Gravity.gravity
 	set_gravity(current_ps3d_gravity_vector)
 	set_gravity_global(current_ps3d_gravity_vector)
@@ -111,14 +112,17 @@ func clear_inputs(disabled:bool=true) -> void:
 	)
 	input_dir *= int(not disabled)
 
+
 func set_input_recursively(node: Node, enabled: bool) -> void:
 	node.set_process_input(enabled)
 	node.set_process_unhandled_input(enabled)
 	for child in node.get_children():
 		if child is Node: set_input_recursively(child, enabled)
 
+
 func accelerate(max_speed: float) -> void:
 	velocity += direction * clamp(max_speed - velocity.dot(direction) , 0, 1) * input_dir.length()
+
 
 func _update_velocity_ground(delta:float) -> void:
 	current_speed = (velocity * gravity_mask).length()
@@ -129,12 +133,15 @@ func _update_velocity_ground(delta:float) -> void:
 	if running: return accelerate(MAX_VELOCITY_RUN)
 	return accelerate(MAX_VELOCITY_GROUND)
 
+
 func _update_velocity_air(delta:float) -> void:
 	velocity += gravity_vector * gravity * delta * FALL_CONSTANT
 	accelerate(MAX_VELOCITY_AIR)
 
+
 func _lean_head(delta:float) -> void:
 	head.rotation.z = lerp(head.rotation.z, 0.0 if velocity == Vector3.ZERO else -input_dir.x * LEAN_SCALE, delta * 10.0)
+
 
 func _limit_speed() -> void:
 	direct_velocity = (velocity * gravity_mask).length()
@@ -142,22 +149,24 @@ func _limit_speed() -> void:
 	direct_velocity /= MAX_VELOCITY
 	velocity *= positive_gravity_vector + gravity_mask / direct_velocity
 
+
 func _wall_handling() -> void:
 	if is_on_wall(): velocity -= velocity * gravity_mask * WALL_GRIP
+
 
 func _move_holder(delta:float) -> void:
 	holder.global_position = lerp(holder.global_position, head.global_position, delta * 16)
 	holder.rotation.x = lerp_angle(holder.rotation.x, head.rotation.x , delta * 16)
 	holder.rotation.y = lerp_angle(holder.rotation.y, head.rotation.y , delta * 16)
 
-func _set_movement_direction() -> void:
-	direction = Basis(inv_gravity_vector, head.rotation.y) * Vector3(
-		input_dir.x * (-1 if gravity_vector.y == 1 else 1) if gravity_vector.x == 0 else 0.0,
-		input_dir.x * gravity_vector.x + input_dir.y * gravity_vector.z,
-		input_dir.y if gravity_vector.z == 0 else 0.0
-	)
-	direction *= gravity_mask
-	direction = direction.normalized() 
+
+func _set_movement_direction() -> void: 
+	direction = ((
+		input_dir.x * up_direction.cross(head.global_basis.z) + # up x forward = left
+		input_dir.y * head.global_basis.z) *
+		gravity_mask
+	).normalized() # * gravity_mask and normalized => look at floor and move
+
 
 func set_gravity(new_gravity_vector:Vector3) -> void:
 	gravity_vector = new_gravity_vector
@@ -166,9 +175,11 @@ func set_gravity(new_gravity_vector:Vector3) -> void:
 	gravity_mask = Vector3.ONE - positive_gravity_vector
 	up_direction = -new_gravity_vector
 
+
 func set_gravity_global(new_gravity_vector:Vector3) -> void:
 	current_ps3d_gravity_vector = new_gravity_vector
 	Gravity.change_gravity_vector(new_gravity_vector)
+
 
 func teleport_to_initial_position() -> void:
 	global_position = initial_position

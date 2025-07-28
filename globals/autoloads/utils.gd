@@ -34,7 +34,7 @@ func get_maps() -> Array:
 	map_files = map_files.map(func (path:String) -> String: return path.get_file().get_basename())
 	return map_files
 
-
+@rpc("authority", "call_remote")
 func load_map(map:String) -> String:
 	var full_map_path : String = get_full_map_name(map)
 	_load_deferred.call_deferred(full_map_path)
@@ -58,7 +58,7 @@ func get_player_by_id(peer_id:int) -> BasePlayer:
 		return player
 	return null
 
-
+@rpc("any_peer", "call_remote")
 func kill(peer_id:int=multiplayer.get_unique_id()) -> void:
 	var player := get_player_by_id(peer_id)
 	if not player: return

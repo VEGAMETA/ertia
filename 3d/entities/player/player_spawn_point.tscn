@@ -1,13 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://cn0cddljejupg"]
-
-[ext_resource type="Script" uid="uid://eabth232ug48" path="res://3d/entities/player/player_spawn_point.gd" id="1_julex"]
+[gd_scene load_steps=2 format=3 uid="uid://cn0cddljejupg"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_julex"]
 size = Vector2(1, 2)
 
 [node name="PlayerSpawnPoint" type="Marker3D"]
 gizmo_extents = 2.0
-script = ExtResource("1_julex")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -24,7 +21,3 @@ mesh = SubResource("QuadMesh_julex")
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 1, 0)
 mesh = SubResource("QuadMesh_julex")
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-unique_name_in_owner = true
-spawn_path = NodePath("..")

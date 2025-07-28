@@ -43,6 +43,7 @@ func run_fov() -> void:
 	Tween.TRANS_SINE)
 
 func run_to_default_fov() -> void:
+	if fov == CAMERA_DEFAULT_FOV: return
 	play_fov_animation(CAMERA_DEFAULT_FOV, \
 	(fov-CAMERA_DEFAULT_FOV) / (CAMERA_RUN_FOV-CAMERA_DEFAULT_FOV),\
 	Tween.TRANS_SINE)

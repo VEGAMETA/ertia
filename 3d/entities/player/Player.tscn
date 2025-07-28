@@ -68,6 +68,7 @@ collision_mask = 4
 
 [node name="Aim" type="Node3D" parent="." index="6"]
 unique_name_in_owner = true
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999998, 0, 0, 0)
 
 [node name="RemoteFlashlight" type="RemoteTransform3D" parent="Holder" index="0"]
 remote_path = NodePath("../../Components/Flashlight")
@@ -184,6 +185,7 @@ layout_mode = 1
 layout_mode = 1
 
 [node name="ItemHolder" type="Node3D" parent="Head" index="0"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, -0.175, -0.2)
 
 [node name="RemoteItem" type="RemoteTransform3D" parent="Head/ItemHolder" index="0"]
@@ -208,6 +210,12 @@ remote_path = NodePath("../../Components/Camera")
 remote_path = NodePath("../../Aim")
 update_rotation = false
 update_scale = false
+
+[node name="RemoteCameraMenu" type="RemoteTransform3D" parent="Head" index="8"]
+unique_name_in_owner = true
+
+[node name="MultiplayerSynchronizer" parent="." index="11"]
+visibility_update_mode = 1
 
 [connection signal="crouched" from="Components/Croucher" to="Components/Camera" method="_on_croucher_crouched"]
 [connection signal="uncrouched" from="Components/Croucher" to="Components/Camera" method="_on_croucher_uncrouched"]

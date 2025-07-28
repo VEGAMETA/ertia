@@ -21,12 +21,12 @@ func _on_connection_failed() -> void:
 
 
 func _reconnect() -> Error:
-	if counter < 1: 
-		counter = MAX_RECONNECTIONS
-		connecting_server.set("ip", null)
-		connecting_server.set("port", null)
-		return ERR_CANT_CONNECT
-	counter -= 1
+	#if counter < 1: 
+		#counter = MAX_RECONNECTIONS
+		#connecting_server.set("ip", null)
+		#connecting_server.set("port", null)
+		#return ERR_CANT_CONNECT
+	#counter -= 1
 	return await connect_to_server(
 		connecting_server.get("ip"),
 		connecting_server.get("port"),
@@ -75,7 +75,6 @@ func disconnect_from_server() -> void:
 	if not server_peer: return Console.printerr("Cannot get server instance", ERR_CONNECTION_ERROR) 
 	server_peer.peer_disconnect_now.call_deferred()
 
-@rpc("authority", "call_remote")
 func request_spawn() -> void:
 	Globals.server.spawn_player.rpc_id(get_multiplayer_authority(), multiplayer.get_unique_id())
 
@@ -85,13 +84,18 @@ func client_change_scene(scene: PackedScene) -> void:
 	print(get_tree().change_scene_to_packed(scene))
 
 
-@rpc("any_peer", "call_local", "reliable")
+@rpc("authority", "call_remote", "reliable")
 func client_change_map(path: String) -> void:
-	if multiplayer.is_server():
-		return
+	if get_tree().current_scene != null:
+		if path == get_tree().current_scene.scene_file_path:
+			return
+	#if multiplayer.is_server(): return
 	var new_scene := (load(path) as PackedScene).instantiate()
 	var current_scene := get_tree().current_scene
-	get_tree().root.remove_child(current_scene)
-	current_scene.queue_free()
-	get_tree().root.add_child(new_scene)
-	get_tree().current_scene = new_scene
+	if get_tree().current_scene != null:
+		get_tree().root.remove_child(current_scene)
+		current_scene.queue_free()
+	get_tree().root.add_child.call_deferred(new_scene)
+	get_tree().set_current_scene.call_deferred(new_scene)
+	await new_scene.ready
+	_reconnect()

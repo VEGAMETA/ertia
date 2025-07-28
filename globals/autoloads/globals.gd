@@ -40,6 +40,16 @@ func _input(event:InputEvent) -> void:
 		toggle_fullscreen()
 	if event.is_action_pressed("Pause"):
 		toggle_pause()
+	if event.is_action_pressed("Debug_mp"):
+		server.serve()
+		server.map = "sv_test"
+		server.set_scene()
+		await get_tree().process_frame
+		await get_tree().process_frame
+		server.spawn_player(1)
+	if event.is_action_pressed("Spawn"):
+		if multiplayer.is_server(): server.spawn_player(client.multiplayer.get_unique_id())
+		else: client.request_spawn()
 	#if event is InputEventMouseButton:
 		#if get_tree().paused: get_tree().set_pause(false)
 		#notify_deferred_thread_group(
