@@ -1,20 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://bcljbuape7mjq"]
+[gd_scene load_steps=10 format=3 uid="uid://bcljbuape7mjq"]
 
 [ext_resource type="Material" uid="uid://bjyyfh03v4u1u" path="res://static/materials/prototype_black.tres" id="1_6sujd"]
+[ext_resource type="Texture2D" uid="uid://cnexs1r87kseq" path="res://assets/skyboxes/skybox2.png" id="1_g88ca"]
 [ext_resource type="PackedScene" uid="uid://diyb5sbluyv0b" path="res://3d/entities/player/Player.tscn" id="2_6sujd"]
 [ext_resource type="Script" uid="uid://sl63lhw2w8gu" path="res://3d/classes/gravity_object.gd" id="3_rryn2"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6sujd"]
-sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_dytxi"]
+panorama = ExtResource("1_g88ca")
 
 [sub_resource type="Sky" id="Sky_rryn2"]
-sky_material = SubResource("ProceduralSkyMaterial_6sujd")
+sky_material = SubResource("PanoramaSkyMaterial_dytxi")
+radiance_size = 5
 
 [sub_resource type="Environment" id="Environment_g88ca"]
 background_mode = 2
 sky = SubResource("Sky_rryn2")
 tonemap_mode = 2
+tonemap_exposure = 1.95
+tonemap_white = 16.0
 glow_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rryn2"]

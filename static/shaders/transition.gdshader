@@ -6,7 +6,7 @@ uniform sampler2D transition_texture;
 uniform int transition_type: hint_enum("Basic", "Mask", "Shape", "Clock") = 0;
 
 uniform bool use_screen_texture = false;
-uniform sampler2D SCREEN_TEXTURE: hint_screen_texture; 
+uniform sampler2D SCREEN_TEXTURE: hint_screen_texture;
 
 group_uniforms positioning;
 uniform vec2 position = vec2(0,0);
@@ -118,7 +118,7 @@ void fragment() {
 
 	if (use_screen_texture) COLOR = texture(TEXTURE, UV) * modulate;
 	else COLOR = texture(SCREEN_TEXTURE , SCREEN_UV) * modulate;
-	
+
 	float alpha = COLOR.a;
 	float transition_progress = 0.0;
 

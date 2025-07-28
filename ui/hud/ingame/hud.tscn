@@ -1,6 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://ngjfadj73yfa"]
+[gd_scene load_steps=8 format=3 uid="uid://ngjfadj73yfa"]
 
 [ext_resource type="Script" uid="uid://c7qutejbx6kb6" path="res://ui/hud/ingame/hud.gd" id="1_npou3"]
+[ext_resource type="Shader" uid="uid://kta4rvftr8vf" path="res://static/shaders/common/blend.gdshader" id="2_35ppi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lf1vh"]
+shader = ExtResource("2_35ppi")
+shader_parameter/alpha = 0.3
+shader_parameter/blend_type = 12
+
+[sub_resource type="Gradient" id="Gradient_npou3"]
+offsets = PackedFloat32Array(0, 0.465798, 0.563518, 0.664495, 0.794788, 1)
+colors = PackedColorArray(1, 0.0392157, 0.0392157, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_npou3"]
+noise_type = 0
+frequency = 0.3065
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_35ppi"]
+color_ramp = SubResource("Gradient_npou3")
+noise = SubResource("FastNoiseLite_npou3")
 
 [sub_resource type="SphereMesh" id="SphereMesh_idlxx"]
 radius = 1.25
@@ -14,6 +33,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_npou3")
+
+[node name="Grain" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.027451)
+material = SubResource("ShaderMaterial_lf1vh")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_35ppi")
 
 [node name="Center" type="CenterContainer" parent="."]
 layout_mode = 1

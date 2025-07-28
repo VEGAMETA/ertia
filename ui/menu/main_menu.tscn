@@ -1,28 +1,171 @@
-[gd_scene load_steps=16 format=3 uid="uid://camwqks3jp737"]
+[gd_scene load_steps=31 format=3 uid="uid://camwqks3jp737"]
 
 [ext_resource type="Script" uid="uid://dtyioqs0liox3" path="res://ui/menu/main_menu.gd" id="1_or6mk"]
-[ext_resource type="Shader" uid="uid://b7os2pcqfuyuy" path="res://static/shaders/blur_singlepass.gdshader" id="2_or6mk"]
+[ext_resource type="Shader" uid="uid://b7os2pcqfuyuy" path="res://static/shaders/common/blur_singlepass.gdshader" id="2_or6mk"]
 [ext_resource type="Texture2D" uid="uid://bdabutonbresv" path="res://assets/bitmaps/art/p13.png" id="3_4gkdq"]
 [ext_resource type="Shader" uid="uid://bapwrhl66pe2m" path="res://static/shaders/transition.gdshader" id="3_gvx18"]
-[ext_resource type="Shader" uid="uid://kta4rvftr8vf" path="res://static/shaders/blend.gdshader" id="3_yc8k7"]
+[ext_resource type="Shader" uid="uid://kta4rvftr8vf" path="res://static/shaders/common/blend.gdshader" id="3_yc8k7"]
+[ext_resource type="Texture2D" uid="uid://cnexs1r87kseq" path="res://assets/skyboxes/skybox2.png" id="4_4aijq"]
+[ext_resource type="PackedScene" uid="uid://balepuh6avo3h" path="res://static/models/column_cube.tscn" id="4_yc8k7"]
+[ext_resource type="FontFile" uid="uid://uouiqbxu67o3" path="res://assets/fonts/Lato-Regular.ttf" id="7_h2671"]
+[ext_resource type="FontFile" uid="uid://c2focg68oglmn" path="res://assets/fonts/0xProtoNerdFontMono-Regular.ttf" id="7_umht6"]
+[ext_resource type="Shader" uid="uid://bqtxdv8rarwht" path="res://static/shaders/common/bloom.gdshader" id="11_r5t3j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_or6mk"]
 shader = ExtResource("2_or6mk")
 shader_parameter/blur_amount = 2.5
-shader_parameter/mix_amount = 0.66
-shader_parameter/color_over = Color(0.196078, 0.196078, 0.196078, 1)
+shader_parameter/mix_amount = 1.0
+shader_parameter/color_over = Color(0.196078, 0.196078, 0.196078, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yc8k7"]
+resource_local_to_scene = true
 shader = ExtResource("3_yc8k7")
 shader_parameter/new_text = ExtResource("3_4gkdq")
-shader_parameter/alpha = 1.0
-shader_parameter/blend_type = 3
+shader_parameter/alpha = 0.0
+shader_parameter/blend_type = 0
+
+[sub_resource type="World3D" id="World3D_8gmgf"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_8gmgf"]
+panorama = ExtResource("4_4aijq")
+energy_multiplier = 1.1
+
+[sub_resource type="Sky" id="Sky_h2671"]
+sky_material = SubResource("PanoramaSkyMaterial_8gmgf")
+radiance_size = 5
+
+[sub_resource type="Environment" id="Environment_umht6"]
+background_mode = 2
+background_energy_multiplier = 0.65
+sky = SubResource("Sky_h2671")
+tonemap_mode = 2
+tonemap_exposure = 0.15
+tonemap_white = 0.1
+adjustment_enabled = true
+adjustment_brightness = 0.7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r5t3j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_umht6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2671"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2671"]
+content_margin_left = 14.0
+bg_color = Color(0.0953347, 0.196424, 0.229732, 1)
+skew = Vector2(0.615, 0)
+border_color = Color(0.678431, 1, 1, 0)
+border_blend = true
+corner_detail = 4
+anti_aliasing_size = 6.33
+
+[sub_resource type="Theme" id="Theme_umht6"]
+default_font = ExtResource("7_h2671")
+default_font_size = 25
+Button/styles/focus = SubResource("StyleBoxEmpty_umht6")
+LineEdit/font_sizes/font_size = 19
+LineEdit/fonts/font = ExtResource("7_umht6")
+LineEdit/styles/focus = SubResource("StyleBoxEmpty_h2671")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_h2671")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_or6mk"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gvx18"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4gkdq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4gkdq"]
+shader = ExtResource("3_gvx18")
+shader_parameter/use_sprite_alpha = true
+shader_parameter/use_transition_texture = false
+shader_parameter/transition_type = 2
+shader_parameter/use_screen_texture = false
+shader_parameter/position = Vector2(0.57, 0.54)
+shader_parameter/invert = true
+shader_parameter/grid_size = Vector2(16, 9)
+shader_parameter/rotation_angle = 9.0
+shader_parameter/stagger = Vector2(0, 0)
+shader_parameter/stagger_frequency = Vector2i(2, 2)
+shader_parameter/flip_frequency = Vector2i(2, 3)
+shader_parameter/basic_feather = 0.0
+shader_parameter/use_mask_size = false
+shader_parameter/mask_size = Vector2(100, 100)
+shader_parameter/edges = 3
+shader_parameter/shape_feather = 0.0
+shader_parameter/sectors = 1
+shader_parameter/clock_feather = 0.0
+shader_parameter/progress = -2.0
+shader_parameter/progress_bias = Vector2(-0.8, -0.8)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_yc8k7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t3kfx"]
+shader = ExtResource("11_r5t3j")
+shader_parameter/bloom_spread = 1.0
+shader_parameter/bloom_intensity = 0.4
+
+[sub_resource type="Animation" id="Animation_4gkdq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%Blur:material:shader_parameter/color_over")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.196078, 0.196078, 0.196078, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:material:shader_parameter/rotation_angle")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [9.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%Blur:material:shader_parameter/mix_amount")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Glow:material:shader_parameter/bloom_intensity")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.4]
+}
 
 [sub_resource type="Animation" id="Animation_gvx18"]
 resource_name = "transition"
@@ -37,46 +180,55 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(0.517632, 0.594605),
 "update": 0,
-"values": [-0.4, 1.8]
+"values": [3.19, -0.8]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../ColorRect:color")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.5),
-"transitions": PackedFloat32Array(1, 1, 3.24901),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0.259294, 0.259294, 0.259293, 1), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_4gkdq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/progress")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [7.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../ColorRect:color")
+tracks/1/path = NodePath("%Blur:material:shader_parameter/color_over")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.233333, 0.5),
+"transitions": PackedFloat32Array(1.86607, 1.86607),
 "update": 0,
-"values": [Color(0, 0, 0, 1)]
+"values": [Color(0, 0, 0, 0), Color(0.646029, 0.646029, 0.646029, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:material:shader_parameter/rotation_angle")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.5),
+"transitions": PackedFloat32Array(2.14355, 0.164939),
+"update": 0,
+"values": [80.0, 9.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%Blur:material:shader_parameter/mix_amount")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.3]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Glow:material:shader_parameter/bloom_intensity")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.4]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yc8k7"]
@@ -84,31 +236,6 @@ _data = {
 &"RESET": SubResource("Animation_4gkdq"),
 &"transition": SubResource("Animation_gvx18")
 }
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4gkdq"]
-shader = ExtResource("3_gvx18")
-shader_parameter/use_sprite_alpha = true
-shader_parameter/use_transition_texture = false
-shader_parameter/transition_type = 0
-shader_parameter/use_screen_texture = false
-shader_parameter/position = Vector2(0.5, 0.5)
-shader_parameter/invert = false
-shader_parameter/grid_size = Vector2(16.18, 4.475)
-shader_parameter/rotation_angle = 0.0
-shader_parameter/stagger = Vector2(0, 0)
-shader_parameter/stagger_frequency = Vector2i(2, 2)
-shader_parameter/flip_frequency = Vector2i(1, 1)
-shader_parameter/basic_feather = 0.0
-shader_parameter/use_mask_size = false
-shader_parameter/mask_size = Vector2(100, 100)
-shader_parameter/edges = 26
-shader_parameter/shape_feather = 0.762
-shader_parameter/sectors = 1
-shader_parameter/clock_feather = 0.0
-shader_parameter/progress = 7.0
-shader_parameter/progress_bias = Vector2(0.485, -0.425)
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_yc8k7"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -118,12 +245,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_or6mk")
-
-[node name="BackBuffer" type="BackBufferCopy" parent="."]
-position = Vector2(576, 324)
-scale = Vector2(5.76, 3.24)
-copy_mode = 2
-rect = Rect2(0, -100, 200, 200)
 
 [node name="Blur" type="ColorRect" parent="."]
 unique_name_in_owner = true
@@ -135,7 +256,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="BackBuffer" type="BackBufferCopy" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(5.76, 3.24)
+copy_mode = 2
+rect = Rect2(0, -100, 200, 200)
+
+[node name="Background" type="ColorRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_yc8k7")
 layout_mode = 1
 anchors_preset = 15
@@ -143,88 +271,157 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="MenuScene" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="MenuScene"]
+own_world_3d = true
+world_3d = SubResource("World3D_8gmgf")
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="MenuScene/SubViewport"]
+
+[node name="ColumnCube" parent="MenuScene/SubViewport/Node3D" instance=ExtResource("4_yc8k7")]
+
+[node name="Hand" type="Node3D" parent="MenuScene/SubViewport/Node3D/ColumnCube"]
+unique_name_in_owner = true
+
+[node name="Camera3D" type="Camera3D" parent="MenuScene/SubViewport/Node3D/ColumnCube/Hand"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+environment = SubResource("Environment_umht6")
+fov = 108.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="MenuScene/SubViewport/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.999194, -0.0401318, 0, 0.0401318, 0.999194, 0, -0.323, 2.09)
+spot_range = 3.774
+spot_angle = 55.41
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="MenuScene/SubViewport/Node3D"]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, -2.5)
+spot_range = 3.192
+spot_angle = 35.88
+
+[node name="Menu" type="VBoxContainer" parent="."]
+z_as_relative = false
+material = SubResource("ShaderMaterial_r5t3j")
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.077
-anchor_top = 0.316
-anchor_right = 0.247
+anchor_left = 0.086
+anchor_top = 0.162
+anchor_right = 0.086
 anchor_bottom = 0.855
-offset_left = 0.295982
-offset_top = 0.231995
-offset_right = -0.544006
-offset_bottom = -0.0400391
+offset_left = -0.0720062
+offset_top = 0.0240021
+offset_right = 224.928
+offset_bottom = -3.04004
+grow_horizontal = 0
+rotation = -0.00108613
+mouse_filter = 0
+theme = SubResource("Theme_umht6")
+alignment = 1
 
-[node name="Play" type="Button" parent="VBoxContainer"]
+[node name="Continue" type="Button" parent="Menu"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Continue"
+flat = true
+alignment = 0
+
+[node name="NewGame" type="Button" parent="Menu"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "play"
+text = "New Game"
+flat = true
+alignment = 0
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+[node name="HSeparator" type="HSeparator" parent="Menu"]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_or6mk")
 
-[node name="Serve" type="Button" parent="VBoxContainer"]
+[node name="Network" type="VBoxContainer" parent="Menu"]
+layout_mode = 2
+
+[node name="Serve" type="Button" parent="Menu/Network"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "serve
+text = "Serve
 "
+flat = true
+alignment = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Ip" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+[node name="Ip" type="LineEdit" parent="Menu/Network"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "ip"
-alignment = 1
+alignment = 3
+max_length = 15
+expand_to_text_length = true
 
-[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="Menu/Network"]
+layout_direction = 2
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_gvx18")
 
-[node name="Port" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+[node name="Port" type="LineEdit" parent="Menu/Network"]
 unique_name_in_owner = true
 layout_mode = 2
 placeholder_text = "port"
+alignment = 3
+max_length = 5
+expand_to_text_length = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/Network"]
+layout_mode = 2
 alignment = 1
 
-[node name="Connect" type="Button" parent="VBoxContainer"]
+[node name="Connect" type="Button" parent="Menu/Network"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "connect"
+text = "Connect"
+flat = true
+alignment = 0
 
-[node name="Disconnect" type="Button" parent="VBoxContainer"]
+[node name="Disconnect" type="Button" parent="Menu/Network"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "disconnect"
+text = "Disconnect"
+flat = true
+alignment = 0
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+[node name="HSeparator2" type="HSeparator" parent="Menu/Network"]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_4gkdq")
 
-[node name="Options" type="Button" parent="VBoxContainer"]
+[node name="Options" type="Button" parent="Menu"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "options
+text = "Options
 "
+flat = true
+alignment = 0
 
-[node name="Quit" type="Button" parent="VBoxContainer"]
+[node name="Quit" type="Button" parent="Menu"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "quit"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Transition")
-libraries = {
-&"": SubResource("AnimationLibrary_yc8k7")
-}
+text = "Quit"
+flat = true
+alignment = 0
 
 [node name="Transition" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_4gkdq")
@@ -237,3 +434,25 @@ grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("CanvasTexture_yc8k7")
 expand_mode = 2
+
+[node name="BackBuffer2" type="BackBufferCopy" parent="."]
+position = Vector2(576.002, 326)
+scale = Vector2(5.76, 3.24)
+copy_mode = 2
+rect = Rect2(-100, -100, 2000, 2000)
+
+[node name="Glow" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_t3kfx")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Transition")
+libraries = {
+&"": SubResource("AnimationLibrary_yc8k7")
+}

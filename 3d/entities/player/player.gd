@@ -24,7 +24,6 @@ class_name Player extends BasePlayer
 @onready var flashlight : FlashlightComponent = %Flashlight
 @onready var camera : PlayerCameraComponent = %Camera
 @onready var remote_camera : RemoteTransform3D = %RemoteCamera
-@onready var remote_camera_menu: RemoteTransform3D = %RemoteCameraMenu
 @onready var safe_area : Area3D = %SafeArea
 @onready var aim : Node3D = %Aim
 
@@ -41,11 +40,6 @@ func _process(delta:float) -> void:
 	aim.rotation.x = lerp_angle(aim.rotation.x, head.rotation.x, delta * 16)
 	aim.rotation.y = lerp_angle(aim.rotation.y, head.rotation.y, delta * 16)
 	_hadle_rotation(delta)
-
-func _physics_process(delta: float) -> void:
-	super(delta)
-	print(position, head.position)
-	
 
 
 func load_save() -> void:

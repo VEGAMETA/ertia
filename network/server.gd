@@ -58,7 +58,7 @@ func set_scene() -> void:
 
 
 @rpc("authority", "call_remote")
-func change_client_map(peer_id:int) -> void:
+func change_client_map(_peer_id:int) -> void:
 	if not map or map == "": return
 	#Globals.client.client_change_map.rpc_id(peer_id, Utils.get_full_map_name(map))
 
@@ -77,5 +77,5 @@ func spawn_player(peer_id:int) -> void:
 	if spawned == null: return Console.printerr("Cannot spawn - wrong authority")
 
 @rpc("any_peer", "call_remote")
-func loaded_map():
+func loaded_map() -> void:
 	player_loaded_map.emit()

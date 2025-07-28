@@ -24,7 +24,6 @@ func _on_toggle(_visible:bool) -> void:
 
 func _toggle_menu() -> Error:
 	if menu_node:
-		#menu_node.visible = !menu_node.visible
 		toggled = menu_node.toggle()
 		if menu_node.is_inside_tree(): return OK
 	if menu_scene.can_instantiate():
