@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://camwqks3jp737"]
+[gd_scene load_steps=33 format=3 uid="uid://camwqks3jp737"]
 
 [ext_resource type="Script" uid="uid://dtyioqs0liox3" path="res://ui/menu/main_menu.gd" id="1_or6mk"]
 [ext_resource type="Shader" uid="uid://b7os2pcqfuyuy" path="res://static/shaders/common/blur_singlepass.gdshader" id="2_or6mk"]
@@ -43,6 +43,13 @@ tonemap_exposure = 0.15
 tonemap_white = 0.1
 adjustment_enabled = true
 adjustment_brightness = 0.7
+
+[sub_resource type="Gradient" id="Gradient_u4nky"]
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.705882)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r5t3j"]
+gradient = SubResource("Gradient_u4nky")
+fill_to = Vector2(0.991453, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r5t3j"]
 
@@ -94,8 +101,8 @@ shader_parameter/edges = 3
 shader_parameter/shape_feather = 0.0
 shader_parameter/sectors = 1
 shader_parameter/clock_feather = 0.0
-shader_parameter/progress = -2.0
-shader_parameter/progress_bias = Vector2(-0.8, -0.8)
+shader_parameter/progress = -5.0
+shader_parameter/progress_bias = Vector2(-1.53, -1.5)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_yc8k7"]
 
@@ -116,7 +123,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-2.0]
+"values": [-5.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -180,7 +187,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(0.517632, 0.594605),
 "update": 0,
-"values": [3.19, -0.8]
+"values": [3.19, -2.43]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -312,6 +319,16 @@ spot_angle = 55.41
 transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, -2.5)
 spot_range = 3.192
 spot_angle = 35.88
+
+[node name="Shadow" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_r5t3j")
 
 [node name="Menu" type="VBoxContainer" parent="."]
 z_as_relative = false

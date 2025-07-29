@@ -1,28 +1,47 @@
-[gd_scene load_steps=10 format=3 uid="uid://bcljbuape7mjq"]
+[gd_scene load_steps=12 format=3 uid="uid://bcljbuape7mjq"]
 
 [ext_resource type="Material" uid="uid://bjyyfh03v4u1u" path="res://static/materials/prototype_black.tres" id="1_6sujd"]
 [ext_resource type="Texture2D" uid="uid://cnexs1r87kseq" path="res://assets/skyboxes/skybox2.png" id="1_g88ca"]
 [ext_resource type="PackedScene" uid="uid://diyb5sbluyv0b" path="res://3d/entities/player/Player.tscn" id="2_6sujd"]
 [ext_resource type="Script" uid="uid://sl63lhw2w8gu" path="res://3d/classes/gravity_object.gd" id="3_rryn2"]
+[ext_resource type="Shader" uid="uid://dyv56y2co3ujb" path="res://static/shaders/stars.gdshader" id="5_dytxi"]
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_dytxi"]
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_5cn2g"]
 panorama = ExtResource("1_g88ca")
+energy_multiplier = 0.55
 
 [sub_resource type="Sky" id="Sky_rryn2"]
-sky_material = SubResource("PanoramaSkyMaterial_dytxi")
-radiance_size = 5
+sky_material = SubResource("PanoramaSkyMaterial_5cn2g")
 
 [sub_resource type="Environment" id="Environment_g88ca"]
 background_mode = 2
 sky = SubResource("Sky_rryn2")
 tonemap_mode = 2
-tonemap_exposure = 1.95
+tonemap_exposure = 2.6
 tonemap_white = 16.0
 glow_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rryn2"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_g88ca"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g88ca"]
+render_priority = 0
+shader = ExtResource("5_dytxi")
+shader_parameter/horizontalMovement = 0.1
+shader_parameter/verticalMovement = 0.1
+shader_parameter/frequencyStar = 0.1
+shader_parameter/sizeStar = 100.0
+shader_parameter/brightnessStar = 3.0
+shader_parameter/shineFrequencyStar = 8.0
+shader_parameter/transparencyStar = 0.0
+shader_parameter/starIterations = 3
+shader_parameter/frequencyBgStar = 0.996
+shader_parameter/shineFrequencyBgStar = 1.0
+shader_parameter/transparencyBgStar = 0.0
+shader_parameter/colorBackground = Color(0.05, 0.04, 0.2, 1)
+shader_parameter/transparencyBackground = 1.0
+shader_parameter/seed = 0.0
 
 [node name="Test" type="Node3D"]
 
@@ -59,3 +78,13 @@ shape = SubResource("BoxShape3D_rryn2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GravityObject"]
 mesh = SubResource("BoxMesh_g88ca")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.25215, 0)
+visible = false
+radius = 28.025
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGSphere3D"]
+operation = 2
+radius = 20.325
+material = SubResource("ShaderMaterial_g88ca")

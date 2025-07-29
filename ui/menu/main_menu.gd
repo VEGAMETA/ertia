@@ -20,6 +20,7 @@ var shown := false
 @onready var background : ColorRect = $Background
 @onready var camera : Camera3D = %Camera3D
 @onready var hand : Node3D = %Hand
+@onready var shadow: TextureRect = $Shadow
 
 func _ready() -> void:
 	quit_button.pressed.connect(Globals.quit)
@@ -30,9 +31,10 @@ func _ready() -> void:
 	if get_tree().current_scene != self:
 		animation_player.play(&"transition")
 		continue_button.visible = true
+		shadow.visible = true
 		continue_button.pressed.connect(Menu.toggle_menu)
 	else:
-		transition.material.set_shader_parameter(&"progress", -2)
+		transition.material.set_shader_parameter(&"progress", -5)
 		if Saver.get_saves().size() > 0:
 			continue_button.visible = true
 			continue_button.pressed.connect(Saver.load_last_save)
