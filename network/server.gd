@@ -23,7 +23,6 @@ func _on_connect(peer_id:int) -> void:
 	clients[peer_id] = Permission.DEFAULT
 	Console.print("Client %d connected" % peer_id)
 	if multiplayer.is_server():
-		#Utils.load_map.rpc_id.call_deferred(peer_id, map)
 		Globals.client.client_change_map.rpc_id(peer_id, Utils.get_full_map_name(map))
 
 func _on_disconnect(peer_id:int) -> void:
@@ -49,6 +48,8 @@ func status() -> String:
 
 
 func set_permission(peer_id:int, permission:Permission) -> void:
+	if not clients.has(peer_id):
+		Console.printerr("unreachable client %d" % peer_id)
 	clients[peer_id] = permission
 
 

@@ -6,11 +6,13 @@ var help_message : String = \
 
 help - shows this message
 serve - serves the server with setted parameters
+map - changes server map
+spawn - spawns server authority
 
 clients - shows clients
-
-port (new port) - shows/sets server port (1025-65535)
-set_permission ip permission - sets permission for client
+status - server status
+port new_port - shows/sets server port (1025-65535)
+set_permission peer_id permission - sets permission for client
 Permissions: 
 	0 - NONE; 
 	1 - DEFAULT; 
@@ -50,4 +52,11 @@ func execute() -> Error:
 				if port: server.PORT = port
 				else: return Console.printerr("incorrect port", ERR_CANT_RESOLVE)
 			Console.print("port - %d" % server.PORT)
+		"set_permission":
+			if command.size() > 3:
+				var peer_id: int = int(command[2])
+				var permission: int = int(command[3])
+				if permission not in Server.Permission.values():
+					return Console.printerr("incorrect Permission %d" % permission, ERR_INVALID_PARAMETER)
+				server.set_permission(peer_id, permission)
 	return OK

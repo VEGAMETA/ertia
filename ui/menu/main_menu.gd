@@ -2,6 +2,10 @@ class_name MainMenu extends Control
 
 var shown := false
 
+
+var settings_packed : PackedScene = preload("uid://cu0e75nu504kb")
+var settings : SettingsWindow
+
 @onready var blur_rect : ColorRect = %Blur
 
 @onready var serve_button : Button = %Serve
@@ -21,13 +25,17 @@ var shown := false
 @onready var camera : Camera3D = %Camera3D
 @onready var hand : Node3D = %Hand
 @onready var shadow: TextureRect = $Shadow
+@onready var network: VBoxContainer = $Menu/Network
 
 func _ready() -> void:
 	quit_button.pressed.connect(Globals.quit)
+	options_button.pressed.connect(open_settings)
 	serve_button.pressed.connect(Globals.server.serve)
 	connect_button.pressed.connect(_on_connect_pressed)
 	disconnect_button.pressed.connect(Globals.client.disconnect_from_server)
 	new_game_button.pressed.connect(Utils.load_map.bind("test"))
+	network.visible = Globals.network
+	Menu.network_toggle.connect(func (v:bool) -> void: network.visible = v)
 	if get_tree().current_scene != self:
 		animation_player.play(&"transition")
 		continue_button.visible = true
@@ -61,18 +69,27 @@ func animation_played(_anim:StringName) -> void:
 
 func toggle() -> bool:
 	animation_player.pause()
-	if visible:
+	if visible: # Close menu
+		if settings: settings.visible = false
 		animation_player.play(&"transition", -1, -2.5, true)
 		if not animation_player.animation_finished.is_connected(animation_played):
 			animation_player.animation_finished.connect(animation_played)
 		return false
-	else:
+	else: # Open menu
 		visible = true
 		animation_player.play(&"transition")
 		if animation_player.animation_finished.is_connected(animation_played):
 			animation_player.animation_finished.disconnect(animation_played)
 		return true
 
+
+func open_settings() -> void:
+	if settings:
+		settings.visible = true
+		return
+	if settings_packed.can_instantiate():
+		settings = settings_packed.instantiate()
+		add_child(settings)
 
 func _on_connect_pressed() -> void:
 	await Globals.client.connect_to_server(

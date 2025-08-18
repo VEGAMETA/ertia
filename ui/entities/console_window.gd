@@ -42,14 +42,15 @@ func _input(event:InputEvent) -> void:
 	if not visible: return
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	if event.is_action_pressed("debug_console"):
+	elif event.is_action_pressed("debug_console"):
 		Console.toggle_console()
-	if event.is_action_pressed("ui_focus_next"):
+	elif event.is_action_pressed("ui_focus_next"):
 		get_suggestions()
-	if event.is_action_pressed("ui_up"):
+	elif event.is_action_pressed("ui_up"):
 		get_history(true)
-	if event.is_action_pressed("ui_down"):
+	elif event.is_action_pressed("ui_down"):
 		get_history(false)
+	else: Globals._input(event)
 
 
 func close() -> void:

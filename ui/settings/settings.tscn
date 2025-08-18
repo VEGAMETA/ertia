@@ -1,0 +1,226 @@
+[gd_scene load_steps=11 format=3 uid="uid://cu0e75nu504kb"]
+
+[ext_resource type="StyleBox" uid="uid://0vijq3tvufbe" path="res://ui/entities/console_window.tres" id="1_bjc66"]
+[ext_resource type="Script" uid="uid://cwntknqu6vhm" path="res://ui/settings/settings.gd" id="2_hrs25"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fayoa"]
+content_margin_left = 8.0
+content_margin_right = 8.0
+bg_color = Color(0.235294, 0.247059, 0.270588, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gweul"]
+content_margin_left = 8.0
+content_margin_right = 8.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hrs25"]
+content_margin_left = 8.0
+content_margin_right = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hrs25"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 60.0
+content_margin_bottom = 20.0
+bg_color = Color(0.235294, 0.247059, 0.270588, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5at5d"]
+content_margin_left = 8.0
+content_margin_right = 8.0
+bg_color = Color(0.235294, 0.247059, 0.270588, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y7dpk"]
+content_margin_left = 8.0
+content_margin_right = 8.0
+bg_color = Color(0.2, 0.2, 0.2, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gweul"]
+content_margin_left = 8.0
+content_margin_right = 8.0
+bg_color = Color(0.129412, 0.129412, 0.129412, 1)
+
+[sub_resource type="Theme" id="Theme_hrs25"]
+
+[node name="Settings" type="Window"]
+transparent_bg = true
+scaling_3d_mode = 0
+anisotropic_filtering_level = 4
+initial_position = 2
+size = Vector2i(670, 380)
+transparent = true
+theme_override_constants/close_h_offset = 20
+theme_override_constants/close_v_offset = 20
+theme_override_styles/embedded_border = ExtResource("1_bjc66")
+theme_override_styles/embedded_unfocused_border = ExtResource("1_bjc66")
+script = ExtResource("2_hrs25")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 8.0
+offset_right = -3.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/tab_focus = SubResource("StyleBoxFlat_fayoa")
+theme_override_styles/tab_disabled = SubResource("StyleBoxEmpty_gweul")
+theme_override_styles/tabbar_background = SubResource("StyleBoxEmpty_hrs25")
+theme_override_styles/panel = SubResource("StyleBoxFlat_hrs25")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_5at5d")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_y7dpk")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_gweul")
+current_tab = 0
+
+[node name="Graphics" type="GridContainer" parent="TabContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 35
+theme_override_constants/v_separation = 20
+columns = 2
+metadata/_tab_index = 0
+
+[node name="AnisotropicFilteringLabel" type="Label" parent="TabContainer/Graphics"]
+layout_mode = 2
+text = "Anisotropic Filtering"
+
+[node name="AnisotropicFilteringButton" type="OptionButton" parent="TabContainer/Graphics"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = SubResource("Theme_hrs25")
+selected = 0
+item_count = 5
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "2x"
+popup/item_1/id = 1
+popup/item_2/text = "4x"
+popup/item_2/id = 2
+popup/item_3/text = "8x"
+popup/item_3/id = 3
+popup/item_4/text = "16x"
+popup/item_4/id = 4
+
+[node name="LightLabel" type="Label" parent="TabContainer/Graphics"]
+layout_mode = 2
+text = "Shadows"
+
+[node name="LightButton" type="OptionButton" parent="TabContainer/Graphics"]
+unique_name_in_owner = true
+layout_mode = 2
+selected = 3
+item_count = 6
+popup/item_0/text = "Ultra Low"
+popup/item_0/id = 0
+popup/item_1/text = "Low"
+popup/item_1/id = 1
+popup/item_2/text = "Medium"
+popup/item_2/id = 2
+popup/item_3/text = "High"
+popup/item_3/id = 3
+popup/item_4/text = "Very High"
+popup/item_4/id = 4
+popup/item_5/text = "Ultra"
+popup/item_5/id = 5
+
+[node name="Display" type="GridContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/h_separation = 35
+theme_override_constants/v_separation = 20
+columns = 2
+metadata/_tab_index = 1
+
+[node name="VSyncLabel" type="Label" parent="TabContainer/Display"]
+layout_mode = 2
+text = "VSync"
+
+[node name="VSyncValue" type="CheckBox" parent="TabContainer/Display"]
+layout_mode = 2
+
+[node name="Audio" type="GridContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/h_separation = 35
+theme_override_constants/v_separation = 20
+columns = 3
+metadata/_tab_index = 2
+
+[node name="MasterLabel" type="Label" parent="TabContainer/Audio"]
+custom_minimum_size = Vector2(0, 67.365)
+layout_mode = 2
+size_flags_vertical = 5
+size_flags_stretch_ratio = 0.0
+text = "Master              "
+vertical_alignment = 1
+
+[node name="MasterSlider" type="HSlider" parent="TabContainer/Audio"]
+layout_mode = 2
+size_flags_vertical = 5
+size_flags_stretch_ratio = 0.0
+value = 100.0
+
+[node name="MasterValue" type="Label" parent="TabContainer/Audio"]
+layout_mode = 2
+size_flags_vertical = 5
+size_flags_stretch_ratio = 0.0
+text = "100%"
+vertical_alignment = 1
+
+[node name="MusicLabel" type="Label" parent="TabContainer/Audio"]
+layout_mode = 2
+text = "Music"
+
+[node name="MusicSlider" type="HSlider" parent="TabContainer/Audio"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+value = 100.0
+
+[node name="MusicValue" type="Label" parent="TabContainer/Audio"]
+layout_mode = 2
+text = "100%"
+
+[node name="SfxLabel" type="Label" parent="TabContainer/Audio"]
+layout_mode = 2
+text = "Sfx"
+
+[node name="SfxSlider" type="HSlider" parent="TabContainer/Audio"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+value = 100.0
+
+[node name="SfxValue" type="Label" parent="TabContainer/Audio"]
+layout_mode = 2
+text = "100%"
+
+[node name="VoiceLabel" type="Label" parent="TabContainer/Audio"]
+layout_mode = 2
+text = "Voice"
+
+[node name="VoiceSlider" type="HSlider" parent="TabContainer/Audio"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+value = 100.0
+
+[node name="VoiceValue" type="Label" parent="TabContainer/Audio"]
+layout_mode = 2
+text = "100%"
+
+[node name="Etc" type="GridContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3

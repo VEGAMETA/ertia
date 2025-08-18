@@ -60,7 +60,8 @@ script = ExtResource("2_ovkh0")
 
 [node name="Rotator" parent="Sprite" instance=ExtResource("2_p7bx5")]
 unique_name_in_owner = true
-scaling_3d_mode = 1
+scaling_3d_mode = 0
+scaling_3d_scale = 2.0
 size = Vector2i(1152, 648)
 
 [node name="Cone" type="MeshInstance3D" parent="."]

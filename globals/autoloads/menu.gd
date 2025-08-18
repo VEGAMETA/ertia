@@ -1,6 +1,7 @@
 extends Node
 
 signal menu_toggle(_visible:bool)
+signal network_toggle(_visible:bool)
 
 const MENU_UID : String = "uid://camwqks3jp737"
 

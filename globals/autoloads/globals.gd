@@ -13,6 +13,10 @@ enum Collisions {
 }
 
 var debug : bool = OS.is_debug_build()
+var network: bool = false:
+	set(v):
+		network = v
+		Menu.network_toggle.emit(v)
 
 var server : Server
 var client : Client

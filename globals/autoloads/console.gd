@@ -53,3 +53,7 @@ func printerr(text:String, error:Error=OK) -> Error:
 	printerr(error, " (%s) ---> " % error_string(error) + text)
 	stream += "[color=red]%s[/color]\n" % text
 	return error
+
+func printwarn(text:String, warning:String) -> void:
+	print(text, "\nWARNING (%s) ---> " % warning)
+	stream += "[color=yellow]%s[/color]\n" % text

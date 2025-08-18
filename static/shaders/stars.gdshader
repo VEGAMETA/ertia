@@ -35,16 +35,16 @@ float rand(vec3 co) {
 
 float remap(float prob, float starValue) {
     return (starValue - prob)/(1.0-prob);
-} 
+}
 
 void fragment() {
     // Use UV from skybox projection (normalized direction)
     vec3 uv3d = normalize(VIEW);
-    
+
     // Convert 3D direction to 2D coordinates for star generation
     vec2 uv;
     float maxAxis = max(abs(uv3d.x), max(abs(uv3d.y), abs(uv3d.z)));
-    
+
     if (maxAxis == abs(uv3d.x)) {
         uv = uv3d.x > 0.0 ? uv3d.zy : uv3d.zy * vec2(-1.0, 1.0);
     } else if (maxAxis == abs(uv3d.y)) {
@@ -52,7 +52,7 @@ void fragment() {
     } else {
         uv = uv3d.z > 0.0 ? uv3d.xy : uv3d.xy * vec2(-1.0, 1.0);
     }
-    
+
     uv = normalize(uv) * (1.0 / maxAxis);
     uv = uv * 0.5 + 0.5;
 
@@ -60,29 +60,29 @@ void fragment() {
     float travelx = TIME * horizontalMovement;
     float travely = TIME * verticalMovement;
     float color = 0.0;
-    
+
     ALBEDO = colorBackground.rgb;
     ALPHA = (1.0 - transparencyBackground);
 
     // Main stars
     for(int i = 1; i < 1 + starIterations; i++) {
         float size = sizeStar/float(i);
-        vec2 pos = vec2(floor((1.0 / size * uv.x * 1000.0) + travelx), 
+        vec2 pos = vec2(floor((1.0 / size * uv.x * 1000.0) + travelx),
                         floor((1.0 / size * uv.y * 1000.0) + travely));
         float starValue = rand(vec3(pos, float(i)));
-        
+
         if (starValue > prob) {
             vec2 center = size * pos + vec2(size, size) * 0.5;
             float t = 0.9 + 0.2 * sin(TIME * shineFrequencyStar + (starValue - prob) / (1.0 - prob) * 45.0);
-            
-            vec2 modifiedCoords = vec2(uv.x * 1000.0 + travelx * size, 
+
+            vec2 modifiedCoords = vec2(uv.x * 1000.0 + travelx * size,
                                      uv.y * 1000.0 + travely * size);
-            
+
             color = 1.0 - distance(modifiedCoords, center) / (0.5 * size);
-            color = t * t * brightnessStar / float(i) / 
-                   (clamp(distance(modifiedCoords.y, center.y), 0.5, size/2.0-1.0)) / 
+            color = t * t * brightnessStar / float(i) /
+                   (clamp(distance(modifiedCoords.y, center.y), 0.5, size/2.0-1.0)) /
                    (clamp(distance(modifiedCoords.x, center.x), 0.5, size/2.0-1.0));
-            
+
             vec4 colormapA = texture(gradientA, vec2(remap(prob, starValue)));
             vec4 COLOR1 = colormapA * color * (1.0 - transparencyStar);
             ALBEDO += COLOR1.rgb;
