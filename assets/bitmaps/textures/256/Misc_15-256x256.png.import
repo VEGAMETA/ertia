@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://jrhb0wsok277"
 path.bptc="res://.godot/imported/Misc_15-256x256.png-b07e8f5b2b9726da8981c4c1b93bd8b8.bptc.ctex"
+path.astc="res://.godot/imported/Misc_15-256x256.png-b07e8f5b2b9726da8981c4c1b93bd8b8.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/bitmaps/textures/256/Misc_15-256x256.png"
-dest_files=["res://.godot/imported/Misc_15-256x256.png-b07e8f5b2b9726da8981c4c1b93bd8b8.bptc.ctex"]
+dest_files=["res://.godot/imported/Misc_15-256x256.png-b07e8f5b2b9726da8981c4c1b93bd8b8.bptc.ctex", "res://.godot/imported/Misc_15-256x256.png-b07e8f5b2b9726da8981c4c1b93bd8b8.astc.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bvli7oj55prcl"
 path.bptc="res://.godot/imported/grV.png-6699c3cf462e48079f79e2f20a18c935.bptc.ctex"
+path.astc="res://.godot/imported/grV.png-6699c3cf462e48079f79e2f20a18c935.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/bitmaps/icons/grV.png"
-dest_files=["res://.godot/imported/grV.png-6699c3cf462e48079f79e2f20a18c935.bptc.ctex"]
+dest_files=["res://.godot/imported/grV.png-6699c3cf462e48079f79e2f20a18c935.bptc.ctex", "res://.godot/imported/grV.png-6699c3cf462e48079f79e2f20a18c935.astc.ctex"]
 
 [params]
 

@@ -8,7 +8,7 @@
 [ext_resource type="Shader" uid="uid://taf5g00cwiyy" path="res://static/shaders/holo.gdshader" id="3_wo257"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_gh6co"]
-viewport_path = NodePath(".")
+viewport_path = NodePath("/root/@EditorNode@21272/@Panel@14/@VBoxContainer@15/DockHSplitLeftL/DockHSplitLeftR/DockHSplitMain/@VBoxContainer@26/DockVSplitCenter/@VSplitContainer@54/@VBoxContainer@55/@EditorMainScreen@102/MainScreen/@CanvasItemEditor@11482/@VSplitContainer@11134/@HSplitContainer@11136/@HSplitContainer@11138/@Control@11139/@SubViewportContainer@11140/@SubViewport@11141/GravityDevice/Sprite/Rotator")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_p7bx5"]
 top_radius = 0.1

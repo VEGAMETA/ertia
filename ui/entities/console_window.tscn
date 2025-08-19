@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://bu8kjkkq3vasm"]
 
-[ext_resource type="FontFile" uid="uid://darb6f1xibj0a" path="res://assets/fonts/Lato-Light.ttf" id="1_ru5jm"]
 [ext_resource type="Script" uid="uid://5bl805er7sxs" path="res://ui/entities/console_window.gd" id="1_xfmnv"]
 [ext_resource type="StyleBox" uid="uid://0vijq3tvufbe" path="res://ui/entities/console_window.tres" id="2_51gmx"]
 [ext_resource type="FontFile" uid="uid://c2focg68oglmn" path="res://assets/fonts/0xProtoNerdFontMono-Regular.ttf" id="2_ru5jm"]
+[ext_resource type="FontFile" uid="uid://dmqmd3pqknw1f" path="res://assets/fonts/DejaVuSansMNerdFont-Regular.ttf" id="5_qt57m"]
 
 [sub_resource type="Theme" id="Theme_51gmx"]
 
@@ -44,15 +44,16 @@ corner_radius_bottom_left = 5
 process_mode = 3
 transparent_bg = true
 scaling_3d_mode = 0
-anisotropic_filtering_level = 4
 title = "console"
 position = Vector2i(748, 57)
 size = Vector2i(355, 410)
+transparent = true
 theme = SubResource("Theme_51gmx")
-theme_override_constants/title_height = 22
+theme_override_constants/title_height = 19
 theme_override_constants/close_h_offset = 20
 theme_override_constants/close_v_offset = 17
-theme_override_fonts/title_font = ExtResource("1_ru5jm")
+theme_override_fonts/title_font = ExtResource("2_ru5jm")
+theme_override_font_sizes/title_font_size = 14
 theme_override_styles/embedded_border = ExtResource("2_51gmx")
 theme_override_styles/embedded_unfocused_border = ExtResource("2_51gmx")
 script = ExtResource("1_xfmnv")
@@ -79,7 +80,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 theme_override_colors/default_color = Color(0.803922, 0.894118, 0.909804, 1)
-theme_override_fonts/normal_font = ExtResource("2_ru5jm")
+theme_override_fonts/normal_font = ExtResource("5_qt57m")
 theme_override_font_sizes/normal_font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxFlat_6kcfx")
 bbcode_enabled = true
@@ -99,7 +100,7 @@ offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_color = Color(0.804312, 0.89545, 0.910315, 1)
-theme_override_fonts/font = ExtResource("2_ru5jm")
+theme_override_fonts/font = ExtResource("5_qt57m")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/focus = SubResource("StyleBoxFlat_4kbc8")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ixdjk")

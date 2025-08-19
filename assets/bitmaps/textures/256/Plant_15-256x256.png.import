@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://724wa3ctfljl"
 path.bptc="res://.godot/imported/Plant_15-256x256.png-b3644c6609dd92d3be5578a87e8b94f3.bptc.ctex"
+path.astc="res://.godot/imported/Plant_15-256x256.png-b3644c6609dd92d3be5578a87e8b94f3.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/bitmaps/textures/256/Plant_15-256x256.png"
-dest_files=["res://.godot/imported/Plant_15-256x256.png-b3644c6609dd92d3be5578a87e8b94f3.bptc.ctex"]
+dest_files=["res://.godot/imported/Plant_15-256x256.png-b3644c6609dd92d3be5578a87e8b94f3.bptc.ctex", "res://.godot/imported/Plant_15-256x256.png-b3644c6609dd92d3be5578a87e8b94f3.astc.ctex"]
 
 [params]
 

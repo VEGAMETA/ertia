@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://crgl5bpfj0ym8"
 path.bptc="res://.godot/imported/Photoreal_Fire_07-512x512.png-c8bb6d370c49f6ae685d96872a0c1a3f.bptc.ctex"
+path.astc="res://.godot/imported/Photoreal_Fire_07-512x512.png-c8bb6d370c49f6ae685d96872a0c1a3f.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/bitmaps/textures/256/Photoreal_Fire_07-512x512.png"
-dest_files=["res://.godot/imported/Photoreal_Fire_07-512x512.png-c8bb6d370c49f6ae685d96872a0c1a3f.bptc.ctex"]
+dest_files=["res://.godot/imported/Photoreal_Fire_07-512x512.png-c8bb6d370c49f6ae685d96872a0c1a3f.bptc.ctex", "res://.godot/imported/Photoreal_Fire_07-512x512.png-c8bb6d370c49f6ae685d96872a0c1a3f.astc.ctex"]
 
 [params]
 

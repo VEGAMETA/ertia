@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cqxl7fr4ht71r"
 path.bptc="res://.godot/imported/Woven_15-256x256.png-47afa92c5e87bdf2198c2c797a379061.bptc.ctex"
+path.astc="res://.godot/imported/Woven_15-256x256.png-47afa92c5e87bdf2198c2c797a379061.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/bitmaps/textures/256/Woven_15-256x256.png"
-dest_files=["res://.godot/imported/Woven_15-256x256.png-47afa92c5e87bdf2198c2c797a379061.bptc.ctex"]
+dest_files=["res://.godot/imported/Woven_15-256x256.png-47afa92c5e87bdf2198c2c797a379061.bptc.ctex", "res://.godot/imported/Woven_15-256x256.png-47afa92c5e87bdf2198c2c797a379061.astc.ctex"]
 
 [params]
 

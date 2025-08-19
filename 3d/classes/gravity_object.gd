@@ -13,7 +13,10 @@ class_name GravityObject extends RigidBody3D
 
 func _ready() -> void:
 	env_audio = AudioStreamPlayer3D.new()
+	env_audio.set_stream(sfx)
+	env_audio.set_bus(&"Sfx")
 	env_audio.finished.connect(_on_audio_finished)
+	add_child(env_audio)
 	Gravity.change_gravity.connect(_on_change_gravity)
 	if not is_connected('body_entered', _on_body_entered):
 		self.body_entered.connect(_on_body_entered)
@@ -44,7 +47,7 @@ func _on_body_entered(body:Node) -> void:
 		if player != null: player = body
 	elif new_velocity > velocity_thereshold:
 		if (playing and new_velocity > old_velocity) or not playing:
-			env_audio.pitch_scale = 1.0 / new_velocity
+			env_audio.pitch_scale =  0.9 + 0.6 * ((new_velocity - 1 )/ 130)#1.0 / new_velocity
 			env_audio.play()
 			playing = true
 		old_velocity = new_velocity

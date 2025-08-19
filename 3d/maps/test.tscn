@@ -20,6 +20,11 @@ sky = SubResource("Sky_rryn2")
 tonemap_mode = 2
 tonemap_exposure = 2.6
 tonemap_white = 16.0
+ssr_fade_in = 1.0815
+ssr_fade_out = 1.07177
+ssr_depth_tolerance = 26.21
+sdfgi_use_occlusion = true
+sdfgi_read_sky_light = false
 glow_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rryn2"]
@@ -100,4 +105,5 @@ material = SubResource("ShaderMaterial_g88ca")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.386227, 0)
+visible = false
 mesh = SubResource("PlaneMesh_yartm")

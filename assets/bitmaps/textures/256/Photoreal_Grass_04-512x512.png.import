@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cbe0chf6onvbt"
 path.bptc="res://.godot/imported/Photoreal_Grass_04-512x512.png-983eaae33b3f5e734172e66ab24d3742.bptc.ctex"
+path.astc="res://.godot/imported/Photoreal_Grass_04-512x512.png-983eaae33b3f5e734172e66ab24d3742.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/bitmaps/textures/256/Photoreal_Grass_04-512x512.png"
-dest_files=["res://.godot/imported/Photoreal_Grass_04-512x512.png-983eaae33b3f5e734172e66ab24d3742.bptc.ctex"]
+dest_files=["res://.godot/imported/Photoreal_Grass_04-512x512.png-983eaae33b3f5e734172e66ab24d3742.bptc.ctex", "res://.godot/imported/Photoreal_Grass_04-512x512.png-983eaae33b3f5e734172e66ab24d3742.astc.ctex"]
 
 [params]
 

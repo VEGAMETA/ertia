@@ -31,6 +31,7 @@ Gravity="*res://globals/autoloads/gravity.gd"
 Saver="*res://globals/autoloads/saver.gd"
 Globals="*res://globals/autoloads/globals.gd"
 Menu="*res://globals/autoloads/menu.gd"
+Settings="*res://globals/autoloads/settings.gd"
 
 [debug]
 
@@ -38,8 +39,9 @@ gdscript/warnings/untyped_declaration=1
 
 [display]
 
+window/size/mode=4
 window/size/initial_position_type=4
-window/vsync/vsync_mode=0
+window/vsync/vsync_mode=2
 
 [editor_plugins]
 
@@ -242,6 +244,7 @@ common/physics_interpolation=true
 
 textures/canvas_textures/default_texture_filter=0
 gl_compatibility/nvidia_disable_threaded_optimization=false
+textures/vram_compression/import_etc2_astc=true
 textures/default_filters/anisotropic_filtering_level=0
 scaling_3d/mode=2
 scaling_3d/fsr_sharpness=0.0

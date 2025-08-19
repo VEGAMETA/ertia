@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dxut4u3x68kyf"
 path.bptc="res://.godot/imported/Wood_14-256x256_113.png-d5b090f188b8539cf044b832ade776d0.bptc.ctex"
+path.astc="res://.godot/imported/Wood_14-256x256_113.png-d5b090f188b8539cf044b832ade776d0.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/bitmaps/textures/256/Wood_14-256x256_113.png"
-dest_files=["res://.godot/imported/Wood_14-256x256_113.png-d5b090f188b8539cf044b832ade776d0.bptc.ctex"]
+dest_files=["res://.godot/imported/Wood_14-256x256_113.png-d5b090f188b8539cf044b832ade776d0.bptc.ctex", "res://.godot/imported/Wood_14-256x256_113.png-d5b090f188b8539cf044b832ade776d0.astc.ctex"]
 
 [params]
 

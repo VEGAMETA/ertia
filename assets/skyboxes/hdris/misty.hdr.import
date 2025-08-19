@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://da4leljqy1nty"
 path.bptc="res://.godot/imported/misty.hdr-9745b8c0a302d21bb28fd305b322157a.bptc.ctex"
+path.astc="res://.godot/imported/misty.hdr-9745b8c0a302d21bb28fd305b322157a.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/skyboxes/hdris/misty.hdr"
-dest_files=["res://.godot/imported/misty.hdr-9745b8c0a302d21bb28fd305b322157a.bptc.ctex"]
+dest_files=["res://.godot/imported/misty.hdr-9745b8c0a302d21bb28fd305b322157a.bptc.ctex", "res://.godot/imported/misty.hdr-9745b8c0a302d21bb28fd305b322157a.astc.ctex"]
 
 [params]
 

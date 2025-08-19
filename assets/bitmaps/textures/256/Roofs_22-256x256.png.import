@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c1i15t0pi44hr"
 path.bptc="res://.godot/imported/Roofs_22-256x256.png-7207429332bd6adc6fe89d8a7350b83a.bptc.ctex"
+path.astc="res://.godot/imported/Roofs_22-256x256.png-7207429332bd6adc6fe89d8a7350b83a.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/bitmaps/textures/256/Roofs_22-256x256.png"
-dest_files=["res://.godot/imported/Roofs_22-256x256.png-7207429332bd6adc6fe89d8a7350b83a.bptc.ctex"]
+dest_files=["res://.godot/imported/Roofs_22-256x256.png-7207429332bd6adc6fe89d8a7350b83a.bptc.ctex", "res://.godot/imported/Roofs_22-256x256.png-7207429332bd6adc6fe89d8a7350b83a.astc.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://hkrp7q4w18a2"
 path.bptc="res://.godot/imported/Photoreal_Trees_02-512x512.png-94f0965345ae2a51975157f6f0389c8a.bptc.ctex"
+path.astc="res://.godot/imported/Photoreal_Trees_02-512x512.png-94f0965345ae2a51975157f6f0389c8a.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/bitmaps/textures/256/Photoreal_Trees_02-512x512.png"
-dest_files=["res://.godot/imported/Photoreal_Trees_02-512x512.png-94f0965345ae2a51975157f6f0389c8a.bptc.ctex"]
+dest_files=["res://.godot/imported/Photoreal_Trees_02-512x512.png-94f0965345ae2a51975157f6f0389c8a.bptc.ctex", "res://.godot/imported/Photoreal_Trees_02-512x512.png-94f0965345ae2a51975157f6f0389c8a.astc.ctex"]
 
 [params]
 

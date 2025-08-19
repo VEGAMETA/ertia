@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dx7heu8l6ss53"
 path.bptc="res://.godot/imported/Cloth_11-256x256.png-548c4490e66d51f6436c4b6543fff230.bptc.ctex"
+path.astc="res://.godot/imported/Cloth_11-256x256.png-548c4490e66d51f6436c4b6543fff230.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/bitmaps/textures/256/Cloth_11-256x256.png"
-dest_files=["res://.godot/imported/Cloth_11-256x256.png-548c4490e66d51f6436c4b6543fff230.bptc.ctex"]
+dest_files=["res://.godot/imported/Cloth_11-256x256.png-548c4490e66d51f6436c4b6543fff230.bptc.ctex", "res://.godot/imported/Cloth_11-256x256.png-548c4490e66d51f6436c4b6543fff230.astc.ctex"]
 
 [params]
 

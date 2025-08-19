@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://ckc33a0ox4ku7"
 path.bptc="res://.godot/imported/Tile_10-256x256_89.png-2aedf2b99ecfbba22dbd61465a93bd00.bptc.ctex"
+path.astc="res://.godot/imported/Tile_10-256x256_89.png-2aedf2b99ecfbba22dbd61465a93bd00.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/bitmaps/textures/256/Tile_10-256x256_89.png"
-dest_files=["res://.godot/imported/Tile_10-256x256_89.png-2aedf2b99ecfbba22dbd61465a93bd00.bptc.ctex"]
+dest_files=["res://.godot/imported/Tile_10-256x256_89.png-2aedf2b99ecfbba22dbd61465a93bd00.bptc.ctex", "res://.godot/imported/Tile_10-256x256_89.png-2aedf2b99ecfbba22dbd61465a93bd00.astc.ctex"]
 
 [params]
 

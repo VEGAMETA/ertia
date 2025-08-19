@@ -5,3 +5,4 @@
 [node name="ConsoleVp" type="SubViewportContainer"]
 
 [node name="Console" parent="." instance=ExtResource("1_67sou")]
+anisotropic_filtering_level = 0

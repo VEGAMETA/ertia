@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://q2b7aqxqfaod"
 path.bptc="res://.godot/imported/Rust_19-256x256.png-3620ac49432c183dc2e075f2e06aae0b.bptc.ctex"
+path.astc="res://.godot/imported/Rust_19-256x256.png-3620ac49432c183dc2e075f2e06aae0b.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/bitmaps/textures/256/Rust_19-256x256.png"
-dest_files=["res://.godot/imported/Rust_19-256x256.png-3620ac49432c183dc2e075f2e06aae0b.bptc.ctex"]
+dest_files=["res://.godot/imported/Rust_19-256x256.png-3620ac49432c183dc2e075f2e06aae0b.bptc.ctex", "res://.godot/imported/Rust_19-256x256.png-3620ac49432c183dc2e075f2e06aae0b.astc.ctex"]
 
 [params]
 

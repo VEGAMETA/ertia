@@ -128,9 +128,7 @@ func inv_collision(collision:Collisions) -> int:
 func reset_physics() -> void:
 	# NOTE: We do have physics interpolation but it is still too clunky 
 	# (not as smooth as I wish)
-	var refresh_rate := int(DisplayServer.screen_get_refresh_rate()) 
-	Engine.physics_ticks_per_second = refresh_rate 
-	# Engine.max_fps = refresh_rate
+	Engine.physics_ticks_per_second = int(DisplayServer.screen_get_refresh_rate()) if Engine.max_fps == 0 else Engine.max_fps
 
 
 func quit() -> void:

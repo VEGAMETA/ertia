@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://buxkxntrbs40t"
 path.bptc="res://.godot/imported/Box_19-256x256.png-bd26ee6a008ffcf991b919938bfb00ea.bptc.ctex"
+path.astc="res://.godot/imported/Box_19-256x256.png-bd26ee6a008ffcf991b919938bfb00ea.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/bitmaps/textures/256/Box_19-256x256.png"
-dest_files=["res://.godot/imported/Box_19-256x256.png-bd26ee6a008ffcf991b919938bfb00ea.bptc.ctex"]
+dest_files=["res://.godot/imported/Box_19-256x256.png-bd26ee6a008ffcf991b919938bfb00ea.bptc.ctex", "res://.godot/imported/Box_19-256x256.png-bd26ee6a008ffcf991b919938bfb00ea.astc.ctex"]
 
 [params]
 

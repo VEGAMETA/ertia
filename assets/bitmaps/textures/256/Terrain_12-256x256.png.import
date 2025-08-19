@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bc1ja87lyhyk4"
 path.bptc="res://.godot/imported/Terrain_12-256x256.png-f89e028e8863b54f03bdabb4cabc5c16.bptc.ctex"
+path.astc="res://.godot/imported/Terrain_12-256x256.png-f89e028e8863b54f03bdabb4cabc5c16.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/bitmaps/textures/256/Terrain_12-256x256.png"
-dest_files=["res://.godot/imported/Terrain_12-256x256.png-f89e028e8863b54f03bdabb4cabc5c16.bptc.ctex"]
+dest_files=["res://.godot/imported/Terrain_12-256x256.png-f89e028e8863b54f03bdabb4cabc5c16.bptc.ctex", "res://.godot/imported/Terrain_12-256x256.png-f89e028e8863b54f03bdabb4cabc5c16.astc.ctex"]
 
 [params]
 

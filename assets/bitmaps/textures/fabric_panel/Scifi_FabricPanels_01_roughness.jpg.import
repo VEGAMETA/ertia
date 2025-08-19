@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cuxp1yo0mgw03"
 path.bptc="res://.godot/imported/Scifi_FabricPanels_01_roughness.jpg-533a616340787a85e5cef8fe0e855af0.bptc.ctex"
+path.astc="res://.godot/imported/Scifi_FabricPanels_01_roughness.jpg-533a616340787a85e5cef8fe0e855af0.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/bitmaps/textures/fabric_panel/Scifi_FabricPanels_01_roughness.jpg"
-dest_files=["res://.godot/imported/Scifi_FabricPanels_01_roughness.jpg-533a616340787a85e5cef8fe0e855af0.bptc.ctex"]
+dest_files=["res://.godot/imported/Scifi_FabricPanels_01_roughness.jpg-533a616340787a85e5cef8fe0e855af0.bptc.ctex", "res://.godot/imported/Scifi_FabricPanels_01_roughness.jpg-533a616340787a85e5cef8fe0e855af0.astc.ctex"]
 
 [params]
 

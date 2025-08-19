@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c1nwtdv1rb02u"
 path.bptc="res://.godot/imported/Weave_24-256x256.png-3debd283c4c00c86896496c7dd9c1222.bptc.ctex"
+path.astc="res://.godot/imported/Weave_24-256x256.png-3debd283c4c00c86896496c7dd9c1222.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/bitmaps/textures/256/Weave_24-256x256.png"
-dest_files=["res://.godot/imported/Weave_24-256x256.png-3debd283c4c00c86896496c7dd9c1222.bptc.ctex"]
+dest_files=["res://.godot/imported/Weave_24-256x256.png-3debd283c4c00c86896496c7dd9c1222.bptc.ctex", "res://.godot/imported/Weave_24-256x256.png-3debd283c4c00c86896496c7dd9c1222.astc.ctex"]
 
 [params]
 

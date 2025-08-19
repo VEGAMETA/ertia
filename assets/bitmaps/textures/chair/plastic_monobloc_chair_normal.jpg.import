@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://h66na028a2g4"
 path.bptc="res://.godot/imported/plastic_monobloc_chair_normal.jpg-3565d46baf0968d36e934de3c0b7d7dc.bptc.ctex"
+path.astc="res://.godot/imported/plastic_monobloc_chair_normal.jpg-3565d46baf0968d36e934de3c0b7d7dc.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/bitmaps/textures/chair/plastic_monobloc_chair_normal.jpg"
-dest_files=["res://.godot/imported/plastic_monobloc_chair_normal.jpg-3565d46baf0968d36e934de3c0b7d7dc.bptc.ctex"]
+dest_files=["res://.godot/imported/plastic_monobloc_chair_normal.jpg-3565d46baf0968d36e934de3c0b7d7dc.bptc.ctex", "res://.godot/imported/plastic_monobloc_chair_normal.jpg-3565d46baf0968d36e934de3c0b7d7dc.astc.ctex"]
 
 [params]
 
