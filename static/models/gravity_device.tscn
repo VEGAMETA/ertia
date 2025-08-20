@@ -159,42 +159,42 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 
 surface_material_override/0 = SubResource("StandardMaterial3D_v5f8a")
 
 [node name="Cube" type="MeshInstance3D" parent="Cube_001" index="0"]
-transform = Transform3D(0.920144, -0.384392, 0.0746797, -0.0248988, -0.247762, -0.968501, 0.390787, 0.889301, -0.237548, 0.0494671, -0.026454, 0.0224944)
+transform = Transform3D(0.644563, -0.503439, -0.575401, 0.651522, -0.0321331, 0.757948, -0.40007, -0.863433, 0.30729, 0.0494671, -0.026454, 0.0224944)
 mesh = SubResource("BoxMesh_v5f8a")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_48kx0")
 script = ExtResource("4_48kx0")
 
 [node name="Cube2" type="MeshInstance3D" parent="Cube_001" index="1"]
-transform = Transform3D(-0.0691474, -0.977341, -0.200059, 0.264133, 0.175446, -0.948395, 0.962004, -0.118421, 0.246017, -0.0469606, -0.0300395, 0.0224944)
+transform = Transform3D(0.61743, 0.78125, -0.0918092, 0.0897124, 0.0460162, 0.994905, 0.781493, -0.62252, -0.041676, -0.0469606, -0.0300395, 0.0224944)
 mesh = SubResource("BoxMesh_v5f8a")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_tbguy")
 script = ExtResource("4_48kx0")
 
 [node name="Cube3" type="MeshInstance3D" parent="Cube_001" index="2"]
-transform = Transform3D(0.908838, 0.139463, -0.393145, -0.296119, -0.448118, -0.843507, -0.293813, 0.883029, -0.365969, 0.0469474, 0.0310263, 0.0224944)
+transform = Transform3D(0.838657, -0.255847, -0.480827, 0.280864, -0.553226, 0.784255, -0.466655, -0.792769, -0.39211, 0.0469474, 0.0310263, 0.0224944)
 mesh = SubResource("BoxMesh_v5f8a")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_gmxmi")
 script = ExtResource("4_48kx0")
 
 [node name="Cube4" type="MeshInstance3D" parent="Cube_001" index="3"]
-transform = Transform3D(0.370249, 0.928932, 0, 0.832236, -0.331709, 0.444244, 0.412673, -0.164481, -0.895906, -0.0484803, 0.024908, 0.0224944)
+transform = Transform3D(0.270093, 0.292184, -0.91743, -0.108749, -0.937488, -0.330588, -0.956673, 0.189059, -0.221435, -0.0484803, 0.024908, 0.0224944)
 mesh = SubResource("BoxMesh_v5f8a")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_nt8ai")
 script = ExtResource("4_48kx0")
 
 [node name="Cube5" type="MeshInstance3D" parent="Cube_001" index="4"]
-transform = Transform3D(0.947272, 0.197115, -0.25263, 0.170121, 0.358743, 0.917803, 0.271542, -0.912387, 0.306293, 0.003, -0.0559869, 0.0224944)
+transform = Transform3D(-0.193313, -0.795028, 0.574945, 0.856976, -0.42215, -0.295603, 0.477725, 0.435571, 0.762926, 0.003, -0.0559869, 0.0224944)
 mesh = SubResource("BoxMesh_v5f8a")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_1pbyh")
 script = ExtResource("4_48kx0")
 
 [node name="Cube6" type="MeshInstance3D" parent="Cube_001" index="5"]
-transform = Transform3D(0.931018, 0.189815, 0.311731, 0.351375, -0.235179, -0.906216, -0.0987011, 0.953237, -0.285652, -0.00193314, 0.0551469, 0.0224944)
+transform = Transform3D(-0.498209, -0.866987, -0.0110067, 0.439879, -0.263673, 0.858478, -0.74719, 0.42286, 0.512734, -0.00193314, 0.0551469, 0.0224944)
 mesh = SubResource("BoxMesh_v5f8a")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_36kd7")

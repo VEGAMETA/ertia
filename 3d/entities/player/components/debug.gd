@@ -5,7 +5,7 @@ class_name PlayerDebug extends Node
 var debug_view_list : Array[int] = [1, 3, 4, 5, 26, 0]
 
 func _on_debug(function:Callable, args:Array=[]) -> Variant:
-	return function.callv(args) if Globals.debug else null
+	return function.callv(args) if Settings.debug else null
 
 func _input(event:InputEvent) -> void:
 	if event.is_action_pressed("debug_firstperson"):
@@ -18,7 +18,7 @@ func _handle_debug_view() -> void:
 	get_viewport().debug_draw = debug_view_list.pop_front()
 
 func _handle_firstperson() -> void:
-	if not Globals.debug: return
+	if not Settings.debug: return
 	player.firstperson = !player.firstperson
 	if not player is Player: return
 	player.remote_camera.position = Vector3(0.0, 0.0, 4.0 * int(!player.firstperson))

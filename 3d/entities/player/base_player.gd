@@ -1,7 +1,17 @@
 class_name BasePlayer
 extends CharacterBody3D
 
-var mouse_sensibility : float = Globals.mouse_sens * 17 / 15000
+var mouse_sensitivity : float = Settings.mouse_sens * 17 / 15000:
+	set(v):
+		mouse_sensitivity = v * 17 / 15000
+
+var gamepad_sensitivity : float = 4.0 * Settings.gamepad_sens:
+	set(v):
+		gamepad_sensitivity = 4.0 * v
+		gamepad_sensitivity_accel = gamepad_sensitivity * 0.9
+
+var gamepad_sensitivity_accel : float = gamepad_sensitivity * 0.9
+
 var velocity_length : float = 0.0
 
 #Movement
@@ -53,7 +63,7 @@ func _notification(what:int) -> void:
 		NOTIFICATION_UNPAUSED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		NOTIFICATION_APPLICATION_FOCUS_IN:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE if Menu.menu_node and Menu.menu_node.visible else Input.MOUSE_MODE_CAPTURED)
 
 
 func _enter_tree() -> void:
@@ -66,6 +76,8 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	Settings.mouse_sens_changed.connect(func (v:float)->void: mouse_sensitivity = v)
+	Settings.gamepad_sens_changed.connect(func (v:float)->void: gamepad_sensitivity = v)
 	if not is_multiplayer_authority(): return
 	Menu.menu_toggle.connect(clear_inputs)
 	Console.console_toggle.connect(clear_inputs)

@@ -1,0 +1,293 @@
+# LANGUAGE translation for ertia for the following files:
+# res://ui/settings/settings.tscn
+#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ertia\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#: ui/settings/settings.tscn
+msgid "settings"
+msgstr "настройки"
+
+#: ui/settings/settings.tscn
+msgid "Game"
+msgstr "Игра"
+
+#: ui/settings/settings.tscn
+msgid "       "
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "English"
+msgstr "Английский"
+
+#: ui/settings/settings.tscn
+msgid "Russian"
+msgstr "Русский"
+
+#: ui/settings/settings.tscn
+msgid "Mouse Sens."
+msgstr "Чувств. Мыши"
+
+#: ui/settings/settings.tscn
+msgid "Gamepad Sens."
+msgstr "Чувств. Геймпада "
+
+#: ui/settings/settings.tscn
+msgid "FOV"
+msgstr "Поле Зрения"
+
+#: ui/settings/settings.tscn
+msgid "Subtitles"
+msgstr "Субтитры"
+
+#: ui/settings/settings.tscn
+msgid "Subtitles Size"
+msgstr "Размер Субтитров  "
+
+#: ui/settings/settings.tscn
+msgid "Networking"
+msgstr "Сеть"
+
+#: ui/settings/settings.tscn
+msgid "Debuging"
+msgstr "Дебаг"
+
+#: ui/settings/settings.tscn
+msgid "Graphics"
+msgstr "Графика"
+
+#: ui/settings/settings.tscn
+msgid "Anisotropic Filtering"
+msgstr "Анизотропная Фильтрация"
+
+#: ui/settings/settings.tscn
+msgid "Disabled"
+msgstr "Отключено"
+
+#: ui/settings/settings.tscn
+msgid "2x"
+msgstr "2x"
+
+#: ui/settings/settings.tscn
+msgid "4x"
+msgstr "4x"
+
+#: ui/settings/settings.tscn
+msgid "8x"
+msgstr "8x"
+
+#: ui/settings/settings.tscn
+msgid "16x"
+msgstr "16x"
+
+#: ui/settings/settings.tscn
+msgid "Shadows"
+msgstr "Тени"
+
+#: ui/settings/settings.tscn
+msgid "Ultra Low"
+msgstr "Ультранизкие"
+
+#: ui/settings/settings.tscn
+msgid "Low"
+msgstr "Низкие"
+
+#: ui/settings/settings.tscn
+msgid "Medium"
+msgstr "Средние"
+
+#: ui/settings/settings.tscn
+msgid "High"
+msgstr "Высокие"
+
+#: ui/settings/settings.tscn
+msgid "Very High"
+msgstr "Очень Высокие"
+
+#: ui/settings/settings.tscn
+msgid "Ultra"
+msgstr "Ультра"
+
+#: ui/settings/settings.tscn
+msgid "Gamma"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "1.00"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "SSAO"
+msgstr "SSAO"
+
+#: ui/settings/settings.tscn
+msgid "SSIL"
+msgstr "SSIL"
+
+#: ui/settings/settings.tscn
+msgid "Glow"
+msgstr "Свечение"
+
+#: ui/settings/settings.tscn
+msgid "Display"
+msgstr "Дисплей"
+
+#: ui/settings/settings.tscn
+msgid "Display Scale"
+msgstr "Масштаб Дисплея"
+
+#: ui/settings/settings.tscn
+msgid "Window Mode"
+msgstr "Режим Окна"
+
+#: ui/settings/settings.tscn
+msgid "Windowed"
+msgstr "Оконный"
+
+#: ui/settings/settings.tscn
+msgid "Fullscreen"
+msgstr "Полноэкранный"
+
+#: ui/settings/settings.tscn
+msgid "Exclusive Fullscreen"
+msgstr "Полноэкранный Экскл. "
+
+#: ui/settings/settings.tscn
+msgid "Maximized"
+msgstr "На Весь Экран (В Окне)"
+
+#: ui/settings/settings.tscn
+msgid "VSync"
+msgstr "Верт. Синхронизация"
+
+#: ui/settings/settings.tscn
+msgid "Enabled"
+msgstr "Включена"
+
+#: ui/settings/settings.tscn
+msgid "Adaptive"
+msgstr "Адаптивная"
+
+#: ui/settings/settings.tscn
+msgid "Fast Sync"
+msgstr "Быстрая"
+
+#: ui/settings/settings.tscn
+msgid "FPS Limit"
+msgstr "Ограничение FPS"
+
+#: ui/settings/settings.tscn
+msgid "Max"
+msgstr "Максимально"
+
+#: ui/settings/settings.tscn
+msgid "30"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "60"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "120"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "144"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "165"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "240"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Phys. Ticks"
+msgstr "Физ. Тики"
+
+#: ui/settings/settings.tscn
+msgid "Auto"
+msgstr "Авто"
+
+#: ui/settings/settings.tscn
+msgid "Audio"
+msgstr "Аудио"
+
+#: ui/settings/settings.tscn
+msgid "Master              "
+msgstr "Общий              "
+
+#: ui/settings/settings.tscn
+msgid "100%"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Music"
+msgstr "Музыка"
+
+#: ui/settings/settings.tscn
+msgid "Sfx"
+msgstr "Эффекты"
+
+#: ui/settings/settings.tscn
+msgid "Voice"
+msgstr "Голос"
+
+#: ui/menu/main_menu.tscn
+msgid "Continue"
+msgstr "Продолжить"
+
+#: ui/menu/main_menu.tscn
+msgid "New Game"
+msgstr "Новая Игра"
+
+#: ui/menu/main_menu.tscn
+msgid "Serve\n"
+msgstr "Заупустить Сервер\n"
+
+#: ui/menu/main_menu.tscn
+msgid "ip"
+msgstr ""
+
+#: ui/menu/main_menu.tscn
+msgid "port"
+msgstr "порт"
+
+#: ui/menu/main_menu.tscn
+msgid "Connect"
+msgstr "Подключиться"
+
+#: ui/menu/main_menu.tscn
+msgid "Disconnect"
+msgstr "Отключиться"
+
+#: ui/menu/main_menu.tscn
+msgid "Options\n"
+msgstr "Настройки\n"
+
+#: ui/menu/main_menu.tscn
+msgid "Quit"
+msgstr "Выход"
+
+#: ui/entities/console_window.tscn
+msgid "console"
+msgstr "консоль"
+
+#~ msgid "Resolution"
+#~ msgstr "Разрешение"

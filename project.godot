@@ -31,7 +31,8 @@ Gravity="*res://globals/autoloads/gravity.gd"
 Saver="*res://globals/autoloads/saver.gd"
 Globals="*res://globals/autoloads/globals.gd"
 Menu="*res://globals/autoloads/menu.gd"
-Settings="*res://globals/autoloads/settings.gd"
+Settings="*res://globals/settings/settings.gd"
+Gamma="*res://globals/settings/gamma.gd"
 
 [debug]
 
@@ -41,7 +42,8 @@ gdscript/warnings/untyped_declaration=1
 
 window/size/mode=4
 window/size/initial_position_type=4
-window/vsync/vsync_mode=2
+window/stretch/aspect="ignore"
+window/vsync/vsync_mode=0
 
 [editor_plugins]
 
@@ -221,8 +223,9 @@ Spawn={
 
 [internationalization]
 
+locale/translations=PackedStringArray("res://i18n/ru.po")
+locale/translations_pot_files=PackedStringArray("res://ui/settings/settings.tscn", "res://ui/menu/main_menu.tscn", "res://ui/entities/console_window.tscn")
 rendering/text_driver="ICU / HarfBuzz / Graphite (Built-in)"
-locale/locale_filter_mode=0
 
 [layer_names]
 

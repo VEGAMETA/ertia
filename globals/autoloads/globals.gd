@@ -12,18 +12,12 @@ enum Collisions {
 	USABLE = 2 ** 5,
 }
 
-var debug : bool = OS.is_debug_build()
-var network: bool = false:
-	set(v):
-		network = v
-		Menu.network_toggle.emit(v)
 
 var server : Server
 var client : Client
 var command_handler : CommandHandler
 
 
-@export var mouse_sens : float = 1.0
 @export var just_unpaused : bool = false
 
 
@@ -44,6 +38,7 @@ func _input(event:InputEvent) -> void:
 		toggle_fullscreen()
 	if event.is_action_pressed("Pause"):
 		toggle_pause()
+	if event.is_action_pressed("debug_console"): Console.toggle_console()
 	if event.is_action_pressed("Debug_mp"):
 		server.serve()
 		server.map = "sv_test"
@@ -128,7 +123,15 @@ func inv_collision(collision:Collisions) -> int:
 func reset_physics() -> void:
 	# NOTE: We do have physics interpolation but it is still too clunky 
 	# (not as smooth as I wish)
-	Engine.physics_ticks_per_second = int(DisplayServer.screen_get_refresh_rate()) if Engine.max_fps == 0 else Engine.max_fps
+	#return
+	if Settings.ticks == 0:
+		if Engine.max_fps == 0: Engine.physics_ticks_per_second = roundi(DisplayServer.screen_get_refresh_rate())
+		else: Engine.physics_ticks_per_second = Engine.max_fps
+		get_tree().set_physics_interpolation_enabled(false)
+	else:
+		Engine.physics_ticks_per_second = Settings.ticks
+		if Engine.physics_ticks_per_second != Engine.max_fps:
+			get_tree().set_physics_interpolation_enabled(true)
 
 
 func quit() -> void:

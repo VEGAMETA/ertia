@@ -59,8 +59,8 @@ func pull_object() -> void:
 
 
 func rotate_object() -> void:
-	grabbed_body.rotation.x += player.new_cam_rotation.y * player.mouse_sensibility * 0.5
-	grabbed_body.rotation.y += player.new_cam_rotation.x * player.mouse_sensibility * 0.5
+	grabbed_body.rotation.x += player.new_cam_rotation.y * player.mouse_sensitivity * 0.5
+	grabbed_body.rotation.y += player.new_cam_rotation.x * player.mouse_sensitivity * 0.5
 	grabbed_body.rotation.x = wrap(grabbed_body.rotation.x, 0, PI*2)
 	grabbed_body.rotation.y = wrap(grabbed_body.rotation.y, 0, PI*2)
 

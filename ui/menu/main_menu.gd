@@ -34,7 +34,7 @@ func _ready() -> void:
 	connect_button.pressed.connect(_on_connect_pressed)
 	disconnect_button.pressed.connect(Globals.client.disconnect_from_server)
 	new_game_button.pressed.connect(Utils.load_map.bind("test"))
-	network.visible = Globals.network
+	network.visible = Settings.network
 	Menu.network_toggle.connect(func (v:bool) -> void: network.visible = v)
 	if get_tree().current_scene != self:
 		animation_player.play(&"transition")

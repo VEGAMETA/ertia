@@ -64,7 +64,7 @@ func attack() -> void:
 	change_gravity.rpc(get_direction().rotation_vector)
 
 func _process(_delta:float) -> void:
-	rotator_head.rotation = player.head.global_rotation
+	rotator_head.rotation = lerp(rotator_head.rotation, player.head.global_rotation, _delta)
 
 func _physics_process(_delta:float) -> void:
 	watch_and_change_gravity()

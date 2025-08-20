@@ -17,14 +17,14 @@ var stream : String:
 func _ready() -> void:
 	console_scene = load(CONSOLE_UID)
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	#if Globals.debug: toggle_console()
-
-
-func _input(event:InputEvent) -> void:
-	if event.is_action_pressed("debug_console"): toggle_console()
 
 
 func toggle_console() -> void:
+	if not Settings.debug:
+		if console_node != null and console_node.visible:
+			_toggle_console()
+			console_toggle.emit(console_node.visible)
+		return
 	if not _toggle_console(): 
 		console_toggle.emit(console_node.visible)
 

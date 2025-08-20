@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://da50vqaugir8g"]
+
+[ext_resource type="Shader" uid="uid://b1jxkk2hhmpgo" path="res://static/shaders/common/gamma.gdshader" id="1_ves1h"]
+[ext_resource type="Script" uid="uid://wcx1x1j6425d" path="res://globals/settings/gamma.gd" id="2_dxu8d"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dxu8d"]
+shader = ExtResource("1_ves1h")
+shader_parameter/gamma = 1.0
+
+[node name="Gamma" type="ColorRect"]
+material = SubResource("ShaderMaterial_dxu8d")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_dxu8d")

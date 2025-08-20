@@ -163,7 +163,7 @@ script = ExtResource("15_odio3")
 
 [node name="GravityDevice" parent="Components" index="8" instance=ExtResource("16_0l3dj")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, -0.175, -0.2)
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0.15, -0.175, -0.2)
 
 [node name="Debug" type="Node" parent="Components" index="9"]
 script = ExtResource("17_myyqq")
@@ -190,6 +190,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, -0.175, -0.2)
 
 [node name="RemoteItem" type="RemoteTransform3D" parent="Head/ItemHolder" index="0"]
 remote_path = NodePath("../../../Components/GravityDevice")
+update_scale = false
 
 [node name="Ambient" type="OmniLight3D" parent="Head" index="1"]
 light_energy = 0.1

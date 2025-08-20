@@ -1,13 +1,25 @@
 class_name SettingsWindow extends Window
 
-@onready var resolution: OptionButton = %ResolutionButton
+@onready var i18n_button: OptionButton = %L8nButton
+@onready var network_value: CheckBox = %NetworkValue
+@onready var debug_value: CheckBox = %DebugValue
+@onready var mouse_sens_value: HSlider = %MouseSensValue
+@onready var gamepad_sens_value: HSlider = %GamepadSensValue
+
+@onready var anisotropic_filtering: OptionButton = %AnisotropicFilteringButton
+@onready var shadows: OptionButton = %ShadowsButton
+@onready var gamma: HSlider = %GammaValue
+@onready var gamma_label: Label = %GammaLabel
+@onready var ssao: CheckBox = %SSAOValue
+@onready var ssil: CheckBox = %SSILValue
+@onready var glow: CheckBox = %GlowValue
+
+@onready var scale_value: HSlider = %ScaleValue
+@onready var scale_label: Label = %ScaleLabel
 @onready var window_mode: OptionButton = %WindowModeValue
 @onready var v_sync: OptionButton = %VSyncValue
 @onready var fps: OptionButton = %FpsButton
 @onready var phys: OptionButton = %PhysButton
-
-@onready var shadows: OptionButton = %ShadowsButton
-@onready var anisotropic_filtering: OptionButton = %AnisotropicFilteringButton
 
 @onready var master_slider: HSlider = %MasterSlider
 @onready var master_value: Label = %MasterValue
@@ -18,39 +30,67 @@ class_name SettingsWindow extends Window
 @onready var voice_slider: HSlider = %VoiceSlider
 @onready var voice_value: Label = %VoiceValue
 
+@onready var tab_container: TabContainer = $TabContainer
+
+var i18n := {0:"en", 1:"ru"}
+
 func _ready() -> void:
-	always_on_top = true
+	set_flag(Window.FLAG_ALWAYS_ON_TOP, true)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	close_requested.connect(close)
+	set_game()
 	set_graphics()
 	set_display()
 	set_audio()
+	tab_container.current_tab = 0
+
+
+func set_game() -> void:
+	i18n_button.get_popup().set_flag(Window.FLAG_ALWAYS_ON_TOP, true)
+	i18n_button.item_selected.connect(func (idx:int)->void: TranslationServer.set_locale(i18n.get(idx, "en")))
+	
+	mouse_sens_value.set_value(Settings.mouse_sens)
+	gamepad_sens_value.set_value(Settings.gamepad_sens)
+	
+	mouse_sens_value.value_changed.connect(Settings.set_sens)
+	gamepad_sens_value.value_changed.connect(Settings.set_sens.bind(true))
+	
+	debug_value.toggled.connect(func (x:bool)->void: Settings.debug = x)
+	network_value.toggled.connect(func (x:bool)->void: Settings.network = x)
+	
+	debug_value.set_pressed(Settings.debug)
+	network_value.set_pressed(Settings.network)
 
 
 func set_graphics() -> void:
-	shadows.get_popup().always_on_top = true
-	anisotropic_filtering.get_popup().always_on_top = true
-	anisotropic_filtering.select(get_tree().get_root().get_anisotropic_filtering_level())
+	shadows.get_popup().set_flag(Window.FLAG_ALWAYS_ON_TOP, true)
 	shadows.item_selected.connect(Settings.set_shadows.bind(shadows))
+	shadows.select(Settings.shadows)
+	
+	anisotropic_filtering.get_popup().set_flag(Window.FLAG_ALWAYS_ON_TOP, true)
+	anisotropic_filtering.select(get_tree().get_root().get_anisotropic_filtering_level())
 	anisotropic_filtering.item_selected.connect(Settings.set_filtering)
+	gamma.value_changed.connect(Settings.set_gamma.bind(gamma_label))
+	gamma.set_value(Gamma.get_gamma())
+	ssao.set_pressed(Settings.ssao)
+	ssao.toggled.connect(Settings.set_ssao)
+	ssil.set_pressed(Settings.ssil)
+	ssil.toggled.connect(Settings.set_ssil)
+	glow.set_pressed(Settings.glow)
+	glow.toggled.connect(Settings.set_glow)
 
-	
+
 func set_display() -> void:
-	resolution.get_popup().always_on_top = true
-	window_mode.get_popup().always_on_top = true
-	v_sync.get_popup().always_on_top = true
-	fps.get_popup().always_on_top = true
-	phys.get_popup().always_on_top = true
-	
+	window_mode.get_popup().set_flag(Window.FLAG_ALWAYS_ON_TOP, true)
+	v_sync.get_popup().set_flag(Window.FLAG_ALWAYS_ON_TOP, true)
+	fps.get_popup().set_flag(Window.FLAG_ALWAYS_ON_TOP, true)
+	phys.get_popup().set_flag(Window.FLAG_ALWAYS_ON_TOP, true)
 	get_tree().get_root().size_changed.connect(func ()->void: window_mode.select(window_mode.get_item_index(DisplayServer.window_get_mode(0))))
-	
-	resolution.set_item_text(0, str(get_tree().root.get_size().x) + "x" + str(get_tree().root.get_size().y) + " (current)")
-	resolution.select(resolution.get_item_index(0))
 	window_mode.select(window_mode.get_item_index(DisplayServer.window_get_mode(0)))
 	v_sync.select(v_sync.get_item_index(DisplayServer.window_get_vsync_mode(0)))
 	fps.select(fps.get_item_index(Engine.get_max_fps()))
-	phys.select(phys.get_item_index(0 if Engine.get_physics_ticks_per_second() == int(DisplayServer.screen_get_refresh_rate()) else Engine.get_physics_ticks_per_second() ))
-	
+	phys.select(phys.get_item_index(0 if Engine.get_physics_ticks_per_second() == int(DisplayServer.screen_get_refresh_rate()) else Engine.get_physics_ticks_per_second()))
+	scale_value.value_changed.connect(Settings.set_scale.bind(scale_label))
 	v_sync.item_selected.connect(Settings.set_vsync.bind(v_sync))
 	window_mode.item_selected.connect(Settings.set_window_mode.bind(window_mode))
 	fps.item_selected.connect(Settings.set_max_fps.bind(phys, fps))
@@ -72,9 +112,11 @@ func _on_toggle(_visible:bool) -> void:
 	if _visible:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Menu"): close()
 	else: Globals._input(event)
+
 
 func close() -> void:
 	visible = false

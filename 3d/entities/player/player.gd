@@ -6,8 +6,6 @@ class_name Player extends BasePlayer
 @export var saved_crouching : bool = false
 @export var saved_rotation : Vector3 = Vector3.ZERO
 
-@export var gamepad_sensibility : float = 4.0
-@export var gamepad_sensibility_accel : float = gamepad_sensibility * 0.9
 @export var new_cam_rotation : Vector2 = Vector2.ZERO
 
 @export var inventory_item : Attackable = null # @export_storage causes constant freezes
@@ -69,9 +67,9 @@ func _input(event:InputEvent) -> void:
 func _hadle_rotation(delta:float) -> void:
 	if not is_multiplayer_authority(): return
 	if new_cam_rotation == Vector2.ZERO:
-		new_cam_rotation = Input.get_vector("j_left", "j_right", "j_up", "j_down") * gamepad_sensibility
-		if new_cam_rotation.length() > gamepad_sensibility_accel:
-			new_cam_rotation *= exp(new_cam_rotation.length() - gamepad_sensibility_accel) / 0.6 + 1
+		new_cam_rotation = Input.get_vector("j_left", "j_right", "j_up", "j_down") * gamepad_sensitivity
+		if new_cam_rotation.length() > gamepad_sensitivity_accel:
+			new_cam_rotation *= exp(new_cam_rotation.length() - gamepad_sensitivity_accel) / 0.6 + 1
 		new_cam_rotation *=  delta * 230
 	if Input.is_action_pressed("Alternative") and grabber.grabbed_object:
 		grabber.rotate_object()
@@ -81,11 +79,11 @@ func _hadle_rotation(delta:float) -> void:
 
 func _handle_camera_rotation() -> void:
 	head.rotation.x = clamp(
-		head.rotation.x - new_cam_rotation.y * mouse_sensibility, 
-		Math.PI_BY_MINUS_2 + DEVIATION, 
+		head.rotation.x - new_cam_rotation.y * mouse_sensitivity, 
+		Math.PI_BY_MINUS_2 + DEVIATION,
 		Math.PI_BY_2 - DEVIATION
 	)
-	head.rotation.y = wrap(head.rotation.y - new_cam_rotation.x * mouse_sensibility, -PI, PI)
+	head.rotation.y = wrap(head.rotation.y - new_cam_rotation.x * mouse_sensitivity, -PI, PI)
 	#camera.global_transform = head.get_global_transform_interpolated()
 	#%ItemHolder.global_position = head.get_global_transform_interpolated() * Vector3(0.15, -0.175, -0.2)
 	#grabber.global_transform = head.get_global_transform_interpolated()
