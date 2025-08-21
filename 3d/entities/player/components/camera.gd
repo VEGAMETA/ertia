@@ -1,8 +1,12 @@
 class_name PlayerCameraComponent extends Camera3D
 
-const CAMERA_RUN_FOV : float = 100.0 # 108 is trueee
-const CAMERA_DEFAULT_FOV : float = 90.0
-const CAMERA_ZOOMED_FOV : float = 45.0
+var CAMERA_DEFAULT_FOV : float = Settings.fov:
+	set(v):
+		CAMERA_DEFAULT_FOV = v
+		CAMERA_ZOOMED_FOV = v / 2
+		CAMERA_RUN_FOV = min(360, v + 10)
+var CAMERA_RUN_FOV : float = min(360, CAMERA_DEFAULT_FOV + 10)
+var CAMERA_ZOOMED_FOV : float = CAMERA_DEFAULT_FOV / 2.0
 
 var fov_tween : Tween
 var position_tween : Tween
@@ -11,6 +15,10 @@ var trasns_time : float = 0.0
 @export var zoomed : bool = false
 
 @onready var player : BasePlayer = owner
+
+func _ready() -> void:
+	fov = CAMERA_DEFAULT_FOV
+	Settings.fov_changed.connect(func (x:float)->void: CAMERA_DEFAULT_FOV = x; fov = x)
 
 func _notification(what:int) -> void:
 	match what:

@@ -12,7 +12,7 @@ Savalon - Ionic and Doric Columns [remodelled]
 Kuutti Siitonen - Monobloc Plastic Garden Chair
 
 [Textures]
-Kenney - Prototype Textures
+Kenney - Prototype Textures, Input Prompts
 SBS - Tiny Texture Pack(s), Photorealistic Texture Pack(s)
 JulioVII - Texture Pack: Tech 01, Texture Pack: Scifi 01
 

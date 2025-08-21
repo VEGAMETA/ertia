@@ -35,7 +35,7 @@ func _ready() -> void:
 	disconnect_button.pressed.connect(Globals.client.disconnect_from_server)
 	new_game_button.pressed.connect(Utils.load_map.bind("test"))
 	network.visible = Settings.network
-	Menu.network_toggle.connect(func (v:bool) -> void: network.visible = v)
+	Settings.network_toggle.connect(func (v:bool) -> void: network.visible = v)
 	if get_tree().current_scene != self:
 		animation_player.play(&"transition")
 		continue_button.visible = true
@@ -86,6 +86,7 @@ func toggle() -> bool:
 func open_settings() -> void:
 	if settings:
 		settings.visible = true
+		settings.grab_focus()
 		return
 	if settings_packed.can_instantiate():
 		settings = settings_packed.instantiate()

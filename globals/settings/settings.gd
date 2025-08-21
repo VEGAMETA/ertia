@@ -2,22 +2,61 @@ extends Node
 
 signal mouse_sens_changed(value:float)
 signal gamepad_sens_changed(value:float)
+signal network_toggle(visible:bool)
+signal fov_changed(value:float)
+signal subtitles_changed(value:bool)
+signal subtitles_size_changed(value:float)
 
 var debug : bool = OS.is_debug_build()
 var network: bool = false:
 	set(v):
 		network = v
-		Menu.network_toggle.emit(v)
+		network_toggle.emit(v)
 
-@export var ssao : bool = false
-@export var ssil : bool = false
-@export var glow : bool = true
-@export var gamma : float = 1.0
+@export var subtitles : bool = false:
+	set(v):
+		subtitles = v
+		subtitles_changed.emit(v)
+@export var subtitles_size : float = 14.0:
+	set(v):
+		subtitles_size = v
+		subtitles_size_changed.emit(v)
+@export var mouse_sens : float = 1.0:
+	set(v):
+		mouse_sens = v
+		mouse_sens_changed.emit(v)
+@export var gamepad_sens : float = 1.0:
+	set(v):
+		gamepad_sens = v
+		gamepad_sens_changed.emit(v)
+@export var fov : float = 100:
+	set(v): 
+		fov = v
+		fov_changed.emit(v)
+	
+
 @export var shadows : int = 3
-@export var mouse_sens : float = 1.0
-@export var gamepad_sens : float = 1.0
-@export var ticks : int = 0
+@export var gamma : float = 1.0:
+	set(v):
+		gamma = v
+		Gamma.set_gamma(v)
+
+@export var ssao : bool = false:
+	set(v):
+		ssao = v
+		set_environment()
+@export var ssil : bool = false:
+	set(v):
+		ssil = v
+		set_environment()
+@export var glow : bool = true:
+	set(v):
+		glow = v
+		set_environment()
+
 @export var current_window_mode : DisplayServer.WindowMode = DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
+@export var max_fps : int = 0
+@export var phys_ticks : int = 0
 
 
 func _ready() -> void:
@@ -31,15 +70,6 @@ func get_settings() -> void:
 	
 func set_settings() -> void:
 	pass
-
-# Game
-func set_sens(value:float, gamepad:bool=false) -> void:
-	if gamepad: 
-		gamepad_sens = value
-		gamepad_sens_changed.emit(value)
-	else:
-		mouse_sens = value
-		mouse_sens_changed.emit(value)
 
 # Graphics
 func set_environment() -> void:
@@ -65,20 +95,8 @@ func set_shadows(idx:int, shadows_button:OptionButton) -> void:
 	shadows = idx
 
 func set_gamma(value:float, gamma_label:Label) -> void:
-	Gamma.set_gamma(value)
+	gamma = value
 	gamma_label.set_text("%.2f" % value)
-
-func set_ssao(value:bool) -> void:
-	ssao = value
-	set_environment()
-
-func set_ssil(value:bool) -> void:
-	ssil = value
-	set_environment()
-
-func set_glow(value:bool) -> void:
-	glow = value
-	set_environment()
 
 
 # Display
@@ -87,14 +105,6 @@ func set_scale(value:float, scale_label:Label) -> void:
 	RenderingServer.viewport_set_scaling_3d_scale(get_tree().get_root().get_viewport_rid(), value)
 	scale_label.set_text("%.2f" % value)
 
-func set_resolution(idx:int, resolution_button:OptionButton) -> void:
-	var resolution := resolution_button.get_item_text(idx).split("x")
-	#get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_VIEWPORT
-	#get_tree().root.content_scale_aspect = Window.CONTENT_SCALE_ASPECT_EXPAND
-	if resolution.size() < 2: return get_tree().root.reset_size()
-	get_tree().root.set_size(Vector2i(int(resolution[0]), int(resolution[1])))
-	DisplayServer.window_set_mode(current_window_mode)
-
 func set_vsync(idx:int, vsync_button:OptionButton) -> void: 
 	DisplayServer.window_set_vsync_mode(vsync_button.get_item_id(idx))
 
@@ -102,14 +112,15 @@ func set_window_mode(idx:int, window_mode_button:OptionButton) -> void:
 	DisplayServer.window_set_mode(window_mode_button.get_item_id(idx))
 	current_window_mode = DisplayServer.window_get_mode(0)
 
-func set_max_fps(idx:int, phys_button:OptionButton, fps_button:OptionButton) -> void:
-	Engine.set_max_fps(fps_button.get_item_id(idx))
+func set_max_fps(idx:int, fps_button:OptionButton) -> void:
+	max_fps = fps_button.get_item_id(idx)
+	Engine.set_max_fps(max_fps)
 	Globals.reset_physics()
 
 func set_phys_ticks(idx:int, phys_button:OptionButton) -> void: 
-	ticks = phys_button.get_item_id(idx)
+	phys_ticks = phys_button.get_item_id(idx)
 	if idx == 0: return Globals.reset_physics()
-	Engine.set_physics_ticks_per_second(ticks)
+	Engine.set_physics_ticks_per_second(phys_ticks)
 	Globals.reset_physics()
 
 # Audio

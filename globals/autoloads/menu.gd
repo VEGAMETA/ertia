@@ -1,7 +1,6 @@
 extends Node
 
 signal menu_toggle(_visible:bool)
-signal network_toggle(_visible:bool)
 
 const MENU_UID : String = "uid://camwqks3jp737"
 
@@ -12,10 +11,6 @@ var toggled := false
 func _init() -> void:
 	menu_scene = load(MENU_UID)
 	menu_toggle.connect(_on_toggle)
-
-
-func _input(event:InputEvent) -> void:
-	if event.is_action_pressed("Menu"): toggle_menu()
 
 
 func _on_toggle(_visible:bool) -> void:

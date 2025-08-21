@@ -12,12 +12,15 @@ var history_count : int = -1
 @onready var command_line : LineEdit = %CommandLine
 
 
+func _init() -> void:
+	set_flag(Window.FLAG_ALWAYS_ON_TOP, true)
+
+
 func _ready() -> void:
-	always_on_top = true
 	close_requested.connect(close)
 	Console.stream_update.connect(set_text)
 	set_text()
-	command_line.grab_focus()
+	command_line.grab_focus.call_deferred()
 	command_line.text_submitted.connect(submit_command)
 	command_line.edit.call_deferred()
 	command_line.text_changed.connect(_inspect_text)

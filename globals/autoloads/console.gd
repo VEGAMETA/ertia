@@ -31,7 +31,7 @@ func toggle_console() -> void:
 
 func _toggle_console() -> Error:
 	if console_node:
-		console_node.visible = !console_node.visible
+		console_node.set_visible(not console_node.is_visible())
 		if console_node.is_inside_tree(): return OK
 	if console_scene.can_instantiate():
 		console_node = console_scene.instantiate()

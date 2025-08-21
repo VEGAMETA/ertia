@@ -43,8 +43,6 @@ script = ExtResource("2_qdkxc")
 saved_flashlight = false
 saved_crouching = false
 saved_rotation = Vector3(0, 0, 0)
-gamepad_sensibility = 4.0
-gamepad_sensibility_accel = null
 new_cam_rotation = Vector2(0, 0)
 
 [node name="CollisionLegs" type="CollisionShape3D" parent="." index="0"]
