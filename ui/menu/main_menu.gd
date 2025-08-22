@@ -25,7 +25,7 @@ var settings : SettingsWindow
 @onready var camera : Camera3D = %Camera3D
 @onready var hand : Node3D = %Hand
 @onready var shadow: TextureRect = $Shadow
-@onready var network: VBoxContainer = $Menu/Network
+@onready var network: VBoxContainer = %Network
 
 func _ready() -> void:
 	quit_button.pressed.connect(Globals.quit)
@@ -34,6 +34,7 @@ func _ready() -> void:
 	connect_button.pressed.connect(_on_connect_pressed)
 	disconnect_button.pressed.connect(Globals.client.disconnect_from_server)
 	new_game_button.pressed.connect(Utils.load_map.bind("test"))
+	network.visibility_changed.connect(toggle_menuing)
 	network.visible = Settings.network
 	Settings.network_toggle.connect(func (v:bool) -> void: network.visible = v)
 	if get_tree().current_scene != self:
@@ -46,6 +47,8 @@ func _ready() -> void:
 		if Saver.get_saves().size() > 0:
 			continue_button.visible = true
 			continue_button.pressed.connect(Saver.load_last_save)
+	if continue_button.is_visible(): continue_button.grab_focus.call_deferred()
+	else: new_game_button.grab_focus.call_deferred()
 
 
 func _notification(what: int) -> void:
@@ -82,11 +85,20 @@ func toggle() -> bool:
 			animation_player.animation_finished.disconnect(animation_played)
 		return true
 
+func toggle_menuing() -> void:
+	new_game_button.set_focus_next(serve_button.get_path() if network.is_visible() else options_button.get_path())
+	new_game_button.set_focus_neighbor(SIDE_LEFT, serve_button.get_path() if network.is_visible() else options_button.get_path())
+	new_game_button.set_focus_neighbor(SIDE_BOTTOM, serve_button.get_path() if network.is_visible() else options_button.get_path())
+
+	options_button.set_focus_previous(disconnect_button.get_path() if network.is_visible() else new_game_button.get_path())
+	options_button.set_focus_neighbor(SIDE_RIGHT, disconnect_button.get_path() if network.is_visible() else new_game_button.get_path())
+	options_button.set_focus_neighbor(SIDE_TOP, disconnect_button.get_path() if network.is_visible() else new_game_button.get_path())
+
 
 func open_settings() -> void:
 	if settings:
 		settings.visible = true
-		settings.grab_focus()
+		settings.tab_container.get_child(settings.tab_container.current_tab).grab_focus.call_deferred()
 		return
 	if settings_packed.can_instantiate():
 		settings = settings_packed.instantiate()

@@ -15,7 +15,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 #: ui/settings/settings.tscn
 msgid "settings"
@@ -26,7 +26,7 @@ msgid "Game"
 msgstr "Игра"
 
 #: ui/settings/settings.tscn
-msgid "       "
+msgid "      "
 msgstr ""
 
 #: ui/settings/settings.tscn
@@ -66,16 +66,124 @@ msgid "Debuging"
 msgstr "Дебаг"
 
 #: ui/settings/settings.tscn
+msgid "Audio"
+msgstr "Аудио"
+
+#: ui/settings/settings.tscn
+msgid "Master              "
+msgstr "Общий              "
+
+#: ui/settings/settings.tscn
+msgid "100%"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Music"
+msgstr "Музыка"
+
+#: ui/settings/settings.tscn
+msgid "Sfx"
+msgstr "Эффекты"
+
+#: ui/settings/settings.tscn
+msgid "Voice"
+msgstr "Голос"
+
+#: ui/settings/settings.tscn
+msgid "Display"
+msgstr "Дисплей"
+
+#: ui/settings/settings.tscn
+msgid "Display Scale"
+msgstr "Масштаб Дисплея"
+
+#: ui/settings/settings.tscn
+msgid "1.00"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Window Mode"
+msgstr "Режим Окна"
+
+#: ui/settings/settings.tscn
+msgid "Windowed"
+msgstr "Оконный"
+
+#: ui/settings/settings.tscn
+msgid "Fullscreen"
+msgstr "Полноэкранный"
+
+#: ui/settings/settings.tscn
+msgid "Exclusive Fullscreen"
+msgstr "Полноэкранный Экскл. "
+
+#: ui/settings/settings.tscn
+msgid "Maximized"
+msgstr "На Весь Экран (В Окне)"
+
+#: ui/settings/settings.tscn
+msgid "VSync"
+msgstr "Верт. Синхронизация"
+
+#: ui/settings/settings.tscn
+msgid "Disabled"
+msgstr "Отключено"
+
+#: ui/settings/settings.tscn
+msgid "Enabled"
+msgstr "Включена"
+
+#: ui/settings/settings.tscn
+msgid "Adaptive"
+msgstr "Адаптивная"
+
+#: ui/settings/settings.tscn
+msgid "Fast Sync"
+msgstr "Быстрая"
+
+#: ui/settings/settings.tscn
+msgid "FPS Limit"
+msgstr "Ограничение FPS"
+
+#: ui/settings/settings.tscn
+msgid "Max"
+msgstr "Максимально"
+
+#: ui/settings/settings.tscn
+msgid "60"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "120"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "144"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "165"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "240"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Phys. Ticks"
+msgstr "Физ. Тики"
+
+#: ui/settings/settings.tscn
+msgid "Auto"
+msgstr "Авто"
+
+#: ui/settings/settings.tscn
 msgid "Graphics"
 msgstr "Графика"
 
 #: ui/settings/settings.tscn
 msgid "Anisotropic Filtering"
 msgstr "Анизотропная Фильтрация"
-
-#: ui/settings/settings.tscn
-msgid "Disabled"
-msgstr "Отключено"
 
 #: ui/settings/settings.tscn
 msgid "2x"
@@ -123,11 +231,7 @@ msgstr "Ультра"
 
 #: ui/settings/settings.tscn
 msgid "Gamma"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "1.00"
-msgstr ""
+msgstr "Гамма"
 
 #: ui/settings/settings.tscn
 msgid "SSAO"
@@ -142,112 +246,32 @@ msgid "Glow"
 msgstr "Свечение"
 
 #: ui/settings/settings.tscn
-msgid "Display"
-msgstr "Дисплей"
+msgid "Keybinds"
+msgstr "Назн. Клавиш"
 
 #: ui/settings/settings.tscn
-msgid "Display Scale"
-msgstr "Масштаб Дисплея"
+msgid "Controller"
+msgstr "Контроллер"
 
 #: ui/settings/settings.tscn
-msgid "Window Mode"
-msgstr "Режим Окна"
+msgid "Controller Type"
+msgstr "Тип Контроллера"
 
 #: ui/settings/settings.tscn
-msgid "Windowed"
-msgstr "Оконный"
+msgid "Letters"
+msgstr "Буквы"
 
 #: ui/settings/settings.tscn
-msgid "Fullscreen"
-msgstr "Полноэкранный"
+msgid "Symbols"
+msgstr "Символы"
 
 #: ui/settings/settings.tscn
-msgid "Exclusive Fullscreen"
-msgstr "Полноэкранный Экскл. "
+msgid "Vibration"
+msgstr "Вибрация"
 
 #: ui/settings/settings.tscn
-msgid "Maximized"
-msgstr "На Весь Экран (В Окне)"
-
-#: ui/settings/settings.tscn
-msgid "VSync"
-msgstr "Верт. Синхронизация"
-
-#: ui/settings/settings.tscn
-msgid "Enabled"
-msgstr "Включена"
-
-#: ui/settings/settings.tscn
-msgid "Adaptive"
-msgstr "Адаптивная"
-
-#: ui/settings/settings.tscn
-msgid "Fast Sync"
-msgstr "Быстрая"
-
-#: ui/settings/settings.tscn
-msgid "FPS Limit"
-msgstr "Ограничение FPS"
-
-#: ui/settings/settings.tscn
-msgid "Max"
-msgstr "Максимально"
-
-#: ui/settings/settings.tscn
-msgid "30"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "60"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "120"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "144"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "165"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "240"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "Phys. Ticks"
-msgstr "Физ. Тики"
-
-#: ui/settings/settings.tscn
-msgid "Auto"
-msgstr "Авто"
-
-#: ui/settings/settings.tscn
-msgid "Audio"
-msgstr "Аудио"
-
-#: ui/settings/settings.tscn
-msgid "Master              "
-msgstr "Общий              "
-
-#: ui/settings/settings.tscn
-msgid "100%"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "Music"
-msgstr "Музыка"
-
-#: ui/settings/settings.tscn
-msgid "Sfx"
-msgstr "Эффекты"
-
-#: ui/settings/settings.tscn
-msgid "Voice"
-msgstr "Голос"
+msgid "Deadzone"
+msgstr "Мёртвая Зона"
 
 #: ui/menu/main_menu.tscn
 msgid "Continue"

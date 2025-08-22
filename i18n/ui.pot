@@ -22,7 +22,7 @@ msgid "Game"
 msgstr ""
 
 #: ui/settings/settings.tscn
-msgid "       "
+msgid "      "
 msgstr ""
 
 #: ui/settings/settings.tscn
@@ -62,15 +62,123 @@ msgid "Debuging"
 msgstr ""
 
 #: ui/settings/settings.tscn
+msgid "Audio"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Master              "
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "100%"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Music"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Sfx"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Voice"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Display"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Display Scale"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "1.00"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Window Mode"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Windowed"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Fullscreen"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Exclusive Fullscreen"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Maximized"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "VSync"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Disabled"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Enabled"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Adaptive"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Fast Sync"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "FPS Limit"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Max"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "60"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "120"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "144"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "165"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "240"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Phys. Ticks"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Auto"
+msgstr ""
+
+#: ui/settings/settings.tscn
 msgid "Graphics"
 msgstr ""
 
 #: ui/settings/settings.tscn
 msgid "Anisotropic Filtering"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "Disabled"
 msgstr ""
 
 #: ui/settings/settings.tscn
@@ -122,10 +230,6 @@ msgid "Gamma"
 msgstr ""
 
 #: ui/settings/settings.tscn
-msgid "1.00"
-msgstr ""
-
-#: ui/settings/settings.tscn
 msgid "SSAO"
 msgstr ""
 
@@ -138,111 +242,31 @@ msgid "Glow"
 msgstr ""
 
 #: ui/settings/settings.tscn
-msgid "Display"
+msgid "Keybinds"
 msgstr ""
 
 #: ui/settings/settings.tscn
-msgid "Display Scale"
+msgid "Controller"
 msgstr ""
 
 #: ui/settings/settings.tscn
-msgid "Window Mode"
+msgid "Controller Type"
 msgstr ""
 
 #: ui/settings/settings.tscn
-msgid "Windowed"
+msgid "Letters"
 msgstr ""
 
 #: ui/settings/settings.tscn
-msgid "Fullscreen"
+msgid "Symbols"
 msgstr ""
 
 #: ui/settings/settings.tscn
-msgid "Exclusive Fullscreen"
+msgid "Vibration"
 msgstr ""
 
 #: ui/settings/settings.tscn
-msgid "Maximized"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "VSync"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "Enabled"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "Adaptive"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "Fast Sync"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "FPS Limit"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "Max"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "30"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "60"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "120"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "144"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "165"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "240"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "Phys. Ticks"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "Auto"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "Audio"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "Master              "
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "100%"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "Music"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "Sfx"
-msgstr ""
-
-#: ui/settings/settings.tscn
-msgid "Voice"
+msgid "Deadzone"
 msgstr ""
 
 #: ui/menu/main_menu.tscn

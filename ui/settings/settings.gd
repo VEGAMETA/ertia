@@ -40,8 +40,6 @@ class_name SettingsWindow extends Window
 
 @onready var tab_container: TabContainer = $TabContainer
 
-var i18n := {0:"en", 1:"ru"}
-
 
 func _init() -> void:
 	set_flag(Window.FLAG_ALWAYS_ON_TOP, true)
@@ -58,12 +56,12 @@ func _ready() -> void:
 	set_keybinds()
 	set_controller()
 	tab_container.current_tab = 0
+	tab_container.get_child(tab_container.current_tab).grab_click_focus.call_deferred()
 
-func _notification(what: int) -> void:
-	print(what)
 
 func set_game() -> void:
 	i18n_button.get_popup().set_flag(Window.FLAG_ALWAYS_ON_TOP, true)
+	i18n_button.select(Settings.locale if Settings.locale != null else -1)
 	mouse_sens_value.set_value(Settings.mouse_sens)
 	gamepad_sens_value.set_value(Settings.gamepad_sens)
 	fov_value.set_value(Settings.fov)
@@ -72,7 +70,7 @@ func set_game() -> void:
 	debug_value.set_pressed(Settings.debug)
 	network_value.set_pressed(Settings.network)
 	
-	i18n_button.item_selected.connect(func (idx:int)->void: TranslationServer.set_locale(i18n.get(idx, "en")))
+	i18n_button.item_selected.connect(func (idx:int)->void: TranslationServer.set_locale(Settings.i18n.get(idx, "en")))
 	mouse_sens_value.value_changed.connect(func (value:float)->void: Settings.mouse_sens = value)
 	gamepad_sens_value.value_changed.connect(func (value:float)->void: Settings.gamepad_sens = value)
 	fov_value.value_changed.connect(func (value:float)->void: Settings.fov = value)
@@ -133,6 +131,11 @@ func set_keybinds() -> void:
 
 func set_controller() -> void:
 	controller_type_button.get_popup().set_flag(Window.FLAG_ALWAYS_ON_TOP, true)
+	deadzone_value.value_changed.connect(Settings.set_deadzone.bind(deadzone_label))
+	deadzone_value.set_value(Settings.deadzone)
+	vibration_value.set_pressed(Settings.vibration)
+	vibration_value.toggled.connect(func (value:bool)->void: Settings.vibration = value)
+
 
 func _on_toggle(_visible:bool) -> void:
 	if _visible:

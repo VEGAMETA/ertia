@@ -86,7 +86,6 @@ func _ready() -> void:
 	initial_position.y += 1.5
 	if current_ps3d_gravity_vector == Vector3.ZERO: 
 		current_ps3d_gravity_vector = Gravity.gravity_vector
-	Console.print("v %d" % current_ps3d_gravity_vector.y)
 	gravity = Gravity.gravity
 	set_gravity(current_ps3d_gravity_vector)
 	set_gravity_global(current_ps3d_gravity_vector)

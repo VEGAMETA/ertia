@@ -81,7 +81,7 @@ func request_spawn() -> void:
 
 @rpc("any_peer", "call_remote", "unreliable_ordered")
 func client_change_scene(scene: PackedScene) -> void:
-	print(get_tree().change_scene_to_packed(scene))
+	Console.print("%d" % get_tree().change_scene_to_packed(scene))
 
 
 @rpc("authority", "call_remote", "reliable")

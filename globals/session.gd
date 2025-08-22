@@ -19,7 +19,6 @@ func _ready() -> void:
 func _lose_scene(_node:Node) -> void:
 	if get_tree() == null: return
 	if get_tree().current_scene == null: return
-	print(get_tree().current_scene)
 	if get_tree().current_scene == self:
 		queue_free()
 		get_tree().tree_changed.disconnect(_lose_scene)

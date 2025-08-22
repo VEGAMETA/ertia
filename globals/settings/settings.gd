@@ -7,11 +7,16 @@ signal fov_changed(value:float)
 signal subtitles_changed(value:bool)
 signal subtitles_size_changed(value:float)
 
+signal changing_keybind
+signal keybind_changed
+signal action_erased(event:InputEvent)
+
 var debug : bool = OS.is_debug_build()
 var network: bool = false:
 	set(v):
 		network = v
 		network_toggle.emit(v)
+
 
 @export var subtitles : bool = false:
 	set(v):
@@ -30,10 +35,13 @@ var network: bool = false:
 		gamepad_sens = v
 		gamepad_sens_changed.emit(v)
 @export var fov : float = 100:
-	set(v): 
+	set(v):
 		fov = v
 		fov_changed.emit(v)
-	
+
+
+var i18n := {0:"en", 1:"ru"}
+var locale := i18n.find_key(OS.get_locale_language()) as int
 
 @export var shadows : int = 3
 @export var gamma : float = 1.0:
@@ -58,6 +66,15 @@ var network: bool = false:
 @export var max_fps : int = 0
 @export var phys_ticks : int = 0
 
+var controller_inputs : Array[StringName] = [&"Forward", &"Backward", &"StrafeLeft", &"StrafeRight", &"j_up", &"j_down", &"j_left", &"j_right"]
+
+@export var deadzone : float = 0.2:
+	set(v):
+		deadzone = v
+		for input in controller_inputs:
+			InputMap.action_set_deadzone(input, v)
+
+@export var vibration : bool = true
 
 func _ready() -> void:
 	_initalize.call_deferred()
@@ -101,9 +118,9 @@ func set_gamma(value:float, gamma_label:Label) -> void:
 
 # Display
 
-func set_scale(value:float, scale_label:Label) -> void:
+func set_scale(value:float, label:Label) -> void:
 	RenderingServer.viewport_set_scaling_3d_scale(get_tree().get_root().get_viewport_rid(), value)
-	scale_label.set_text("%.2f" % value)
+	label.set_text("%.2f" % value)
 
 func set_vsync(idx:int, vsync_button:OptionButton) -> void: 
 	DisplayServer.window_set_vsync_mode(vsync_button.get_item_id(idx))
@@ -128,3 +145,9 @@ func set_phys_ticks(idx:int, phys_button:OptionButton) -> void:
 func set_bus_volume(value:float, button:HSlider, label:Label, bus_name:StringName) -> void:
 	AudioServer.set_bus_volume_linear(AudioServer.get_bus_index(bus_name), value)
 	label.set_text(String.num(button.get_value() * 100, 0) + "%")
+
+# Controls
+
+func set_deadzone(value:float, label:Label) -> void:
+	deadzone = value
+	label.set_text("%.2f" % value)

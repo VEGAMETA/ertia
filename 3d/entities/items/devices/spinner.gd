@@ -26,5 +26,5 @@ func rotate_gravitate(value:float) -> void:
 func _input(event:InputEvent) -> void:
 	if not owner.is_multiplayer_authority(): return
 	if event.is_action_pressed("Attack"):
-		Input.start_joy_vibration(0, 0.6, 0.0, 0.17)
+		if Settings.vibration: Input.start_joy_vibration(0, 0.6, 0.0, 0.17)
 		rotate_gravitate(10)

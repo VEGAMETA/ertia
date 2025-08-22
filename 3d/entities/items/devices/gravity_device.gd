@@ -97,8 +97,9 @@ func change_gravity(direction:Vector3) -> void:
 	if new_gravity_vector != player.gravity_vector:
 		rotation_correction()
 		set_gravity()
-		Input.start_joy_vibration(1, 0.8, 0.95, 0.17)
-		vibration_timer.start(0.5)
+		if Settings.vibration: 
+			Input.start_joy_vibration(1, 0.8, 0.95, 0.17)
+			vibration_timer.start(0.5)
 
 func _validate_area_direction() -> bool:
 	if not player.gravity_area_watcher.is_colliding(): return true

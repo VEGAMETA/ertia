@@ -53,13 +53,24 @@ fill_to = Vector2(0.991453, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r5t3j"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_umht6"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u4nky"]
+bg_color = Color(0.0941176, 0.196078, 0.231373, 1)
+skew = Vector2(0.615, 0)
+border_color = Color(0.8, 0.8, 0.8, 0)
+border_blend = true
+corner_detail = 4
+expand_margin_left = 14.0
+anti_aliasing_size = 6.33
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2671"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r5t3j"]
+bg_color = Color(0.129412, 0.25098, 0.290196, 1)
+skew = Vector2(0.615, 0)
+corner_detail = 4
+anti_aliasing_size = 6.33
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2671"]
 content_margin_left = 14.0
-bg_color = Color(0.0953347, 0.196424, 0.229732, 1)
+bg_color = Color(0.12804, 0.250185, 0.290464, 1)
 skew = Vector2(0.615, 0)
 border_color = Color(0.678431, 1, 1, 0)
 border_blend = true
@@ -69,10 +80,10 @@ anti_aliasing_size = 6.33
 [sub_resource type="Theme" id="Theme_umht6"]
 default_font = ExtResource("7_h2671")
 default_font_size = 25
-Button/styles/focus = SubResource("StyleBoxEmpty_umht6")
+Button/styles/focus = SubResource("StyleBoxFlat_u4nky")
 LineEdit/font_sizes/font_size = 19
 LineEdit/fonts/font = ExtResource("7_umht6")
-LineEdit/styles/focus = SubResource("StyleBoxEmpty_h2671")
+LineEdit/styles/focus = SubResource("StyleBoxFlat_r5t3j")
 LineEdit/styles/normal = SubResource("StyleBoxFlat_h2671")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_or6mk"]
@@ -251,6 +262,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+focus_mode = 2
 script = ExtResource("1_or6mk")
 
 [node name="Blur" type="ColorRect" parent="."]
@@ -353,6 +365,12 @@ alignment = 1
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
+focus_neighbor_left = NodePath("../Quit")
+focus_neighbor_top = NodePath("../Quit")
+focus_neighbor_right = NodePath("../NewGame")
+focus_neighbor_bottom = NodePath("../NewGame")
+focus_next = NodePath("../NewGame")
+focus_previous = NodePath("../Quit")
 text = "Continue"
 flat = true
 alignment = 0
@@ -360,6 +378,12 @@ alignment = 0
 [node name="NewGame" type="Button" parent="Menu"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_left = NodePath("../Continue")
+focus_neighbor_top = NodePath("../Continue")
+focus_neighbor_right = NodePath("../Network/Serve")
+focus_neighbor_bottom = NodePath("../Network/Serve")
+focus_next = NodePath("../Network/Serve")
+focus_previous = NodePath("../Continue")
 text = "New Game"
 flat = true
 alignment = 0
@@ -370,11 +394,22 @@ layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_or6mk")
 
 [node name="Network" type="VBoxContainer" parent="Menu"]
+unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_top = NodePath("../NewGame")
+focus_neighbor_bottom = NodePath("../Options")
+focus_next = NodePath("../Options")
+focus_previous = NodePath("../NewGame")
 
 [node name="Serve" type="Button" parent="Menu/Network"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_left = NodePath("../../NewGame")
+focus_neighbor_top = NodePath("../../NewGame")
+focus_neighbor_right = NodePath("../Ip")
+focus_neighbor_bottom = NodePath("../Ip")
+focus_next = NodePath("../Ip")
+focus_previous = NodePath("../../NewGame")
 text = "Serve
 "
 flat = true
@@ -384,6 +419,12 @@ alignment = 0
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../Serve")
+focus_neighbor_top = NodePath("../Serve")
+focus_neighbor_right = NodePath("../Port")
+focus_neighbor_bottom = NodePath("../Port")
+focus_next = NodePath("../Port")
+focus_previous = NodePath("../Serve")
 placeholder_text = "ip"
 alignment = 3
 max_length = 15
@@ -397,6 +438,12 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_gvx18")
 [node name="Port" type="LineEdit" parent="Menu/Network"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_left = NodePath("../Ip")
+focus_neighbor_top = NodePath("../Ip")
+focus_neighbor_right = NodePath("../Connect")
+focus_neighbor_bottom = NodePath("../Connect")
+focus_next = NodePath("../Connect")
+focus_previous = NodePath("../Ip")
 placeholder_text = "port"
 alignment = 3
 max_length = 5
@@ -409,6 +456,12 @@ alignment = 1
 [node name="Connect" type="Button" parent="Menu/Network"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_left = NodePath("../Port")
+focus_neighbor_top = NodePath("../Port")
+focus_neighbor_right = NodePath("../Disconnect")
+focus_neighbor_bottom = NodePath("../Disconnect")
+focus_next = NodePath("../Disconnect")
+focus_previous = NodePath("../Port")
 text = "Connect"
 flat = true
 alignment = 0
@@ -416,6 +469,12 @@ alignment = 0
 [node name="Disconnect" type="Button" parent="Menu/Network"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_left = NodePath("../Connect")
+focus_neighbor_top = NodePath("../Connect")
+focus_neighbor_right = NodePath("../../Options")
+focus_neighbor_bottom = NodePath("../../Options")
+focus_next = NodePath("../../Options")
+focus_previous = NodePath("../Connect")
 text = "Disconnect"
 flat = true
 alignment = 0
@@ -428,6 +487,12 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_4gkdq")
 [node name="Options" type="Button" parent="Menu"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_left = NodePath("../Network/Disconnect")
+focus_neighbor_top = NodePath("../Network/Disconnect")
+focus_neighbor_right = NodePath("../Quit")
+focus_neighbor_bottom = NodePath("../Quit")
+focus_next = NodePath("../Quit")
+focus_previous = NodePath("../Network/Disconnect")
 text = "Options
 "
 flat = true
@@ -436,6 +501,12 @@ alignment = 0
 [node name="Quit" type="Button" parent="Menu"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_left = NodePath("../Options")
+focus_neighbor_top = NodePath("../Options")
+focus_neighbor_right = NodePath("../Continue")
+focus_neighbor_bottom = NodePath("../Continue")
+focus_next = NodePath("../Continue")
+focus_previous = NodePath("../Options")
 text = "Quit"
 flat = true
 alignment = 0
