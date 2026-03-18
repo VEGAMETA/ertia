@@ -1,5 +1,8 @@
 class_name KeybindButton extends HBoxContainer
 
+signal changing_keybind
+signal keybind_changed
+signal action_erased(event:InputEvent)
 
 var label := Label.new()
 var button := Button.new()
@@ -11,9 +14,9 @@ func _init(action:StringName, key_: InputEvent) -> void:
 	key = key_
 
 func _ready() -> void:
-	Settings.changing_keybind.connect(toggle_off)
-	Settings.keybind_changed.connect(toggle_on)
-	Settings.action_erased.connect(reset_name)
+	changing_keybind.connect(toggle_off)
+	keybind_changed.connect(toggle_on)
+	action_erased.connect(reset_name)
 	button.toggled.connect(set_keybinding)
 	button.set_text(get_key_name())
 	button.set_toggle_mode(true)
@@ -39,9 +42,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func unchange() -> void:
-	if not Settings.changing_keybind.is_connected(toggle_off):
-		Settings.changing_keybind.connect(toggle_off)
-	Settings.keybind_changed.emit()
+	if not changing_keybind.is_connected(toggle_off):
+		changing_keybind.connect(toggle_off)
+	keybind_changed.emit()
 	button.set_pressed(false)
 	
 
@@ -57,16 +60,16 @@ func toggle_on() -> void:
 
 func set_keybinding(pressed:bool) -> void:
 	if pressed:
-		if Settings.changing_keybind.is_connected(toggle_off):
-			Settings.changing_keybind.disconnect(toggle_off)
-		Settings.changing_keybind.emit()
+		if changing_keybind.is_connected(toggle_off):
+			changing_keybind.disconnect(toggle_off)
+		changing_keybind.emit()
 		button.set_text("...")
 		set_process_unhandled_input.call_deferred(true)
 		owner.set_process_input(false)
 		button.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
 	else:
-		if not Settings.changing_keybind.is_connected(toggle_off):
-			Settings.changing_keybind.connect(toggle_off)
+		if not changing_keybind.is_connected(toggle_off):
+			changing_keybind.connect(toggle_off)
 		button.set_text.call_deferred(get_key_name())
 		set_process_unhandled_input(false)
 		owner.set_process_input(true)

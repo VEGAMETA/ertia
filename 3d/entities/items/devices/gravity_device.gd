@@ -63,10 +63,9 @@ func attack() -> void:
 	if Input.is_action_pressed("Alternative"): return
 	change_gravity.rpc(get_direction().rotation_vector)
 
-func _process(_delta:float) -> void:
-	rotator_head.rotation = lerp(rotator_head.rotation, player.head.global_rotation, _delta)
-
-func _physics_process(_delta:float) -> void:
+func _physics_process(delta:float) -> void:
+	rotator_head.global_rotation.x = lerp_angle(rotator_head.global_rotation.x, player.head.global_rotation.x, delta * 8)
+	rotator_head.global_rotation.y = lerp_angle(rotator_head.global_rotation.y, player.head.global_rotation.y, delta * 8)
 	watch_and_change_gravity()
 
 func watch_and_change_gravity() -> void:
@@ -97,7 +96,7 @@ func change_gravity(direction:Vector3) -> void:
 	if new_gravity_vector != player.gravity_vector:
 		rotation_correction()
 		set_gravity()
-		if Settings.vibration: 
+		if vibration_timer and Settings.vibration: 
 			Input.start_joy_vibration(1, 0.8, 0.95, 0.17)
 			vibration_timer.start(0.5)
 
@@ -147,8 +146,24 @@ func camera_correction() -> void:
 
 func position_correction() -> void:
 	if player.croucher.crouching:
+		player.global_position += player.gravity_vector - new_gravity_vector
+		player.head.position = -new_gravity_vector
+		player.croucher.wish_uncrouch_natural = true
+		return
+	await get_tree().physics_frame
+	player.shape_stand.force_shapecast_update()
+	if player.shape_stand.is_colliding():
+		player.global_position -= new_gravity_vector
+		player.croucher.wish_crouch = true
+		player.croucher.crouch() ## mul by offset
+		player.croucher.wish_uncrouch_natural = true
+	
+func position_correction_old() -> void:
+	if player.croucher.crouching:
 		if player.head.position != Vector3.ZERO:
+			player.head.position = -new_gravity_vector  ## mul by y offset
 			player.global_position += player.gravity_vector - new_gravity_vector
+			player.croucher.wish_uncrouch_natural = true
 		return
 	await get_tree().physics_frame
 	player.shape_stand.force_shapecast_update()
@@ -156,8 +171,7 @@ func position_correction() -> void:
 		player.global_position -= new_gravity_vector
 		player.croucher.wish_crouch = true
 		player.croucher.crouch(true)
-		player.croucher.wish_uncrouch = true
-
+		player.croucher.wish_uncrouch_natural = true
 
 ## Sets gravity vector
 func set_gravity() -> void:

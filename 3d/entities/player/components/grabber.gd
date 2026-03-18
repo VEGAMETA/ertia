@@ -68,8 +68,8 @@ func rotate_object() -> void:
 func zoom_object() -> void:
 	if grabbed_object == null: return
 	grabbed_zoom = grabbed_body.position.z + \
-	(int(Input.is_action_just_pressed("ZoomOut")) - \
-	int(Input.is_action_just_pressed("ZoomIn"))) * -0.1
+	(int(Input.is_action_just_pressed("Zoom Out")) - \
+	int(Input.is_action_just_pressed("Zoom In"))) * -0.1
 	grabbed_body.position.z = clamp(grabbed_zoom, -2.5, -1.5)
 
 

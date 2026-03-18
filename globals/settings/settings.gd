@@ -7,16 +7,11 @@ signal fov_changed(value:float)
 signal subtitles_changed(value:bool)
 signal subtitles_size_changed(value:float)
 
-signal changing_keybind
-signal keybind_changed
-signal action_erased(event:InputEvent)
-
 var debug : bool = OS.is_debug_build()
 var network: bool = false:
 	set(v):
 		network = v
 		network_toggle.emit(v)
-
 
 @export var subtitles : bool = false:
 	set(v):
@@ -34,17 +29,17 @@ var network: bool = false:
 	set(v):
 		gamepad_sens = v
 		gamepad_sens_changed.emit(v)
-@export var fov : float = 100:
+@export_range(0, 360) var fov : float = 100:
 	set(v):
 		fov = v
 		fov_changed.emit(v)
 
-
 var i18n := {0:"en", 1:"ru"}
 var locale := i18n.find_key(OS.get_locale_language()) as int
 
+@export_range(0.1, 2.0, 0.05) var display_scale : float = 1.0
 @export var shadows : int = 3
-@export var gamma : float = 1.0:
+@export_range(0.05, 2.0, 0.05) var gamma : float = 1.0:
 	set(v):
 		gamma = v
 		Gamma.set_gamma(v)
@@ -66,7 +61,10 @@ var locale := i18n.find_key(OS.get_locale_language()) as int
 @export var max_fps : int = 0
 @export var phys_ticks : int = 0
 
-var controller_inputs : Array[StringName] = [&"Forward", &"Backward", &"StrafeLeft", &"StrafeRight", &"j_up", &"j_down", &"j_left", &"j_right"]
+var controller_inputs : Array[StringName] = [
+	&"Forward", &"Backward", &"Strafe Left", &"Strafe Right", 
+	&"Controller Left", &"Controller Right", &"Controller Up", &"Controller Down"
+]
 
 @export var deadzone : float = 0.2:
 	set(v):
@@ -76,19 +74,20 @@ var controller_inputs : Array[StringName] = [&"Forward", &"Backward", &"StrafeLe
 
 @export var vibration : bool = true
 
+
 func _ready() -> void:
 	_initalize.call_deferred()
+
 
 func _initalize() -> void:
 	get_tree().tree_changed.connect(set_environment.call_deferred)
 
-func get_settings() -> void:
-	pass
-	
-func set_settings() -> void:
-	pass
+
+func get_settings() -> void: pass
+func set_settings() -> void: pass
 
 # Graphics
+
 func set_environment() -> void:
 	if get_tree() == null: return
 	if get_tree().current_scene == null: return
@@ -98,10 +97,12 @@ func set_environment() -> void:
 			world_env.environment.ssao_enabled = ssao
 			world_env.environment.glow_enabled = glow
 
+
 func set_filtering(idx:Window.AnisotropicFiltering) -> void:
-		if idx > Window.AnisotropicFiltering.ANISOTROPY_16X or idx < 0:
-			get_tree().get_root().set_anisotropic_filtering_level(Window.AnisotropicFiltering.ANISOTROPY_MAX)
-		get_tree().get_root().set_anisotropic_filtering_level(idx)
+	if idx > Window.AnisotropicFiltering.ANISOTROPY_16X or idx < 0:
+		get_tree().get_root().set_anisotropic_filtering_level(Window.AnisotropicFiltering.ANISOTROPY_MAX)
+	get_tree().get_root().set_anisotropic_filtering_level(idx)
+
 
 func set_shadows(idx:int, shadows_button:OptionButton) -> void:
 	var shadow_size := shadows_button.get_item_id(idx)
@@ -111,28 +112,39 @@ func set_shadows(idx:int, shadows_button:OptionButton) -> void:
 	RenderingServer.directional_soft_shadow_filter_set_quality(idx)
 	shadows = idx
 
+
 func set_gamma(value:float, gamma_label:Label) -> void:
 	gamma = value
 	gamma_label.set_text("%.2f" % value)
 
-
 # Display
 
 func set_scale(value:float, label:Label) -> void:
+	display_scale = value
 	RenderingServer.viewport_set_scaling_3d_scale(get_tree().get_root().get_viewport_rid(), value)
 	label.set_text("%.2f" % value)
+
+
+func get_scale(value:float, label:Label) -> void:
+	RenderingServer.viewport_set_scaling_3d_scale(get_tree().get_root().get_viewport_rid(), value)
+	label.set_text("%.2f" % value)
+
 
 func set_vsync(idx:int, vsync_button:OptionButton) -> void: 
 	DisplayServer.window_set_vsync_mode(vsync_button.get_item_id(idx))
 
+
 func set_window_mode(idx:int, window_mode_button:OptionButton) -> void: 
 	DisplayServer.window_set_mode(window_mode_button.get_item_id(idx))
 	current_window_mode = DisplayServer.window_get_mode(0)
+	Cursor.set_cursor()			
+
 
 func set_max_fps(idx:int, fps_button:OptionButton) -> void:
 	max_fps = fps_button.get_item_id(idx)
 	Engine.set_max_fps(max_fps)
 	Globals.reset_physics()
+
 
 func set_phys_ticks(idx:int, phys_button:OptionButton) -> void: 
 	phys_ticks = phys_button.get_item_id(idx)

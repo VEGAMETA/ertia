@@ -85,6 +85,7 @@ func toggle() -> bool:
 			animation_player.animation_finished.disconnect(animation_played)
 		return true
 
+
 func toggle_menuing() -> void:
 	new_game_button.set_focus_next(serve_button.get_path() if network.is_visible() else options_button.get_path())
 	new_game_button.set_focus_neighbor(SIDE_LEFT, serve_button.get_path() if network.is_visible() else options_button.get_path())
@@ -98,11 +99,13 @@ func toggle_menuing() -> void:
 func open_settings() -> void:
 	if settings:
 		settings.visible = true
-		settings.tab_container.get_child(settings.tab_container.current_tab).grab_focus.call_deferred()
-		return
-	if settings_packed.can_instantiate():
+		#settings.tab_container.get_child(settings.tab_container.current_tab).grab_focus.call_deferred()
+	elif settings_packed.can_instantiate():
 		settings = settings_packed.instantiate()
 		add_child(settings)
+	#settings.tab_container.get_child(settings.tab_container.current_tab).get_child(0).grab_focus()
+	settings.tab_container.get_child(settings.tab_container.current_tab).grab_focus()
+
 
 func _on_connect_pressed() -> void:
 	await Globals.client.connect_to_server(
@@ -111,6 +114,7 @@ func _on_connect_pressed() -> void:
 		int(port_field.text) if port_field.text != "" else \
 		Globals.client.default_port,
 	)
+
 
 func blur(enable:bool=true) -> void:
 	blur_rect.set_visible(enable)

@@ -1,0 +1,15 @@
+[gd_resource type="CompositorEffect" script_class="CompositorEffectDatamosh" load_steps=2 format=3 uid="uid://b71lwtklnqnpe"]
+
+[ext_resource type="Script" uid="uid://d326d6t5stv36" path="res://static/compositors/datamosh/datamosh_compositor.gd" id="1_pteo8"]
+
+[resource]
+resource_local_to_scene = true
+resource_name = ""
+enabled = true
+effect_callback_type = 3
+access_resolved_color = true
+access_resolved_depth = true
+needs_motion_vectors = true
+needs_normal_roughness = false
+script = ExtResource("1_pteo8")
+metadata/_custom_type_script = "uid://d326d6t5stv36"

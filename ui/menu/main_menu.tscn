@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://camwqks3jp737"]
+[gd_scene format=3 uid="uid://camwqks3jp737"]
 
 [ext_resource type="Script" uid="uid://dtyioqs0liox3" path="res://ui/menu/main_menu.gd" id="1_or6mk"]
 [ext_resource type="Shader" uid="uid://b7os2pcqfuyuy" path="res://static/shaders/common/blur_singlepass.gdshader" id="2_or6mk"]
@@ -9,7 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://balepuh6avo3h" path="res://static/models/column_cube.tscn" id="4_yc8k7"]
 [ext_resource type="FontFile" uid="uid://uouiqbxu67o3" path="res://assets/fonts/Lato-Regular.ttf" id="7_h2671"]
 [ext_resource type="FontFile" uid="uid://c2focg68oglmn" path="res://assets/fonts/0xProtoNerdFontMono-Regular.ttf" id="7_umht6"]
+[ext_resource type="Script" uid="uid://oqonj8loy4w" path="res://ui/menu/menu_buttons.gd" id="9_t3kfx"]
 [ext_resource type="Shader" uid="uid://bqtxdv8rarwht" path="res://static/shaders/common/bloom.gdshader" id="11_r5t3j"]
+[ext_resource type="Shader" uid="uid://1w2y2ib7qlf5" path="res://static/shaders/psychedelic.gdshader" id="11_t3kfx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_or6mk"]
 shader = ExtResource("2_or6mk")
@@ -39,7 +41,6 @@ background_mode = 2
 background_energy_multiplier = 0.65
 sky = SubResource("Sky_h2671")
 tonemap_mode = 2
-tonemap_exposure = 0.15
 tonemap_white = 0.1
 adjustment_enabled = true
 adjustment_brightness = 0.7
@@ -51,16 +52,13 @@ colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.705882)
 gradient = SubResource("Gradient_u4nky")
 fill_to = Vector2(0.991453, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_r5t3j"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u4nky"]
-bg_color = Color(0.0941176, 0.196078, 0.231373, 1)
-skew = Vector2(0.615, 0)
-border_color = Color(0.8, 0.8, 0.8, 0)
-border_blend = true
-corner_detail = 4
+bg_color = Color(0.098400004, 0.2046, 0.24, 1)
+corner_radius_top_left = 63
+corner_detail = 1
 expand_margin_left = 14.0
-anti_aliasing_size = 6.33
+shadow_color = Color(0, 0, 0, 0)
+shadow_size = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r5t3j"]
 bg_color = Color(0.129412, 0.25098, 0.290196, 1)
@@ -121,6 +119,13 @@ shader_parameter/progress_bias = Vector2(-1.53, -1.5)
 shader = ExtResource("11_r5t3j")
 shader_parameter/bloom_spread = 1.0
 shader_parameter/bloom_intensity = 0.4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hut73"]
+shader = ExtResource("11_t3kfx")
+shader_parameter/feedback = 0.01
+shader_parameter/symmetry_power = 0.15
+shader_parameter/edge_gain = 0.01
+shader_parameter/time_scale = 0.2
 
 [sub_resource type="Animation" id="Animation_4gkdq"]
 length = 0.001
@@ -255,7 +260,7 @@ _data = {
 &"transition": SubResource("Animation_gvx18")
 }
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=1842493963]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -265,7 +270,7 @@ grow_vertical = 2
 focus_mode = 2
 script = ExtResource("1_or6mk")
 
-[node name="Blur" type="ColorRect" parent="."]
+[node name="Blur" type="ColorRect" parent="." unique_id=994640545]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_or6mk")
 layout_mode = 1
@@ -275,13 +280,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BackBuffer" type="BackBufferCopy" parent="."]
+[node name="BackBuffer" type="BackBufferCopy" parent="." unique_id=1532206598]
 position = Vector2(576, 324)
 scale = Vector2(5.76, 3.24)
 copy_mode = 2
 rect = Rect2(0, -100, 200, 200)
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=1144200008]
 visible = false
 material = SubResource("ShaderMaterial_yc8k7")
 layout_mode = 1
@@ -291,7 +296,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MenuScene" type="SubViewportContainer" parent="."]
+[node name="MenuScene" type="SubViewportContainer" parent="." unique_id=1572266092]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -301,7 +306,7 @@ grow_vertical = 2
 mouse_filter = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="MenuScene"]
+[node name="SubViewport" type="SubViewport" parent="MenuScene" unique_id=1708277110]
 own_world_3d = true
 world_3d = SubResource("World3D_8gmgf")
 handle_input_locally = false
@@ -309,30 +314,30 @@ snap_2d_transforms_to_pixel = true
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="Node3D" type="Node3D" parent="MenuScene/SubViewport"]
+[node name="Node3D" type="Node3D" parent="MenuScene/SubViewport" unique_id=999502561]
 
-[node name="ColumnCube" parent="MenuScene/SubViewport/Node3D" instance=ExtResource("4_yc8k7")]
+[node name="ColumnCube" parent="MenuScene/SubViewport/Node3D" unique_id=649132627 instance=ExtResource("4_yc8k7")]
 
-[node name="Hand" type="Node3D" parent="MenuScene/SubViewport/Node3D/ColumnCube"]
+[node name="Hand" type="Node3D" parent="MenuScene/SubViewport/Node3D/ColumnCube" unique_id=887807132]
 unique_name_in_owner = true
 
-[node name="Camera3D" type="Camera3D" parent="MenuScene/SubViewport/Node3D/ColumnCube/Hand"]
+[node name="Camera3D" type="Camera3D" parent="MenuScene/SubViewport/Node3D/ColumnCube/Hand" unique_id=1307072294]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 environment = SubResource("Environment_umht6")
 fov = 108.0
 
-[node name="SpotLight3D" type="SpotLight3D" parent="MenuScene/SubViewport/Node3D"]
+[node name="SpotLight3D" type="SpotLight3D" parent="MenuScene/SubViewport/Node3D" unique_id=1499311524]
 transform = Transform3D(1, 0, 0, 0, 0.999194, -0.0401318, 0, 0.0401318, 0.999194, 0, -0.323, 2.09)
 spot_range = 3.774
 spot_angle = 55.41
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="MenuScene/SubViewport/Node3D"]
+[node name="SpotLight3D2" type="SpotLight3D" parent="MenuScene/SubViewport/Node3D" unique_id=1707980061]
 transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, -2.5)
 spot_range = 3.192
 spot_angle = 35.88
 
-[node name="Shadow" type="TextureRect" parent="."]
+[node name="Shadow" type="TextureRect" parent="." unique_id=1237295607]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -340,11 +345,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = SubResource("GradientTexture2D_r5t3j")
 
-[node name="Menu" type="VBoxContainer" parent="."]
+[node name="Menu" type="VBoxContainer" parent="." unique_id=1357116692]
 z_as_relative = false
-material = SubResource("ShaderMaterial_r5t3j")
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.086
@@ -360,10 +365,10 @@ rotation = -0.00108613
 mouse_filter = 0
 theme = SubResource("Theme_umht6")
 alignment = 1
+script = ExtResource("9_t3kfx")
 
-[node name="Continue" type="Button" parent="Menu"]
+[node name="Continue" type="Button" parent="Menu" unique_id=251502561]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 focus_neighbor_left = NodePath("../Quit")
 focus_neighbor_top = NodePath("../Quit")
@@ -375,7 +380,7 @@ text = "Continue"
 flat = true
 alignment = 0
 
-[node name="NewGame" type="Button" parent="Menu"]
+[node name="NewGame" type="Button" parent="Menu" unique_id=804070015]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_left = NodePath("../Continue")
@@ -388,20 +393,21 @@ text = "New Game"
 flat = true
 alignment = 0
 
-[node name="HSeparator" type="HSeparator" parent="Menu"]
+[node name="HSeparator" type="HSeparator" parent="Menu" unique_id=1059678892]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_or6mk")
 
-[node name="Network" type="VBoxContainer" parent="Menu"]
+[node name="Network" type="VBoxContainer" parent="Menu" unique_id=1766094947]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 focus_neighbor_top = NodePath("../NewGame")
 focus_neighbor_bottom = NodePath("../Options")
 focus_next = NodePath("../Options")
 focus_previous = NodePath("../NewGame")
 
-[node name="Serve" type="Button" parent="Menu/Network"]
+[node name="Serve" type="Button" parent="Menu/Network" unique_id=1975588959]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_left = NodePath("../../NewGame")
@@ -415,7 +421,7 @@ text = "Serve
 flat = true
 alignment = 0
 
-[node name="Ip" type="LineEdit" parent="Menu/Network"]
+[node name="Ip" type="LineEdit" parent="Menu/Network" unique_id=1491184312]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -430,12 +436,12 @@ alignment = 3
 max_length = 15
 expand_to_text_length = true
 
-[node name="VSeparator" type="VSeparator" parent="Menu/Network"]
+[node name="VSeparator" type="VSeparator" parent="Menu/Network" unique_id=915100091]
 layout_direction = 2
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_gvx18")
 
-[node name="Port" type="LineEdit" parent="Menu/Network"]
+[node name="Port" type="LineEdit" parent="Menu/Network" unique_id=1811790956]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_left = NodePath("../Ip")
@@ -449,11 +455,11 @@ alignment = 3
 max_length = 5
 expand_to_text_length = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Menu/Network"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/Network" unique_id=1143152656]
 layout_mode = 2
 alignment = 1
 
-[node name="Connect" type="Button" parent="Menu/Network"]
+[node name="Connect" type="Button" parent="Menu/Network" unique_id=1746004288]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_left = NodePath("../Port")
@@ -466,7 +472,7 @@ text = "Connect"
 flat = true
 alignment = 0
 
-[node name="Disconnect" type="Button" parent="Menu/Network"]
+[node name="Disconnect" type="Button" parent="Menu/Network" unique_id=825640859]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_left = NodePath("../Connect")
@@ -479,12 +485,12 @@ text = "Disconnect"
 flat = true
 alignment = 0
 
-[node name="HSeparator2" type="HSeparator" parent="Menu/Network"]
+[node name="HSeparator2" type="HSeparator" parent="Menu/Network" unique_id=922029482]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_4gkdq")
 
-[node name="Options" type="Button" parent="Menu"]
+[node name="Options" type="Button" parent="Menu" unique_id=654525963]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_left = NodePath("../Network/Disconnect")
@@ -498,7 +504,7 @@ text = "Options
 flat = true
 alignment = 0
 
-[node name="Quit" type="Button" parent="Menu"]
+[node name="Quit" type="Button" parent="Menu" unique_id=315799648]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_left = NodePath("../Options")
@@ -511,7 +517,7 @@ text = "Quit"
 flat = true
 alignment = 0
 
-[node name="Transition" type="TextureRect" parent="."]
+[node name="Transition" type="TextureRect" parent="." unique_id=2028724386]
 material = SubResource("ShaderMaterial_4gkdq")
 layout_mode = 1
 anchors_preset = 15
@@ -523,13 +529,13 @@ mouse_filter = 2
 texture = SubResource("CanvasTexture_yc8k7")
 expand_mode = 2
 
-[node name="BackBuffer2" type="BackBufferCopy" parent="."]
+[node name="BackBuffer2" type="BackBufferCopy" parent="." unique_id=1779743679]
 position = Vector2(576.002, 326)
 scale = Vector2(5.76, 3.24)
 copy_mode = 2
 rect = Rect2(-100, -100, 2000, 2000)
 
-[node name="Glow" type="ColorRect" parent="."]
+[node name="Glow" type="ColorRect" parent="." unique_id=1076069973]
 material = SubResource("ShaderMaterial_t3kfx")
 layout_mode = 1
 anchors_preset = 15
@@ -539,8 +545,16 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="psych" type="ColorRect" parent="." unique_id=1540706549]
+visible = false
+material = SubResource("ShaderMaterial_hut73")
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1270718745]
 root_node = NodePath("../Transition")
-libraries = {
-&"": SubResource("AnimationLibrary_yc8k7")
-}
+libraries/ = SubResource("AnimationLibrary_yc8k7")

@@ -85,7 +85,8 @@ func set_graphics() -> void:
 	anisotropic_filtering.get_popup().set_flag(Window.FLAG_ALWAYS_ON_TOP, true)
 	shadows.select(Settings.shadows)
 	anisotropic_filtering.select(get_tree().get_root().get_anisotropic_filtering_level())
-	gamma.set_value(Gamma.get_gamma())
+	gamma_label.set_text("%.2f" % Settings.gamma)
+	gamma.set_value(Settings.gamma)
 	ssao.set_pressed(Settings.ssao)
 	ssil.set_pressed(Settings.ssil)
 	glow.set_pressed(Settings.glow)
@@ -98,6 +99,8 @@ func set_graphics() -> void:
 
 
 func set_display() -> void:
+	scale_value.value=Settings.display_scale
+	scale_label.set_text("%.2f" % Settings.display_scale)
 	window_mode.get_popup().set_flag(Window.FLAG_ALWAYS_ON_TOP, true)
 	v_sync.get_popup().set_flag(Window.FLAG_ALWAYS_ON_TOP, true)
 	fps.get_popup().set_flag(Window.FLAG_ALWAYS_ON_TOP, true)

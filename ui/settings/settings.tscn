@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cu0e75nu504kb"]
+[gd_scene format=3 uid="uid://cu0e75nu504kb"]
 
 [ext_resource type="StyleBox" uid="uid://0vijq3tvufbe" path="res://ui/entities/console_window.tres" id="1_bjc66"]
 [ext_resource type="FontFile" uid="uid://c2focg68oglmn" path="res://assets/fonts/0xProtoNerdFontMono-Regular.ttf" id="1_gweul"]
@@ -8,12 +8,61 @@
 [ext_resource type="StyleBox" uid="uid://2ov1g1u04wts" path="res://static/styles/setting_panel_style.stylebox" id="5_eenmm"]
 [ext_resource type="Texture2D" uid="uid://d2gkfgqx4bs6v" path="res://assets/bitmaps/sprites/russian.png" id="6_ryoa4"]
 [ext_resource type="Script" uid="uid://imx4r8n0dvfd" path="res://ui/classes/keybinds.gd" id="7_ryoa4"]
+[ext_resource type="Texture2D" uid="uid://6kvcoysgx7ue" path="res://assets/bitmaps/icons/controllers/l.svg" id="9_tymtl"]
+[ext_resource type="Texture2D" uid="uid://dlpsp6jufqrek" path="res://assets/bitmaps/icons/controllers/r.svg" id="10_mcwst"]
+[ext_resource type="Texture2D" uid="uid://bnjscq3o6uw2s" path="res://assets/bitmaps/icons/controllers/b_l.svg" id="11_2wl1o"]
+[ext_resource type="Texture2D" uid="uid://c5php75y71ewv" path="res://assets/bitmaps/icons/controllers/b_r.svg" id="12_2ssnc"]
+[ext_resource type="Texture2D" uid="uid://o3ohhn84s4xn" path="res://assets/bitmaps/icons/controllers/b_d.svg" id="13_q1ftd"]
+[ext_resource type="Texture2D" uid="uid://bid084wpgyeb5" path="res://assets/bitmaps/icons/controllers/b_u.svg" id="14_2ssnc"]
+[ext_resource type="Texture2D" uid="uid://df4o3lesmq61x" path="res://assets/bitmaps/icons/controllers/r1.svg" id="15_q1ftd"]
+[ext_resource type="Texture2D" uid="uid://cxrp8q2chjfyn" path="res://assets/bitmaps/icons/controllers/rb.svg" id="16_fqhk4"]
+[ext_resource type="Texture2D" uid="uid://duwq8o305nai4" path="res://assets/bitmaps/icons/controllers/l3.svg" id="17_fqhk4"]
+[ext_resource type="Texture2D" uid="uid://cskc0ddk5ivi7" path="res://assets/bitmaps/icons/controllers/ls.svg" id="18_d4swc"]
+[ext_resource type="Texture2D" uid="uid://cb2nik0ur53tn" path="res://assets/bitmaps/icons/controllers/r3.svg" id="19_heosg"]
+[ext_resource type="Texture2D" uid="uid://bxvnyttuvtyw3" path="res://assets/bitmaps/icons/controllers/rs.svg" id="20_2se06"]
+[ext_resource type="Texture2D" uid="uid://ctnto16tamhhf" path="res://assets/bitmaps/icons/controllers/l1.svg" id="21_722tm"]
+[ext_resource type="Texture2D" uid="uid://cwxj76gf3hqrx" path="res://assets/bitmaps/icons/controllers/lb.svg" id="22_f83t1"]
+[ext_resource type="Texture2D" uid="uid://cfwic20ofmyjm" path="res://assets/bitmaps/icons/controllers/r2.svg" id="23_56ncf"]
+[ext_resource type="Texture2D" uid="uid://cxgrgk82c1mni" path="res://assets/bitmaps/icons/controllers/rt.svg" id="24_8gm2d"]
+[ext_resource type="Texture2D" uid="uid://by0g6h1odb5fp" path="res://assets/bitmaps/icons/controllers/l2.svg" id="25_c5jr0"]
+[ext_resource type="Texture2D" uid="uid://bc0nkbdx16o6y" path="res://assets/bitmaps/icons/controllers/lt.svg" id="26_kjjho"]
+[ext_resource type="Texture2D" uid="uid://bgaaqsh2dft13" path="res://assets/bitmaps/icons/controllers/start.svg" id="27_ljqoi"]
+[ext_resource type="Texture2D" uid="uid://5bfp2mbc42ih" path="res://assets/bitmaps/icons/controllers/start2.svg" id="28_xhbxp"]
+[ext_resource type="Texture2D" uid="uid://pfci21aw3k8h" path="res://assets/bitmaps/icons/controllers/select.svg" id="29_ocbse"]
+[ext_resource type="Texture2D" uid="uid://coc5gvlvpunsc" path="res://assets/bitmaps/icons/controllers/select2.svg" id="30_hldko"]
 
 [sub_resource type="Theme" id="Theme_gweul"]
 default_font = ExtResource("3_fayoa")
 default_font_size = 20
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fayoa"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hrs25"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.23529412, 0.24705882, 0.27058825, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hrs25"]
+content_margin_left = 8.0
+content_margin_right = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gweul"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.129412, 0.129412, 0.129412, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y7dpk"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0.2, 0.2, 0.2, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5at5d"]
 content_margin_left = 10.0
 content_margin_right = 10.0
 bg_color = Color(0.235294, 0.247059, 0.270588, 1)
@@ -24,39 +73,12 @@ corner_radius_top_right = 15
 content_margin_left = 8.0
 content_margin_right = 8.0
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hrs25"]
-content_margin_left = 8.0
-content_margin_right = 8.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hrs25"]
-content_margin_left = 20.0
-content_margin_top = 20.0
-content_margin_right = 20.0
-content_margin_bottom = 20.0
-bg_color = Color(0.235294, 0.247059, 0.270588, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5at5d"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fayoa"]
 content_margin_left = 10.0
 content_margin_right = 10.0
 bg_color = Color(0.235294, 0.247059, 0.270588, 1)
 corner_radius_top_left = 15
 corner_radius_top_right = 15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y7dpk"]
-content_margin_left = 10.0
-content_margin_right = 10.0
-bg_color = Color(0.2, 0.2, 0.2, 1)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gweul"]
-content_margin_left = 10.0
-content_margin_right = 10.0
-bg_color = Color(0.129412, 0.129412, 0.129412, 1)
 
 [sub_resource type="Theme" id="Theme_hrs25"]
 
@@ -71,10 +93,22 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="Settings" type="Window"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fqhk4"]
+content_margin_left = 25.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.137255, 0.137255, 0.137255, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Settings" type="Window" unique_id=863810972]
 transparent_bg = true
 scaling_3d_mode = 0
 anisotropic_filtering_level = 4
+oversampling_override = 1.0
 title = "settings"
 initial_position = 2
 size = Vector2i(670, 375)
@@ -88,7 +122,7 @@ theme_override_styles/embedded_border = ExtResource("1_bjc66")
 theme_override_styles/embedded_unfocused_border = ExtResource("1_bjc66")
 script = ExtResource("2_hrs25")
 
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="TabContainer" type="TabContainer" parent="." unique_id=618146905]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -99,24 +133,25 @@ offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_gweul")
-theme_override_styles/tab_focus = SubResource("StyleBoxFlat_fayoa")
-theme_override_styles/tab_disabled = SubResource("StyleBoxEmpty_gweul")
-theme_override_styles/tabbar_background = SubResource("StyleBoxEmpty_hrs25")
 theme_override_styles/panel = SubResource("StyleBoxFlat_hrs25")
-theme_override_styles/tab_selected = SubResource("StyleBoxFlat_5at5d")
-theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_y7dpk")
+theme_override_styles/tabbar_background = SubResource("StyleBoxEmpty_hrs25")
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_gweul")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_y7dpk")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_5at5d")
+theme_override_styles/tab_disabled = SubResource("StyleBoxEmpty_gweul")
+theme_override_styles/tab_focus = SubResource("StyleBoxFlat_fayoa")
 tab_alignment = 1
-current_tab = 4
+current_tab = 0
 
-[node name="Game" type="ScrollContainer" parent="TabContainer"]
-visible = false
+[node name="Game" type="ScrollContainer" parent="TabContainer" unique_id=585985472]
 layout_mode = 2
+focus_neighbor_bottom = NodePath("GridContainer/L8nButton")
+focus_mode = 2
 theme_override_styles/panel = ExtResource("5_eenmm")
 vertical_scroll_mode = 3
 metadata/_tab_index = 0
 
-[node name="GridContainer" type="GridContainer" parent="TabContainer/Game"]
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Game" unique_id=2157700]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -124,14 +159,14 @@ theme_override_constants/h_separation = 40
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="L8nLabel" type="Label" parent="TabContainer/Game/GridContainer"]
+[node name="L8nLabel" type="Label" parent="TabContainer/Game/GridContainer" unique_id=365092788]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_gweul")
 theme_override_font_sizes/font_size = 30
 text = "      "
 vertical_alignment = 1
 
-[node name="L8nButton" type="OptionButton" parent="TabContainer/Game/GridContainer"]
+[node name="L8nButton" type="OptionButton" parent="TabContainer/Game/GridContainer" unique_id=598346729]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -146,11 +181,11 @@ popup/item_1/text = "Russian"
 popup/item_1/icon = ExtResource("6_ryoa4")
 popup/item_1/id = 1
 
-[node name="MouseSensLabel" type="Label" parent="TabContainer/Game/GridContainer"]
+[node name="MouseSensLabel" type="Label" parent="TabContainer/Game/GridContainer" unique_id=494421406]
 layout_mode = 2
 text = "Mouse Sens."
 
-[node name="MouseSensValue" type="HSlider" parent="TabContainer/Game/GridContainer"]
+[node name="MouseSensValue" type="HSlider" parent="TabContainer/Game/GridContainer" unique_id=564000137]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -160,11 +195,11 @@ step = 0.01
 value = 1.0
 exp_edit = true
 
-[node name="GamepadSensLabel" type="Label" parent="TabContainer/Game/GridContainer"]
+[node name="GamepadSensLabel" type="Label" parent="TabContainer/Game/GridContainer" unique_id=2094936642]
 layout_mode = 2
 text = "Gamepad Sens."
 
-[node name="GamepadSensValue" type="HSlider" parent="TabContainer/Game/GridContainer"]
+[node name="GamepadSensValue" type="HSlider" parent="TabContainer/Game/GridContainer" unique_id=1196178045]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -174,11 +209,11 @@ step = 0.01
 value = 1.0
 exp_edit = true
 
-[node name="FOVLabel" type="Label" parent="TabContainer/Game/GridContainer"]
+[node name="FOVLabel" type="Label" parent="TabContainer/Game/GridContainer" unique_id=1077026618]
 layout_mode = 2
 text = "FOV"
 
-[node name="FOVValue" type="HSlider" parent="TabContainer/Game/GridContainer"]
+[node name="FOVValue" type="HSlider" parent="TabContainer/Game/GridContainer" unique_id=96751220]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -187,20 +222,20 @@ min_value = 45.0
 max_value = 180.0
 value = 100.0
 
-[node name="SubtitlesLabel" type="Label" parent="TabContainer/Game/GridContainer"]
+[node name="SubtitlesLabel" type="Label" parent="TabContainer/Game/GridContainer" unique_id=1816754848]
 layout_mode = 2
 text = "Subtitles"
 
-[node name="SubtitlesValue" type="CheckBox" parent="TabContainer/Game/GridContainer"]
+[node name="SubtitlesValue" type="CheckBox" parent="TabContainer/Game/GridContainer" unique_id=1057365992]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="SubtitlesSizeLabel" type="Label" parent="TabContainer/Game/GridContainer"]
+[node name="SubtitlesSizeLabel" type="Label" parent="TabContainer/Game/GridContainer" unique_id=1080096305]
 layout_mode = 2
 text = "Subtitles Size"
 
-[node name="SubtitlesSizeValue" type="HSlider" parent="TabContainer/Game/GridContainer"]
+[node name="SubtitlesSizeValue" type="HSlider" parent="TabContainer/Game/GridContainer" unique_id=1282485836]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -210,31 +245,33 @@ step = 0.5
 value = 14.0
 exp_edit = true
 
-[node name="NetworkLabel" type="Label" parent="TabContainer/Game/GridContainer"]
+[node name="NetworkLabel" type="Label" parent="TabContainer/Game/GridContainer" unique_id=402223214]
 layout_mode = 2
 text = "Networking"
 
-[node name="NetworkValue" type="CheckBox" parent="TabContainer/Game/GridContainer"]
+[node name="NetworkValue" type="CheckBox" parent="TabContainer/Game/GridContainer" unique_id=50155073]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="DebugLabel" type="Label" parent="TabContainer/Game/GridContainer"]
+[node name="DebugLabel" type="Label" parent="TabContainer/Game/GridContainer" unique_id=2102294920]
 layout_mode = 2
 text = "Debuging"
 
-[node name="DebugValue" type="CheckBox" parent="TabContainer/Game/GridContainer"]
+[node name="DebugValue" type="CheckBox" parent="TabContainer/Game/GridContainer" unique_id=469336744]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="Audio" type="ScrollContainer" parent="TabContainer"]
+[node name="Audio" type="ScrollContainer" parent="TabContainer" unique_id=176497133]
 visible = false
 layout_mode = 2
+focus_neighbor_bottom = NodePath("GridContainer/MasterSlider")
+focus_mode = 2
 theme_override_styles/panel = ExtResource("5_eenmm")
 metadata/_tab_index = 1
 
-[node name="GridContainer" type="GridContainer" parent="TabContainer/Audio"]
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Audio" unique_id=1129086116]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -242,7 +279,7 @@ theme_override_constants/h_separation = 35
 theme_override_constants/v_separation = 20
 columns = 3
 
-[node name="MasterLabel" type="Label" parent="TabContainer/Audio/GridContainer"]
+[node name="MasterLabel" type="Label" parent="TabContainer/Audio/GridContainer" unique_id=1019305940]
 custom_minimum_size = Vector2(0, 67.365)
 layout_mode = 2
 size_flags_vertical = 5
@@ -250,7 +287,7 @@ size_flags_stretch_ratio = 0.0
 text = "Master              "
 vertical_alignment = 1
 
-[node name="MasterSlider" type="HSlider" parent="TabContainer/Audio/GridContainer"]
+[node name="MasterSlider" type="HSlider" parent="TabContainer/Audio/GridContainer" unique_id=782443827]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 5
@@ -258,7 +295,7 @@ size_flags_stretch_ratio = 0.0
 max_value = 1.0
 step = 0.01
 
-[node name="MasterValue" type="Label" parent="TabContainer/Audio/GridContainer"]
+[node name="MasterValue" type="Label" parent="TabContainer/Audio/GridContainer" unique_id=895355481]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 5
@@ -266,11 +303,11 @@ size_flags_stretch_ratio = 0.0
 text = "100%"
 vertical_alignment = 1
 
-[node name="MusicLabel" type="Label" parent="TabContainer/Audio/GridContainer"]
+[node name="MusicLabel" type="Label" parent="TabContainer/Audio/GridContainer" unique_id=261916924]
 layout_mode = 2
 text = "Music"
 
-[node name="MusicSlider" type="HSlider" parent="TabContainer/Audio/GridContainer"]
+[node name="MusicSlider" type="HSlider" parent="TabContainer/Audio/GridContainer" unique_id=11880351]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -279,16 +316,16 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="MusicValue" type="Label" parent="TabContainer/Audio/GridContainer"]
+[node name="MusicValue" type="Label" parent="TabContainer/Audio/GridContainer" unique_id=1701435929]
 unique_name_in_owner = true
 layout_mode = 2
 text = "100%"
 
-[node name="SfxLabel" type="Label" parent="TabContainer/Audio/GridContainer"]
+[node name="SfxLabel" type="Label" parent="TabContainer/Audio/GridContainer" unique_id=388679937]
 layout_mode = 2
 text = "Sfx"
 
-[node name="SfxSlider" type="HSlider" parent="TabContainer/Audio/GridContainer"]
+[node name="SfxSlider" type="HSlider" parent="TabContainer/Audio/GridContainer" unique_id=157716827]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -297,16 +334,16 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="SfxValue" type="Label" parent="TabContainer/Audio/GridContainer"]
+[node name="SfxValue" type="Label" parent="TabContainer/Audio/GridContainer" unique_id=2125639265]
 unique_name_in_owner = true
 layout_mode = 2
 text = "100%"
 
-[node name="VoiceLabel" type="Label" parent="TabContainer/Audio/GridContainer"]
+[node name="VoiceLabel" type="Label" parent="TabContainer/Audio/GridContainer" unique_id=321675282]
 layout_mode = 2
 text = "Voice"
 
-[node name="VoiceSlider" type="HSlider" parent="TabContainer/Audio/GridContainer"]
+[node name="VoiceSlider" type="HSlider" parent="TabContainer/Audio/GridContainer" unique_id=318190213]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -315,17 +352,20 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="VoiceValue" type="Label" parent="TabContainer/Audio/GridContainer"]
+[node name="VoiceValue" type="Label" parent="TabContainer/Audio/GridContainer" unique_id=781373817]
 unique_name_in_owner = true
 layout_mode = 2
 text = "100%"
 
-[node name="Display" type="ScrollContainer" parent="TabContainer"]
+[node name="Display" type="ScrollContainer" parent="TabContainer" unique_id=300207932]
 visible = false
 layout_mode = 2
+focus_neighbor_bottom = NodePath("GridContainer/HBoxContainer/ScaleValue")
+focus_mode = 2
+theme_override_styles/panel = ExtResource("5_eenmm")
 metadata/_tab_index = 2
 
-[node name="GridContainer" type="GridContainer" parent="TabContainer/Display"]
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Display" unique_id=1566669510]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -333,20 +373,14 @@ theme_override_constants/h_separation = 35
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="Control" type="Control" parent="TabContainer/Display/GridContainer"]
-layout_mode = 2
-
-[node name="Control2" type="Control" parent="TabContainer/Display/GridContainer"]
-layout_mode = 2
-
-[node name="ScaleLabel" type="Label" parent="TabContainer/Display/GridContainer"]
+[node name="ScaleLabel" type="Label" parent="TabContainer/Display/GridContainer" unique_id=1656757300]
 layout_mode = 2
 text = "Display Scale"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Display/GridContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Display/GridContainer" unique_id=137662670]
 layout_mode = 2
 
-[node name="ScaleValue" type="HSlider" parent="TabContainer/Display/GridContainer/HBoxContainer"]
+[node name="ScaleValue" type="HSlider" parent="TabContainer/Display/GridContainer/HBoxContainer" unique_id=818279798]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -356,21 +390,21 @@ max_value = 2.0
 step = 0.05
 value = 1.0
 
-[node name="Control" type="Control" parent="TabContainer/Display/GridContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="TabContainer/Display/GridContainer/HBoxContainer" unique_id=1147250227]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="ScaleLabel" type="Label" parent="TabContainer/Display/GridContainer/HBoxContainer"]
+[node name="ScaleLabel" type="Label" parent="TabContainer/Display/GridContainer/HBoxContainer" unique_id=1487955627]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 text = "1.00"
 
-[node name="WindowModeLabel" type="Label" parent="TabContainer/Display/GridContainer"]
+[node name="WindowModeLabel" type="Label" parent="TabContainer/Display/GridContainer" unique_id=1736351886]
 layout_mode = 2
 text = "Window Mode"
 
-[node name="WindowModeValue" type="OptionButton" parent="TabContainer/Display/GridContainer"]
+[node name="WindowModeValue" type="OptionButton" parent="TabContainer/Display/GridContainer" unique_id=533181039]
 unique_name_in_owner = true
 layout_mode = 2
 selected = 0
@@ -384,11 +418,11 @@ popup/item_2/id = 4
 popup/item_3/text = "Maximized"
 popup/item_3/id = 2
 
-[node name="VSyncLabel" type="Label" parent="TabContainer/Display/GridContainer"]
+[node name="VSyncLabel" type="Label" parent="TabContainer/Display/GridContainer" unique_id=1812725389]
 layout_mode = 2
 text = "VSync"
 
-[node name="VSyncValue" type="OptionButton" parent="TabContainer/Display/GridContainer"]
+[node name="VSyncValue" type="OptionButton" parent="TabContainer/Display/GridContainer" unique_id=1881562194]
 unique_name_in_owner = true
 layout_mode = 2
 selected = 0
@@ -402,11 +436,11 @@ popup/item_2/id = 2
 popup/item_3/text = "Fast Sync"
 popup/item_3/id = 3
 
-[node name="FpsLabel" type="Label" parent="TabContainer/Display/GridContainer"]
+[node name="FpsLabel" type="Label" parent="TabContainer/Display/GridContainer" unique_id=2083712077]
 layout_mode = 2
 text = "FPS Limit"
 
-[node name="FpsButton" type="OptionButton" parent="TabContainer/Display/GridContainer"]
+[node name="FpsButton" type="OptionButton" parent="TabContainer/Display/GridContainer" unique_id=2048585323]
 unique_name_in_owner = true
 layout_mode = 2
 selected = 0
@@ -424,11 +458,11 @@ popup/item_4/id = 165
 popup/item_5/text = "240"
 popup/item_5/id = 240
 
-[node name="PhysLabel" type="Label" parent="TabContainer/Display/GridContainer"]
+[node name="PhysLabel" type="Label" parent="TabContainer/Display/GridContainer" unique_id=1216442086]
 layout_mode = 2
 text = "Phys. Ticks"
 
-[node name="PhysButton" type="OptionButton" parent="TabContainer/Display/GridContainer"]
+[node name="PhysButton" type="OptionButton" parent="TabContainer/Display/GridContainer" unique_id=2108306037]
 unique_name_in_owner = true
 layout_mode = 2
 selected = 0
@@ -446,13 +480,15 @@ popup/item_4/id = 165
 popup/item_5/text = "240"
 popup/item_5/id = 240
 
-[node name="Graphics" type="ScrollContainer" parent="TabContainer"]
+[node name="Graphics" type="ScrollContainer" parent="TabContainer" unique_id=448869356]
 visible = false
 layout_mode = 2
+focus_neighbor_bottom = NodePath("GridContainer/AnisotropicFilteringButton")
+focus_mode = 2
 theme_override_styles/panel = ExtResource("5_eenmm")
 metadata/_tab_index = 3
 
-[node name="GridContainer" type="GridContainer" parent="TabContainer/Graphics"]
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Graphics" unique_id=949976874]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -460,11 +496,11 @@ theme_override_constants/h_separation = 35
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="AnisotropicFilteringLabel" type="Label" parent="TabContainer/Graphics/GridContainer"]
+[node name="AnisotropicFilteringLabel" type="Label" parent="TabContainer/Graphics/GridContainer" unique_id=1116611855]
 layout_mode = 2
 text = "Anisotropic Filtering"
 
-[node name="AnisotropicFilteringButton" type="OptionButton" parent="TabContainer/Graphics/GridContainer"]
+[node name="AnisotropicFilteringButton" type="OptionButton" parent="TabContainer/Graphics/GridContainer" unique_id=300729887]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
@@ -483,11 +519,11 @@ popup/item_3/id = 3
 popup/item_4/text = "16x"
 popup/item_4/id = 4
 
-[node name="ShadowsLabel" type="Label" parent="TabContainer/Graphics/GridContainer"]
+[node name="ShadowsLabel" type="Label" parent="TabContainer/Graphics/GridContainer" unique_id=1811659013]
 layout_mode = 2
 text = "Shadows"
 
-[node name="ShadowsButton" type="OptionButton" parent="TabContainer/Graphics/GridContainer"]
+[node name="ShadowsButton" type="OptionButton" parent="TabContainer/Graphics/GridContainer" unique_id=1710784681]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -506,83 +542,270 @@ popup/item_4/id = 8192
 popup/item_5/text = "Ultra"
 popup/item_5/id = 16384
 
-[node name="GammaLabel" type="Label" parent="TabContainer/Graphics/GridContainer"]
+[node name="GammaLabel" type="Label" parent="TabContainer/Graphics/GridContainer" unique_id=1451981789]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Gamma"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Graphics/GridContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Graphics/GridContainer" unique_id=511788185]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="GammaValue" type="HSlider" parent="TabContainer/Graphics/GridContainer/HBoxContainer"]
+[node name="GammaValue" type="HSlider" parent="TabContainer/Graphics/GridContainer/HBoxContainer" unique_id=1746409365]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 min_value = 0.05
-max_value = 3.0
+max_value = 2.0
 step = 0.05
 value = 1.0
 
-[node name="Control" type="Control" parent="TabContainer/Graphics/GridContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="TabContainer/Graphics/GridContainer/HBoxContainer" unique_id=740142081]
 layout_mode = 2
 
-[node name="GammaLabel" type="Label" parent="TabContainer/Graphics/GridContainer/HBoxContainer"]
+[node name="GammaLabel" type="Label" parent="TabContainer/Graphics/GridContainer/HBoxContainer" unique_id=1753796535]
 unique_name_in_owner = true
 layout_mode = 2
 text = "1.00"
 
-[node name="Control2" type="Control" parent="TabContainer/Graphics/GridContainer/HBoxContainer"]
+[node name="Control2" type="Control" parent="TabContainer/Graphics/GridContainer/HBoxContainer" unique_id=1117041905]
 layout_mode = 2
 
-[node name="SSAOLabel" type="Label" parent="TabContainer/Graphics/GridContainer"]
+[node name="SSAOLabel" type="Label" parent="TabContainer/Graphics/GridContainer" unique_id=1897980672]
 layout_mode = 2
 text = "SSAO"
 
-[node name="SSAOValue" type="CheckBox" parent="TabContainer/Graphics/GridContainer"]
+[node name="SSAOValue" type="CheckBox" parent="TabContainer/Graphics/GridContainer" unique_id=2003590493]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="SSILLabel" type="Label" parent="TabContainer/Graphics/GridContainer"]
+[node name="SSILLabel" type="Label" parent="TabContainer/Graphics/GridContainer" unique_id=751520705]
 layout_mode = 2
 text = "SSIL"
 
-[node name="SSILValue" type="CheckBox" parent="TabContainer/Graphics/GridContainer"]
+[node name="SSILValue" type="CheckBox" parent="TabContainer/Graphics/GridContainer" unique_id=1103598361]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="GlowLabel" type="Label" parent="TabContainer/Graphics/GridContainer"]
+[node name="GlowLabel" type="Label" parent="TabContainer/Graphics/GridContainer" unique_id=1306808293]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Glow"
 
-[node name="GlowValue" type="CheckBox" parent="TabContainer/Graphics/GridContainer"]
+[node name="GlowValue" type="CheckBox" parent="TabContainer/Graphics/GridContainer" unique_id=913460604]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 button_pressed = true
 
-[node name="Keybinds" type="ScrollContainer" parent="TabContainer"]
+[node name="Keybinds" type="ScrollContainer" parent="TabContainer" unique_id=1960501074]
+visible = false
 layout_mode = 2
+focus_neighbor_bottom = NodePath("Keybinds/Control")
+focus_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ryoa4")
 metadata/_tab_index = 4
 
-[node name="Keybinds" type="VBoxContainer" parent="TabContainer/Keybinds"]
+[node name="Keybinds" type="VBoxContainer" parent="TabContainer/Keybinds" unique_id=2000256653]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 script = ExtResource("7_ryoa4")
 
-[node name="Controller" type="ScrollContainer" parent="TabContainer"]
+[node name="Control" type="Control" parent="TabContainer/Keybinds/Keybinds" unique_id=560922874]
 visible = false
 layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=700531714]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Attack"
+
+[node name="Label2" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=1947252647]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Alternative"
+
+[node name="Label3" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=270861144]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Strafe Left"
+
+[node name="Label4" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=1045271260]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Strafe Right"
+
+[node name="Label5" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=1660177759]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Forward"
+
+[node name="Label6" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=898126853]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Backward"
+
+[node name="Label7" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=1919160852]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Interract"
+
+[node name="Label8" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=819136951]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Jump"
+
+[node name="Label9" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=1127824134]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Walk"
+
+[node name="Label10" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=328633611]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Crouch"
+
+[node name="Label11" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=992713292]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Zoom"
+
+[node name="Label12" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=581811348]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Zoom In"
+
+[node name="Label13" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=1347276588]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Zoom Out"
+
+[node name="Label14" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=404640709]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Flashlight"
+
+[node name="Label15" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=1067898741]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Quicksave"
+
+[node name="Label16" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=709219580]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Quickload"
+
+[node name="Label17" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=787052709]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Fullscreen"
+
+[node name="Label18" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=1486927815]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Menu"
+
+[node name="Label19" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=1675188873]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Controller Left"
+
+[node name="Label20" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=127849237]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Controller Right"
+
+[node name="Label21" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=1698029052]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Controller Up"
+
+[node name="Label22" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=1784002827]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Controller Down"
+
+[node name="Label23" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=1377442124]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+
+[node name="Label24" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=457292125]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Run"
+
+[node name="Label25" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=13859258]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Reload"
+
+[node name="Label26" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=83677927]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Movement"
+
+[node name="Label27" type="Label" parent="TabContainer/Keybinds/Keybinds/Control" unique_id=1053533717]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 25.0
+text = "Camera"
+
+[node name="Controller" type="ScrollContainer" parent="TabContainer" unique_id=1618059154]
+visible = false
+layout_mode = 2
+focus_neighbor_left = NodePath("../Keybinds")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath("../Game")
+focus_neighbor_bottom = NodePath("VBoxContainer/ScrollContainer2/GridContainer/VibrationValue")
+focus_next = NodePath("../Game")
+focus_previous = NodePath("../Keybinds")
+focus_mode = 2
 metadata/_tab_index = 5
 
-[node name="GridContainer" type="GridContainer" parent="TabContainer/Controller"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Controller" unique_id=150613803]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="TabContainer/Controller/VBoxContainer" unique_id=1964434766]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+theme_override_styles/panel = ExtResource("5_eenmm")
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Controller/VBoxContainer/ScrollContainer2" unique_id=1008931655]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -590,12 +813,12 @@ theme_override_constants/h_separation = 35
 theme_override_constants/v_separation = 20
 columns = 2
 
-[node name="ControllerTypeLabel" type="Label" parent="TabContainer/Controller/GridContainer"]
+[node name="ControllerTypeLabel" type="Label" parent="TabContainer/Controller/VBoxContainer/ScrollContainer2/GridContainer" unique_id=1078786883]
 visible = false
 layout_mode = 2
 text = "Controller Type"
 
-[node name="ControllerTypeButton" type="OptionButton" parent="TabContainer/Controller/GridContainer"]
+[node name="ControllerTypeButton" type="OptionButton" parent="TabContainer/Controller/VBoxContainer/ScrollContainer2/GridContainer" unique_id=340977776]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -610,25 +833,25 @@ popup/item_1/id = 1
 popup/item_2/text = "Symbols"
 popup/item_2/id = 2
 
-[node name="VibrationLabel" type="Label" parent="TabContainer/Controller/GridContainer"]
+[node name="VibrationLabel" type="Label" parent="TabContainer/Controller/VBoxContainer/ScrollContainer2/GridContainer" unique_id=1119971786]
 layout_mode = 2
 text = "Vibration"
 
-[node name="VibrationValue" type="CheckBox" parent="TabContainer/Controller/GridContainer"]
+[node name="VibrationValue" type="CheckBox" parent="TabContainer/Controller/VBoxContainer/ScrollContainer2/GridContainer" unique_id=1448450417]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
 
-[node name="DeadzoneLabel" type="Label" parent="TabContainer/Controller/GridContainer"]
+[node name="DeadzoneLabel" type="Label" parent="TabContainer/Controller/VBoxContainer/ScrollContainer2/GridContainer" unique_id=1806996859]
 layout_mode = 2
 text = "Deadzone"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Controller/GridContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Controller/VBoxContainer/ScrollContainer2/GridContainer" unique_id=1036448502]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 20
 
-[node name="DeadzoneValue" type="HSlider" parent="TabContainer/Controller/GridContainer/HBoxContainer"]
+[node name="DeadzoneValue" type="HSlider" parent="TabContainer/Controller/VBoxContainer/ScrollContainer2/GridContainer/HBoxContainer" unique_id=1009625573]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -636,13 +859,278 @@ size_flags_vertical = 1
 max_value = 1.0
 step = 0.01
 
-[node name="Control" type="Control" parent="TabContainer/Controller/GridContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="TabContainer/Controller/VBoxContainer/ScrollContainer2/GridContainer/HBoxContainer" unique_id=1265451563]
 layout_mode = 2
 
-[node name="DeadzoneLabel" type="Label" parent="TabContainer/Controller/GridContainer/HBoxContainer"]
+[node name="DeadzoneLabel" type="Label" parent="TabContainer/Controller/VBoxContainer/ScrollContainer2/GridContainer/HBoxContainer" unique_id=1399919799]
 unique_name_in_owner = true
 layout_mode = 2
 text = "0.00"
 
-[node name="Control2" type="Control" parent="TabContainer/Controller/GridContainer/HBoxContainer"]
+[node name="Control2" type="Control" parent="TabContainer/Controller/VBoxContainer/ScrollContainer2/GridContainer/HBoxContainer" unique_id=882817991]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Controller/VBoxContainer" unique_id=245332614]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_fqhk4")
+vertical_scroll_mode = 4
+
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Controller/VBoxContainer/ScrollContainer" unique_id=1391019106]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 20
+columns = 9
+
+[node name="Label" type="Label" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=264631828]
+layout_mode = 2
+text = "Movement"
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=803352060]
+layout_mode = 2
+texture = ExtResource("9_tymtl")
+stretch_mode = 5
+
+[node name="Control3" type="Control" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=2107478124]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=690084603]
+layout_mode = 2
+text = "Camera"
+
+[node name="TextureRect2" type="TextureRect" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=41531726]
+layout_mode = 2
+texture = ExtResource("10_mcwst")
+stretch_mode = 5
+
+[node name="Control2" type="Control" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=2130598649]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label3" type="Label" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=1488838984]
+layout_mode = 2
+text = "Interract"
+
+[node name="TextureRect3" type="TextureRect" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=1878235230]
+layout_mode = 2
+texture = ExtResource("11_2wl1o")
+stretch_mode = 5
+
+[node name="Control6" type="Control" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=2086790934]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label4" type="Label" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=693341884]
+layout_mode = 2
+text = "Crouch"
+
+[node name="HBoxContainer3" type="TextureRect" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=1094483466]
+layout_mode = 2
+texture = ExtResource("12_2ssnc")
+stretch_mode = 5
+
+[node name="Control4" type="Control" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=744090725]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=1867065702]
+layout_mode = 2
+text = "Jump"
+
+[node name="TextureRect4" type="TextureRect" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=1793757309]
+layout_mode = 2
+texture = ExtResource("13_q1ftd")
+stretch_mode = 5
+
+[node name="Control5" type="Control" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=874703644]
+layout_mode = 2
+
+[node name="Label6" type="Label" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=1568162879]
+layout_mode = 2
+text = "Reload"
+
+[node name="TextureRect5" type="TextureRect" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=1368642268]
+layout_mode = 2
+texture = ExtResource("14_2ssnc")
+stretch_mode = 5
+
+[node name="Control9" type="Control" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=1105335220]
+layout_mode = 2
+
+[node name="Label7" type="Label" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=1581121472]
+layout_mode = 2
+text = "Run"
+
+[node name="HBoxContainer" type="GridContainer" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=1776545392]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer" unique_id=964274812]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("15_q1ftd")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer" unique_id=1172301823]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("16_fqhk4")
+expand_mode = 4
+
+[node name="TextureRect3" type="TextureRect" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer" unique_id=1199954343]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("17_fqhk4")
+expand_mode = 4
+
+[node name="TextureRect4" type="TextureRect" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer" unique_id=1958286387]
+layout_mode = 2
+texture = ExtResource("18_d4swc")
+expand_mode = 4
+
+[node name="Control7" type="Control" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=1110303133]
+layout_mode = 2
+
+[node name="Label8" type="Label" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=1169682627]
+layout_mode = 2
+text = "Falshlight"
+
+[node name="TextureRect6" type="GridContainer" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=1042485980]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+columns = 2
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer/TextureRect6" unique_id=811303172]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("19_heosg")
+expand_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer/TextureRect6" unique_id=1229234229]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("20_2se06")
+expand_mode = 5
+
+[node name="Control8" type="Control" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=1771559852]
+layout_mode = 2
+
+[node name="Label9" type="Label" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=1476983560]
+layout_mode = 2
+text = "Zoom"
+
+[node name="TextureRect8" type="GridContainer" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=1952528237]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+columns = 2
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer/TextureRect8" unique_id=1803578496]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("21_722tm")
+expand_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer/TextureRect8" unique_id=532355002]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("22_f83t1")
+expand_mode = 5
+
+[node name="Control13" type="Control" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=203261039]
+layout_mode = 2
+
+[node name="Label11" type="Label" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=475231185]
+layout_mode = 2
+text = "Attack"
+
+[node name="TextureRect7" type="GridContainer" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=679362583]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+columns = 2
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer/TextureRect7" unique_id=1254530872]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("23_56ncf")
+expand_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer/TextureRect7" unique_id=2016213298]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("24_8gm2d")
+expand_mode = 5
+
+[node name="Control10" type="Control" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=1086866723]
+layout_mode = 2
+
+[node name="Label12" type="Label" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=1097329367]
+layout_mode = 2
+text = "Alternative"
+
+[node name="TextureRect9" type="GridContainer" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=719367498]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+columns = 2
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer/TextureRect9" unique_id=551752471]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("25_c5jr0")
+expand_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer/TextureRect9" unique_id=629471023]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("26_kjjho")
+expand_mode = 5
+
+[node name="Control11" type="Control" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=635108676]
+layout_mode = 2
+
+[node name="Label10" type="Label" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=1159763089]
+layout_mode = 2
+text = "Menu"
+
+[node name="HBoxContainer2" type="GridContainer" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=175197939]
+layout_mode = 2
+size_flags_vertical = 6
+columns = 2
+
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer2" unique_id=962840358]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("27_ljqoi")
+expand_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer2" unique_id=898260922]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("28_xhbxp")
+expand_mode = 4
+
+[node name="TextureRect3" type="TextureRect" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer2" unique_id=1487121016]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("29_ocbse")
+expand_mode = 4
+
+[node name="TextureRect4" type="TextureRect" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer2" unique_id=1913923655]
+layout_mode = 2
+texture = ExtResource("30_hldko")
+expand_mode = 4
+
+[node name="Control12" type="Control" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=170387148]
 layout_mode = 2

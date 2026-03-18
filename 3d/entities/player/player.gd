@@ -1,6 +1,7 @@
 class_name Player extends BasePlayer
 
 #Save
+
 @export var saved_grabbed_object : RigidBody3D = null
 @export var saved_flashlight : bool = false
 @export var saved_crouching : bool = false
@@ -21,9 +22,14 @@ class_name Player extends BasePlayer
 @onready var croucher : CroucherComponent = %Croucher
 @onready var flashlight : FlashlightComponent = %Flashlight
 @onready var camera : PlayerCameraComponent = %Camera
+@onready var side_camera : PlayerCameraComponent = %SideCamera
 @onready var remote_camera : RemoteTransform3D = %RemoteCamera
 @onready var safe_area : Area3D = %SafeArea
 @onready var aim : Node3D = %Aim
+@onready var motion_vector_field : MeshInstance3D = %MotionVectorField
+
+var omega : Vector2 = Vector2.ZERO
+var active_effect : float = 0.0
 
 
 func _ready() -> void:
@@ -32,12 +38,32 @@ func _ready() -> void:
 	inventory_item = gravity_device
 	camera.current = true
 	self.load_save()
+	(motion_vector_field.get_active_material(0) as ShaderMaterial)\
+		.set_shader_parameter(&"PREVIOUS_TEXTURE", %SubViewport.get_texture())
 
 
 func _process(delta:float) -> void:
 	aim.rotation.x = lerp_angle(aim.rotation.x, head.rotation.x, delta * 16)
 	aim.rotation.y = lerp_angle(aim.rotation.y, head.rotation.y, delta * 16)
 	_hadle_rotation(delta)
+	#if Time.get_ticks_msec() % 1000: print(head.global_position, head.position)
+
+
+func _physics_process(delta:float) -> void:
+	super(delta)
+	set_datamosh_shader(delta)
+
+
+func set_datamosh_shader(delta:float) -> void:
+	var sssp := (motion_vector_field.get_active_material(0) as ShaderMaterial)\
+	.set_shader_parameter.bind()
+	var velocity_threshold := float(velocity_length > 6.0)
+	active_effect = lerp(active_effect, velocity_threshold, (delta * 0.25) * (1 + velocity_threshold + 76*float(camera.fov == camera.CAMERA_ZOOMED_FOV)))
+	sssp.call(&"active", active_effect)
+	#print(active_effect)
+	var new_omega := camera.get_camera_angular_velocity_2d(delta)
+	omega = lerp(omega, new_omega, delta * 0.03)
+	sssp.call(&"omega", omega)
 
 
 func load_save() -> void:
@@ -67,7 +93,9 @@ func _input(event:InputEvent) -> void:
 func _hadle_rotation(delta:float) -> void:
 	if not is_multiplayer_authority(): return
 	if new_cam_rotation == Vector2.ZERO:
-		new_cam_rotation = Input.get_vector("j_left", "j_right", "j_up", "j_down") * gamepad_sensitivity
+		new_cam_rotation = Input.get_vector(
+			"Controller Left", "Controller Right", "Controller Up", "Controller Down"
+		) * gamepad_sensitivity
 		if new_cam_rotation.length() > gamepad_sensitivity_accel:
 			new_cam_rotation *= exp(new_cam_rotation.length() - gamepad_sensitivity_accel) / 0.6 + 1
 		new_cam_rotation *=  delta * 230

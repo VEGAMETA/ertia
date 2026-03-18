@@ -19,4 +19,4 @@ func _physics_process(delta: float) -> void:
 	if not player: return
 	set_bubble_offset()
 	bubble.position = bubble.position.lerp(offset_v2, delta * 16)
-	#((grain.texture as NoiseTexture2D).noise as FastNoiseLite).seed += 1
+	((grain.texture as NoiseTexture2D).noise as FastNoiseLite).seed += 1

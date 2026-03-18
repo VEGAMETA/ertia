@@ -246,6 +246,106 @@ msgid "Keybinds"
 msgstr ""
 
 #: ui/settings/settings.tscn
+msgid "Attack"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Alternative"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Strafe Left"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Strafe Right"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Forward"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Backward"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Interract"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Jump"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Walk"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Crouch"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Zoom"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Zoom In"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Zoom Out"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Flashlight"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Quicksave"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Quickload"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Menu"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Controller Left"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Controller Right"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Controller Up"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Controller Down"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Run"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Reload"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Movement"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Camera"
+msgstr ""
+
+#: ui/settings/settings.tscn
 msgid "Controller"
 msgstr ""
 
@@ -267,6 +367,14 @@ msgstr ""
 
 #: ui/settings/settings.tscn
 msgid "Deadzone"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "0.00"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Falshlight"
 msgstr ""
 
 #: ui/menu/main_menu.tscn

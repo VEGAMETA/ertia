@@ -5,6 +5,7 @@ signal uncrouched
 
 @export var wish_crouch : bool = false
 @export var wish_uncrouch : bool = true
+@export var wish_uncrouch_natural : bool = false
 @export var crouching : bool = false
 @onready var player : Player = owner
 
@@ -37,6 +38,7 @@ func _input(_event:InputEvent) -> void:
 	if not owner.is_multiplayer_authority(): return
 	if crouching: wish_uncrouch = not Input.is_action_pressed("Crouch")
 	else: wish_crouch = Input.is_action_pressed("Crouch")
+	if wish_uncrouch_natural: wish_uncrouch = true
 
 
 func _physics_process(_delta:float) -> void:
@@ -45,17 +47,18 @@ func _physics_process(_delta:float) -> void:
 	crouch()
 	uncrouch()
 	_set_walk()
+	#if Time.get_ticks_msec() % 5000: print(player.head.position.y)
 
 
-func crouch(gravitating := false, not_saved := true) -> void:
+func crouch(gravitating := false, not_saved := true, vector := Vector3.ZERO) -> void:
 	if not wish_crouch: return
-	if gravitating: player.head.position = player.collision_crouch.position
+	if gravitating: player.head.position += vector
 	crouched.emit(not_saved)
 
 
 func uncrouch() -> void:
 	if not wish_uncrouch or wish_crouch: return
-	if not player.is_on_floor() or player.shape_stand.is_colliding(): return
+	if not player.is_on_floor() or player.shape_stand.is_colliding(): return ### not player.is_on_floor() or
 	uncrouched.emit()
 
 
@@ -76,7 +79,7 @@ func crouch_in_air() -> void:
 		player.collision_legs.position.y = -1.25
 		_on_uncrouch()
 
-
+## TODO: rewrite all of the croucher system, y is not applicable
 func restore_crouch() -> void:
 	if player.collision_crouch.position.y != 0.0: return
 	player.collision_crouch.position.y = -1.0
@@ -99,3 +102,4 @@ func _on_uncrouch() -> void:
 	player.collision_stand.disabled = false
 	crouching = false
 	wish_uncrouch = false
+	wish_uncrouch_natural = false

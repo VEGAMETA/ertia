@@ -74,22 +74,22 @@ func initialize() -> void:
 
 func set_holo() -> void:
 	shader_mat_holo.shader = shader_holo
-	shader_mat_holo.set_shader_parameter("line_color", col + highlighter)
-	shader_mat_holo.set_shader_parameter("line_width", 0.002)
-	shader_mat_holo.set_shader_parameter("line_blur", 0.4)
-	shader_mat_holo.set_shader_parameter("straight_lines", false)
-	shader_mat_holo.set_shader_parameter("line_speed", 0.003)
-	shader_mat_holo.set_shader_parameter("interrupt_speed", 0.375)
-	shader_mat_holo.set_shader_parameter("glow_color", col * 0.5 + highlighter)
+	shader_mat_holo.set_shader_parameter(&"line_color", col + highlighter)
+	shader_mat_holo.set_shader_parameter(&"line_width", 0.002)
+	shader_mat_holo.set_shader_parameter(&"line_blur", 0.4)
+	shader_mat_holo.set_shader_parameter(&"straight_lines", false)
+	shader_mat_holo.set_shader_parameter(&"line_speed", 0.003)
+	shader_mat_holo.set_shader_parameter(&"interrupt_speed", 0.375)
+	shader_mat_holo.set_shader_parameter(&"glow_color", col * 0.5 + highlighter)
 	material.next_pass = shader_mat_holo
 
 
 func set_color() -> void:
 	col = _gravity_direction.color
-	material.set_shader_parameter("col", _gravity_direction.rotation_vector + highlighter_v3)
-	#material.set_shader_parameter("alpha", 0.1)
-	shader_mat_holo.set_shader_parameter("line_color", col + highlighter)
-	shader_mat_holo.set_shader_parameter("glow_color", col * 0.5 + highlighter)
+	material.set_shader_parameter(&"col", _gravity_direction.rotation_vector + highlighter_v3)
+	#material.set_shader_parameter(&"alpha", 0.1)
+	shader_mat_holo.set_shader_parameter(&"line_color", col + highlighter)
+	shader_mat_holo.set_shader_parameter(&"glow_color", col * 0.5 + highlighter)
 
 
 func change_gravity(value: Vector3) -> void:

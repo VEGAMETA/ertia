@@ -95,7 +95,7 @@ func _ready() -> void:
 
 func _input(event:InputEvent) -> void:
 	if not is_multiplayer_authority(): return
-	input_dir = Input.get_vector("StrafeLeft", "StrafeRight", "Forward", "Backward")
+	input_dir = Input.get_vector("Strafe Left", "Strafe Right", "Forward", "Backward")
 	if event.is_action_released("Walk"): walking = false
 	if event.is_action_pressed("Walk"): walking = true
 	running = Input.is_action_pressed("Run")

@@ -17,6 +17,7 @@ func set_syncronized() -> void:
 func _process(delta:float) -> void:
 	rotation_multiplyer = lerpf(rotation_multiplyer, initial_rotation_multiplyer, delta * rotation_multiplyer)
 	new_rot = lerpf(rotation.y, rotation.y + PI, delta * rotation_multiplyer)
+	
 	if is_nan(new_rot) or is_inf(new_rot): return
 	rotation.y = new_rot
 

@@ -12,6 +12,11 @@ var fov_tween : Tween
 var position_tween : Tween
 var hud_tween : Tween
 var trasns_time : float = 0.0
+
+var q_prev : Quaternion = Quaternion()
+var omega_smoothed : Vector3 = Vector3.ZERO
+var previous_position := Vector3()
+
 @export var zoomed : bool = false
 
 @onready var player : BasePlayer = owner
@@ -19,6 +24,7 @@ var trasns_time : float = 0.0
 func _ready() -> void:
 	fov = CAMERA_DEFAULT_FOV
 	Settings.fov_changed.connect(func (x:float)->void: CAMERA_DEFAULT_FOV = x; fov = x)
+	call_deferred("set", "previous_position", global_position)
 
 func _notification(what:int) -> void:
 	match what:
@@ -72,3 +78,18 @@ func _on_croucher_crouched(not_saved:bool) -> void:
 func _on_croucher_uncrouched() -> void:
 	if position != player.head.position:
 		play_position_animation(Vector3.ZERO, 1 - player.head.position.y)
+
+func get_camera_angular_velocity_2d(delta:float) -> Vector2:
+	var q_delta := Quaternion(global_basis) * q_prev.inverse()
+	q_prev = Quaternion(global_basis)
+	if q_delta.w < 0.0:
+		q_delta = -q_delta
+	var angle := 2.0 * acos(clamp(q_delta.w, -1.0, 1.0))
+	var alpha := 1.0 - exp(-delta/0.05)
+	if angle > 1e-6:
+		var axis := Vector3(q_delta.x, q_delta.y, q_delta.z).normalized()
+		var omega := axis * (angle / delta)
+		omega_smoothed = omega_smoothed.lerp(omega, alpha)
+	else:
+		omega_smoothed = omega_smoothed.lerp(Vector3.ZERO, alpha)
+	return Vector2(omega_smoothed.dot(global_basis.y), omega_smoothed.dot(global_basis.x))

@@ -2,7 +2,7 @@ class_name PlayerDebug extends Node
 
 @onready var player : BasePlayer = owner
 
-var debug_view_list : Array[int] = [1, 3, 4, 5, 26, 0]
+var debug_view_list : Array[int] = [1, 3, 4, 5, 26, 25, 0]
 
 func _on_debug(function:Callable, args:Array=[]) -> Variant:
 	return function.callv(args) if Settings.debug else null

@@ -250,6 +250,106 @@ msgid "Keybinds"
 msgstr "Назн. Клавиш"
 
 #: ui/settings/settings.tscn
+msgid "Attack"
+msgstr "Атака"
+
+#: ui/settings/settings.tscn
+msgid "Alternative"
+msgstr "Доп."
+
+#: ui/settings/settings.tscn
+msgid "Strafe Left"
+msgstr "Влево"
+
+#: ui/settings/settings.tscn
+msgid "Strafe Right"
+msgstr "Вправо"
+
+#: ui/settings/settings.tscn
+msgid "Forward"
+msgstr "Вперёд"
+
+#: ui/settings/settings.tscn
+msgid "Backward"
+msgstr "Назад"
+
+#: ui/settings/settings.tscn
+msgid "Interract"
+msgstr "Взаимод-е."
+
+#: ui/settings/settings.tscn
+msgid "Jump"
+msgstr "Прыжок"
+
+#: ui/settings/settings.tscn
+msgid "Walk"
+msgstr "Идти"
+
+#: ui/settings/settings.tscn
+msgid "Crouch"
+msgstr "Пригнуться"
+
+#: ui/settings/settings.tscn
+msgid "Zoom"
+msgstr "Увеличить"
+
+#: ui/settings/settings.tscn
+msgid "Zoom In"
+msgstr "Приблизить"
+
+#: ui/settings/settings.tscn
+msgid "Zoom Out"
+msgstr "Отдалить"
+
+#: ui/settings/settings.tscn
+msgid "Flashlight"
+msgstr "Фонарик"
+
+#: ui/settings/settings.tscn
+msgid "Quicksave"
+msgstr "Быстрое Сохранение"
+
+#: ui/settings/settings.tscn
+msgid "Quickload"
+msgstr "Быстрая Загрузка"
+
+#: ui/settings/settings.tscn
+msgid "Menu"
+msgstr "Меню"
+
+#: ui/settings/settings.tscn
+msgid "Controller Left"
+msgstr "Контроллер Влево"
+
+#: ui/settings/settings.tscn
+msgid "Controller Right"
+msgstr "Контроллер Вправо"
+
+#: ui/settings/settings.tscn
+msgid "Controller Up"
+msgstr "Контроллер Вверх"
+
+#: ui/settings/settings.tscn
+msgid "Controller Down"
+msgstr "Контроллер Вниз"
+
+#: ui/settings/settings.tscn
+msgid "Run"
+msgstr "Бежать"
+
+#: ui/settings/settings.tscn
+msgid "Reload"
+msgstr "Перезарядка"
+
+#: ui/settings/settings.tscn
+msgid "Movement"
+msgstr "Передв-е."
+
+#: ui/settings/settings.tscn
+msgid "Camera"
+msgstr "Камера"
+
+#: ui/settings/settings.tscn
 msgid "Controller"
 msgstr "Контроллер"
 
@@ -272,6 +372,14 @@ msgstr "Вибрация"
 #: ui/settings/settings.tscn
 msgid "Deadzone"
 msgstr "Мёртвая Зона"
+
+#: ui/settings/settings.tscn
+msgid "0.00"
+msgstr ""
+
+#: ui/settings/settings.tscn
+msgid "Falshlight"
+msgstr "Фонарик"
 
 #: ui/menu/main_menu.tscn
 msgid "Continue"

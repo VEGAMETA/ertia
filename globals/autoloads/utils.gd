@@ -67,7 +67,7 @@ func kill(peer_id:int=multiplayer.get_unique_id()) -> void:
 func get_inputs() -> Dictionary:
 	var inputs := {}
 	for action in InputMap.get_actions():
-		if action.contains("_"): continue
+		if action.contains("_") or action.contains("Controller"): continue
 		var keys := InputMap.action_get_events(action).filter(func (x:InputEvent) -> bool: return x is InputEventKey or x is InputEventMouseButton)
 		if not keys.is_empty() and keys[0] is InputEventKey and keys[0].get_physical_keycode() == KEY_ESCAPE: continue
 		inputs.get_or_add(action, keys)
