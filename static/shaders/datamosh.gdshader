@@ -18,7 +18,7 @@ vec2 get_motion_vector(float depth, vec2 uv) {
 }
 
 float get_pulse(float time, float phase_l, float derive_l){
-	return (12.0 + cos(PI * clamp((abs(mod(time, phase_l) - phase_l * 0.5) - phase_l * 0.5 + derive_l) / derive_l, 0.0, 1.0))) * 0.0769230769;
+	return (31.0 + cos(PI * clamp((abs(mod(time, phase_l) - phase_l * 0.5) - phase_l * 0.5 + derive_l) / derive_l, 0.0, 1.0))) * 0.03125;
 }
 
 void fragment() {
@@ -34,7 +34,7 @@ void fragment() {
 	
 	// test 3
 	vec2 mvuv = vec2(SCREEN_UV.x-mot.r,SCREEN_UV.y-mot.g);
-	float power = active * 0.96 * get_pulse(TIME, 4.0, 1.0);
+	float power = active * 0.99 * get_pulse(TIME, 4.0, 1.0);
 	ALBEDO = col;
 	ALBEDO = mix(ALBEDO, texture(PREVIOUS_TEXTURE, mvuv).rgb, power);
 	//ALBEDO = pow(ALBEDO, vec3(1.0 + power * 0.03));
