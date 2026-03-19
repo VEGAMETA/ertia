@@ -128,8 +128,7 @@ func set_audio() -> void:
 	voice_slider.set_value(AudioServer.get_bus_volume_linear(AudioServer.get_bus_index(&"Voice")))
 
 
-func set_keybinds() -> void:
-	pass
+func set_keybinds() -> void: pass
 
 
 func set_controller() -> void:

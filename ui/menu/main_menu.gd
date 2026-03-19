@@ -2,7 +2,6 @@ class_name MainMenu extends Control
 
 var shown := false
 
-
 var settings_packed : PackedScene = preload("uid://cu0e75nu504kb")
 var settings : SettingsWindow
 
@@ -26,6 +25,7 @@ var settings : SettingsWindow
 @onready var hand : Node3D = %Hand
 @onready var shadow: TextureRect = $Shadow
 @onready var network: VBoxContainer = %Network
+
 
 func _ready() -> void:
 	quit_button.pressed.connect(Globals.quit)
@@ -55,6 +55,9 @@ func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_VISIBILITY_CHANGED:
 			set_physics_process(visible)
+			if continue_button and continue_button.is_visible(): 
+				continue_button.grab_focus.call_deferred()
+			elif new_game_button: new_game_button.grab_focus.call_deferred()
 
 
 func _physics_process(delta: float) -> void:
@@ -90,7 +93,7 @@ func toggle_menuing() -> void:
 	new_game_button.set_focus_next(serve_button.get_path() if network.is_visible() else options_button.get_path())
 	new_game_button.set_focus_neighbor(SIDE_LEFT, serve_button.get_path() if network.is_visible() else options_button.get_path())
 	new_game_button.set_focus_neighbor(SIDE_BOTTOM, serve_button.get_path() if network.is_visible() else options_button.get_path())
-
+	
 	options_button.set_focus_previous(disconnect_button.get_path() if network.is_visible() else new_game_button.get_path())
 	options_button.set_focus_neighbor(SIDE_RIGHT, disconnect_button.get_path() if network.is_visible() else new_game_button.get_path())
 	options_button.set_focus_neighbor(SIDE_TOP, disconnect_button.get_path() if network.is_visible() else new_game_button.get_path())

@@ -137,7 +137,7 @@ func set_vsync(idx:int, vsync_button:OptionButton) -> void:
 func set_window_mode(idx:int, window_mode_button:OptionButton) -> void: 
 	DisplayServer.window_set_mode(window_mode_button.get_item_id(idx))
 	current_window_mode = DisplayServer.window_get_mode(0)
-	Cursor.set_cursor()			
+	Cursor.set_cursor()
 
 
 func set_max_fps(idx:int, fps_button:OptionButton) -> void:

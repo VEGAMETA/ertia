@@ -71,7 +71,6 @@ func initialize() -> void:
 	set_color()
 
 
-
 func set_holo() -> void:
 	shader_mat_holo.shader = shader_holo
 	shader_mat_holo.set_shader_parameter(&"line_color", col + highlighter)

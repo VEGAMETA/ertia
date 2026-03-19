@@ -40,8 +40,10 @@ var vibration_timer : Timer = Timer.new()
 
 var tween: Tween
 
+
 func _ready() -> void:
 	_initialize()
+
 
 func _initialize() -> void:
 	if player.gravity_vector != Vector3.ZERO:
@@ -63,15 +65,18 @@ func attack() -> void:
 	if Input.is_action_pressed("Alternative"): return
 	change_gravity.rpc(get_direction().rotation_vector)
 
+
 func _physics_process(delta:float) -> void:
 	rotator_head.global_rotation.x = lerp_angle(rotator_head.global_rotation.x, player.head.global_rotation.x, delta * 8)
 	rotator_head.global_rotation.y = lerp_angle(rotator_head.global_rotation.y, player.head.global_rotation.y, delta * 8)
 	watch_and_change_gravity()
 
+
 func watch_and_change_gravity() -> void:
 	watch_areas()
 	if new_gravity_vector == player.gravity_vector: return
 	change_gravity(new_gravity_vector)
+
 
 func watch_areas() -> void:
 	if not player.gravity_area_watcher.is_colliding(): 
@@ -100,6 +105,7 @@ func change_gravity(direction:Vector3) -> void:
 			Input.start_joy_vibration(1, 0.8, 0.95, 0.17)
 			vibration_timer.start(0.5)
 
+
 func _validate_area_direction() -> bool:
 	if not player.gravity_area_watcher.is_colliding(): return true
 	for area in range(player.gravity_area_watcher.get_collision_count()):
@@ -107,6 +113,7 @@ func _validate_area_direction() -> bool:
 		if not garvity_area is GravityArea3D: continue
 		if not garvity_area.avalible_gravities & gravity_direction.flag: return false
 	return true
+
 
 func get_direction() -> GravityDirection:
 	x = player.head.global_rotation.x
@@ -122,8 +129,8 @@ func get_direction() -> GravityDirection:
 	)
 
 
-func set_hud() -> void: 
-	pass
+func set_hud() -> void: pass
+
 
 func rotation_correction() -> void:
 	old_head_rotation_global = player.head.global_rotation
@@ -134,6 +141,7 @@ func rotation_correction() -> void:
 	camera_correction()
 	player.head.global_rotation = old_head_rotation_global
 
+
 func camera_correction() -> void:
 	#if not player.noclip: return
 	if (-new_gravity_vector).cross(old_vision_position_global-old_head_position_global).is_zero_approx(): return
@@ -143,6 +151,7 @@ func camera_correction() -> void:
 	tween = create_tween()
 	tween.set_trans(Tween.TRANS_EXPO)
 	tween.tween_property(player.head, "global_rotation", new_head_rotation_global, 0.15 + (new_head_rotation_global - old_head_rotation_global).length()*0.0625)
+
 
 func position_correction() -> void:
 	if player.croucher.crouching:
@@ -157,7 +166,8 @@ func position_correction() -> void:
 		player.croucher.wish_crouch = true
 		player.croucher.crouch() ## mul by offset
 		player.croucher.wish_uncrouch_natural = true
-	
+
+
 func position_correction_old() -> void:
 	if player.croucher.crouching:
 		if player.head.position != Vector3.ZERO:
@@ -173,19 +183,21 @@ func position_correction_old() -> void:
 		player.croucher.crouch(true)
 		player.croucher.wish_uncrouch_natural = true
 
+
 ## Sets gravity vector
 func set_gravity() -> void:
 	set_gravity_vector_player()
 	set_gravity_vector_global()
 
+
 func set_gravity_vector_player() -> void:
 	player.set_gravity(new_gravity_vector)
-	
+
+
 func set_gravity_vector_global() -> void:
 	if not player.gravity_area_watcher.is_colliding():
 		player.current_ps3d_gravity_vector = new_gravity_vector
 		return Gravity.change_gravity_vector(new_gravity_vector)
-
 	for area in range(player.gravity_area_watcher.get_collision_count()):
 		garvity_area = player.gravity_area_watcher.get_collider(area)
 		if not garvity_area is GravityArea3D: continue 
@@ -194,8 +206,10 @@ func set_gravity_vector_global() -> void:
 		garvity_area.set_color()
 		Gravity.change_gravity.emit(new_gravity_vector)
 
+
 func set_gravity_ps3d() -> void:
 	Gravity.change_gravity_vector(player.current_ps3d_gravity_vector)
+
 
 func prevent_vibration() -> void:
 	Input.stop_joy_vibration(1)

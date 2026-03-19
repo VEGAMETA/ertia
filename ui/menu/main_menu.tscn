@@ -9,9 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://balepuh6avo3h" path="res://static/models/column_cube.tscn" id="4_yc8k7"]
 [ext_resource type="FontFile" uid="uid://uouiqbxu67o3" path="res://assets/fonts/Lato-Regular.ttf" id="7_h2671"]
 [ext_resource type="FontFile" uid="uid://c2focg68oglmn" path="res://assets/fonts/0xProtoNerdFontMono-Regular.ttf" id="7_umht6"]
-[ext_resource type="Script" uid="uid://oqonj8loy4w" path="res://ui/menu/menu_buttons.gd" id="9_t3kfx"]
+[ext_resource type="Script" uid="uid://dd8o2kd4ihjsm" path="res://ui/menu/menu_buttons.gd" id="9_t3kfx"]
+[ext_resource type="AudioStream" uid="uid://c80u14crfg2u1" path="res://assets/audio/sfx/glass_1.wav" id="10_hut73"]
+[ext_resource type="Script" uid="uid://oqonj8loy4w" path="res://ui/menu/focus_button_animation.gd" id="10_t3kfx"]
 [ext_resource type="Shader" uid="uid://bqtxdv8rarwht" path="res://static/shaders/common/bloom.gdshader" id="11_r5t3j"]
-[ext_resource type="Shader" uid="uid://1w2y2ib7qlf5" path="res://static/shaders/psychedelic.gdshader" id="11_t3kfx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_or6mk"]
 shader = ExtResource("2_or6mk")
@@ -53,8 +54,9 @@ gradient = SubResource("Gradient_u4nky")
 fill_to = Vector2(0.991453, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u4nky"]
-bg_color = Color(0.098400004, 0.2046, 0.24, 1)
-corner_radius_top_left = 63
+bg_color = Color(0.15, 0.26250002, 0.3, 1)
+skew = Vector2(0.5, -0.2)
+corner_radius_top_left = 5
 corner_detail = 1
 expand_margin_left = 14.0
 shadow_color = Color(0, 0, 0, 0)
@@ -83,6 +85,261 @@ LineEdit/font_sizes/font_size = 19
 LineEdit/fonts/font = ExtResource("7_umht6")
 LineEdit/styles/focus = SubResource("StyleBoxFlat_r5t3j")
 LineEdit/styles/normal = SubResource("StyleBoxFlat_h2671")
+
+[sub_resource type="Animation" id="Animation_t3kfx"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_hut73"]
+resource_name = "color"
+length = 4.0
+loop_mode = 2
+step = 0.0167
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Menu:theme:Button/styles/focus:bg_color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.15, 0.26250002, 0.3, 1), Color(0.2805, 0.47813335, 0.55, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kurrx"]
+_data = {
+&"RESET": SubResource("Animation_t3kfx"),
+&"color": SubResource("Animation_hut73")
+}
+
+[sub_resource type="Animation" id="Animation_3pyrn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../..:theme:Button/styles/focus:skew:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.5]
+}
+
+[sub_resource type="Animation" id="Animation_kf8oo"]
+resource_name = "skew_x"
+length = 3.7
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../..:theme:Button/styles/focus:skew:x")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.5, 0.5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yime1"]
+_data = {
+&"RESET": SubResource("Animation_3pyrn"),
+&"skew_x": SubResource("Animation_kf8oo")
+}
+
+[sub_resource type="Animation" id="Animation_kurrx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:theme:Button/styles/focus:skew:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-0.2]
+}
+
+[sub_resource type="Animation" id="Animation_yime1"]
+resource_name = "skew_y"
+length = 4.7
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:theme:Button/styles/focus:skew:y")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.2, -0.2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jhv5v"]
+_data = {
+&"RESET": SubResource("Animation_kurrx"),
+&"skew_y": SubResource("Animation_yime1")
+}
+
+[sub_resource type="Animation" id="Animation_jhv5v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:theme:Button/styles/focus:corner_radius_top_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_7vvdv"]
+resource_name = "corner_t_l"
+length = 2.1
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:theme:Button/styles/focus:corner_radius_top_left")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [35, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kdptx"]
+_data = {
+&"RESET": SubResource("Animation_jhv5v"),
+&"corner_t_l": SubResource("Animation_7vvdv")
+}
+
+[sub_resource type="Animation" id="Animation_kdptx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:theme:Button/styles/focus:corner_radius_top_right")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_qfqop"]
+resource_name = "corner_t_r"
+length = 3.1
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:theme:Button/styles/focus:corner_radius_top_right")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [5, 35]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x5md7"]
+_data = {
+&"RESET": SubResource("Animation_kdptx"),
+&"corner_t_r": SubResource("Animation_qfqop")
+}
+
+[sub_resource type="Animation" id="Animation_43o14"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:theme:Button/styles/focus:corner_radius_bottom_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_x5md7"]
+resource_name = "corner_b_l"
+length = 2.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:theme:Button/styles/focus:corner_radius_bottom_left")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [5, 35]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_43o14"]
+_data = {
+&"RESET": SubResource("Animation_43o14"),
+&"corner_b_l": SubResource("Animation_x5md7")
+}
+
+[sub_resource type="Animation" id="Animation_8xuyq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:theme:Button/styles/focus:corner_radius_bottom_right")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_nbl23"]
+resource_name = "corner_b_r"
+length = 3.1
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:theme:Button/styles/focus:corner_radius_bottom_right")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [35, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fm505"]
+_data = {
+&"RESET": SubResource("Animation_8xuyq"),
+&"corner_b_r": SubResource("Animation_nbl23")
+}
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_or6mk"]
 
@@ -119,13 +376,6 @@ shader_parameter/progress_bias = Vector2(-1.53, -1.5)
 shader = ExtResource("11_r5t3j")
 shader_parameter/bloom_spread = 1.0
 shader_parameter/bloom_intensity = 0.4
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hut73"]
-shader = ExtResource("11_t3kfx")
-shader_parameter/feedback = 0.01
-shader_parameter/symmetry_power = 0.15
-shader_parameter/edge_gain = 0.01
-shader_parameter/time_scale = 0.2
 
 [sub_resource type="Animation" id="Animation_4gkdq"]
 length = 0.001
@@ -356,16 +606,58 @@ anchor_left = 0.086
 anchor_top = 0.162
 anchor_right = 0.086
 anchor_bottom = 0.855
-offset_left = -0.0720062
-offset_top = 0.0240021
-offset_right = 224.928
-offset_bottom = -3.04004
+offset_left = -0.072006226
+offset_top = 0.024002075
+offset_right = 141.928
+offset_bottom = -1.0400391
 grow_horizontal = 0
-rotation = -0.00108613
+focus_mode = 2
 mouse_filter = 0
 theme = SubResource("Theme_umht6")
 alignment = 1
 script = ExtResource("9_t3kfx")
+
+[node name="FocusSFX" type="AudioStreamPlayer" parent="Menu" unique_id=482247316]
+unique_name_in_owner = true
+stream = ExtResource("10_hut73")
+volume_db = -5.545
+pitch_scale = 2.5
+max_polyphony = 4
+bus = &"Sfx"
+
+[node name="FocusAnimations" type="Node" parent="Menu" unique_id=527869139]
+unique_name_in_owner = true
+script = ExtResource("10_t3kfx")
+
+[node name="ColorAnimation" type="AnimationPlayer" parent="Menu/FocusAnimations" unique_id=2018940401]
+root_node = NodePath("../../..")
+libraries/ = SubResource("AnimationLibrary_kurrx")
+autoplay = &"color"
+
+[node name="SkewX" type="AnimationPlayer" parent="Menu/FocusAnimations" unique_id=4932042]
+root_node = NodePath("../ColorAnimation")
+libraries/ = SubResource("AnimationLibrary_yime1")
+autoplay = &"skew_x"
+
+[node name="SkewY" type="AnimationPlayer" parent="Menu/FocusAnimations" unique_id=746099647]
+libraries/ = SubResource("AnimationLibrary_jhv5v")
+autoplay = &"skew_y"
+
+[node name="CornerTL" type="AnimationPlayer" parent="Menu/FocusAnimations" unique_id=834587579]
+libraries/ = SubResource("AnimationLibrary_kdptx")
+autoplay = &"corner_t_l"
+
+[node name="CornerTR" type="AnimationPlayer" parent="Menu/FocusAnimations" unique_id=863497395]
+libraries/ = SubResource("AnimationLibrary_x5md7")
+autoplay = &"corner_t_r"
+
+[node name="CornerBL" type="AnimationPlayer" parent="Menu/FocusAnimations" unique_id=2111094556]
+libraries/ = SubResource("AnimationLibrary_43o14")
+autoplay = &"corner_b_l"
+
+[node name="CornerBR" type="AnimationPlayer" parent="Menu/FocusAnimations" unique_id=1555314701]
+libraries/ = SubResource("AnimationLibrary_fm505")
+autoplay = &"corner_b_r"
 
 [node name="Continue" type="Button" parent="Menu" unique_id=251502561]
 unique_name_in_owner = true
@@ -545,16 +837,28 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="psych" type="ColorRect" parent="." unique_id=1540706549]
-visible = false
-material = SubResource("ShaderMaterial_hut73")
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1270718745]
 root_node = NodePath("../Transition")
 libraries/ = SubResource("AnimationLibrary_yc8k7")
+
+[connection signal="focus_entered" from="Menu/Continue" to="Menu" method="_on_button_focused"]
+[connection signal="mouse_entered" from="Menu/Continue" to="Menu" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="Menu/Continue" to="Menu" method="_on_button_pressed"]
+[connection signal="focus_entered" from="Menu/NewGame" to="Menu" method="_on_button_focused"]
+[connection signal="mouse_entered" from="Menu/NewGame" to="Menu" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="Menu/NewGame" to="Menu" method="_on_button_pressed"]
+[connection signal="focus_entered" from="Menu/Network/Serve" to="Menu" method="_on_button_focused"]
+[connection signal="mouse_entered" from="Menu/Network/Serve" to="Menu" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="Menu/Network/Serve" to="Menu" method="_on_button_pressed"]
+[connection signal="focus_entered" from="Menu/Network/Connect" to="Menu" method="_on_button_focused"]
+[connection signal="mouse_entered" from="Menu/Network/Connect" to="Menu" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="Menu/Network/Connect" to="Menu" method="_on_button_pressed"]
+[connection signal="focus_entered" from="Menu/Network/Disconnect" to="Menu" method="_on_button_focused"]
+[connection signal="mouse_entered" from="Menu/Network/Disconnect" to="Menu" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="Menu/Network/Disconnect" to="Menu" method="_on_button_pressed"]
+[connection signal="focus_entered" from="Menu/Options" to="Menu" method="_on_button_focused"]
+[connection signal="mouse_entered" from="Menu/Options" to="Menu" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="Menu/Options" to="Menu" method="_on_button_pressed"]
+[connection signal="focus_entered" from="Menu/Quit" to="Menu" method="_on_button_focused"]
+[connection signal="mouse_entered" from="Menu/Quit" to="Menu" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="Menu/Quit" to="Menu" method="_on_button_pressed"]
