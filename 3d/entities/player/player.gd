@@ -22,7 +22,7 @@ class_name Player extends BasePlayer
 @onready var croucher : CroucherComponent = %Croucher
 @onready var flashlight : FlashlightComponent = %Flashlight
 @onready var camera : PlayerCameraComponent = %Camera
-@onready var side_camera : PlayerCameraComponent = %SideCamera
+@onready var side_camera : Camera3D = %SideCamera
 @onready var remote_camera : RemoteTransform3D = %RemoteCamera
 @onready var safe_area : Area3D = %SafeArea
 @onready var aim : Node3D = %Aim
@@ -39,28 +39,27 @@ func _ready() -> void:
 	camera.current = true
 	self.load_save()
 	(motion_vector_field.get_active_material(0) as ShaderMaterial)\
-		.set_shader_parameter(&"PREVIOUS_TEXTURE", %SubViewport.get_texture())
+		.set_shader_parameter(&"PREVIOUS_TEXTURE", %Datamosh.get_texture())
 
 
 func _process(delta:float) -> void:
 	aim.rotation.x = lerp_angle(aim.rotation.x, head.rotation.x, delta * 16)
 	aim.rotation.y = lerp_angle(aim.rotation.y, head.rotation.y, delta * 16)
 	_hadle_rotation(delta)
-	#if Time.get_ticks_msec() % 1000: print(head.global_position, head.position)
 
 
 func _physics_process(delta:float) -> void:
 	super(delta)
 	set_datamosh_shader(delta)
 
-
 func set_datamosh_shader(delta:float) -> void:
 	var sssp := (motion_vector_field.get_active_material(0) as ShaderMaterial)\
 	.set_shader_parameter.bind()
 	var velocity_threshold := float(velocity_length > 6.0)
-	active_effect = lerp(active_effect, velocity_threshold, (delta * 0.25) * (1 + velocity_threshold + 76*float(camera.fov == camera.CAMERA_ZOOMED_FOV)))
-	sssp.call(&"active", active_effect)
-	#print(active_effect)
+	active_effect = lerp(active_effect, velocity_threshold, (delta * 0.25) * \
+	(1.0 + velocity_threshold ))
+	var power := Math.pulse_function(Time.get_unix_time_from_system(), 4.0, 1.0, 0.03) * 0.99
+	sssp.call(&"power", active_effect * power)
 	var new_omega := camera.get_camera_angular_velocity_2d(delta)
 	omega = lerp(omega, new_omega, delta * 0.03)
 	sssp.call(&"omega", omega)

@@ -2,7 +2,7 @@
 
 [resource]
 bg_color = Color(0.129412, 0.129412, 0.129412, 1)
-border_color = Color(0.333333, 0.388235, 0.419608, 1)
+border_color = Color(0.33179998, 0.38766, 0.42, 1)
 border_blend = true
 corner_radius_top_left = 8
 corner_radius_top_right = 8

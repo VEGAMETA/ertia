@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-@onready var focus_sfx: AudioStreamPlayer = %FocusSFX
+@onready var focus_sfx : AudioStreamPlayer = %FocusSFX
 
 var first_focus : bool = true
 

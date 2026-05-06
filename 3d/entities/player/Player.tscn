@@ -21,6 +21,8 @@
 [ext_resource type="Script" uid="uid://dnup0g8xl1v3w" path="res://3d/entities/player/player_ui.gd" id="18_1lo27"]
 [ext_resource type="PackedScene" uid="uid://ngjfadj73yfa" path="res://ui/hud/ingame/hud.tscn" id="19_84ghu"]
 [ext_resource type="Shader" uid="uid://b5i0p7wsiwh8m" path="res://static/shaders/datamosh.gdshader" id="21_cx8vp"]
+[ext_resource type="Script" uid="uid://lr2tnxhvdggb" path="res://3d/entities/player/motion_vector_field.gd" id="22_0qmf1"]
+[ext_resource type="Script" uid="uid://b7fpjjdo1pfsl" path="res://3d/entities/player/side_camera.gd" id="22_u86xm"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4xa2n"]
 height = 0.5
@@ -45,7 +47,7 @@ size = Vector2(10, 5)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0qmf1"]
 render_priority = -1
 shader = ExtResource("21_cx8vp")
-shader_parameter/active = 0.0
+shader_parameter/power = 0.0
 shader_parameter/omega = Vector2(0, 0)
 
 [node name="Player" unique_id=1877529802 instance=ExtResource("1_v5t3m")]
@@ -91,6 +93,7 @@ script = ExtResource("6_6jsqp")
 
 [node name="Camera" type="Camera3D" parent="Components" index="1" unique_id=368448808]
 unique_name_in_owner = true
+fov = 108.0
 script = ExtResource("3_7e343")
 
 [node name="Grabber" type="Node3D" parent="Components" index="2" unique_id=873774653]
@@ -188,9 +191,11 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Hud" parent="UI" index="0" unique_id=1725484704 instance=ExtResource("19_84ghu")]
 layout_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Debug" parent="UI" index="1" unique_id=644507927 instance=ExtResource("17_mgp6e")]
 layout_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="ItemHolder" type="Node3D" parent="Head" index="0" unique_id=177949009]
 unique_name_in_owner = true
@@ -225,23 +230,22 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -0.07293567)
 mesh = SubResource("PlaneMesh_u86xm")
 surface_material_override/0 = SubResource("ShaderMaterial_0qmf1")
+script = ExtResource("22_0qmf1")
 
 [node name="RemoteCamera2" type="RemoteTransform3D" parent="Head" index="9" unique_id=868107927]
 unique_name_in_owner = true
-remote_path = NodePath("../SubViewport/SideCamera")
+remote_path = NodePath("../Datamosh/SideCamera")
 
-[node name="SubViewport" type="SubViewport" parent="Head" index="10" unique_id=1146013621]
+[node name="Datamosh" type="SubViewport" parent="Head" index="10" unique_id=1146013621]
 unique_name_in_owner = true
 handle_input_locally = false
 debug_draw = 26
 use_hdr_2d = true
 size = Vector2i(1152, 648)
-render_target_update_mode = 4
 
-[node name="SideCamera" type="Camera3D" parent="Head/SubViewport" index="0" unique_id=1390211924]
+[node name="SideCamera" type="Camera3D" parent="Head/Datamosh" index="0" unique_id=1390211924]
 unique_name_in_owner = true
-fov = 108.0
-script = ExtResource("3_7e343")
+script = ExtResource("22_u86xm")
 
 [node name="MultiplayerSynchronizer" parent="." index="11"]
 visibility_update_mode = 1

@@ -8,7 +8,7 @@ signal subtitles_changed(value:bool)
 signal subtitles_size_changed(value:float)
 
 var debug : bool = OS.is_debug_build()
-var network: bool = false:
+var network : bool = false:
 	set(v):
 		network = v
 		network_toggle.emit(v)
@@ -38,6 +38,7 @@ var i18n := {0:"en", 1:"ru"}
 var locale := i18n.find_key(OS.get_locale_language()) as int
 
 @export_range(0.1, 2.0, 0.05) var display_scale : float = 1.0
+@export_range(0, 2, 1) var display_scale_mode : int = 2
 @export var shadows : int = 3
 @export_range(0.05, 2.0, 0.05) var gamma : float = 1.0:
 	set(v):
@@ -81,6 +82,7 @@ func _ready() -> void:
 
 func _initalize() -> void:
 	get_tree().tree_changed.connect(set_environment.call_deferred)
+	display_scale_mode = get_viewport().get_scaling_3d_mode()
 
 
 func get_settings() -> void: pass
@@ -118,6 +120,12 @@ func set_gamma(value:float, gamma_label:Label) -> void:
 	gamma_label.set_text("%.2f" % value)
 
 # Display
+
+func set_scale_mode(idx:int, mode_button:OptionButton) -> void:
+	display_scale_mode = mode_button.get_item_id(idx)
+	Globals.collect_viewports(get_tree().root, [])\
+		.map(func (x:Viewport) -> void: x.set_scaling_3d_mode(display_scale_mode))
+
 
 func set_scale(value:float, label:Label) -> void:
 	display_scale = value

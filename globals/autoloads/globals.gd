@@ -133,5 +133,13 @@ func reset_physics() -> void:
 			get_tree().set_physics_interpolation_enabled(true)
 
 
+func collect_viewports(node: Node, result: Array) -> Array:
+	if node is Viewport:
+		result.append(node)
+	for child in node.get_children():
+		collect_viewports(child, result)
+	return result
+
+
 func quit() -> void:
 	get_tree().quit()

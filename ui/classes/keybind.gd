@@ -92,7 +92,8 @@ func bind_action_key(event: InputEvent) -> void:
 	key = event
 
 func check_duplicates(event: InputEvent) -> void:
-	InputMap.action_get_events(bind_name).filter(func (x:InputEvent)->bool: return x is InputEventKey or x is InputEventMouseButton)
+	InputMap.action_get_events(bind_name).filter(func (x:InputEvent) -> bool: 
+		return x is InputEventKey or x is InputEventMouseButton)
 	var inputs := Utils.get_inputs()
 	for action : StringName in inputs.keys():
 		if action == bind_name: continue

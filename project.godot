@@ -25,6 +25,10 @@ boot_splash/stretch_mode=0
 boot_splash/use_filter=false
 config/icon="uid://brp1bn13rjti"
 
+[audio]
+
+buses/default_bus_layout="uid://bahr83ujc8vd"
+
 [autoload]
 
 StartSession="*res://globals/session.tscn"
@@ -46,7 +50,6 @@ gdscript/warnings/untyped_declaration=1
 
 [display]
 
-window/size/mode=4
 window/size/initial_position_type=4
 window/stretch/aspect="ignore"
 window/vsync/vsync_mode=3

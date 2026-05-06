@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://c2focg68oglmn" path="res://assets/fonts/0xProtoNerdFontMono-Regular.ttf" id="1_gweul"]
 [ext_resource type="Script" uid="uid://cwntknqu6vhm" path="res://ui/settings/settings.gd" id="2_hrs25"]
 [ext_resource type="FontFile" uid="uid://uouiqbxu67o3" path="res://assets/fonts/Lato-Regular.ttf" id="3_fayoa"]
+[ext_resource type="AudioStream" uid="uid://c80u14crfg2u1" path="res://assets/audio/sfx/glass_1.wav" id="4_2se06"]
 [ext_resource type="Texture2D" uid="uid://cbwodxel1p7ca" path="res://assets/bitmaps/sprites/usa.png" id="5_5at5d"]
 [ext_resource type="StyleBox" uid="uid://2ov1g1u04wts" path="res://static/styles/setting_panel_style.stylebox" id="5_eenmm"]
 [ext_resource type="Texture2D" uid="uid://d2gkfgqx4bs6v" path="res://assets/bitmaps/sprites/russian.png" id="6_ryoa4"]
@@ -108,6 +109,7 @@ corner_radius_bottom_left = 8
 transparent_bg = true
 scaling_3d_mode = 0
 anisotropic_filtering_level = 4
+fsr_sharpness = 2.0
 oversampling_override = 1.0
 title = "settings"
 initial_position = 2
@@ -121,6 +123,18 @@ theme_override_font_sizes/title_font_size = 14
 theme_override_styles/embedded_border = ExtResource("1_bjc66")
 theme_override_styles/embedded_unfocused_border = ExtResource("1_bjc66")
 script = ExtResource("2_hrs25")
+
+[node name="FocusSFX" type="AudioStreamPlayer" parent="." unique_id=938550879]
+stream = ExtResource("4_2se06")
+volume_db = -8.0
+pitch_scale = 4.0
+max_polyphony = 3
+bus = &"Sfx"
+
+[node name="SFXTimeoutTimer" type="Timer" parent="." unique_id=756774394]
+wait_time = 0.03
+one_shot = true
+autostart = true
 
 [node name="TabContainer" type="TabContainer" parent="." unique_id=618146905]
 anchors_preset = 15
@@ -141,9 +155,10 @@ theme_override_styles/tab_selected = SubResource("StyleBoxFlat_5at5d")
 theme_override_styles/tab_disabled = SubResource("StyleBoxEmpty_gweul")
 theme_override_styles/tab_focus = SubResource("StyleBoxFlat_fayoa")
 tab_alignment = 1
-current_tab = 0
+current_tab = 2
 
 [node name="Game" type="ScrollContainer" parent="TabContainer" unique_id=585985472]
+visible = false
 layout_mode = 2
 focus_neighbor_bottom = NodePath("GridContainer/L8nButton")
 focus_mode = 2
@@ -358,7 +373,6 @@ layout_mode = 2
 text = "100%"
 
 [node name="Display" type="ScrollContainer" parent="TabContainer" unique_id=300207932]
-visible = false
 layout_mode = 2
 focus_neighbor_bottom = NodePath("GridContainer/HBoxContainer/ScaleValue")
 focus_mode = 2
@@ -372,6 +386,22 @@ size_flags_vertical = 3
 theme_override_constants/h_separation = 35
 theme_override_constants/v_separation = 20
 columns = 2
+
+[node name="ScaleMethodLabel" type="Label" parent="TabContainer/Display/GridContainer" unique_id=867080837]
+layout_mode = 2
+text = "Scaling Method"
+
+[node name="ScaleMethodButton" type="OptionButton" parent="TabContainer/Display/GridContainer" unique_id=2054628462]
+unique_name_in_owner = true
+layout_mode = 2
+selected = 2
+item_count = 3
+popup/item_0/text = "Bilinear"
+popup/item_0/id = 0
+popup/item_1/text = "FSR 1.0"
+popup/item_1/id = 1
+popup/item_2/text = "FSR 2.2"
+popup/item_2/id = 2
 
 [node name="ScaleLabel" type="Label" parent="TabContainer/Display/GridContainer" unique_id=1656757300]
 layout_mode = 2
@@ -1134,3 +1164,39 @@ expand_mode = 4
 
 [node name="Control12" type="Control" parent="TabContainer/Controller/VBoxContainer/ScrollContainer/GridContainer" unique_id=170387148]
 layout_mode = 2
+
+[connection signal="close_requested" from="." to="." method="_on_button_pressed"]
+[connection signal="tab_hovered" from="TabContainer" to="." method="_on_button_focused"]
+[connection signal="tab_selected" from="TabContainer" to="." method="_on_button_pressed"]
+[connection signal="item_focused" from="TabContainer/Game/GridContainer/L8nButton" to="." method="_on_button_focused"]
+[connection signal="item_selected" from="TabContainer/Game/GridContainer/L8nButton" to="." method="_on_button_pressed"]
+[connection signal="value_changed" from="TabContainer/Game/GridContainer/MouseSensValue" to="." method="_on_range_changed"]
+[connection signal="value_changed" from="TabContainer/Game/GridContainer/GamepadSensValue" to="." method="_on_range_changed"]
+[connection signal="value_changed" from="TabContainer/Game/GridContainer/FOVValue" to="." method="_on_range_changed"]
+[connection signal="toggled" from="TabContainer/Game/GridContainer/SubtitlesValue" to="." method="_on_checkbox_clicked"]
+[connection signal="value_changed" from="TabContainer/Game/GridContainer/SubtitlesSizeValue" to="." method="_on_range_changed"]
+[connection signal="value_changed" from="TabContainer/Audio/GridContainer/MasterSlider" to="." method="_on_range_changed"]
+[connection signal="value_changed" from="TabContainer/Audio/GridContainer/MusicSlider" to="." method="_on_range_changed"]
+[connection signal="value_changed" from="TabContainer/Audio/GridContainer/SfxSlider" to="." method="_on_range_changed"]
+[connection signal="value_changed" from="TabContainer/Audio/GridContainer/VoiceSlider" to="." method="_on_range_changed"]
+[connection signal="value_changed" from="TabContainer/Display/GridContainer/HBoxContainer/ScaleValue" to="." method="_on_range_changed"]
+[connection signal="item_focused" from="TabContainer/Display/GridContainer/WindowModeValue" to="." method="_on_button_focused"]
+[connection signal="item_selected" from="TabContainer/Display/GridContainer/WindowModeValue" to="." method="_on_button_pressed"]
+[connection signal="item_focused" from="TabContainer/Display/GridContainer/VSyncValue" to="." method="_on_button_focused"]
+[connection signal="item_selected" from="TabContainer/Display/GridContainer/VSyncValue" to="." method="_on_button_pressed"]
+[connection signal="item_focused" from="TabContainer/Display/GridContainer/FpsButton" to="." method="_on_button_focused"]
+[connection signal="item_selected" from="TabContainer/Display/GridContainer/FpsButton" to="." method="_on_button_pressed"]
+[connection signal="item_focused" from="TabContainer/Display/GridContainer/PhysButton" to="." method="_on_button_focused"]
+[connection signal="item_selected" from="TabContainer/Display/GridContainer/PhysButton" to="." method="_on_button_pressed"]
+[connection signal="item_focused" from="TabContainer/Graphics/GridContainer/AnisotropicFilteringButton" to="." method="_on_button_focused"]
+[connection signal="item_selected" from="TabContainer/Graphics/GridContainer/AnisotropicFilteringButton" to="." method="_on_button_pressed"]
+[connection signal="item_focused" from="TabContainer/Graphics/GridContainer/ShadowsButton" to="." method="_on_button_focused"]
+[connection signal="item_selected" from="TabContainer/Graphics/GridContainer/ShadowsButton" to="." method="_on_button_pressed"]
+[connection signal="value_changed" from="TabContainer/Graphics/GridContainer/HBoxContainer/GammaValue" to="." method="_on_range_changed"]
+[connection signal="toggled" from="TabContainer/Graphics/GridContainer/SSAOValue" to="." method="_on_checkbox_clicked"]
+[connection signal="toggled" from="TabContainer/Graphics/GridContainer/SSILValue" to="." method="_on_checkbox_clicked"]
+[connection signal="toggled" from="TabContainer/Graphics/GridContainer/GlowValue" to="." method="_on_checkbox_clicked"]
+[connection signal="item_focused" from="TabContainer/Controller/VBoxContainer/ScrollContainer2/GridContainer/ControllerTypeButton" to="." method="_on_button_focused"]
+[connection signal="item_selected" from="TabContainer/Controller/VBoxContainer/ScrollContainer2/GridContainer/ControllerTypeButton" to="." method="_on_button_pressed"]
+[connection signal="toggled" from="TabContainer/Controller/VBoxContainer/ScrollContainer2/GridContainer/VibrationValue" to="." method="_on_checkbox_clicked"]
+[connection signal="value_changed" from="TabContainer/Controller/VBoxContainer/ScrollContainer2/GridContainer/HBoxContainer/DeadzoneValue" to="." method="_on_range_changed"]

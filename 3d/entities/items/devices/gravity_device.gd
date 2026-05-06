@@ -34,7 +34,7 @@ var gravity_direction : GravityDirection
 @onready var sprite : Sprite3D = %Sprite
 @onready var rotator : SubViewport = %Rotator
 @onready var rotator_head : Node3D = rotator.find_child("Center")
-@onready var player : BasePlayer = owner
+@onready var player : Player = owner
 
 var vibration_timer : Timer = Timer.new()
 
@@ -155,9 +155,12 @@ func camera_correction() -> void:
 
 func position_correction() -> void:
 	if player.croucher.crouching:
-		player.global_position += player.gravity_vector - new_gravity_vector
 		player.head.position = -new_gravity_vector
+		player.global_position += player.gravity_vector - new_gravity_vector
 		player.croucher.wish_uncrouch_natural = true
+		if !player.is_on_floor():
+			await get_tree().physics_frame
+			player.head.position = Vector3.ZERO
 		return
 	await get_tree().physics_frame
 	player.shape_stand.force_shapecast_update()
@@ -165,22 +168,6 @@ func position_correction() -> void:
 		player.global_position -= new_gravity_vector
 		player.croucher.wish_crouch = true
 		player.croucher.crouch() ## mul by offset
-		player.croucher.wish_uncrouch_natural = true
-
-
-func position_correction_old() -> void:
-	if player.croucher.crouching:
-		if player.head.position != Vector3.ZERO:
-			player.head.position = -new_gravity_vector  ## mul by y offset
-			player.global_position += player.gravity_vector - new_gravity_vector
-			player.croucher.wish_uncrouch_natural = true
-		return
-	await get_tree().physics_frame
-	player.shape_stand.force_shapecast_update()
-	if player.shape_stand.is_colliding():
-		player.global_position -= new_gravity_vector
-		player.croucher.wish_crouch = true
-		player.croucher.crouch(true)
 		player.croucher.wish_uncrouch_natural = true
 
 

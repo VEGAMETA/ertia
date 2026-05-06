@@ -23,8 +23,8 @@ var settings : SettingsWindow
 @onready var background : ColorRect = $Background
 @onready var camera : Camera3D = %Camera3D
 @onready var hand : Node3D = %Hand
-@onready var shadow: TextureRect = $Shadow
-@onready var network: VBoxContainer = %Network
+@onready var shadow : TextureRect = $Shadow
+@onready var network : VBoxContainer = %Network
 
 
 func _ready() -> void:

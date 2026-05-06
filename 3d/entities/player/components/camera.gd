@@ -24,7 +24,7 @@ var previous_position := Vector3()
 
 func _ready() -> void:
 	fov = CAMERA_DEFAULT_FOV
-	Settings.fov_changed.connect(func (x:float)->void: CAMERA_DEFAULT_FOV = x; fov = x)
+	Settings.fov_changed.connect(func (x:float) -> void: CAMERA_DEFAULT_FOV = x; fov = x)
 	call_deferred("set", "previous_position", global_position)
 
 

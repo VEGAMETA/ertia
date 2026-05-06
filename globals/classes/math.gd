@@ -25,5 +25,11 @@ const PI_TIMES_2_BY_MINUS_3 : float = -2.09439510239
 
 const SQRT_TWO_BY_TWO : float = 0.70710678118
 
+
 static func conjugate(quaternion: Quaternion) -> Quaternion:
 	return Quaternion(-quaternion.x, -quaternion.y, -quaternion.z, quaternion.w)
+
+
+static func pulse_function(x:float, phase_length:float, change_length:float, y:float ) -> float:
+	return (cos(PI * clampf((abs(fmod(x, phase_length) - phase_length * 0.5) \
+		- phase_length * 0.5 + change_length), 0.0, 1.0)) - 1.0) * y + 1.0

@@ -47,7 +47,6 @@ func _physics_process(_delta:float) -> void:
 	crouch()
 	uncrouch()
 	_set_walk()
-	#if Time.get_ticks_msec() % 5000: print(player.head.position.y)
 
 
 func crouch(gravitating := false, not_saved := true, vector := Vector3.ZERO) -> void:
@@ -79,7 +78,7 @@ func crouch_in_air() -> void:
 		player.collision_legs.position.y = -1.25
 		_on_uncrouch()
 
-## TODO: rewrite all of the croucher system, y is not applicable
+
 func restore_crouch() -> void:
 	if player.collision_crouch.position.y != 0.0: return
 	player.collision_crouch.position.y = -1.0
@@ -96,7 +95,6 @@ func _on_crouch(_not_saved:bool) -> void:
 	player.collision_stand.disabled = true
 	crouching = true
 	wish_crouch = false
-
 
 func _on_uncrouch() -> void:
 	player.collision_stand.disabled = false
