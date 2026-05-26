@@ -4,6 +4,7 @@ var shader : ShaderMaterial
 
 
 func _ready() -> void:
+	super()
 	gravity_vector = -transform.basis.y
 	var mesh := MeshInstance3D.new()
 	mesh.mesh = SphereMesh.new()

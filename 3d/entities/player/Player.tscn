@@ -87,8 +87,12 @@ remote_path = NodePath("../../Components/Flashlight")
 
 [node name="Flashlight" type="SpotLight3D" parent="Components" index="0" unique_id=1251313221]
 unique_name_in_owner = true
+light_energy = 2.0
+light_indirect_energy = 2.0
 light_projector = ExtResource("6_h0acb")
 shadow_enabled = true
+spot_range = 10.0
+spot_angle = 34.0
 script = ExtResource("6_6jsqp")
 
 [node name="Camera" type="Camera3D" parent="Components" index="1" unique_id=368448808]
@@ -239,8 +243,14 @@ remote_path = NodePath("../Datamosh/SideCamera")
 [node name="Datamosh" type="SubViewport" parent="Head" index="10" unique_id=1146013621]
 unique_name_in_owner = true
 handle_input_locally = false
+use_occlusion_culling = true
 debug_draw = 26
 use_hdr_2d = true
+scaling_3d_mode = 0
+fsr_sharpness = 1.0
+canvas_item_default_texture_filter = 0
+sdf_oversize = 0
+positional_shadow_atlas_size = 128
 size = Vector2i(1152, 648)
 
 [node name="SideCamera" type="Camera3D" parent="Head/Datamosh" index="0" unique_id=1390211924]

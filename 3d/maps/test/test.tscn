@@ -1,35 +1,15 @@
 [gd_scene format=3 uid="uid://bcljbuape7mjq"]
 
-[ext_resource type="Material" uid="uid://bjyyfh03v4u1u" path="res://static/materials/prototype_black.tres" id="1_6sujd"]
-[ext_resource type="Texture2D" uid="uid://cnexs1r87kseq" path="res://assets/skyboxes/skybox2.png" id="1_g88ca"]
-[ext_resource type="PackedScene" uid="uid://diyb5sbluyv0b" path="res://3d/entities/player/Player.tscn" id="2_6sujd"]
-[ext_resource type="Script" uid="uid://sl63lhw2w8gu" path="res://3d/classes/gravity_object.gd" id="3_rryn2"]
-[ext_resource type="Shader" uid="uid://dyv56y2co3ujb" path="res://static/shaders/stars.gdshader" id="5_dytxi"]
-[ext_resource type="PackedScene" uid="uid://balepuh6avo3h" path="res://static/models/column_cube.tscn" id="5_fotpu"]
-[ext_resource type="Script" uid="uid://c4djh7xf17npu" path="res://3d/classes/strong_gravity_object.gd" id="5_vys1o"]
-[ext_resource type="Texture2D" uid="uid://cx01pqa2yfg3" path="res://assets/bitmaps/textures/256/Metal_05-256x256_29.png" id="6_5cn2g"]
-[ext_resource type="Shader" uid="uid://crknpdgmgvypv" path="res://static/shaders/aura_strong_gravity_object.gdshader" id="6_y1qwu"]
-[ext_resource type="Material" uid="uid://cu7ch8eak34l3" path="res://static/materials/prototype_white.tres" id="8_yartm"]
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_5cn2g"]
-panorama = ExtResource("1_g88ca")
-energy_multiplier = 0.55
-
-[sub_resource type="Sky" id="Sky_rryn2"]
-sky_material = SubResource("PanoramaSkyMaterial_5cn2g")
-
-[sub_resource type="Environment" id="Environment_g88ca"]
-background_mode = 2
-sky = SubResource("Sky_rryn2")
-tonemap_mode = 2
-tonemap_exposure = 2.6
-tonemap_white = 16.0
-ssr_fade_in = 1.0815
-ssr_fade_out = 1.07177
-ssr_depth_tolerance = 26.21
-sdfgi_use_occlusion = true
-sdfgi_read_sky_light = false
-glow_enabled = true
+[ext_resource type="PackedScene" uid="uid://s3g25d2dj5n" path="res://static/environments/environment1.tscn" id="1_rrirn"]
+[ext_resource type="PackedScene" uid="uid://diyb5sbluyv0b" path="res://3d/entities/player/Player.tscn" id="2_pj60q"]
+[ext_resource type="PackedScene" uid="uid://lahimfld8dy7" path="res://3d/entities/gravity_objects/cube.tscn" id="3_rrirn"]
+[ext_resource type="PackedScene" uid="uid://balepuh6avo3h" path="res://static/models/column_cube.tscn" id="4_0mw6c"]
+[ext_resource type="Script" uid="uid://c4djh7xf17npu" path="res://3d/classes/strong_gravity_object.gd" id="5_jkxw4"]
+[ext_resource type="Shader" uid="uid://crknpdgmgvypv" path="res://static/shaders/aura_strong_gravity_object.gdshader" id="6_mvqq6"]
+[ext_resource type="Shader" uid="uid://dyv56y2co3ujb" path="res://static/shaders/stars.gdshader" id="7_jya3f"]
+[ext_resource type="Texture2D" uid="uid://cx01pqa2yfg3" path="res://assets/bitmaps/textures/256/Metal_05-256x256_29.png" id="8_cs8au"]
+[ext_resource type="Material" uid="uid://bjyyfh03v4u1u" path="res://static/materials/prototype_black.tres" id="9_smy1l"]
+[ext_resource type="Material" uid="uid://cu7ch8eak34l3" path="res://static/materials/prototype_white.tres" id="10_b5u11"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rryn2"]
 
@@ -37,7 +17,7 @@ glow_enabled = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6s74i"]
 render_priority = 0
-shader = ExtResource("6_y1qwu")
+shader = ExtResource("6_mvqq6")
 shader_parameter/alpha = 0.6
 shader_parameter/gravity_vector = Vector3(0, 0, 0)
 
@@ -48,7 +28,7 @@ height = 2.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g88ca"]
 render_priority = 0
-shader = ExtResource("5_dytxi")
+shader = ExtResource("7_jya3f")
 shader_parameter/horizontalMovement = 0.1
 shader_parameter/verticalMovement = 0.1
 shader_parameter/frequencyStar = 0.1
@@ -65,7 +45,7 @@ shader_parameter/transparencyBackground = 1.0
 shader_parameter/seed = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fotpu"]
-albedo_texture = ExtResource("6_5cn2g")
+albedo_texture = ExtResource("8_cs8au")
 uv1_triplanar = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_yartm"]
@@ -78,35 +58,20 @@ size = Vector2(100, 100)
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=664044906]
-environment = SubResource("Environment_g88ca")
+[node name="WorldEnvironment" parent="." unique_id=1097846496 instance=ExtResource("1_rrirn")]
 
-[node name="Player" parent="." unique_id=382387475 instance=ExtResource("2_6sujd")]
+[node name="Player" parent="." unique_id=382387475 instance=ExtResource("2_pj60q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.56557, 0)
 
-[node name="GravityObject" type="RigidBody3D" parent="." unique_id=1855031798]
+[node name="GravityObject" parent="." unique_id=871397227 instance=ExtResource("3_rrirn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.886552, -4.25406)
-collision_layer = 4
-collision_mask = 5
-script = ExtResource("3_rryn2")
-metadata/_custom_type_script = "uid://sl63lhw2w8gu"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="GravityObject" unique_id=856210407]
-shape = SubResource("BoxShape3D_rryn2")
-
-[node name="ColumnCube" parent="GravityObject" unique_id=1887185479 instance=ExtResource("5_fotpu")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="GravityObject" unique_id=2048530760]
-visible = false
-mesh = SubResource("BoxMesh_g88ca")
 
 [node name="GravityObject2" type="RigidBody3D" parent="." unique_id=1393325064]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.325, 1.5913963, -4.384)
 rotation_edit_mode = 1
 collision_layer = 4
 collision_mask = 5
-script = ExtResource("5_vys1o")
+script = ExtResource("5_jkxw4")
 gravity_vector = Vector3(0, 4.371139e-08, 1)
 velocity_thereshold = 0.0
 metadata/_custom_type_script = "uid://c4djh7xf17npu"
@@ -114,7 +79,7 @@ metadata/_custom_type_script = "uid://c4djh7xf17npu"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GravityObject2" unique_id=2141232682]
 shape = SubResource("BoxShape3D_rryn2")
 
-[node name="ColumnCube" parent="GravityObject2" unique_id=1417034442 instance=ExtResource("5_fotpu")]
+[node name="ColumnCube" parent="GravityObject2" unique_id=1417034442 instance=ExtResource("4_0mw6c")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GravityObject2" unique_id=287340616]
@@ -145,29 +110,29 @@ mesh = SubResource("PlaneMesh_yartm")
 [node name="CSGBox3D" type="CSGBox3D" parent="Geometry" unique_id=1372074633]
 use_collision = true
 size = Vector3(16, 4, 16)
-material = ExtResource("1_6sujd")
+material = ExtResource("9_smy1l")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Geometry/CSGBox3D" unique_id=1134749608]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 operation = 2
 size = Vector3(15, 4, 15)
-material = ExtResource("1_6sujd")
+material = ExtResource("9_smy1l")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Geometry" unique_id=1497683308]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6538773, 1.8608587, 2.7434435)
-material_override = ExtResource("8_yartm")
+material_override = ExtResource("10_b5u11")
 use_collision = true
 size = Vector3(4.547119, 4.379883, 4.1123657)
-material = ExtResource("1_6sujd")
+material = ExtResource("9_smy1l")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="Geometry" unique_id=1658483076]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 23.053589, -7.421875)
-material_override = ExtResource("8_yartm")
+material_override = ExtResource("10_b5u11")
 size = Vector3(6, 8.053589, 8.421875)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="Geometry" unique_id=940043825]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.641277, 14.050255, -38.33107)
-material_override = ExtResource("1_6sujd")
+material_override = ExtResource("9_smy1l")
 use_collision = true
 size = Vector3(23.075317, 6.582245, 88.49756)
 
@@ -178,6 +143,6 @@ size = Vector3(24.36621, 6.570923, 79.391846)
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="Geometry" unique_id=68293384]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.537745, 8.688265, -29.197954)
-material_override = ExtResource("8_yartm")
+material_override = ExtResource("10_b5u11")
 use_collision = true
 size = Vector3(6, 8.053589, 16.249023)

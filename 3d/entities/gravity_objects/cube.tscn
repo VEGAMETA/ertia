@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://lahimfld8dy7"]
+
+[ext_resource type="Script" uid="uid://sl63lhw2w8gu" path="res://3d/classes/gravity_object.gd" id="1_sbiga"]
+[ext_resource type="PackedScene" uid="uid://balepuh6avo3h" path="res://static/models/column_cube.tscn" id="2_lbo8v"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rryn2"]
+
+[node name="Cube" type="RigidBody3D" unique_id=871397227]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_sbiga")
+metadata/_custom_type_script = "uid://sl63lhw2w8gu"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=210202872]
+shape = SubResource("BoxShape3D_rryn2")
+
+[node name="ColumnCube" parent="." unique_id=906587179 instance=ExtResource("2_lbo8v")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

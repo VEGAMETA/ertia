@@ -33,7 +33,7 @@ func _ready() -> void:
 	serve_button.pressed.connect(Globals.server.serve)
 	connect_button.pressed.connect(_on_connect_pressed)
 	disconnect_button.pressed.connect(Globals.client.disconnect_from_server)
-	new_game_button.pressed.connect(Utils.load_map.bind("test"))
+	new_game_button.pressed.connect(Utils.load_map.bind("lvl1_a"))
 	network.visibility_changed.connect(toggle_menuing)
 	network.visible = Settings.network
 	Settings.network_toggle.connect(func (v:bool) -> void: network.visible = v)

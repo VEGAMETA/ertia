@@ -1,12 +1,12 @@
 class_name GrabberComponent extends Node3D
 
 const PULL_FORCE : float = 10.0
-const THROW_FORCE : float = 5.0
+const THROW_FORCE : float = 10.0
+const TIMEOUT : float = 0.1
 
-@export_storage var grabbed_object : RigidBody3D
+@export_storage var grabbed_object : GravityObject
 @export var grabbed_zoom : float
 @export var grab_ray_collider : Node
-@export var throw : bool
 
 @onready var grab_ray : RayCast3D = %Grab
 @onready var hand : Marker3D = %Hand
@@ -22,7 +22,6 @@ func _ready() -> void:
 
 func _process(_delta:float) -> void:
 	if check_grabbed_object():
-		pull_object()
 		zoom_object()
 	check_if_floor_is_not_gravity_object()
 
@@ -31,8 +30,7 @@ func _input(event:InputEvent) -> void:
 	if not owner.is_multiplayer_authority(): return
 	if event.is_action_pressed("Interract"): interract()
 	if Input.is_action_pressed("Alternative") and Input.is_action_pressed("Attack"):
-		throw = true
-		ungrab_object()
+		throw_object(ungrab_object())
 
 
 func interract() -> void:
@@ -51,11 +49,6 @@ func grab() -> bool:
 		return true
 	ungrab_object()
 	return false
-
-
-func pull_object() -> void:
-	if grabbed_object == null: return
-	grabbed_object.set_linear_velocity((PULL_FORCE + PULL_FORCE*int(player.running)) * (grabbed_body.global_position - grabbed_object.global_position))
 
 
 func rotate_object() -> void:
@@ -81,17 +74,24 @@ func grab_object(object:RigidBody3D) -> void:
 	joint.set_node_b(grabbed_object.get_path())
 
 
-func ungrab_object() -> void:
-	if grabbed_object == null: return
-	grabbed_object.linear_velocity /= 8.0 
+func ungrab_object() -> RigidBody3D:
+	if grabbed_object == null: return null
+	var _grabbed_object : RigidBody3D = grabbed_object
+	grabbed_object.linear_velocity /= 8.0
 	grabbed_object.angular_velocity /= 25.0
-	if throw: 
-		grabbed_object.apply_central_impulse((THROW_FORCE + grabbed_object.mass * 2.0) * (grabbed_object.global_position - player.global_position))
-		throw = false
 	grabbed_object = null
 	joint.set_node_b(joint.get_path())
 	grabbed_body.rotation = Vector3.ZERO
 	grabbed_body.position.z = -2.0
+	return _grabbed_object
+
+
+func throw_object(_grabbed_object: RigidBody3D) -> void:
+	if _grabbed_object == null: return
+	var impulse := _grabbed_object.global_position - player.global_position
+	impulse = impulse.normalized()
+	impulse *= THROW_FORCE + _grabbed_object.mass * 2.0
+	_grabbed_object.set_linear_velocity(impulse)
 
 
 func check_grabbed_object() -> bool:

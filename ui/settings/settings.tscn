@@ -155,7 +155,7 @@ theme_override_styles/tab_selected = SubResource("StyleBoxFlat_5at5d")
 theme_override_styles/tab_disabled = SubResource("StyleBoxEmpty_gweul")
 theme_override_styles/tab_focus = SubResource("StyleBoxFlat_fayoa")
 tab_alignment = 1
-current_tab = 2
+current_tab = 5
 
 [node name="Game" type="ScrollContainer" parent="TabContainer" unique_id=585985472]
 visible = false
@@ -373,6 +373,7 @@ layout_mode = 2
 text = "100%"
 
 [node name="Display" type="ScrollContainer" parent="TabContainer" unique_id=300207932]
+visible = false
 layout_mode = 2
 focus_neighbor_bottom = NodePath("GridContainer/HBoxContainer/ScaleValue")
 focus_mode = 2
@@ -812,7 +813,6 @@ offset_bottom = 25.0
 text = "Camera"
 
 [node name="Controller" type="ScrollContainer" parent="TabContainer" unique_id=1618059154]
-visible = false
 layout_mode = 2
 focus_neighbor_left = NodePath("../Keybinds")
 focus_neighbor_top = NodePath(".")

@@ -18,19 +18,19 @@ vec2 get_motion_vector(float depth, vec2 uv) {
 }
 
 void fragment() {
+	vec3 col = texture(SCREEN_TEXTURE, SCREEN_UV).rgb;
 	float d = texture(DEPTH_TEXTURE, SCREEN_UV).r;
 	vec2 mot = get_motion_vector(d, SCREEN_UV);
-	vec3 col = texture(SCREEN_TEXTURE, SCREEN_UV).rgb;
+	vec2 mvuv = vec2(SCREEN_UV.x-mot.r,SCREEN_UV.y-mot.g);
+	ALBEDO = mix(col, texture(PREVIOUS_TEXTURE, mvuv).rgb, power);
 	// test motion vectors
 	//ALBEDO = mix(col, vec3(mot, 0.0), 0.5);
 	//ALBEDO = vec3(1.0, 0.0, 1.0);`
 	
 	// test 2
 	//ALBEDO = textureLod(SCREEN_TEXTURE, SCREEN_UV + mot, 1.0).rgb;
-	
+
 	// test 3
-	vec2 mvuv = vec2(SCREEN_UV.x-mot.r,SCREEN_UV.y-mot.g);
-	ALBEDO = mix(col, texture(PREVIOUS_TEXTURE, mvuv).rgb, power);
 	//ALBEDO = pow(ALBEDO, vec3(1.0 + power * 0.03));
 	//ALBEDO = apply_contrast(ALBEDO, 1.0 + power * 0.001);
 }

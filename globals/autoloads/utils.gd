@@ -34,6 +34,12 @@ func get_maps() -> Array:
 	map_files = map_files.map(func (path:String) -> String: return path.get_file().get_basename())
 	return map_files
 
+
+func _load_deferred(map:String) -> void:
+	if get_tree().change_scene_to_file(map): 
+		Console.printerr("Cannot load the map", ERR_FILE_BAD_PATH)
+
+
 @rpc("authority", "call_remote")
 func load_map(map:String) -> String:
 	var full_map_path : String = get_full_map_name(map)
@@ -42,12 +48,31 @@ func load_map(map:String) -> String:
 
 
 func get_full_map_name(map:String) -> String:
-	return map_path + map + ".tscn" if not map.ends_with(".tscn") else ""
+	var filename : String = map + ".tscn" if not map.ends_with(".tscn") else ""
+	return find_map_path(filename)
 
 
-func _load_deferred(map:String) -> void:
-	if get_tree().change_scene_to_file(map): 
-		Console.printerr("Cannot load the map", ERR_FILE_BAD_PATH)
+func find_map_path(filename:String, root_dir:String = map_path) -> String:
+	if filename == "":
+		return ""
+	var dir := DirAccess.open(root_dir)
+	if dir == null:
+		return ""
+	dir.list_dir_begin()
+	while true:
+		var found_file := dir.get_next()
+		if found_file == "": break
+		if found_file.begins_with("."):
+			continue
+		var fullpath := root_dir.path_join(filename)
+		if dir.current_is_dir():
+			fullpath = find_map_path(filename, root_dir.path_join(found_file))
+		elif found_file != filename: continue
+		if fullpath == "": continue
+		dir.list_dir_end()
+		return fullpath
+	return ""
+
 
 
 func get_player_by_id(peer_id:int) -> BasePlayer:
@@ -58,11 +83,13 @@ func get_player_by_id(peer_id:int) -> BasePlayer:
 		return player
 	return null
 
+
 @rpc("any_peer", "call_remote")
 func kill(peer_id:int=multiplayer.get_unique_id()) -> void:
 	var player := get_player_by_id(peer_id)
 	if not player: return
 	player.queue_free()
+
 
 func get_inputs() -> Dictionary:
 	var inputs := {}

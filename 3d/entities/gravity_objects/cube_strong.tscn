@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bs6aumbvg6bxl"]
+
+[ext_resource type="Script" uid="uid://c4djh7xf17npu" path="res://3d/classes/strong_gravity_object.gd" id="1_1m6m3"]
+[ext_resource type="PackedScene" uid="uid://balepuh6avo3h" path="res://static/models/column_cube.tscn" id="2_mqqcq"]
+[ext_resource type="Shader" uid="uid://crknpdgmgvypv" path="res://static/shaders/aura_strong_gravity_object.gdshader" id="3_5drqt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rryn2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_g88ca"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6s74i"]
+render_priority = 0
+shader = ExtResource("3_5drqt")
+shader_parameter/alpha = 0.6
+shader_parameter/gravity_vector = Vector3(0, 0, 0)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4gqd6"]
+material = SubResource("ShaderMaterial_6s74i")
+radius = 1.0
+height = 2.0
+
+[node name="CubeStrong" type="RigidBody3D" unique_id=142409447]
+rotation_edit_mode = 1
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_1m6m3")
+gravity_vector = Vector3(0, 4.371139e-08, 1)
+velocity_thereshold = 0.0
+metadata/_custom_type_script = "uid://c4djh7xf17npu"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=233327224]
+shape = SubResource("BoxShape3D_rryn2")
+
+[node name="ColumnCube" parent="." unique_id=653149232 instance=ExtResource("2_mqqcq")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=512807625]
+visible = false
+mesh = SubResource("BoxMesh_g88ca")
+
+[node name="Aura" type="MeshInstance3D" parent="." unique_id=1666221523]
+mesh = SubResource("SphereMesh_4gqd6")

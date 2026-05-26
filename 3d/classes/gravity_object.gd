@@ -11,13 +11,13 @@ class_name GravityObject extends RigidBody3D
 @onready var player: Player
 @onready var env_audio: AudioStreamPlayer3D
 
+
 func _ready() -> void:
 	env_audio = AudioStreamPlayer3D.new()
 	env_audio.set_stream(sfx)
 	env_audio.set_bus(&"Sfx")
 	env_audio.finished.connect(_on_audio_finished)
 	add_child(env_audio)
-	Gravity.change_gravity.connect(_on_change_gravity)
 	if not is_connected('body_entered', _on_body_entered):
 		self.body_entered.connect(_on_body_entered)
 	collision_layer = 4 # 3 layer
@@ -25,21 +25,29 @@ func _ready() -> void:
 	max_contacts_reported = 1
 	contact_monitor = true
 	player = owner.find_child("Player")
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	Gravity.change_gravity.connect(_on_change_gravity)
+
 
 func _on_change_gravity(new_gravity_vector: Vector3) -> void:
 	apply_central_impulse(-new_gravity_vector)
 	gravity_vector = new_gravity_vector
 
+
 func _integrate_forces(state:PhysicsDirectBodyState3D) -> void:
-	if player == null or state.get_contact_count() <= 0: return
-	if player.get_slide_collision_count() == 0: return
+	if player == null : return
 	if player.grabber.grabbed_object != self: return
+	var pull_velocity := player.grabber.grabbed_body.global_position - global_position
+	pull_velocity *= player.grabber.PULL_FORCE * (1 + int(player.running))
+	linear_velocity = pull_velocity
+	
 	for contact in range(state.get_contact_count()):
 		if state.get_contact_collider_object(contact) != player: continue
 		player.grabber.ungrab_object()
 		apply_central_impulse(-(player.head.global_position - global_position) * mass * 2)
 		return
-
+	
 func _on_body_entered(body:Node) -> void:
 	if body == null: return
 	new_velocity = (linear_velocity.length() + 1) * (angular_velocity.length() + 1)

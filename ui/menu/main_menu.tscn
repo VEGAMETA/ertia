@@ -537,7 +537,6 @@ copy_mode = 2
 rect = Rect2(0, -100, 200, 200)
 
 [node name="Background" type="ColorRect" parent="." unique_id=1144200008]
-visible = false
 material = SubResource("ShaderMaterial_yc8k7")
 layout_mode = 1
 anchors_preset = 15

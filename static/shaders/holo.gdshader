@@ -35,7 +35,7 @@ void fragment () {
 	vec3 fresnel_color = vec3(glow_color.r, glow_color.g, glow_color.b);
 	vec3 fresnel = fresnel_glow(glow_amount, glow_itensity, fresnel_color, NORMAL, VIEW);
 
-	ALBEDO = imgtex_color + fresnel;
+	ALBEDO = imgtex_color; // + fresnel;
 	EMISSION = glow_amount * vec3(glow_color.r, glow_color.g, glow_color.b);
 	ALPHA = lines.x * interupts.x;
 }

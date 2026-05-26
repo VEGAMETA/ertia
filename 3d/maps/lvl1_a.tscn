@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://bh6iflvuwrb18"]
+
+[ext_resource type="Material" uid="uid://bjyyfh03v4u1u" path="res://static/materials/prototype_black.tres" id="1_aouw6"]
+[ext_resource type="PackedScene" uid="uid://s3g25d2dj5n" path="res://static/environments/environment1.tscn" id="2_mh8ed"]
+[ext_resource type="Material" uid="uid://cu7ch8eak34l3" path="res://static/materials/prototype_white.tres" id="2_w43dr"]
+[ext_resource type="PackedScene" uid="uid://cxsbin0mnvsi4" path="res://3d/entities/gravity_objects/plastic_chair.tscn" id="3_nqh1f"]
+[ext_resource type="Shader" uid="uid://crknpdgmgvypv" path="res://static/shaders/aura_strong_gravity_object.gdshader" id="3_vrw42"]
+[ext_resource type="PackedScene" uid="uid://diyb5sbluyv0b" path="res://3d/entities/player/Player.tscn" id="3_w43dr"]
+[ext_resource type="Shader" uid="uid://cf6q5glklboav" path="res://static/shaders/misc/rot.gdshader" id="4_vrw42"]
+[ext_resource type="Shader" uid="uid://djy8ywk73sxx3" path="res://static/shaders/glowing.gdshader" id="7_jktfr"]
+[ext_resource type="Shader" uid="uid://taf5g00cwiyy" path="res://static/shaders/holo.gdshader" id="7_x61em"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jktfr"]
+render_priority = 0
+shader = ExtResource("4_vrw42")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nqh1f"]
+render_priority = 0
+shader = ExtResource("3_vrw42")
+shader_parameter/alpha = 0.6
+shader_parameter/gravity_vector = Vector3(0, 0, -1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x61em"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_nqh1f")
+shader = ExtResource("7_x61em")
+shader_parameter/line_color = Color(0, 0.39999986, 1, 1)
+shader_parameter/line_width = 0.0650000030875
+shader_parameter/line_blur = 0.670000031825
+shader_parameter/line_speed = -0.11999995819999998
+shader_parameter/straight_lines = true
+shader_parameter/interrupt_width = 0.0250000011875
+shader_parameter/interrupt_blur = 0.25
+shader_parameter/interrupt_speed = -0.009999952975
+shader_parameter/glow_color = Color(0.5, 0.75, 1, 1)
+shader_parameter/glow_itensity = 4.5
+shader_parameter/glow_amount = 4.5
+shader_parameter/flickering = 0.55
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vrw42"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_x61em")
+shader = ExtResource("7_jktfr")
+
+[node name="Lvl1A" type="Node3D" unique_id=573493118]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1766446430]
+transform = Transform3D(-1.8112738e-05, 6.473677e-05, -1, -1.8882258e-05, 1, 6.473677e-05, 1, 1.8882261e-05, -1.8112738e-05, -0.50643307, 1.5086282, -4.8190784)
+use_collision = true
+size = Vector3(14, 4, 6)
+material = ExtResource("1_aouw6")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D" unique_id=1269114305]
+operation = 2
+size = Vector3(13.5, 3.5, 5.5)
+material = ExtResource("1_aouw6")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGBox3D" unique_id=1062516309]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -0.35000002, -3)
+operation = 2
+size = Vector3(2, 2.8, 1)
+material = ExtResource("1_aouw6")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGBox3D" unique_id=1009607493]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.709163, 0.089904785, 2.3841858e-07)
+operation = 2
+size = Vector3(4.2285156, 1.1798096, 1.3)
+material = ExtResource("1_aouw6")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGBox3D" unique_id=239051996]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.3633223, 0)
+radius = 2.1914063
+height = 1.0339355
+sides = 64
+material = ExtResource("2_w43dr")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGBox3D/CSGCylinder3D" unique_id=473172398]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075113535, 0)
+operation = 2
+radius = 1.4379883
+height = 1.0339355
+sides = 64
+material = ExtResource("2_w43dr")
+
+[node name="PlasticChair" parent="CSGBox3D/CSGCylinder3D" unique_id=587636375 instance=ExtResource("3_nqh1f")]
+transform = Transform3D(-1.811396e-05, -1.8881088e-05, 1, 6.473643e-05, 1, 1.8883431e-05, -1, 6.473711e-05, -1.8111516e-05, 0.17974424, 0.5213211, -1.747196)
+
+[node name="WorldEnvironment" parent="." unique_id=1097846496 instance=ExtResource("2_mh8ed")]
+
+[node name="Player" parent="." unique_id=1877529802 instance=ExtResource("3_w43dr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14301562, 1.2578334, 1.1666291)
+
+[node name="Node" type="Node3D" parent="." unique_id=869472945]
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="Node" unique_id=992943216]
+transform = Transform3D(-6.4780485e-05, -1.806903e-05, -1, -1, -1.8925974e-05, 6.4780485e-05, -1.8925974e-05, 1, -1.8069026e-05, -0.50643307, 1.5000001, -4.8190784)
+visible = false
+sides = 48
+ring_sides = 32
+material = SubResource("ShaderMaterial_jktfr")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Node" unique_id=1415452964]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5102391, 1.163783, -4.8555117)
+radius = 1.885
+height = 2.744328
+sides = 48
+cone = true
+material = SubResource("ShaderMaterial_vrw42")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Node" unique_id=1923546252]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.51096493, 3.1200092, -4.853095)
+use_collision = true
+radius = 0.6308594
+height = 1.1333008
+cone = true
+material = ExtResource("2_w43dr")

@@ -1,60 +1,47 @@
-[gd_scene load_steps=9 format=3 uid="uid://6dm80s7iw5pt"]
+[gd_scene format=3 uid="uid://6dm80s7iw5pt"]
 
+[ext_resource type="PackedScene" uid="uid://s3g25d2dj5n" path="res://static/environments/environment1.tscn" id="1_p4c5b"]
 [ext_resource type="Material" uid="uid://cu7ch8eak34l3" path="res://static/materials/prototype_white.tres" id="1_sosiq"]
 [ext_resource type="PackedScene" uid="uid://cn0cddljejupg" path="res://3d/entities/player/player_spawn_point.tscn" id="2_8ofa2"]
 [ext_resource type="Script" uid="uid://bocclwggvkja1" path="res://3d/classes/inbound_area.gd" id="3_10b2t"]
 [ext_resource type="Script" uid="uid://eabth232ug48" path="res://3d/entities/player/player_spawner.gd" id="4_7xn26"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8ofa2"]
-sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
-
-[sub_resource type="Sky" id="Sky_kdyj7"]
-sky_material = SubResource("ProceduralSkyMaterial_8ofa2")
-
-[sub_resource type="Environment" id="Environment_kdyj7"]
-background_mode = 2
-sky = SubResource("Sky_kdyj7")
-tonemap_mode = 2
-glow_enabled = true
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_8ofa2"]
 size = Vector3(25, 8, 25)
 
-[node name="SVTest" type="Node3D"]
+[node name="SVTest" type="Node3D" unique_id=1989537334]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_kdyj7")
+[node name="WorldEnvironment2" parent="." unique_id=1097846496 instance=ExtResource("1_p4c5b")]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=856456922]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1201353492]
 use_collision = true
 size = Vector3(20, 0.1, 20)
 material = ExtResource("1_sosiq")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D" unique_id=1390282738]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.56062, 0)
 use_collision = true
 size = Vector3(20, 0.1, 20)
 material = ExtResource("1_sosiq")
 
-[node name="PlayerSpawnPoint" parent="." instance=ExtResource("2_8ofa2")]
+[node name="PlayerSpawnPoint" parent="." unique_id=828954362 instance=ExtResource("2_8ofa2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.30486, 0.0499997, 0.634584)
 
-[node name="Players" type="Node3D" parent="."]
+[node name="Players" type="Node3D" parent="." unique_id=1804090810]
 transform = Transform3D(-0.0206457, 0, 0.999787, 0, 1, 0, -0.999787, 0, -0.0206457, -1.7619, 0.97782, 0)
 
-[node name="SpawnPoint3D" type="MultiplayerSpawner" parent="."]
+[node name="SpawnPoint3D" type="MultiplayerSpawner" parent="." unique_id=549913829]
 spawn_path = NodePath("../Players")
 script = ExtResource("4_7xn26")
 metadata/_custom_type_script = "uid://eabth232ug48"
 
-[node name="Inbounds" type="Area3D" parent="."]
+[node name="Inbounds" type="Area3D" parent="." unique_id=1473876614]
 script = ExtResource("3_10b2t")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Inbounds"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Inbounds" unique_id=648544852]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2918, 0)
 shape = SubResource("BoxShape3D_8ofa2")

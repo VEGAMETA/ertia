@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://s3g25d2dj5n"]
+
+[ext_resource type="Texture2D" uid="uid://cnexs1r87kseq" path="res://assets/skyboxes/skybox2.png" id="1_u16vy"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_5cn2g"]
+panorama = ExtResource("1_u16vy")
+energy_multiplier = 0.55
+
+[sub_resource type="Sky" id="Sky_rryn2"]
+sky_material = SubResource("PanoramaSkyMaterial_5cn2g")
+
+[sub_resource type="Environment" id="Environment_g88ca"]
+background_mode = 2
+sky = SubResource("Sky_rryn2")
+tonemap_mode = 2
+tonemap_exposure = 2.6
+tonemap_white = 16.0
+ssr_fade_in = 1.0815
+ssr_fade_out = 1.07177
+ssr_depth_tolerance = 26.21
+sdfgi_use_occlusion = true
+sdfgi_read_sky_light = false
+glow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" unique_id=1097846496]
+environment = SubResource("Environment_g88ca")
