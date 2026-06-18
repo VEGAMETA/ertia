@@ -43,10 +43,10 @@ func _toggle_console() -> Error:
 func clear() -> void:
 	stream = ""
 
-
 func print(text:String) -> void:
+	text = "%s\n" % text
 	print(text)
-	stream += "%s\n" % text
+	stream += text
 
 
 func printerr(text:String, error:Error=OK) -> Error:

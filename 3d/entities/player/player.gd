@@ -3,6 +3,7 @@ class_name Player extends BasePlayer
 #Save
 
 @export var saved_grabbed_object : RigidBody3D = null
+@export var saved_grabbed_object_zoom : float = GrabberComponent.ZOOM_MAX
 @export var saved_flashlight : bool = false
 @export var saved_crouching : bool = false
 @export var saved_rotation : Vector3 = Vector3.ZERO
@@ -68,6 +69,7 @@ func set_datamosh_shader(delta:float) -> void:
 
 func load_save() -> void:
 	grabber.grabbed_object = saved_grabbed_object
+	grabber.grabbed_zoom = saved_grabbed_object_zoom 
 	flashlight.visible = saved_flashlight
 	head.rotation = saved_rotation
 	holder.rotation = saved_rotation
@@ -76,6 +78,7 @@ func load_save() -> void:
 
 func save() -> void:
 	saved_grabbed_object = grabber.grabbed_object
+	saved_grabbed_object_zoom = grabber.grabbed_zoom
 	saved_flashlight = flashlight.visible
 	saved_crouching = croucher.crouching
 	saved_rotation = head.rotation

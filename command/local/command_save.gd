@@ -15,8 +15,7 @@ savetype:
 	1 - QUICKSAVE,
 	2 - AUTOSAVE,
 	3 - MANUAL,
-	4 - UNKNOWN
-"""
+	4 - UNKNOWN"""
 
 
 static func get_registered() -> Array[String]:
@@ -32,7 +31,7 @@ func execute() -> Error:
 				Saver.quicksave()
 			"load": Saver.load_last_save()
 			"quickload": Saver.quickload()
-			"savefiles": Console.print("%s" % "\n".join(Saver.get_saves().map(
+			"savefiles": Console.print("\n".join(Saver.get_saves().map(
 				func (dict:Dictionary) -> String:
 					return (dict.keys().pop_front() as String).trim_prefix("user://saves/")
 			)))
@@ -43,5 +42,5 @@ func execute() -> Error:
 				Saver.save(Saver.fetch_metadata(int(command[1])))
 			"load": Saver.load_save(Saver.save_directory + \
 				command[1].replace("\\", "").replace("/", ""))
-			"savefiles": Console.print("%s" % "\n".join(Saver.get_saves()))
+			"savefiles": Console.print("\n".join(Saver.get_saves()))
 	return OK

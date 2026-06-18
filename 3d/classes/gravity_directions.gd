@@ -59,7 +59,7 @@ static var by_flag : Dictionary = directions.reduce(
 		return accum
 , {}
 )
-static var by_vector: Dictionary = directions.reduce(
+static var by_vector : Dictionary = directions.reduce(
 	func(accum:Dictionary, direction:GravityDirection) -> Dictionary:
 		accum.set(direction.rotation_vector, direction)
 		return accum

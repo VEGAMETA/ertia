@@ -52,6 +52,7 @@ shader_parameter/omega = Vector2(0, 0)
 
 [node name="Player" unique_id=1877529802 instance=ExtResource("1_v5t3m")]
 script = ExtResource("2_qdkxc")
+saved_grabbed_object_zoom = -1.5
 saved_flashlight = false
 saved_crouching = false
 saved_rotation = Vector3(0, 0, 0)
@@ -106,7 +107,7 @@ script = ExtResource("4_4xa2n")
 
 [node name="Grab" type="RayCast3D" parent="Components/Grabber" index="0" unique_id=1943894081]
 unique_name_in_owner = true
-target_position = Vector3(0, 0, -3)
+target_position = Vector3(0, 0, -2)
 collision_mask = 37
 hit_back_faces = false
 
@@ -115,7 +116,7 @@ unique_name_in_owner = true
 
 [node name="GrabbedBody" type="StaticBody3D" parent="Components/Grabber/Grab" index="1" unique_id=1882070333]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Components/Grabber/Grab/GrabbedBody" index="0" unique_id=1265003759]
 shape = SubResource("BoxShape3D_4xa2n")

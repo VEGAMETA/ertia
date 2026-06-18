@@ -4,21 +4,26 @@ const PULL_FORCE : float = 10.0
 const THROW_FORCE : float = 10.0
 const TIMEOUT : float = 0.1
 
+const ZOOM_MAX : float = -1.5
+const ZOOM_MIN : float = -2.5
+
 @export_storage var grabbed_object : GravityObject
-@export var grabbed_zoom : float
+@export var grabbed_zoom : float = ZOOM_MAX
 @export var grab_ray_collider : Node
 
 @onready var grab_ray : RayCast3D = %Grab
 @onready var hand : Marker3D = %Hand
 @onready var grabbed_body : StaticBody3D = %GrabbedBody
-@onready var joint: Generic6DOFJoint3D = %GrabJoint
+@onready var joint : Generic6DOFJoint3D = %GrabJoint
 @onready var player : Player = owner
 
 
 func _ready() -> void:
 	if player.saved_grabbed_object:
 		grabbed_object = player.saved_grabbed_object
+		grabbed_zoom = player.saved_grabbed_object_zoom
 		joint.set_node_b.call_deferred(grabbed_object.get_path()) # CALL DEFERED TO SAVE ROTATION !!!
+		grabbed_body.position.z = clamp(grabbed_zoom, ZOOM_MIN, ZOOM_MAX)
 
 func _process(_delta:float) -> void:
 	if check_grabbed_object():
@@ -63,7 +68,7 @@ func zoom_object() -> void:
 	grabbed_zoom = grabbed_body.position.z + \
 	(int(Input.is_action_just_pressed("Zoom Out")) - \
 	int(Input.is_action_just_pressed("Zoom In"))) * -0.1
-	grabbed_body.position.z = clamp(grabbed_zoom, -2.5, -1.5)
+	grabbed_body.position.z = clamp(grabbed_zoom, ZOOM_MIN, ZOOM_MAX)
 
 
 func grab_object(object:RigidBody3D) -> void:
@@ -82,7 +87,7 @@ func ungrab_object() -> RigidBody3D:
 	grabbed_object = null
 	joint.set_node_b(joint.get_path())
 	grabbed_body.rotation = Vector3.ZERO
-	grabbed_body.position.z = -2.0
+	grabbed_body.position.z = ZOOM_MAX
 	return _grabbed_object
 
 

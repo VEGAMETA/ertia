@@ -1315,7 +1315,7 @@ class TabStateCache:
 	var auto_translate_mode_state: Node.AutoTranslateMode
 	var tab_bar_drag_to_rearrange_enabled: bool
 	var tab_close_display_policy: TabBar.CloseButtonDisplayPolicy
-	var select_with_rmb: bool
+	var select_with_rmb : bool
 
 	func save(tab_container: TabContainer, tab_bar: TabBar):
 		if (tab_container != null):

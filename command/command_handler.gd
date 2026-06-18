@@ -18,7 +18,7 @@ func _ready() -> void:
 func execute(command_:PackedStringArray) -> void:
 	if not command_: return
 	var joined_command : String = " ".join(command_)
-	Console.print("\n> " + joined_command + "\n")
+	Console.print("> " + joined_command)
 	if not joined_command: return
 	find_command(command_)
 	executor.execute()

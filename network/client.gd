@@ -34,11 +34,11 @@ func _reconnect() -> Error:
 
 
 func _on_connect() -> void:
-	Console.print("\nConnected to server %s" % connecting_server.get("ip"))
+	Console.print("Connected to server %s" % connecting_server.get("ip"))
 
 
 func _on_disconnect() -> void:
-	Console.print("\nDisconnected from server %s" % connecting_server.get("ip"))
+	Console.print("Disconnected from server %s" % connecting_server.get("ip"))
 	connecting_server.set("ip", null)
 	connecting_server.set("port", null)
 	Menu.menu()

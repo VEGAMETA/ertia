@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://byvcnatlevf76"]
+[gd_scene format=3 uid="uid://byvcnatlevf76"]
 
 [ext_resource type="Script" uid="uid://c42v6em5k1bg1" path="res://addons/project_time_tracker/ptt_dock.gd" id="1_7wcfh"]
 
-[node name="Project Time Tracker" type="Control" node_paths=PackedStringArray("lbl_CST", "lbl_LST", "lbl_TOOD", "cb_sn", "lbl_StartDate")]
+[node name="Project Time Tracker" type="Control" unique_id=575317007 node_paths=PackedStringArray("lbl_CST", "lbl_LST", "lbl_TOOD", "cb_sn", "lbl_StartDate")]
 clip_contents = true
 layout_mode = 3
 anchors_preset = 15
@@ -17,7 +17,7 @@ lbl_TOOD = NodePath("ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer
 cb_sn = NodePath("ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/CheckBox")
 lbl_StartDate = NodePath("ScrollContainer/MarginContainer/VBoxContainer/StartDate")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=453789766]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,7 +25,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer" unique_id=2058413340]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -34,47 +34,48 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer" unique_id=753682266]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="CurrentSession" type="RichTextLabel" parent="ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="CurrentSession" type="RichTextLabel" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=1226075412]
 layout_mode = 2
 bbcode_enabled = true
 text = "[center]Current Session
-[color=green]05:46[/color][/center]"
+[color=green_yellow]01:38[/color][/center]"
 fit_content = true
 
-[node name="LastSession" type="RichTextLabel" parent="ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="LastSession" type="RichTextLabel" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=1848829393]
 layout_mode = 2
 bbcode_enabled = true
 text = "[center]Last Session
-[color=green]~ 4s[/color][/center]"
+[color=green]~ 1s[/color][/center]"
 fit_content = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=255330942]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="TotalOnOffDays" type="RichTextLabel" parent="ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="TotalOnOffDays" type="RichTextLabel" parent="ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=251226682]
 layout_mode = 2
 theme_override_constants/line_separation = 4
 bbcode_enabled = true
-text = "Combined Time Over [color=gold]1 Day[/color]
-[color=white]~ 24 minutes, 26 seconds[/color]"
+text = "Combined Time Over [color=gold]3 Months, 3 Days[/color]
+[color=white]~ 20d, 20h, 50m, 20s[/color]"
 fit_content = true
 autowrap_mode = 2
 
-[node name="CheckBox" type="CheckBox" parent="ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+[node name="CheckBox" type="CheckBox" parent="ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1037799091]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
+button_pressed = true
 text = "Short Notation"
 
-[node name="StartDate" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer"]
+[node name="StartDate" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=1387909877]
 layout_mode = 2
 text = "Tracking Started:
-2024-05-23 15:20:40"
+2024-06-06 08:48:03"
 horizontal_alignment = 1
 vertical_alignment = 1
 

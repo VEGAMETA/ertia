@@ -17,8 +17,7 @@ Permissions:
 	0 - NONE; 
 	1 - DEFAULT; 
 	2 - ADMIN; 
-	3 - CUSTOM
-"""
+	3 - CUSTOM"""
 
 
 static func get_registered() -> Array[String]:
@@ -28,7 +27,7 @@ static func get_registered() -> Array[String]:
 func execute() -> Error:
 	if command.size() < 2:
 		Console.print(
-			"server help - show commands\nport - %d\nclients - %s\n" % [
+			"server help - show commands\nport - %d\nclients - %s" % [
 			server.PORT, server.clients
 		])
 		return OK
@@ -44,7 +43,7 @@ func execute() -> Error:
 				if map not in Utils.get_maps(): return ERR_INVALID_PARAMETER
 				server.map = map
 				server.set_scene()
-			Console.print("%s" % server.map)
+			Console.print(server.map)
 		"port": 
 			if command.size() > 2:
 				var port : int = int(command[2])
@@ -54,8 +53,8 @@ func execute() -> Error:
 			Console.print("port - %d" % server.PORT)
 		"set_permission":
 			if command.size() > 3:
-				var peer_id: int = int(command[2])
-				var permission: int = int(command[3])
+				var peer_id := int(command[2])
+				var permission := int(command[3])
 				if permission not in Server.Permission.values():
 					return Console.printerr("incorrect Permission %d" % permission, ERR_INVALID_PARAMETER)
 				server.set_permission(peer_id, permission)

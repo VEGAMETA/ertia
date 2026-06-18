@@ -1,7 +1,7 @@
 @tool
 extends EditorPlugin
 
-var dock
+var dock : Control
 
 func _enter_tree():
 	# Load the dock scene and instantiate it.

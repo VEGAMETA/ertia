@@ -29,12 +29,12 @@ const DEVIATION : float = 0.001
 
 @export var initial_position : Vector3
 @export var uuid : String = UUID.v4()
-@export var prev_velocity: Vector3
-@export var input_dir: Vector2
-@export var direction: Vector3
-@export var direct_velocity: float
-@export var current_speed: float
-@export var drop: float
+@export var prev_velocity : Vector3
+@export var input_dir : Vector2
+@export var direction : Vector3
+@export var direct_velocity : float
+@export var current_speed : float
+@export var drop : float
 @export var walking : bool = false
 @export var running : bool = false
 

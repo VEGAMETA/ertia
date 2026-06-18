@@ -1,16 +1,16 @@
 class_name PTT extends Object
 
-var _data: Dictionary = {}
+var _data := {}
 
 var time_short_notation := false
 
-func _init():
+func _init() -> void:
 	_data = PTTUtils.load_data()
 	
-	var datetime_dict: Dictionary = Time.get_datetime_dict_from_system()
-	var now: int = Time.get_unix_time_from_datetime_dict(datetime_dict)
-	var date_now: String = PTTUtils.get_date(now)
-	var lod: String = _data[PTTUtils.LO]
+	var datetime_dict : Dictionary = Time.get_datetime_dict_from_system()
+	var now : int = Time.get_unix_time_from_datetime_dict(datetime_dict)
+	var date_now : String = PTTUtils.get_date(now)
+	var lod : String = _data[PTTUtils.LO]
 	if (lod != date_now):
 		_data[PTTUtils.LO] = date_now
 		_data[PTTUtils.TD] += 1
@@ -26,11 +26,11 @@ func has_data() -> bool:
 func get_data(key):
 	return _data[key]
 
-func set_data(key, value):
+func set_data(key, value) -> void:
 	_data[key] = value
 
-func increment(key):
+func increment(key) -> void:
 	_data[key] += 1
 
-func update_last_session_to_current():
+func update_last_session_to_current() -> void:
 	_data[PTTUtils.LS] = _data[PTTUtils.ST]

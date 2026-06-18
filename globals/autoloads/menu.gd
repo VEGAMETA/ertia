@@ -5,7 +5,7 @@ signal menu_toggle(_visible:bool)
 const MENU_UID : String = "uid://camwqks3jp737"
 
 var menu_scene : PackedScene 
-var menu_node : MainMenu = null
+var menu_node : MainMenu
 var toggled := false
 
 func _init() -> void:

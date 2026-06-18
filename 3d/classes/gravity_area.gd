@@ -9,7 +9,7 @@ var chosen_gravity : int = 2:
 	get: return _gravity_direction.flag
 
 @export_flags("TOP", "BOTTOM", "LEFT", "RIGHT", "FRONT", "REAR", "ZERO")
-var avalible_gravities: int = 63
+var avalible_gravities : int = 63
 
 @export
 var shape_size : Vector3i = Vector3i.ONE:
@@ -30,12 +30,12 @@ var collision_shape := BoxShape3D.new()
 var mesh := BoxMesh.new()
 var material := ShaderMaterial.new()
 var shader_mat_holo := ShaderMaterial.new()
-var shader := preload("res://static/shaders/area.gdshader") as Shader
-var shader_holo := preload("res://static/shaders/holo.gdshader") as Shader
-var highlighter_shader := preload("res://static/shaders/highlight.gdshader") as Shader
+var shader : Shader = preload("res://static/shaders/area.gdshader")
+var shader_holo : Shader = preload("res://static/shaders/holo.gdshader")
+var highlighter_shader : Shader = preload("res://static/shaders/highlight.gdshader")
 var generated_collision : CollisionShape3D = null
 var generated_mesh : MeshInstance3D = null
-
+ 
 
 func _ready() -> void:
 	if is_on: initialize()

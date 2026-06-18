@@ -6,7 +6,7 @@ var context : StringName = "PreviousFrame"
 var texture : StringName = "texture"
 var x_groups : int = 0
 var y_groups : int = 0
-var datamosh_amount : float = .8
+var datamosh_amount : float = 0.8
 var refresh_frame : bool = false
 var uniform : RDUniform
 var input_set : RID
@@ -14,7 +14,7 @@ var velocity_set : RID
 var previous_set : RID
 var dst_set : RID
 var compute_list : int
-var start :bool = true
+var start := true
 
 func _init() -> void:
 	needs_motion_vectors = true
@@ -40,7 +40,7 @@ func _initialize_compute() -> void:
 	if not rd: return
 
 	var shader_file : RDShaderFile = load("uid://do7rmo0edjdf7")
-	var shader_spirv: RDShaderSPIRV = shader_file.get_spirv()
+	var shader_spirv : RDShaderSPIRV = shader_file.get_spirv()
 	datamosh_shader = rd.shader_create_from_spirv(shader_spirv)
 	datamosh_pipeline = rd.compute_pipeline_create(datamosh_shader)
 	

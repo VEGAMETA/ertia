@@ -6,10 +6,10 @@ class_name GravityObject extends RigidBody3D
 @export var new_velocity : float
 @export var old_velocity : float = 0.0
 @export var velocity_thereshold : float = 1.2
-@export var playing :bool = false
+@export var playing : bool = false
 
-@onready var player: Player
-@onready var env_audio: AudioStreamPlayer3D
+@onready var player : Player
+@onready var env_audio : AudioStreamPlayer3D
 
 
 func _ready() -> void:

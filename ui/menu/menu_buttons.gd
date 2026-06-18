@@ -2,7 +2,7 @@ extends VBoxContainer
 
 @onready var focus_sfx : AudioStreamPlayer = %FocusSFX
 
-var first_focus : bool = true
+var first_focus := true
 
 
 func _on_button_mouse_entered(source:Control) -> void:

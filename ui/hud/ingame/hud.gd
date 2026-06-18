@@ -4,9 +4,17 @@ var offset_x : float
 var offset_y : float
 var offset_v2 : Vector2
 const MULTIPLYER : float = 20.0
+
 @onready var bubble : MeshInstance2D = %Bubble
+@onready var grain : TextureRect = $Grain
 @onready var player : Player = owner
-@onready var grain: TextureRect = $Grain
+
+
+func _ready() -> void:
+	await get_tree().process_frame
+	player.aim.rotation = player.head.rotation
+	set_bubble_offset()
+	bubble.position = offset_v2
 
 
 func set_bubble_offset() -> void:

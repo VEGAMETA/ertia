@@ -17,7 +17,7 @@ var settings : SettingsWindow
 
 @onready var ip_field : LineEdit = %Ip
 @onready var port_field : LineEdit = %Port
-@onready var transition: TextureRect = $Transition
+@onready var transition : TextureRect = $Transition
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var background : ColorRect = $Background
@@ -33,7 +33,7 @@ func _ready() -> void:
 	serve_button.pressed.connect(Globals.server.serve)
 	connect_button.pressed.connect(_on_connect_pressed)
 	disconnect_button.pressed.connect(Globals.client.disconnect_from_server)
-	new_game_button.pressed.connect(Utils.load_map.bind("lvl1_a"))
+	new_game_button.pressed.connect(Utils.load_map.bind("lvl_1a"))
 	network.visibility_changed.connect(toggle_menuing)
 	network.visible = Settings.network
 	Settings.network_toggle.connect(func (v:bool) -> void: network.visible = v)

@@ -38,7 +38,7 @@ var gravity_direction : GravityDirection
 
 var vibration_timer : Timer = Timer.new()
 
-var tween: Tween
+var tween : Tween
 
 
 func _ready() -> void:

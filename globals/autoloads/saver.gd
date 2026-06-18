@@ -104,7 +104,7 @@ func get_metadata(save_path:String) -> Dictionary[String, SaveMetadata]:
 	file.store_buffer(metadata_scene)
 	file.close()
 	
-	var metadata: SaveMetadata = ResourceLoader.load(temp_metadata)
+	var metadata : SaveMetadata = ResourceLoader.load(temp_metadata)
 	
 	DirAccess.remove_absolute(temp_metadata)
 	if metadata == null or metadata is not SaveMetadata:
@@ -138,7 +138,7 @@ func _save(metadata:SaveMetadata, scene:Node) -> void:
 	if not save_file: return push_error("Failed to initialize save filepath")
 	var result : Error
 	var file : FileAccess
-	var final_file: FileAccess
+	var final_file : FileAccess
 	var scene_data : PackedByteArray
 	var metadata_data : PackedByteArray
 	
@@ -168,7 +168,7 @@ func _save(metadata:SaveMetadata, scene:Node) -> void:
 	DirAccess.remove_absolute(temp_metadata)
 
 func load_save(save_path:String) -> void:
-	var file : FileAccess = FileAccess.open(save_path, FileAccess.READ)
+	var file := FileAccess.open(save_path, FileAccess.READ)
 	if file == null:
 		#Console.printerr("Failed to open save file.", ERR_FILE_BAD_PATH) 
 		return push_error("Failed to open save file.")

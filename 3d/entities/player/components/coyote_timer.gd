@@ -1,7 +1,7 @@
 class_name CoyoteTimerComponent extends Timer
 
-@onready var jumper: JumpComponent = get_parent()
-@onready var player: BasePlayer = owner
+@onready var jumper : JumpComponent = get_parent()
+@onready var player : BasePlayer = owner
 
 @export var timer_time : float = 0.187
 @export var jumped : bool = true

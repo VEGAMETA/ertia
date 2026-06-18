@@ -1,8 +1,7 @@
 class_name CommandDefault extends Command
 
 var help_message : String = \
-"""This is console 
-help - show this message
+"""help - show this message
 clear/cls/clr - clear console
 connect ip port - connect to server with given ip (IPv4) and port (1025-65535) 
 server - handle server
@@ -12,8 +11,7 @@ map - load map
 maps - show maps
 pause - pauses the game
 unpause - pauses the game
-toggle_fullscreen - toggles fullscreen window mode
-"""
+toggle_fullscreen - toggles fullscreen window mode"""
 
 
 static func get_registered() -> Array[String]:
@@ -39,7 +37,7 @@ func execute() -> Error:
 		"exit": Globals.quit()
 		"quit": Globals.quit()
 		"close": Console.toggle_console()
-		"maps": Console.print("%s" % "\n".join(Utils.get_maps()))
+		"maps": Console.print("\n".join(Utils.get_maps()))
 		"map": 
 			if command.size() > 1: Utils.load_map(command[1])
 			elif Globals.get_tree(): Console.print(Globals.get_tree().current_scene.name)

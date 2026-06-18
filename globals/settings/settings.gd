@@ -34,7 +34,7 @@ var network : bool = false:
 		fov = v
 		fov_changed.emit(v)
 
-var i18n := {0:"en", 1:"ru"}
+var i18n : Dictionary[int, String] = {0:"en", 1:"ru"}
 var locale := i18n.find_key(OS.get_locale_language()) as int
 
 @export_range(0.1, 2.0, 0.05) var display_scale : float = 1.0

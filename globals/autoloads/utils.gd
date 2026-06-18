@@ -1,6 +1,6 @@
 extends Node
 
-var ip_regex : RegEx = RegEx.new()
+var ip_regex := RegEx.new()
 var map_path : String = "res://3d/maps/"
 
 
@@ -30,14 +30,25 @@ func get_class_from_string(name_: String) -> GDScript:
 
 func get_maps() -> Array:
 	var map_files := Array(DirAccess.get_files_at(map_path))
-	map_files = map_files.filter(func (path:String) -> bool: return not path.ends_with(".tmp"))
-	map_files = map_files.map(func (path:String) -> String: return path.get_file().get_basename())
+	for dir : String in DirAccess.get_directories_at(map_path):
+		map_files.append_array(Array(DirAccess.get_files_at(map_path + dir)))
+	map_files = map_files.filter(
+		func (path:String) -> bool: 
+			return path.contains(".tscn") and not path.ends_with(".tmp")
+	)
+	map_files = map_files.map(func (path:String) -> String: return path.trim_suffix(".remap").trim_suffix(".tscn"))
 	return map_files
 
 
 func _load_deferred(map:String) -> void:
-	if get_tree().change_scene_to_file(map): 
-		Console.printerr("Cannot load the map", ERR_FILE_BAD_PATH)
+	if map == "":
+		return Console.printerr("Cannot find the map", ERR_FILE_BAD_PATH)
+	var scene := ResourceLoader.load(map)
+	if not(scene is PackedScene):
+		return Console.printerr("Cannot load the map", ERR_FILE_BAD_PATH)
+	var node := (scene as PackedScene).instantiate()
+	if get_tree().change_scene_to_node(node):
+		Console.printerr("Cannot instantiate the map", ERR_CANT_CREATE)
 
 
 @rpc("authority", "call_remote")
@@ -48,7 +59,9 @@ func load_map(map:String) -> String:
 
 
 func get_full_map_name(map:String) -> String:
-	var filename : String = map + ".tscn" if not map.ends_with(".tscn") else ""
+	var filename : String = map + (".tscn" if not map.contains(".tscn") else "")
+	filename = filename.trim_suffix(".remap")
+	print(filename)
 	return find_map_path(filename)
 
 
@@ -58,19 +71,15 @@ func find_map_path(filename:String, root_dir:String = map_path) -> String:
 	var dir := DirAccess.open(root_dir)
 	if dir == null:
 		return ""
-	dir.list_dir_begin()
-	while true:
-		var found_file := dir.get_next()
-		if found_file == "": break
-		if found_file.begins_with("."):
-			continue
-		var fullpath := root_dir.path_join(filename)
-		if dir.current_is_dir():
-			fullpath = find_map_path(filename, root_dir.path_join(found_file))
-		elif found_file != filename: continue
-		if fullpath == "": continue
-		dir.list_dir_end()
+	var fullpath := root_dir.path_join(filename)
+	var filename_remap := filename + ".remap"
+	var files := dir.get_files()
+	if files.has(filename) or files.has(filename_remap):
 		return fullpath
+	for nested_dir in dir.get_directories():
+		var found := find_map_path(filename, root_dir.path_join(nested_dir))
+		if found != "":
+			return found
 	return ""
 
 

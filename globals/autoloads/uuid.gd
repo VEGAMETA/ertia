@@ -38,13 +38,13 @@ func v4_rng(rng: RandomNumberGenerator) -> String:
 	b[10], b[11], b[12], b[13], b[14], b[15]
   ]
   
-var _uuid: Array[int]
+var _uuid : Array[int]
 
 func _init(rng := RandomNumberGenerator.new()) -> void: _uuid = uuidbinrng(rng)
 
 func as_array() -> Array[int]: return _uuid.duplicate() as Array[int]
 
-func as_dict(big_endian := true) -> Dictionary:
+func as_dict(big_endian := true) -> Dictionary[String, int]:
 	if big_endian:
 		return {
 		  "low"  : (_uuid[0]  << 24) + (_uuid[1]  << 16) + (_uuid[2]  << 8 ) +  _uuid[3],
